@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persona — Wireframe v2</title>
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+
+/* ===== VARS ===== */
+:root {
+  --bg:       #F2F2F2;
+  --white:    #FFFFFF;
+  --gray-1:   #E0E0E0;
+  --gray-2:   #C8C8C8;
+  --gray-3:   #A0A0A0;
+  --ink:      #1A1A1A;
+  --ink-soft: #444444;
+  --border:   #D0D0D0;
+  --ff: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ===== BASE ===== */
+body { background:var(--bg); color:var(--ink); font-family:var(--ff); font-size:14px; line-height:1.6; overflow-x:hidden; }
+h1 { font-size:clamp(36px,5vw,64px); font-weight:400; line-height:1.05; }
+h2 { font-size:clamp(24px,3vw,40px); font-weight:400; line-height:1.1; }
+h3 { font-size:18px; font-weight:500; }
+p  { color:var(--ink-soft); line-height:1.75; }
+a  { text-decoration:none; color:inherit; }
+section { padding:80px 48px; }
+
+/* ===== UTILS ===== */
+.eyebrow { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray-3); display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+.eyebrow::before { content:''; width:20px; height:1px; background:var(--gray-2); }
+.c-tag { display:inline-flex; align-items:center; gap:5px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-3); border:1px dashed var(--gray-2); padding:3px 9px; margin-bottom:12px; }
+.c-tag::before { content:'✎'; }
+.ph { background:var(--gray-1); border:1px dashed var(--gray-2); display:flex; align-items:center; justify-content:center; color:var(--gray-3); font-size:12px; text-transform:uppercase; letter-spacing:.08em; text-align:center; }
+
+/* ===== BUTTONS ===== */
+.btn { display:inline-block; font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding:12px 28px; border:1.5px solid var(--ink); color:var(--ink); cursor:pointer; background:transparent; font-family:var(--ff); transition:background .15s, color .15s; }
+.btn:hover { background:var(--ink); color:#fff; }
+.btn-fill { background:var(--ink); color:#fff; }
+.btn-fill:hover { background:#333; }
+.btn-ghost { border-color:var(--gray-2); color:var(--gray-3); }
+.btn-ghost:hover { border-color:var(--ink); color:var(--ink); background:transparent; }
+
+/* ===== NAV ===== */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  height:56px; background:var(--white); border-bottom:1px solid var(--border);
+  display:flex; align-items:center; padding:0 48px; gap:0;
+}
+.nav-logo { font-size:15px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; margin-right:auto; }
+.nav-links { display:flex; gap:22px; list-style:none; margin-right:24px; }
+.nav-links a { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--gray-3); transition:color .15s; }
+.nav-links a:hover { color:var(--ink); }
+
+/* ===== 1. HERO ===== */
+#hero {
+  min-height:100vh; padding-top:56px;
+  display:grid; grid-template-columns:1fr 1fr;
+  background:var(--white);
+}
+.hero-left { display:flex; flex-direction:column; justify-content:center; padding:60px 48px; border-right:1px solid var(--border); }
+.hero-brand { margin-bottom:28px; }
+.hero-brand-name { font-size:11px; letter-spacing:.3em; text-transform:uppercase; font-weight:600; margin-bottom:6px; }
+.hero-brand-tagline { font-size:16px; color:var(--gray-3); }
+.hero-divider { width:28px; height:1px; background:var(--gray-2); margin-bottom:24px; }
+.hero-left h1 { margin-bottom:14px; }
+.hero-sub { font-size:15px; color:var(--ink-soft); max-width:440px; margin-bottom:40px; }
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap; }
+.hero-right { background:var(--gray-1); display:flex; align-items:center; justify-content:center; padding:60px; }
+.hero-book { display:flex; flex-direction:column; align-items:center; gap:8px; }
+.hero-book-cover {
+  width:200px; height:240px; background:var(--gray-2);
+  border:1px solid var(--gray-3); display:flex; align-items:center;
+  justify-content:center; flex-direction:column; gap:8px;
+  position:relative;
+}
+.hero-book-spine { width:16px; height:240px; background:var(--gray-3); position:absolute; left:-16px; top:0; }
+.hero-book-word { font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--gray-3); }
+.hero-book-box { width:216px; height:40px; background:var(--gray-2); border:1px solid var(--gray-3); display:flex; align-items:center; justify-content:center; }
+.hero-book-box span { font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-3); }
+
+/* ===== 2. MARQUEE ===== */
+.marquee-wrap { background:var(--ink); padding:13px 0; overflow:hidden; }
+.marquee-track { display:flex; animation:marquee 30s linear infinite; width:max-content; }
+.marquee-track:hover { animation-play-state:paused; }
+.marquee-item { font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.4); padding:0 32px; white-space:nowrap; display:flex; align-items:center; gap:32px; }
+.marquee-item::after { content:'·'; color:rgba(255,255,255,.2); }
+@keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ===== 3. EMOTIONAL ===== */
+#emotional { padding:0; background:var(--white); }
+.emotional-text { padding:48px 48px 36px; max-width:680px; }
+.emotional-text h2 { margin:10px 0 14px; }
+.emotional-video { width:100%; height:62vh; background:var(--gray-1); display:flex; align-items:center; justify-content:center; flex-direction:column; gap:10px; }
+.emotional-video span { font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-3); }
+
+/* ===== 4. PRODUCTS ===== */
+#products { background:var(--bg); }
+.section-top { margin-bottom:48px; }
+.products-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; }
+.product-card { background:var(--white); padding:36px 28px; border:1px solid var(--border); cursor:pointer; transition:border-color .15s; }
+.product-card:hover { border-color:var(--ink); }
+.product-card.featured { background:var(--ink); color:#fff; }
+.product-num { font-size:10px; letter-spacing:.16em; color:var(--gray-3); display:block; margin-bottom:20px; }
+.product-card.featured .product-num { color:rgba(255,255,255,.3); }
+.product-img { aspect-ratio:4/3; margin-bottom:20px; }
+.product-word { font-size:22px; font-weight:400; margin-bottom:4px; }
+.product-seo { font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--gray-3); margin-bottom:10px; display:block; }
+.product-card.featured .product-seo { color:rgba(255,255,255,.3); }
+.product-desc { font-size:13px; color:var(--ink-soft); line-height:1.6; margin-bottom:14px; }
+.product-card.featured .product-desc { color:rgba(255,255,255,.5); }
+.product-price { font-size:17px; font-weight:500; }
+.product-card.featured .product-price { color:rgba(255,255,255,.8); }
+.featured-tag { position:absolute; top:20px; right:20px; font-size:9px; letter-spacing:.14em; text-transform:uppercase; background:rgba(255,255,255,.15); color:#fff; padding:3px 9px; }
+.product-card { position:relative; }
+
+/* ===== 5. WHY ===== */
+#why { background:var(--white); }
+.why-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:1px; margin-top:48px; }
+.why-card { background:var(--bg); border:1px solid var(--border); padding:32px 28px; }
+.why-card-large { grid-row:span 2; background:var(--ink); color:#fff; }
+.why-num { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray-3); margin-bottom:12px; display:block; }
+.why-card-large .why-num { color:rgba(255,255,255,.3); }
+.why-title { font-size:18px; font-weight:400; margin-bottom:10px; line-height:1.25; }
+.why-card-large .why-title { font-size:22px; color:#fff; }
+.why-body { font-size:13px; color:var(--ink-soft); line-height:1.65; }
+.why-card-large .why-body { color:rgba(255,255,255,.5); }
+.why-compare { margin-top:20px; display:flex; flex-direction:column; gap:7px; }
+.why-cmp { font-size:12px; padding:7px 10px; }
+.why-cmp.bad  { background:rgba(255,255,255,.06); color:rgba(255,255,255,.4); }
+.why-cmp.good { background:rgba(255,255,255,.12); color:rgba(255,255,255,.8); }
+
+/* ===== DISCOUNT ===== */
+#discount { background:var(--ink); color:#fff; display:grid; grid-template-columns:1fr 1fr; gap:60px; padding:64px 48px; }
+.disc-badge { font-size:9px; letter-spacing:.2em; text-transform:uppercase; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.4); padding:3px 10px; display:inline-block; margin-bottom:18px; }
+.disc-title { font-size:clamp(24px,3vw,38px); font-weight:400; line-height:1.15; margin-bottom:12px; }
+.disc-sub { font-size:14px; color:rgba(255,255,255,.4); line-height:1.7; margin-bottom:20px; }
+.disc-timer-wrap { display:flex; align-items:center; gap:10px; }
+.disc-timer-label { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.3); }
+.disc-timer { font-size:20px; color:rgba(255,255,255,.6); font-weight:500; }
+.disc-form { display:flex; flex-direction:column; gap:10px; justify-content:center; }
+.disc-input { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15); padding:12px 16px; font-size:13px; color:#fff; font-family:var(--ff); outline:none; transition:border-color .15s; }
+.disc-input::placeholder { color:rgba(255,255,255,.28); }
+.disc-input:focus { border-color:rgba(255,255,255,.4); }
+.disc-submit { background:#fff; border:none; padding:13px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink); cursor:pointer; font-family:var(--ff); transition:background .15s; }
+.disc-submit:hover { background:#e8e8e8; }
+.disc-note { font-size:10px; color:rgba(255,255,255,.2); text-align:center; }
+
+/* ===== CONFIGURATOR ===== */
+#configurator { padding:0; background:var(--ink); color:#fff; }
+.cfg-header { text-align:center; padding:40px 48px 28px; }
+.cfg-header h2 { color:#fff; margin-top:8px; }
+.cfg-header p { color:rgba(255,255,255,.4); margin-top:6px; }
+.cfg-header .eyebrow { justify-content:center; color:rgba(255,255,255,.35); }
+.cfg-header .eyebrow::before { background:rgba(255,255,255,.2); }
+.cfg-layout { display:grid; grid-template-columns:1fr 1fr; height:calc(100vh - 200px); min-height:560px; max-height:760px; border-top:1px solid rgba(255,255,255,.08); }
+
+/* Preview col */
+.cfg-preview { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px; gap:14px; border-right:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.02); }
+.cfg-book-wrap { display:flex; gap:0; box-shadow:0 16px 48px rgba(0,0,0,.5); }
+#spineCanvas { display:block; flex-shrink:0; }
+#bookCanvas  { display:block; cursor:grab; }
+#bookCanvas:active { cursor:grabbing; }
+.cfg-photo-btns { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; }
+.cfg-pbtn { font-size:10px; letter-spacing:.1em; text-transform:uppercase; padding:6px 12px; background:transparent; border:1px solid rgba(255,255,255,.2); color:rgba(255,255,255,.5); cursor:pointer; font-family:var(--ff); transition:all .15s; }
+.cfg-pbtn:hover { border-color:rgba(255,255,255,.5); color:#fff; }
+.cfg-pbtn.primary { background:#fff; color:var(--ink); border-color:#fff; }
+.cfg-pbtn.primary:hover { background:#e8e8e8; }
+.cfg-price-wrap { text-align:center; }
+.cfg-price-label { font-size:9px; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.3); display:block; margin-bottom:4px; }
+.cfg-price-val { font-size:34px; font-weight:600; color:#fff; line-height:1; }
+.cfg-price-sub { font-size:10px; color:rgba(255,255,255,.25); }
+.cfg-drag-hint { font-size:10px; color:rgba(255,255,255,.2); letter-spacing:.08em; text-align:center; }
+
+/* Params col */
+.cfg-params { display:flex; flex-direction:column; overflow:hidden; }
+.cfg-tabs { display:flex; border-bottom:1px solid rgba(255,255,255,.08); flex-shrink:0; }
+.cfg-tab { flex:1; padding:13px 6px; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,.35); background:transparent; border:none; border-bottom:2px solid transparent; cursor:pointer; font-family:var(--ff); transition:all .15s; }
+.cfg-tab:hover { color:rgba(255,255,255,.65); }
+.cfg-tab.active { color:#fff; border-bottom-color:#fff; }
+.cfg-panels { flex:1; overflow:hidden; position:relative; }
+.cfg-panel { position:absolute; inset:0; padding:22px 24px; overflow-y:auto; display:none; scrollbar-width:thin; scrollbar-color:rgba(255,255,255,.1) transparent; }
+.cfg-panel.active { display:block; }
+.cfg-group { margin-bottom:20px; }
+.cfg-lbl { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.3); display:block; margin-bottom:9px; }
+.cfg-opts { display:flex; flex-wrap:wrap; gap:5px; }
+.cfg-opt { font-size:11px; padding:5px 12px; background:transparent; border:1px solid rgba(255,255,255,.15); color:rgba(255,255,255,.5); cursor:pointer; font-family:var(--ff); transition:all .15s; }
+.cfg-opt:hover { border-color:rgba(255,255,255,.4); color:rgba(255,255,255,.85); }
+.cfg-opt.active { border-color:#fff; background:rgba(255,255,255,.1); color:#fff; }
+.cfg-input { width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); padding:8px 12px; font-size:12px; color:#fff; font-family:var(--ff); outline:none; transition:border-color .15s; margin-bottom:8px; }
+.cfg-input::placeholder { color:rgba(255,255,255,.25); }
+.cfg-input:focus { border-color:rgba(255,255,255,.4); }
+.cfg-slider { width:100%; -webkit-appearance:none; height:1px; background:rgba(255,255,255,.18); outline:none; margin-bottom:6px; }
+.cfg-slider::-webkit-slider-thumb { -webkit-appearance:none; width:13px; height:13px; border-radius:50%; background:#fff; cursor:pointer; }
+.cdot { width:22px; height:22px; border-radius:50%; cursor:pointer; border:2px solid transparent; transition:border-color .15s, transform .15s; position:relative; display:inline-block; }
+.cdot:hover, .cdot.active { border-color:#fff; transform:scale(1.15); }
+.cdot-tip { position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); font-size:9px; white-space:nowrap; color:rgba(255,255,255,.4); display:none; z-index:10; pointer-events:none; }
+.cdot:hover .cdot-tip { display:block; }
+.color-row { display:flex; flex-wrap:wrap; gap:7px; margin-top:2px; }
+.sum-line { display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid rgba(255,255,255,.07); font-size:11px; }
+.sum-key { color:rgba(255,255,255,.35); }
+.sum-val { color:rgba(255,255,255,.75); font-weight:500; }
+.cfg-submit { width:100%; background:#fff; border:none; padding:12px; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink); cursor:pointer; font-family:var(--ff); margin-top:4px; transition:background .15s; }
+.cfg-submit:hover { background:#e8e8e8; }
+
+/* ===== HOW ===== */
+#how { background:var(--white); }
+.steps-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:48px; position:relative; }
+.steps-grid::before { content:''; position:absolute; top:20px; left:10%; right:10%; height:1px; background:var(--border); }
+.step { text-align:center; padding:0 20px; }
+.step-num { width:40px; height:40px; border-radius:50%; border:1.5px solid var(--ink-soft); background:var(--white); display:flex; align-items:center; justify-content:center; margin:0 auto 20px; position:relative; z-index:2; font-size:15px; }
+.step-title { font-size:16px; font-weight:500; margin-bottom:8px; }
+.step-body { font-size:12px; color:var(--ink-soft); line-height:1.6; }
+
+/* ===== MATERIALS ===== */
+#materials { background:var(--bg); }
+.mat-grid { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:1px; margin-top:48px; }
+.mat-card { background:var(--white); padding:36px 28px; border:1px solid var(--border); }
+.mat-card.dark { background:var(--ink); color:#fff; }
+.mat-card.dark p { color:rgba(255,255,255,.45); }
+.mat-name { font-size:20px; font-weight:500; margin-bottom:8px; }
+.mat-desc { font-size:13px; color:var(--ink-soft); line-height:1.65; }
+.mat-tags { margin-top:20px; display:flex; flex-direction:column; gap:8px; }
+.mat-tag { font-size:12px; color:rgba(255,255,255,.5); display:flex; align-items:center; gap:10px; }
+.mat-tag::before { content:'—'; color:rgba(255,255,255,.3); }
+.mat-cols { display:flex; flex-direction:column; gap:1px; }
+
+/* ===== REVIEWS ===== */
+#reviews { background:var(--white); overflow:hidden; }
+.reviews-track { display:flex; gap:16px; margin-top:48px; overflow-x:auto; scrollbar-width:none; cursor:grab; }
+.reviews-track::-webkit-scrollbar { display:none; }
+.rev-card { flex:0 0 320px; background:var(--bg); border:1px solid var(--border); padding:28px; }
+.rev-stars { font-size:12px; letter-spacing:2px; margin-bottom:14px; }
+.rev-text { font-size:15px; line-height:1.55; margin-bottom:16px; }
+.rev-who { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-3); }
+.rev-what { font-size:11px; color:var(--ink-soft); margin-top:2px; }
+
+/* ===== FAQ ===== */
+#faq { background:var(--bg); }
+.faq-layout { display:grid; grid-template-columns:1fr 2fr; gap:64px; margin-top:48px; }
+.faq-side-title { font-size:26px; font-weight:400; margin-bottom:12px; }
+.faq-side-body { font-size:13px; color:var(--ink-soft); line-height:1.7; margin-bottom:18px; }
+.faq-side-link { font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink); text-decoration:none; }
+.faq-group-lbl { font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:var(--gray-3); padding-bottom:9px; margin-top:20px; border-bottom:1px solid var(--border); }
+.faq-item { border-bottom:1px solid var(--border); }
+.faq-q { padding:15px 0; display:flex; justify-content:space-between; align-items:center; gap:12px; cursor:pointer; font-size:15px; transition:color .15s; }
+.faq-q:hover { color:var(--gray-3); }
+.faq-plus { font-size:18px; transition:transform .25s; flex-shrink:0; }
+.faq-item.open .faq-plus { transform:rotate(45deg); }
+.faq-a { font-size:13px; color:var(--ink-soft); max-height:0; overflow:hidden; transition:max-height .3s ease, padding .3s; line-height:1.7; }
+.faq-item.open .faq-a { max-height:160px; padding-bottom:15px; }
+
+/* ===== CTA ===== */
+#cta { background:var(--ink); text-align:center; padding:100px 48px; position:relative; overflow:hidden; }
+#cta::before { content:'PERSONA'; position:absolute; font-size:200px; font-weight:600; color:rgba(255,255,255,.025); top:50%; left:50%; transform:translate(-50%,-50%); letter-spacing:.15em; white-space:nowrap; pointer-events:none; }
+.cta-eyebrow { font-size:9px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.3); display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:20px; }
+.cta-eyebrow::before, .cta-eyebrow::after { content:''; width:28px; height:1px; background:rgba(255,255,255,.2); }
+#cta h2 { color:#fff; margin-bottom:10px; position:relative; }
+.cta-sub { font-size:16px; color:rgba(255,255,255,.4); margin-bottom:40px; position:relative; display:block; }
+.cta-actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; position:relative; }
+.btn-w { border-color:#fff; color:#fff; }
+.btn-w:hover { background:#fff; color:var(--ink); }
+.btn-wg { border-color:rgba(255,255,255,.25); color:rgba(255,255,255,.45); }
+.btn-wg:hover { border-color:rgba(255,255,255,.5); color:#fff; background:transparent; }
+
+/* ===== FOOTER ===== */
+footer { background:#0d0d0d; padding:36px 48px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+.footer-logo { font-size:14px; letter-spacing:.2em; text-transform:uppercase; font-weight:600; color:rgba(255,255,255,.25); }
+.footer-copy { font-size:11px; color:rgba(255,255,255,.15); }
+.footer-links { display:flex; gap:20px; list-style:none; }
+.footer-links a { font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.2); transition:color .15s; }
+.footer-links a:hover { color:rgba(255,255,255,.6); }
+
+/* ===== STICKY BANNER ===== */
+.sticky-banner { position:fixed; bottom:0; left:0; right:0; z-index:500; background:var(--ink); border-top:1px solid rgba(255,255,255,.08); padding:11px 40px; display:flex; align-items:center; justify-content:space-between; gap:20px; transform:translateY(100%); transition:transform .35s ease; }
+.sticky-banner.show { transform:translateY(0); }
+.sticky-banner-text { font-size:13px; color:rgba(255,255,255,.55); }
+.sticky-banner-text strong { color:#fff; font-weight:500; }
+.sb-btn { font-size:10px; letter-spacing:.14em; text-transform:uppercase; padding:9px 22px; background:#fff; color:var(--ink); border:none; cursor:pointer; font-family:var(--ff); white-space:nowrap; flex-shrink:0; }
+.sb-close { background:transparent; border:none; color:rgba(255,255,255,.3); font-size:18px; cursor:pointer; flex-shrink:0; line-height:1; }
+
+/* ===== FADE ===== */
+.fade-up { opacity:0; transform:translateY(20px); transition:opacity .65s ease, transform .65s ease; }
+.fade-up.visible { opacity:1; transform:none; }
+
+/* ===== MOBILE ===== */
+@media (max-width:768px) {
+  section { padding:56px 20px; }
+  nav { padding:0 20px; }
+  .nav-links { display:none; }
+  #hero { grid-template-columns:1fr; }
+  .hero-right { display:none; }
+  .hero-left { padding:80px 20px 48px; }
+  #emotional .emotional-text { padding:40px 20px 28px; }
+  .products-grid { grid-template-columns:1fr; }
+  .why-grid { grid-template-columns:1fr; }
+  .why-card-large { grid-row:span 1; }
+  #discount { grid-template-columns:1fr; gap:32px; padding:48px 20px; }
+  .cfg-layout { grid-template-columns:1fr; height:auto; max-height:none; }
+  .cfg-preview { border-right:none; border-bottom:1px solid rgba(255,255,255,.08); padding:24px 16px; }
+  .cfg-params { height:500px; }
+  .steps-grid { grid-template-columns:1fr 1fr; }
+  .steps-grid::before { display:none; }
+  .mat-grid { grid-template-columns:1fr; }
+  .faq-layout { grid-template-columns:1fr; gap:32px; }
+  #cta { padding:64px 20px; }
+  footer { flex-direction:column; align-items:flex-start; padding:28px 20px; }
+  .sticky-banner { padding:11px 20px; }
+}
+@media (max-width:480px) {
+  h1 { font-size:30px; }
+  h2 { font-size:22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- STICKY BANNER -->
+<div class="sticky-banner" id="sticky-banner">
+  <div class="sticky-banner-text">🎁 <strong>Знижка 10%</strong> для нових клієнтів Persona</div>
+  <button class="sb-btn" onclick="document.getElementById('discount').scrollIntoView({behavior:'smooth'});closeBanner()">Отримати знижку</button>
+  <button class="sb-close" onclick="closeBanner()">✕</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Persona</div>
+  <ul class="nav-links">
+    <li><a href="#products">Продукти</a></li>
+    <li><a href="#why">Чому фотокнига</a></li>
+    <li><a href="#configurator">Ціна</a></li>
+    <li><a href="#how">Процес</a></li>
+    <li><a href="#materials">Якість</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="tel:+380000000000" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1.5px solid var(--border);color:var(--ink);margin-right:10px;transition:all .15s;" title="+38 000 000 00 00" onmouseover="this.style.background='var(--ink)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--ink)'"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"></path></svg></a><a href="#configurator" class="btn btn-fill" style="font-size:11px;padding:9px 22px">Створити книгу</a>
+</nav>
+
+
+<!-- 1. HERO -->
+<section id="hero">
+  <div class="hero-left fade-up">
+    <div class="c-tag">Змінний — Hero</div>
+    <div class="hero-brand">
+      <div class="hero-brand-name">Persona</div>
+      <div class="hero-brand-tagline">Зроблено так, щоб передавати далі.</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="eyebrow">Весільна фотокнига</div>
+    <h1>Суголосся</h1>
+    <p class="hero-sub">Одного дня ви згадаєте не сам день — а те, як сильно ви були щасливі. І саме ці моменти ми збережемо у книзі, яку захочеться брати в руки знову і знову.</p>
+    <div class="hero-actions">
+      <a href="#configurator" class="btn btn-fill">Створити обкладинку</a>
+      <a href="#how" class="btn btn-ghost">Як це працює →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-book">
+      <div style="position:relative">
+        <div class="hero-book-spine"></div>
+        <div class="hero-book-cover">
+          <div class="hero-book-word">Суголосся</div>
+          <div style="width:32px;height:1px;background:var(--gray-3);opacity:.4"></div>
+          <div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-3)">Весільна фотокнига</div>
+        </div>
+      </div>
+      <div class="hero-book-box"><span>Подарункова коробка</span></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 2. MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Ручна робота</span>
+    <span class="marquee-item">12 кольорів коробок</span>
+    <span class="marquee-item">Доставка по всій Україні</span>
+    <span class="marquee-item">7–10 днів виготовлення</span>
+    <span class="marquee-item">Ручна робота</span>
+    <span class="marquee-item">12 кольорів коробок</span>
+    <span class="marquee-item">Доставка по всій Україні</span>
+    <span class="marquee-item">7–10 днів виготовлення</span>
+    <span class="marquee-item">Ручна робота</span>
+    <span class="marquee-item">12 кольорів коробок</span>
+    <span class="marquee-item">Доставка по всій Україні</span>
+    <span class="marquee-item">7–10 днів виготовлення</span>
+    <span class="marquee-item">Ручна робота</span>
+    <span class="marquee-item">12 кольорів коробок</span>
+    <span class="marquee-item">Доставка по всій Україні</span>
+    <span class="marquee-item">7–10 днів виготовлення</span>
+  </div>
+</div>
+
+
+<!-- 3. EMOTIONAL -->
+<div id="emotional" class="fade-up">
+  <div class="emotional-text">
+    <div class="c-tag">Змінний блок</div>
+    <div class="eyebrow">Для тих, хто цінує</div>
+    <h2>Фотографії є у всіх.<br>Книга — у одиниць.</h2>
+    <p style="margin-top:14px;max-width:520px">Persona перетворює ваші фото у преміальну книгу, яку хочеться брати в руки знову і знову. Зроблено так, щоб передавати далі.</p>
+  </div>
+  <div class="emotional-video">
+    <span style="font-size:36px;color:var(--gray-2)">▶</span>
+    <span>[ Відео або фото · Автоплей · Без звуку · Loop ]</span>
+  </div>
+</div>
+
+
+<!-- 4. PRODUCTS -->
+<section id="products" class="fade-up">
+  <div class="section-top">
+    <div class="eyebrow">Наші продукти</div>
+    <h2 style="margin-top:10px">Три форми спогаду</h2>
+  </div>
+  <div class="products-grid">
+    <div class="product-card featured">
+      <span class="featured-tag">Хіт</span>
+      <span class="product-num">01</span>
+      <div class="product-img ph" style="background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.3)">[ Фотокнига ]</div>
+      <div class="product-word" style="color:#fff">Спадщина</div>
+      <span class="product-seo">Фотокнига у подарунковій коробці</span>
+      <p class="product-desc">Layflat-палітурка, вибір обкладинки та паперу. У коробці одного з 12 кольорів.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:10px;">
+        <div class="product-price">від 5 000 грн</div>
+        <button onclick="openModal('book')" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;font-family:inherit;transition:all .15s;" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='transparent'">Замовити</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <span class="product-num">02</span>
+      <div class="product-img ph">[ Волларт ]</div>
+      <div class="product-word">Обрій</div>
+      <span class="product-seo">Волларт з фото на стіну</span>
+      <p class="product-desc">Ваше фото у форматі настінного арт-об'єкта. Преміальний друк.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:10px;">
+        <div class="product-price">від 1 000 грн</div>
+        <button onclick="openModal('wall')" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;border:1.5px solid #1A1A1A;background:transparent;color:#1A1A1A;cursor:pointer;font-family:inherit;transition:all .15s;" onmouseover="this.style.background='#1A1A1A';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1A1A1A'">Замовити</button>
+      </div>
+    </div>
+    <div class="product-card">
+      <span class="product-num">03</span>
+      <div class="product-img ph">[ Настільне фото ]</div>
+      <div class="product-word">Миттєвість</div>
+      <span class="product-seo">Настільне фото у рамці</span>
+      <p class="product-desc">Архівний друк, витончена рамка. Маленький подарунок з великим змістом.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:14px;flex-wrap:wrap;gap:10px;">
+        <div class="product-price">від 200 грн</div>
+        <button onclick="openModal('frame')" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;border:1.5px solid #1A1A1A;background:transparent;color:#1A1A1A;cursor:pointer;font-family:inherit;transition:all .15s;" onmouseover="this.style.background='#1A1A1A';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#1A1A1A'">Замовити</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 5. WHY PHOTOBOOK -->
+<section id="why" class="fade-up" style="background:var(--white);">
+
+  <!-- Верхня частина — емоційний текст -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:72px;">
+    <div>
+      <div class="eyebrow">Чому фотокнига</div>
+      <h2 style="margin-top:12px;">Чому фотокнига —<br>це більше, ніж подарунок</h2>
+    </div>
+    <div>
+      <p style="font-size:16px;line-height:1.8;color:var(--ink-soft);margin-bottom:20px;">
+        Квіти зів'януть. Торт буде з'їдений. Повідомлення загубляться серед тисяч інших. Ми робимо тисячі фотографій щоб не забути — але більшість із них назавжди залишаються десь між старими чатами і телефонами які давно змінили.
+      </p>
+      <p style="font-size:16px;line-height:1.8;color:var(--ink-soft);margin-bottom:20px;">
+        Фотокнига повертає спогадам їхню справжню цінність. Перша усмішка дитини. День весілля. Люди яких хочеться пам'ятати завжди. Все це — на сторінках які можна взяти в руки, показати дітям, передати далі.
+      </p>
+      <p style="font-size:17px;line-height:1.75;color:var(--ink);font-weight:400;">
+        Одного дня ці фото стануть безцінними. І тоді ви будете щасливі що зберегли їх не лише в пам'яті телефону — а й у пам'яті родини.
+      </p>
+    </div>
+  </div>
+
+  <!-- Нижня частина — 5 причин -->
+  <div style="border-top:1px solid var(--border);padding-top:48px;">
+    <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-3);margin-bottom:32px;">5 причин подарувати фотокнигу</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:1px;">
+      <div style="background:var(--bg);padding:28px 22px;border:1px solid var(--border);">
+        <div style="font-size:28px;font-weight:300;color:var(--gray-2);margin-bottom:16px;line-height:1;">01</div>
+        <div style="font-size:14px;line-height:1.65;color:var(--ink-soft);">Особистий подарунок, створений саме для конкретної людини.</div>
+      </div>
+      <div style="background:var(--bg);padding:28px 22px;border:1px solid var(--border);">
+        <div style="font-size:28px;font-weight:300;color:var(--gray-2);margin-bottom:16px;line-height:1;">02</div>
+        <div style="font-size:14px;line-height:1.65;color:var(--ink-soft);">Викликає справжні емоції, а не просто приємне враження на кілька хвилин.</div>
+      </div>
+      <div style="background:var(--bg);padding:28px 22px;border:1px solid var(--border);">
+        <div style="font-size:28px;font-weight:300;color:var(--gray-2);margin-bottom:16px;line-height:1;">03</div>
+        <div style="font-size:14px;line-height:1.65;color:var(--ink-soft);">Не має терміну придатності та не втрачає актуальності з роками.</div>
+      </div>
+      <div style="background:var(--ink);padding:28px 22px;border:1px solid var(--ink);">
+        <div style="font-size:28px;font-weight:300;color:rgba(255,255,255,.2);margin-bottom:16px;line-height:1;">04</div>
+        <div style="font-size:14px;line-height:1.65;color:rgba(255,255,255,.6);">Зберігає історію сім'ї, кохання, дружби чи важливої події.</div>
+      </div>
+      <div style="background:var(--bg);padding:28px 22px;border:1px solid var(--border);">
+        <div style="font-size:28px;font-weight:300;color:var(--gray-2);margin-bottom:16px;line-height:1;">05</div>
+        <div style="font-size:14px;line-height:1.65;color:var(--ink-soft);">Річ яку переглядатимуть десятки разів, а не поставлять на полицю і забудуть.</div>
+      </div>
+    </div>
+    <div style="margin-top:1px;background:var(--bg);border:1px solid var(--border);padding:28px 32px;text-align:center;">
+      <p style="font-size:16px;color:var(--ink-soft);line-height:1.7;">Фотокнига нагадує про найцінніше — <span style="color:var(--ink);font-weight:500;">людей, моменти та почуття</span>, які формують наше життя.</p>
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- DISCOUNT -->
+<section id="discount" class="fade-up" style="padding:0">
+  <div id="discount" style="background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:64px 48px;">
+    <div>
+      <div class="c-tag" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">Ядро — Знижка</div>
+      <div class="disc-badge">Спеціальна пропозиція</div>
+      <div class="disc-title">Забронюйте знижку<br>10% на першу книгу</div>
+      <div class="disc-sub">Залиште заявку — менеджер зв'яжеться і зафіксує вашу знижку.</div>
+      <div class="disc-timer-wrap">
+        <span class="disc-timer-label">Пропозиція діє:</span>
+        <span class="disc-timer" id="disc-timer">47:59:59</span>
+      </div>
+    </div>
+    <div class="disc-form">
+      <input type="text" class="disc-input" placeholder="Ваше ім'я">
+      <input type="tel" class="disc-input" placeholder="Номер телефону">
+      <button class="disc-submit">Отримати знижку 10% →</button>
+      <div class="disc-note">Надсилаючи заявку, ви погоджуєтесь з умовами</div>
+    </div>
+  </div>
+</section>
+
+<div style="height:48px;background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;"><span style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-3);">Конфігуратор обкладинки</span></div>
+
+<!-- CONFIGURATOR -->
+<section id="configurator" style="padding:0;margin-top:4px;">
+  <div class="cfg-header fade-up">
+    <div class="c-tag" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">Ядро — Конфігуратор</div>
+    <div class="eyebrow">Конфігуратор обкладинки</div>
+    <h2>Створіть свою книгу</h2>
+    <p>Налаштуйте параметри — ціна і вигляд змінюються одразу</p>
+  </div>
+  <div class="cfg-layout">
+
+    <!-- Preview -->
+    <div class="cfg-preview">
+      <div class="cfg-book-wrap">
+        <canvas id="spineCanvas" width="28" height="300"></canvas>
+        <canvas id="bookCanvas"  width="300" height="300"></canvas>
+      </div>
+      <div class="cfg-photo-btns">
+        <label class="cfg-pbtn" style="cursor:pointer">↑ Фото<input type="file" accept="image/*" style="display:none" onchange="loadPhoto(event)"></label>
+        <button class="cfg-pbtn" onclick="removePhoto()">✕</button>
+        <button class="cfg-pbtn" onclick="zoomPhoto(1.12)">＋</button>
+        <button class="cfg-pbtn" onclick="zoomPhoto(0.89)">－</button>
+        <button class="cfg-pbtn primary" onclick="downloadCanvas()">↓ Зберегти</button>
+      </div>
+      <div class="cfg-price-wrap">
+        <span class="cfg-price-label">Орієнтовна вартість</span>
+        <div class="cfg-price-val" id="cfg-price">5 600 <span style="font-size:16px;font-weight:300;color:rgba(255,255,255,.3)">грн</span></div>
+        <div class="cfg-price-sub">уточнюється менеджером</div>
+      </div>
+      <div class="cfg-drag-hint">Перетягуйте фото · Колесо миші для масштабу</div>
+    </div>
+
+    <!-- Params -->
+    <div class="cfg-params">
+      <div class="cfg-tabs">
+        <button class="cfg-tab active" onclick="switchTab(this,'t-cover')">Обкладинка</button>
+        <button class="cfg-tab" onclick="switchTab(this,'t-book')">Книга</button>
+        <button class="cfg-tab" onclick="switchTab(this,'t-spine')">Корінець</button>
+        <button class="cfg-tab" onclick="switchTab(this,'t-order')">Замовлення</button>
+      </div>
+      <div class="cfg-panels">
+
+        <!-- TAB: Обкладинка -->
+        <div class="cfg-panel active" id="t-cover">
+          <div class="cfg-group">
+            <span class="cfg-lbl">Назва книги</span>
+            <input class="cfg-input" id="cfg-title" placeholder="Суголосся" oninput="renderBook()">
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Підпис або дата</span>
+            <input class="cfg-input" id="cfg-subtitle" placeholder="12 · 06 · 2024" oninput="renderBook()">
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Колір обкладинки</span>
+            <div class="color-row" id="bg-colors">
+              <div class="cdot active" style="background:#1C1510" data-c="#1C1510" onclick="pickBg(this)"><span class="cdot-tip">Чорний</span></div>
+              <div class="cdot" style="background:#2C2E25" data-c="#2C2E25" onclick="pickBg(this)"><span class="cdot-tip">Оливка</span></div>
+              <div class="cdot" style="background:#1A2332" data-c="#1A2332" onclick="pickBg(this)"><span class="cdot-tip">Нічний</span></div>
+              <div class="cdot" style="background:#3D2B4A" data-c="#3D2B4A" onclick="pickBg(this)"><span class="cdot-tip">Слива</span></div>
+              <div class="cdot" style="background:#4A3728" data-c="#4A3728" onclick="pickBg(this)"><span class="cdot-tip">Горіх</span></div>
+              <div class="cdot" style="background:#3B4A3F" data-c="#3B4A3F" onclick="pickBg(this)"><span class="cdot-tip">Ліс</span></div>
+              <div class="cdot" style="background:#8C5C5C" data-c="#8C5C5C" onclick="pickBg(this)"><span class="cdot-tip">Бордо</span></div>
+              <div class="cdot" style="background:#F5F0E8" data-c="#F5F0E8" onclick="pickBg(this)"><span class="cdot-tip">Крем</span></div>
+              <div class="cdot" style="background:#E8E0D5" data-c="#E8E0D5" onclick="pickBg(this)"><span class="cdot-tip">Пісок</span></div>
+            </div>
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Дизайн</span>
+            <div class="cfg-opts" id="design-opts">
+              <button class="cfg-opt active" data-v="photo" onclick="pickDesign(this)">Тільки фото</button>
+              <button class="cfg-opt" data-v="symbol" onclick="pickDesign(this)">Символ</button>
+              <button class="cfg-opt" data-v="both" onclick="pickDesign(this)">Фото + символ</button>
+            </div>
+          </div>
+          <div class="cfg-group" id="symbol-group">
+            <span class="cfg-lbl">Символ</span>
+            <div class="cfg-opts" id="symbol-opts">
+              <button class="cfg-opt active" data-v="none" onclick="pickSym(this)">Без</button>
+              <button class="cfg-opt" data-v="heart" onclick="pickSym(this)">♥</button>
+              <button class="cfg-opt" data-v="ring" onclick="pickSym(this)">◎</button>
+              <button class="cfg-opt" data-v="star" onclick="pickSym(this)">✦</button>
+              <button class="cfg-opt" data-v="flower" onclick="pickSym(this)">✿</button>
+              <button class="cfg-opt" data-v="infinity" onclick="pickSym(this)">∞</button>
+              <button class="cfg-opt" data-v="custom" onclick="document.getElementById('sym-upload').click()">↑ Свій</button>
+              <input type="file" id="sym-upload" accept="image/*" style="display:none" onchange="loadSym(event)">
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Книга -->
+        <div class="cfg-panel" id="t-book">
+          <div class="cfg-group">
+            <span class="cfg-lbl">Розмір (квадрат)</span>
+            <div class="cfg-opts" id="size-opts">
+              <button class="cfg-opt active" data-p="5000" data-s="20×20" onclick="pickSize(this)">20×20 см</button>
+              <button class="cfg-opt" data-p="6500" data-s="25×25" onclick="pickSize(this)">25×25 см</button>
+              <button class="cfg-opt" data-p="8500" data-s="30×30" onclick="pickSize(this)">30×30 см</button>
+            </div>
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Матеріал обкладинки</span>
+            <div class="cfg-opts" id="cover-opts">
+              <button class="cfg-opt active" data-a="0" onclick="pickAdd(this,'cover')">Льон</button>
+              <button class="cfg-opt" data-a="800" onclick="pickAdd(this,'cover')">Оксамит</button>
+              <button class="cfg-opt" data-a="1500" onclick="pickAdd(this,'cover')">Шкіра</button>
+            </div>
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Тип паперу</span>
+            <div class="cfg-opts" id="paper-opts">
+              <button class="cfg-opt active" data-a="0" onclick="pickAdd(this,'paper')">Матовий</button>
+              <button class="cfg-opt" data-a="200" onclick="pickAdd(this,'paper')">Глянець</button>
+              <button class="cfg-opt" data-a="800" onclick="pickAdd(this,'paper')">Fine Art</button>
+            </div>
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Розвороти — <span id="sp-val">20</span></span>
+            <input type="range" class="cfg-slider" id="sp-slider" min="10" max="40" value="20" oninput="document.getElementById('sp-val').textContent=this.value;calcTotal()">
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Коробка</span>
+            <div class="cfg-opts" id="box-opts">
+              <button class="cfg-opt active" data-a="600" onclick="pickAdd(this,'box')">З коробкою</button>
+              <button class="cfg-opt" data-a="0" onclick="pickAdd(this,'box')">Без коробки</button>
+            </div>
+          </div>
+          <div class="cfg-group" id="box-color-group">
+            <span class="cfg-lbl">Колір коробки</span>
+            <div class="color-row">
+              <div class="cdot active" style="background:#1C1510"><span class="cdot-tip">Чорний</span></div>
+              <div class="cdot" style="background:#8B6E4A"><span class="cdot-tip">Кемел</span></div>
+              <div class="cdot" style="background:#4A5C6A"><span class="cdot-tip">Синій</span></div>
+              <div class="cdot" style="background:#6B7355"><span class="cdot-tip">Оливка</span></div>
+              <div class="cdot" style="background:#8C5C5C"><span class="cdot-tip">Бордо</span></div>
+              <div class="cdot" style="background:#C8B89A"><span class="cdot-tip">Крем</span></div>
+              <div class="cdot" style="background:#3D2B4A"><span class="cdot-tip">Слива</span></div>
+              <div class="cdot" style="background:#D4A853"><span class="cdot-tip">Золото</span></div>
+              <div class="cdot" style="background:#2C3E50"><span class="cdot-tip">Нічний</span></div>
+              <div class="cdot" style="background:#4A3728"><span class="cdot-tip">Горіх</span></div>
+              <div class="cdot" style="background:#E8E0D5"><span class="cdot-tip">Пісок</span></div>
+              <div class="cdot" style="background:#7A7A7A"><span class="cdot-tip">Сірий</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB: Корінець -->
+        <div class="cfg-panel" id="t-spine">
+          <div class="cfg-group">
+            <span class="cfg-lbl">Текст на корінці</span>
+            <input class="cfg-input" id="spine-text" placeholder="Persona · 2024" oninput="renderBook()">
+          </div>
+          <div class="cfg-group">
+            <span class="cfg-lbl">Символ на корінці</span>
+            <div class="cfg-opts" id="spine-sym-opts">
+              <button class="cfg-opt active" data-v="none" onclick="pickSpineSym(this)">Без</button>
+              <button class="cfg-opt" data-v="dot" onclick="pickSpineSym(this)">·</button>
+              <button class="cfg-opt" data-v="heart" onclick="pickSpineSym(this)">♥</button>
+              <button class="cfg-opt" data-v="star" onclick="pickSpineSym(this)">✦</button>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding:14px;border:1px dashed rgba(255,255,255,.1);font-size:12px;color:rgba(255,255,255,.3);line-height:1.6">
+            Корінець відображається зліва від обкладинки. Текст друкується вздовж знизу вгору.
+          </div>
+        </div>
+
+        <!-- TAB: Замовлення -->
+        <div class="cfg-panel" id="t-order">
+          <div class="cfg-group">
+            <div class="sum-line"><span class="sum-key">Розмір</span><span class="sum-val" id="s-size">20×20</span></div>
+            <div class="sum-line"><span class="sum-key">Матеріал</span><span class="sum-val" id="s-cover">Льон</span></div>
+            <div class="sum-line"><span class="sum-key">Папір</span><span class="sum-val" id="s-paper">Матовий</span></div>
+            <div class="sum-line"><span class="sum-key">Розвороти</span><span class="sum-val" id="s-spreads">20</span></div>
+            <div class="sum-line"><span class="sum-key">Коробка</span><span class="sum-val" id="s-box">Так</span></div>
+          </div>
+          <div class="cfg-group">
+            <input type="text" class="cfg-input" placeholder="Ваше ім'я">
+            <input type="tel" class="cfg-input" placeholder="Номер телефону">
+            <button class="cfg-submit">Відправити заявку →</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 7. HOW -->
+<section id="how" class="fade-up">
+  <div class="section-top">
+    <div class="eyebrow">Процес</div>
+    <h2 style="margin-top:10px">Від заявки до книги</h2>
+  </div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Заявка</div>
+      <div class="step-body">Заповнюєте форму або пишете нам. Обговорюємо параметри.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Фото</div>
+      <div class="step-body">Надсилаєте фотографії будь-яким зручним способом.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Макет</div>
+      <div class="step-body">Надсилаємо PDF на затвердження. Правки безкоштовно.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Доставка</div>
+      <div class="step-body">Нова Пошта по всій Україні. 7–10 робочих днів.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 8. MATERIALS -->
+<section id="materials" class="fade-up" style="padding:0;background:var(--white);">
+
+  <div style="padding:80px 48px 48px;">
+    <div class="eyebrow">Якість</div>
+    <h2 style="margin-top:10px">З чого зроблена ваша книга</h2>
+  </div>
+
+  <!-- Ряд 1: текст ліворуч, фото праворуч -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border);">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px;">01</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px;">Подарункова коробка</h3>
+      <p style="font-size:15px;line-height:1.75;color:var(--ink-soft);margin-bottom:24px;">Ручна робота. 12 кольорів. Магнітне закриття. Лого Persona — знак якості на кожній коробці.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:10px;"><span style="width:16px;height:1px;background:var(--gray-2);flex-shrink:0;display:inline-block;"></span>Leatherette або натуральний льон</div>
+        <div style="font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:10px;"><span style="width:16px;height:1px;background:var(--gray-2);flex-shrink:0;display:inline-block;"></span>Магнітне закриття</div>
+        <div style="font-size:12px;color:var(--ink-soft);display:flex;align-items:center;gap:10px;"><span style="width:16px;height:1px;background:var(--gray-2);flex-shrink:0;display:inline-block;"></span>12 кольорів на вибір</div>
+      </div>
+    </div>
+    <div class="ph" style="background:var(--gray-1);border:none;border-left:1px solid var(--border);border-top:1px solid var(--border);min-height:420px;">[ Фото коробки ]</div>
+  </div>
+
+  <!-- Ряд 2: фото ліворуч, текст праворуч -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
+    <div class="ph" style="background:var(--gray-1);border:none;border-top:1px solid var(--border);border-right:1px solid var(--border);min-height:420px;">[ Фото обкладинки ]</div>
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border);">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px;">02</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px;">Обкладинка</h3>
+      <p style="font-size:15px;line-height:1.75;color:var(--ink-soft);">Льон, шкіра або оксамит. Три характери — від тихої класики до відвертого люксу. Кожна обкладинка витримує роки щоденного доторку.</p>
+    </div>
+  </div>
+
+  <!-- Ряд 3: текст ліворуч, фото праворуч -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:420px;">
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border);">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-3);margin-bottom:16px;">03</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px;">Layflat-палітурка</h3>
+      <p style="font-size:15px;line-height:1.75;color:var(--ink-soft);">Сторінки розкриваються без зламу. Фото через весь розворот — без втрат у корінці. Кожен розворот як окрема картина.</p>
+    </div>
+    <div class="ph" style="background:var(--gray-1);border:none;border-left:1px solid var(--border);border-top:1px solid var(--border);min-height:420px;">[ Фото розвороту ]</div>
+  </div>
+
+  <!-- Ряд 4: фото ліворуч, текст праворуч — темний -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:360px;">
+    <div class="ph" style="background:var(--gray-1);border:none;border-top:1px solid var(--border);border-right:1px solid var(--border);min-height:360px;">[ Фото паперу ]</div>
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;background:var(--ink);color:#fff;border-top:1px solid var(--ink);">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px;">04</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px;color:#fff;">Папір</h3>
+      <p style="font-size:15px;line-height:1.75;color:rgba(255,255,255,.55);">Матовий, глянець або Fine Art. Якість яка не вицвітає роками. Те що сьогодні виглядає як щойно надруковане — через двадцять років виглядатиме так само.</p>
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- 9. REVIEWS -->
+<section id="reviews" class="fade-up">
+  <div class="section-top">
+    <div class="eyebrow">Відгуки</div>
+    <h2 style="margin-top:10px">Вони вже тримали книгу в руках</h2>
+  </div>
+  <div class="reviews-track" id="reviews-track">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Коли ми відкрили коробку, я не могла говорити. Просто тримала книгу і плакала."</div>
+      <div class="rev-who">Оксана та Михайло</div>
+      <div class="rev-what">Суголосся — Весільна фотокнига</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Замовляла татові на ювілей. Він людина строга. Але коли відкрив — обійняв мене і мовчав хвилину."</div>
+      <div class="rev-who">Юлія, Харків</div>
+      <div class="rev-what">Опора — Фотокнига для батька</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Якість просто шикарна. Паперу хочеться торкатись знову і знову. Коробка виглядає як щось із Парижа."</div>
+      <div class="rev-who">Марина, Київ</div>
+      <div class="rev-what">Першосвіт — Фотокнига новонародженого</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Надіслала фото — через тиждень отримала скриньку. Краще ніж уявляла."</div>
+      <div class="rev-who">Катерина, Львів</div>
+      <div class="rev-what">Суголосся — Весільна фотокнига</div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <div class="rev-text">"Менеджер підказав які фото взяти. Результат — як з глянцевого журналу."</div>
+      <div class="rev-who">Андрій, Одеса</div>
+      <div class="rev-what">Родовід — Сімейна фотокнига</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 10. FAQ -->
+<section id="faq" class="fade-up">
+  <div class="faq-layout">
+    <div>
+      <div class="c-tag">Змінний + ядро</div>
+      <div class="faq-side-title">Питання і відповіді</div>
+      <div class="faq-side-body">Залишились питання? Напишіть нам — відповімо протягом години.</div>
+      <a href="#" class="faq-side-link">Написати у Telegram →</a>
+    </div>
+    <div>
+      <div class="faq-group-lbl">✎ Про весільну книгу</div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Скільки фото потрібно?<span class="faq-plus">+</span></div>
+        <div class="faq-a">Для книги на 20 розворотів — 80–120 фото. Ми допоможемо відібрати найкращі.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Чи можна додати текст і дати?<span class="faq-plus">+</span></div>
+        <div class="faq-a">Так — будь-який текст, цитати, дати. Обговорюємо на етапі макету.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Можна замовити дві книги?<span class="faq-plus">+</span></div>
+        <div class="faq-a">Так, знижка 15% на другий примірник.</div>
+      </div>
+      <div class="faq-group-lbl" style="margin-top:16px">◆ Загальні питання</div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Як надіслати фотографії?<span class="faq-plus">+</span></div>
+        <div class="faq-a">Google Drive, WeTransfer або Telegram — будь-який зручний спосіб.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Скільки часу займає виготовлення?<span class="faq-plus">+</span></div>
+        <div class="faq-a">7–10 робочих днів від затвердження макету.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Чи можна побачити макет до друку?<span class="faq-plus">+</span></div>
+        <div class="faq-a">Обов'язково. PDF з усіма розворотами. Правки безкоштовні.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Чи доставляєте по всій Україні?<span class="faq-plus">+</span></div>
+        <div class="faq-a">Так, Нова Пошта по всій Україні.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 11. CTA -->
+<section id="cta">
+  <div class="cta-eyebrow">Persona</div>
+  <h2>Зроблено так, щоб<br>передавати далі.</h2>
+  <span class="cta-sub">Ексклюзивна фотокнига у подарунковій коробці</span>
+  <div class="cta-actions">
+    <a href="#configurator" class="btn btn-w">Створити обкладинку</a>
+    <a href="#" class="btn btn-wg">Написати у Telegram</a>
+  </div>
+</section>
+
+
+<footer style="background:#0d0d0d;color:#fff;padding:0;">
+
+  <!-- Top footer -->
+  <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding:64px 48px;border-bottom:1px solid rgba(255,255,255,.08);">
+
+    <!-- Brand -->
+    <div>
+      <div style="font-size:13px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;margin-bottom:14px;">Persona</div>
+      <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:24px;max-width:240px;">Зроблено так, щоб передавати далі. Преміальні фотокниги по всій Україні.</p>
+      <div style="display:flex;gap:12px;">
+        <a href="#" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);padding:7px 14px;transition:all .15s;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.35)';this.style.borderColor='rgba(255,255,255,.15)'">Instagram</a>
+        <a href="#" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);padding:7px 14px;transition:all .15s;" onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.4)'" onmouseout="this.style.color='rgba(255,255,255,.35)';this.style.borderColor='rgba(255,255,255,.15)'">Telegram</a>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px;">Навігація</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <a href="#products" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Продукти</a>
+        <a href="#why" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Чому фотокнига</a>
+        <a href="#configurator" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Ціна</a>
+        <a href="#how" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Процес</a>
+        <a href="#materials" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Якість</a>
+        <a href="#reviews" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">Відгуки</a>
+        <a href="#faq" style="font-size:13px;color:rgba(255,255,255,.45);text-decoration:none;transition:color .15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.45)'">FAQ</a>
+      </div>
+    </div>
+
+    <!-- Contacts -->
+    <div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px;">Контакти</div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <a href="tel:+380000000000" style="text-decoration:none;">
+          <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.25);margin-bottom:3px;text-transform:uppercase;">Телефон 1</div>
+          <div style="font-size:16px;color:rgba(255,255,255,.75);font-weight:400;">+38 000 000 00 00</div>
+        </a>
+        <a href="tel:+380000000000" style="text-decoration:none;">
+          <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.25);margin-bottom:3px;text-transform:uppercase;">Телефон 2</div>
+          <div style="font-size:16px;color:rgba(255,255,255,.75);font-weight:400;">+38 000 000 00 00</div>
+        </a>
+        <a href="mailto:hello@persona.ua" style="text-decoration:none;">
+          <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.25);margin-bottom:3px;text-transform:uppercase;">Email</div>
+          <div style="font-size:14px;color:rgba(255,255,255,.55);">hello@persona.ua</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+    </div>
+
+  </div>
+
+  <!-- Bottom footer -->
+  <div style="padding:20px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <div style="font-size:11px;color:rgba(255,255,255,.18);">© 2025 Persona. Всі права захищені.</div>
+    <div style="display:flex;gap:20px;">
+      <a href="#" style="font-size:11px;color:rgba(255,255,255,.18);text-decoration:none;">Політика конфіденційності</a>
+      <a href="#" style="font-size:11px;color:rgba(255,255,255,.18);text-decoration:none;">Умови використання</a>
+    </div>
+  </div>
+
+</footer>
+
+
+<script>
+/* ===== NAV ===== */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.boxShadow = window.scrollY > 10 ? '0 1px 12px rgba(0,0,0,.08)' : 'none';
+});
+
+/* ===== FADE UP ===== */
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+/* ===== STICKY BANNER ===== */
+let bannerClosed = false;
+function closeBanner() { bannerClosed=true; document.getElementById('sticky-banner').classList.remove('show'); }
+window.addEventListener('scroll', () => { if(!bannerClosed && window.scrollY>400) document.getElementById('sticky-banner').classList.add('show'); });
+
+/* ===== DISCOUNT TIMER ===== */
+let timerSecs = 48*3600-1;
+const timerEl = document.getElementById('disc-timer');
+setInterval(() => {
+  if(timerSecs<=0) return;
+  timerSecs--;
+  const h=String(Math.floor(timerSecs/3600)).padStart(2,'0');
+  const m=String(Math.floor((timerSecs%3600)/60)).padStart(2,'0');
+  const s=String(timerSecs%60).padStart(2,'0');
+  timerEl.textContent=h+':'+m+':'+s;
+},1000);
+
+/* ===== REVIEWS DRAG ===== */
+const rtrack = document.getElementById('reviews-track');
+let rd={on:false,sx:0,sl:0};
+rtrack.addEventListener('mousedown',e=>{rd={on:true,sx:e.pageX-rtrack.offsetLeft,sl:rtrack.scrollLeft};rtrack.style.cursor='grabbing';});
+rtrack.addEventListener('mouseleave',()=>{rd.on=false;rtrack.style.cursor='grab';});
+rtrack.addEventListener('mouseup',()=>{rd.on=false;rtrack.style.cursor='grab';});
+rtrack.addEventListener('mousemove',e=>{if(!rd.on)return;e.preventDefault();rtrack.scrollLeft=rd.sl-(e.pageX-rtrack.offsetLeft-rd.sx)*1.5;});
+
+/* ===== FAQ ===== */
+function toggleFaq(el) {
+  const item=el.parentElement, was=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+  if(!was) item.classList.add('open');
+}
+
+/* ===== TABS ===== */
+function switchTab(btn, id) {
+  document.querySelectorAll('.cfg-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.cfg-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+
+/* ===== CONFIGURATOR ===== */
+const C = {
+  title:'', subtitle:'', bg:'#1C1510',
+  design:'photo', sym:'none', customSym:null, pos:'center',
+  spineText:'', spineSym:'none',
+  photo:null, px:0, py:0, pscale:1,
+  base:5000, coverAdd:0, paperAdd:0, boxAdd:600,
+  sizeName:'20×20', coverName:'Льон', paperName:'Матовий', hasBox:true
+};
+
+function autoText(hex) {
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return (0.299*r+0.587*g+0.114*b)/255>.5?'#1C1510':'#F5F0E8';
+}
+function autoAccent(hex) {
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return (0.299*r+0.587*g+0.114*b)/255>.5?'#4A3728':'#C9A96E';
+}
+
+const cv  = document.getElementById('bookCanvas');
+const ctx = cv.getContext('2d');
+const sv  = document.getElementById('spineCanvas');
+const sctx= sv.getContext('2d');
+
+/* Drag photo */
+let _d={on:false,sx:0,sy:0,ox:0,oy:0};
+cv.addEventListener('mousedown',e=>{if(!C.photo)return;_d={on:true,sx:e.clientX,sy:e.clientY,ox:C.px,oy:C.py};cv.style.cursor='grabbing';});
+window.addEventListener('mousemove',e=>{if(!_d.on)return;C.px=_d.ox+(e.clientX-_d.sx);C.py=_d.oy+(e.clientY-_d.sy);renderBook();});
+window.addEventListener('mouseup',()=>{_d.on=false;cv.style.cursor=C.photo?'grab':'default';});
+cv.addEventListener('wheel',e=>{if(!C.photo)return;e.preventDefault();C.pscale=Math.max(.2,Math.min(6,C.pscale*(e.deltaY>0?.92:1.09)));renderBook();},{passive:false});
+function zoomPhoto(f){if(!C.photo)return;C.pscale=Math.max(.2,Math.min(6,C.pscale*f));renderBook();}
+
+function getLayout(W,H){
+  if(C.pos==='top')    return{sy:H*.14,ty:H*.32,suby:H*.46};
+  if(C.pos==='bottom') return{sy:H*.60,ty:H*.76,suby:H*.90};
+  return                     {sy:H*.25,ty:H*.50,suby:H*.80};
+}
+
+function renderBook(){
+  C.title   =(document.getElementById('cfg-title')||{value:''}).value;
+  C.subtitle=(document.getElementById('cfg-subtitle')||{value:''}).value;
+  const W=cv.width,H=cv.height;
+  const tc=autoText(C.bg),ac=autoAccent(C.bg);
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle=C.bg; ctx.fillRect(0,0,W,H);
+
+  /* photo */
+  const showPh=(C.design==='photo'||C.design==='both')&&C.photo;
+  if(showPh){
+    const img=C.photo,bs=Math.max(W/img.width,H/img.height);
+    const dw=img.width*bs*C.pscale,dh=img.height*bs*C.pscale;
+    ctx.save();ctx.globalAlpha=.62;ctx.drawImage(img,(W-dw)/2+C.px,(H-dh)/2+C.py,dw,dh);ctx.restore();
+    ctx.fillStyle=C.bg;ctx.globalAlpha=.4;ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;
+    cv.style.cursor='grab';
+  }
+
+  /* border */
+  ctx.strokeStyle=ac;ctx.globalAlpha=.2;ctx.lineWidth=1;ctx.strokeRect(12,12,W-24,H-24);ctx.globalAlpha=1;
+
+  const L=getLayout(W,H);
+  const showSym=(C.design==='symbol'||C.design==='both')&&C.sym!=='none';
+  if(showSym){
+    if(C.sym==='custom'&&C.customSym){const ss=42;ctx.drawImage(C.customSym,W/2-ss/2,L.sy-ss/2,ss,ss);}
+    else drawSym(ctx,C.sym,W/2,L.sy,ac);
+  }
+
+  /* title */
+  ctx.fillStyle=tc;ctx.textAlign='center';ctx.textBaseline='middle';
+  const tY=showSym?L.ty:H/2;
+  if(C.title){
+    ctx.font=`400 26px system-ui,sans-serif`;
+    const words=C.title.split(' ');let lines=[],line='';
+    for(const w of words){const t=line?line+' '+w:w;if(ctx.measureText(t).width>W-44){lines.push(line);line=w;}else line=t;}
+    lines.push(line);
+    const lh=34,sy2=tY-((lines.length-1)*lh)/2;
+    lines.forEach((l,i)=>ctx.fillText(l,W/2,sy2+i*lh));
+  } else {
+    ctx.globalAlpha=.18;ctx.font='300 14px system-ui,sans-serif';ctx.fillText('Назва книги',W/2,H/2);ctx.globalAlpha=1;
+  }
+
+  /* subtitle */
+  if(C.subtitle){
+    ctx.fillStyle=ac;ctx.globalAlpha=.65;ctx.font='300 10px system-ui,sans-serif';
+    ctx.fillText(C.subtitle.toUpperCase(),W/2,L.suby);ctx.globalAlpha=1;
+  }
+
+  /* bottom line */
+  ctx.strokeStyle=ac;ctx.globalAlpha=.15;ctx.lineWidth=.5;
+  ctx.beginPath();ctx.moveTo(24,H-26);ctx.lineTo(W-24,H-26);ctx.stroke();ctx.globalAlpha=1;
+
+  renderSpine();
+}
+
+function drawSym(c,type,x,y,color){
+  c.fillStyle=color;c.strokeStyle=color;c.globalAlpha=.6;c.lineWidth=1.5;
+  if(type==='heart'){const s=13;c.beginPath();c.moveTo(x,y+s*.3);c.bezierCurveTo(x,y-s*.3,x-s,y-s*.3,x-s,y+s*.1);c.bezierCurveTo(x-s,y+s*.7,x,y+s,x,y+s);c.bezierCurveTo(x,y+s,x+s,y+s*.7,x+s,y+s*.1);c.bezierCurveTo(x+s,y-s*.3,x,y-s*.3,x,y+s*.3);c.fill();}
+  else if(type==='ring'){c.beginPath();c.arc(x,y,13,0,Math.PI*2);c.stroke();c.beginPath();c.arc(x,y,7,0,Math.PI*2);c.stroke();}
+  else if(type==='star'){const r1=15,r2=6,sp=5;c.beginPath();for(let i=0;i<sp*2;i++){const r=i%2?r2:r1,a=i*Math.PI/sp-Math.PI/2;i?c.lineTo(x+r*Math.cos(a),y+r*Math.sin(a)):c.moveTo(x+r*Math.cos(a),y+r*Math.sin(a));}c.closePath();c.fill();}
+  else if(type==='flower'){for(let i=0;i<6;i++){const a=i/6*Math.PI*2;c.beginPath();c.arc(x+8*Math.cos(a),y+8*Math.sin(a),6,0,Math.PI*2);c.fill();}c.fillStyle=C.bg;c.beginPath();c.arc(x,y,6,0,Math.PI*2);c.fill();c.fillStyle=color;}
+  else if(type==='infinity'){c.beginPath();c.moveTo(x-18,y);c.bezierCurveTo(x-18,y-11,x,y-11,x,y);c.bezierCurveTo(x,y+11,x+18,y+11,x+18,y);c.bezierCurveTo(x+18,y-11,x,y-11,x,y);c.bezierCurveTo(x,y+11,x-18,y+11,x-18,y);c.stroke();}
+  c.globalAlpha=1;
+}
+
+function renderSpine(){
+  const SW=sv.width,SH=sv.height;
+  const tc=autoText(C.bg),ac=autoAccent(C.bg);
+  sctx.clearRect(0,0,SW,SH);sctx.fillStyle=C.bg;sctx.fillRect(0,0,SW,SH);
+  sctx.strokeStyle=ac;sctx.globalAlpha=.15;sctx.lineWidth=1;sctx.strokeRect(2,2,SW-4,SH-4);sctx.globalAlpha=1;
+  const st=(document.getElementById('spine-text')||{value:''}).value;
+  if(st){sctx.save();sctx.fillStyle=tc;sctx.globalAlpha=.65;sctx.font='300 8px system-ui,sans-serif';sctx.textAlign='center';sctx.textBaseline='middle';sctx.translate(SW/2,SH/2);sctx.rotate(-Math.PI/2);sctx.fillText(st.toUpperCase(),0,0);sctx.restore();sctx.globalAlpha=1;}
+  if(C.spineSym!=='none'){const sym=C.spineSym==='dot'?'·':C.spineSym==='heart'?'♥':'✦';sctx.fillStyle=ac;sctx.globalAlpha=.55;sctx.font='11px system-ui,sans-serif';sctx.textAlign='center';sctx.textBaseline='middle';sctx.fillText(sym,SW/2,20);sctx.globalAlpha=1;}
+}
+
+function loadPhoto(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{C.photo=img;C.px=0;C.py=0;C.pscale=1;renderBook();};img.src=ev.target.result;};r.readAsDataURL(f);}
+function removePhoto(){C.photo=null;C.px=0;C.py=0;C.pscale=1;cv.style.cursor='default';renderBook();}
+function loadSym(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{C.customSym=img;C.sym='custom';renderBook();};img.src=ev.target.result;};r.readAsDataURL(f);}
+function downloadCanvas(){const a=document.createElement('a');a.download='persona-cover.png';a.href=cv.toDataURL('image/png');a.click();}
+
+function pickBg(el){document.querySelectorAll('#bg-colors .cdot').forEach(d=>d.classList.remove('active'));el.classList.add('active');C.bg=el.dataset.c;renderBook();}
+function pickDesign(btn){document.querySelectorAll('#design-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.design=btn.dataset.v;document.getElementById('symbol-group').style.opacity=C.design==='photo'?'.35':'1';renderBook();}
+function pickSym(btn){document.querySelectorAll('#symbol-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.sym=btn.dataset.v;renderBook();}
+function pickPos(btn){document.querySelectorAll('#pos-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.pos=btn.dataset.v;renderBook();}
+function pickSpineSym(btn){document.querySelectorAll('#spine-sym-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.spineSym=btn.dataset.v;renderSpine();}
+
+function pickSize(btn){
+  document.querySelectorAll('#size-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  C.base=parseInt(btn.dataset.p);C.sizeName=btn.dataset.s;document.getElementById('s-size').textContent=C.sizeName;calcTotal();
+}
+function pickAdd(btn,group){
+  const map={cover:'cover-opts',paper:'paper-opts',box:'box-opts'};
+  document.querySelectorAll('#'+map[group]+' .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+  const v=parseInt(btn.dataset.a),t=btn.textContent.trim();
+  if(group==='cover'){C.coverAdd=v;C.coverName=t;document.getElementById('s-cover').textContent=t;}
+  if(group==='paper'){C.paperAdd=v;C.paperName=t;document.getElementById('s-paper').textContent=t;}
+  if(group==='box'){C.boxAdd=v;C.hasBox=v>0;document.getElementById('s-box').textContent=C.hasBox?'Так':'Ні';document.getElementById('box-color-group').style.opacity=C.hasBox?'1':'.3';}
+  calcTotal();
+}
+
+function calcTotal(){
+  const sp=parseInt(document.getElementById('sp-slider')?.value||20);
+  document.getElementById('s-spreads').textContent=sp;
+  const total=C.base+C.coverAdd+C.paperAdd+C.boxAdd+(sp-10)*80;
+  document.getElementById('sp-val').textContent=sp;
+  const fmt=total.toLocaleString('uk');
+  document.getElementById('cfg-price').innerHTML=fmt+' <span style="font-size:16px;font-weight:300;color:rgba(255,255,255,.3)">грн</span>';
+}
+
+
+function openModal(product) {
+  const modal = document.getElementById('order-modal');
+  modal.style.display = 'flex';
+  if(product) document.getElementById('modal-product').value = product;
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('order-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.getElementById('order-modal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+/* ===== INIT ===== */
+renderBook();
+calcTotal();
+</script>
+
+<!-- ORDER MODAL -->
+<div id="order-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.55);align-items:center;justify-content:center;">
+  <div style="background:#fff;width:100%;max-width:480px;padding:40px;position:relative;margin:20px;">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:transparent;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1;">✕</button>
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#aaa;margin-bottom:12px;">Замовлення</div>
+    <h3 style="font-size:22px;font-weight:400;margin-bottom:20px;">Залишіть заявку</h3>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <input type="text" placeholder="Ваше ім'я" style="border:1px solid #D0D0D0;padding:11px 14px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      <input type="tel" placeholder="Номер телефону" style="border:1px solid #D0D0D0;padding:11px 14px;font-size:13px;font-family:inherit;outline:none;width:100%;">
+      <select id="modal-product" style="border:1px solid #D0D0D0;padding:11px 14px;font-size:13px;font-family:inherit;outline:none;width:100%;background:#fff;color:#444;">
+        <option value="">Що вас цікавить?</option>
+        <option value="book">Фотокнига (Спадщина)</option>
+        <option value="wall">Волларт (Обрій)</option>
+        <option value="frame">Настільне фото (Миттєвість)</option>
+      </select>
+      <button onclick="closeModal()" style="background:#1A1A1A;border:none;padding:13px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;cursor:pointer;font-family:inherit;margin-top:4px;">Відправити заявку →</button>
+      <div style="font-size:10px;color:#bbb;text-align:center;">Менеджер зв'яжеться протягом години</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
