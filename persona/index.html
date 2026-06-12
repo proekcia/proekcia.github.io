@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persona — Преміум фотокниги</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#F2F2F2;--white:#FFF;--g1:#E0E0E0;--g2:#C8C8C8;--g3:#A0A0A0;
+  --ink:#1A1A1A;--ink2:#444;--border:#D0D0D0;
+  --ff:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--ff);font-size:14px;line-height:1.6;overflow-x:hidden}
+h1{font-size:clamp(36px,5vw,64px);font-weight:400;line-height:1.05}
+h2{font-size:clamp(22px,3vw,40px);font-weight:400;line-height:1.1}
+h3{font-size:18px;font-weight:500}
+p{color:var(--ink2);line-height:1.75}
+a{text-decoration:none;color:inherit}
+section{padding:80px 48px}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.eyebrow::before{content:'';width:20px;height:1px;background:var(--g2)}
+.c-tag{display:inline-flex;align-items:center;gap:5px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);border:1px dashed var(--g2);padding:3px 9px;margin-bottom:12px}
+.c-tag::before{content:'✎'}
+.ph{background:var(--g1);border:1px dashed var(--g2);display:flex;align-items:center;justify-content:center;color:var(--g3);font-size:12px;text-transform:uppercase;letter-spacing:.08em;text-align:center}
+.btn{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:12px 28px;border:1.5px solid var(--ink);color:var(--ink);cursor:pointer;background:transparent;font-family:var(--ff);transition:background .15s,color .15s}
+.btn:hover,.btn-fill{background:var(--ink);color:#fff}
+.btn-fill:hover{background:#333}
+.btn-ghost{border-color:var(--g2);color:var(--g3)}
+.btn-ghost:hover{border-color:var(--ink);color:var(--ink);background:transparent}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:transparent;border-bottom:1px solid transparent;display:flex;align-items:center;padding:0 48px;transition:background .35s,border-color .35s}
+.nav-logo{font-size:14px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;margin-right:auto;display:flex;align-items:center;color:#fff;transition:color .35s}
+.nav-links{display:flex;gap:20px;list-style:none;margin-right:20px}
+.nav-links a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);transition:color .15s}
+.nav-links a:hover{color:#fff}
+/* HERO */
+#hero{position:relative;height:100vh;min-height:600px;overflow:hidden;display:block;padding:0}
+.hero-bg{position:absolute;inset:0;background:var(--g1);display:flex;align-items:center;justify-content:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--g3)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.25) 50%,rgba(0,0,0,.15) 100%)}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:56px 56px 64px;color:#fff;z-index:2}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.6);max-width:480px;margin-bottom:32px;line-height:1.75}
+/* MARQUEE */
+.marquee-wrap{background:var(--ink);padding:13px 0;overflow:hidden}
+.marquee-track{display:flex;animation:marquee 30s linear infinite;width:max-content}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);padding:0 32px;white-space:nowrap;display:flex;align-items:center;gap:32px}
+.marquee-item::after{content:'·';color:rgba(255,255,255,.2)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px}
+.pcard{background:var(--white);padding:36px 28px;border:1px solid var(--border);cursor:pointer;transition:border-color .15s;position:relative}
+.pcard:hover{border-color:var(--ink)}
+.pcard.feat{background:var(--ink);color:#fff}
+.pcard.feat p{color:rgba(255,255,255,.5)}
+/* WHY */
+.why-5{display:grid;grid-template-columns:repeat(5,1fr);gap:1px}
+.w5{background:var(--bg);padding:28px 22px;border:1px solid var(--border)}
+.w5.dark{background:var(--ink);border-color:var(--ink)}
+.w5num{font-size:28px;font-weight:300;color:var(--g2);margin-bottom:16px;line-height:1}
+.w5.dark .w5num{color:rgba(255,255,255,.2)}
+.w5body{font-size:14px;line-height:1.65;color:var(--ink2)}
+.w5.dark .w5body{color:rgba(255,255,255,.6)}
+/* DISCOUNT */
+.disc-wrap{background:var(--ink);color:#fff;display:grid;grid-template-columns:1fr 1fr;gap:60px;padding:64px 48px}
+.dinput{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);padding:12px 16px;font-size:13px;color:#fff;font-family:var(--ff);outline:none;width:100%;margin-bottom:10px}
+.dinput::placeholder{color:rgba(255,255,255,.28)}
+.dsubmit{background:#fff;border:none;padding:13px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);cursor:pointer;font-family:var(--ff);width:100%}
+/* CFG */
+.cfg-divider{height:48px;background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center}
+.cfg-divider span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3)}
+.cfg-header{text-align:center;padding:40px 48px 28px}
+.cfg-header h2{color:#fff;margin-top:8px}
+.cfg-header p{color:rgba(255,255,255,.4);margin-top:6px}
+.cfg-header .eyebrow{justify-content:center;color:rgba(255,255,255,.35)}
+.cfg-header .eyebrow::before{background:rgba(255,255,255,.2)}
+.cfg-layout{display:grid;grid-template-columns:1fr 1fr;height:calc(100vh - 210px);min-height:560px;max-height:760px;border-top:1px solid rgba(255,255,255,.08)}
+.cfg-preview{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px;gap:14px;border-right:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
+.cfg-book-wrap{display:flex;box-shadow:0 16px 48px rgba(0,0,0,.5)}
+#spineCanvas,#bookCanvas{display:block}
+#bookCanvas{cursor:grab}
+#bookCanvas:active{cursor:grabbing}
+.cpbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.cpbtn{font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);cursor:pointer;font-family:var(--ff);transition:all .15s}
+.cpbtn:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.cpbtn.pr{background:#fff;color:var(--ink);border-color:#fff}
+.cfg-price-wrap{text-align:center}
+.cfg-price-lbl{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:4px}
+.cfg-price-val{font-size:34px;font-weight:700;color:#fff;line-height:1}
+.cfg-price-sub{font-size:10px;color:rgba(255,255,255,.25)}
+.drag-hint{font-size:10px;color:rgba(255,255,255,.2);text-align:center}
+.cfg-params{display:flex;flex-direction:column;overflow:hidden}
+.cfg-tabs{display:flex;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.cfg-tab{flex:1;padding:12px 4px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);background:transparent;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--ff);transition:all .15s}
+.cfg-tab:hover{color:rgba(255,255,255,.65)}
+.cfg-tab.active{color:#fff;border-bottom-color:#fff}
+.cfg-panels{flex:1;overflow:hidden;position:relative}
+.cfg-panel{position:absolute;inset:0;padding:20px 22px;overflow-y:auto;display:none;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.1) transparent}
+.cfg-panel.active{display:block}
+.cfg-group{margin-bottom:18px}
+.cfg-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);display:block;margin-bottom:8px}
+.cfg-opts{display:flex;flex-wrap:wrap;gap:5px}
+.cfg-opt{font-size:11px;padding:5px 12px;background:transparent;border:1px solid rgba(255,255,255,.15);color:rgba(255,255,255,.5);cursor:pointer;font-family:var(--ff);transition:all .15s}
+.cfg-opt:hover{border-color:rgba(255,255,255,.4);color:rgba(255,255,255,.85)}
+.cfg-opt.active{border-color:#fff;background:rgba(255,255,255,.1);color:#fff}
+.cinput{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);padding:8px 12px;font-size:12px;color:#fff;font-family:var(--ff);outline:none;margin-bottom:8px}
+.cinput::placeholder{color:rgba(255,255,255,.25)}
+.cinput:focus{border-color:rgba(255,255,255,.4)}
+.cfg-slider{width:100%;-webkit-appearance:none;height:1px;background:rgba(255,255,255,.18);outline:none;margin-bottom:6px}
+.cfg-slider::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:#fff;cursor:pointer}
+.cdot{width:22px;height:22px;border-radius:50%;cursor:pointer;border:2px solid transparent;transition:border-color .15s,transform .15s;position:relative;display:inline-block}
+.cdot:hover,.cdot.active{border-color:#fff;transform:scale(1.15)}
+.cdot-tip{position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:9px;white-space:nowrap;color:rgba(255,255,255,.4);display:none;z-index:10;pointer-events:none}
+.cdot:hover .cdot-tip{display:block}
+.color-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+.sum-line{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:11px}
+.sum-key{color:rgba(255,255,255,.35)}
+.sum-val{color:rgba(255,255,255,.75);font-weight:500}
+.cfg-submit{width:100%;background:#fff;border:none;padding:12px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);cursor:pointer;font-family:var(--ff);margin-top:4px}
+.cfg-submit:hover{background:#e8e8e8}
+.info-box{margin-top:8px;font-size:11px;color:rgba(255,255,255,.35);line-height:1.5;padding:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08)}
+.prebook-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:14px;margin-top:4px}
+/* HOW */
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;position:relative}
+.steps-grid::before{content:'';position:absolute;top:20px;left:10%;right:10%;height:1px;background:var(--border)}
+.step{text-align:center;padding:0 20px}
+.step-num{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--ink2);background:var(--white);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;position:relative;z-index:2;font-size:15px}
+.step-title{font-size:16px;font-weight:500;margin-bottom:8px}
+.step-body{font-size:12px;color:var(--ink2);line-height:1.6}
+/* REVIEWS */
+.reviews-track{display:flex;gap:16px;margin-top:48px;overflow-x:auto;scrollbar-width:none;cursor:grab}
+.reviews-track::-webkit-scrollbar{display:none}
+.rev-card{flex:0 0 320px;background:var(--bg);border:1px solid var(--border);padding:28px}
+.rev-stars{font-size:12px;letter-spacing:2px;margin-bottom:14px}
+.rev-text{font-size:15px;line-height:1.55;margin-bottom:16px}
+.rev-who{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--g3)}
+.rev-what{font-size:11px;color:var(--ink2);margin-top:2px}
+/* FAQ */
+.faq-layout{display:grid;grid-template-columns:1fr 2fr;gap:64px;margin-top:48px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{padding:15px 0;display:flex;justify-content:space-between;align-items:center;gap:12px;cursor:pointer;font-size:15px;transition:color .15s}
+.faq-q:hover{color:var(--g3)}
+.faq-plus{font-size:18px;transition:transform .25s;flex-shrink:0}
+.faq-item.open .faq-plus{transform:rotate(45deg)}
+.faq-a{font-size:13px;color:var(--ink2);max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;line-height:1.7}
+.faq-item.open .faq-a{max-height:160px;padding-bottom:15px}
+/* CTA */
+#cta{background:var(--ink);text-align:center;padding:100px 48px;position:relative;overflow:hidden}
+#cta::before{content:'PERSONA';position:absolute;font-size:200px;font-weight:700;color:rgba(255,255,255,.025);top:50%;left:50%;transform:translate(-50%,-50%);letter-spacing:.15em;white-space:nowrap;pointer-events:none}
+#cta h2{color:#fff;margin-bottom:10px;position:relative}
+.cta-sub{font-size:16px;color:rgba(255,255,255,.4);margin-bottom:40px;position:relative;display:block}
+.cta-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-w{border-color:#fff;color:#fff}
+.btn-w:hover{background:#fff;color:var(--ink)}
+.btn-wg{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.45)}
+.btn-wg:hover{border-color:rgba(255,255,255,.5);color:#fff;background:transparent}
+/* FOOTER */
+footer{background:#0d0d0d;color:#fff;padding:0}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:48px;padding:64px 48px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-bottom{padding:20px 48px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+/* STICKY */
+.sticky-banner{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--ink);border-top:1px solid rgba(255,255,255,.08);padding:11px 40px;display:flex;align-items:center;justify-content:space-between;gap:20px;transform:translateY(100%);transition:transform .35s ease}
+.sticky-banner.show{transform:translateY(0)}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.55);align-items:center;justify-content:center}
+.modal-box{background:#fff;width:100%;max-width:480px;padding:40px;position:relative;margin:20px}
+.modal-input{border:1px solid var(--border);padding:11px 14px;font-size:13px;font-family:var(--ff);outline:none;width:100%;margin-bottom:10px}
+.modal-submit{background:var(--ink);border:none;padding:13px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#fff;cursor:pointer;font-family:var(--ff);width:100%}
+/* FADE */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.fade-up.visible{opacity:1;transform:none}
+/* MOBILE */
+@media(max-width:768px){
+  section{padding:56px 20px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  #hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:80px 20px 48px}
+  .products-grid,.why-5,.disc-wrap,.footer-top{grid-template-columns:1fr}
+  .disc-wrap{padding:48px 20px}
+  .cfg-layout{grid-template-columns:1fr;height:auto;max-height:none}
+  .cfg-preview{border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .cfg-params{height:500px}
+  .steps-grid{grid-template-columns:1fr 1fr}
+  .steps-grid::before{display:none}
+  .faq-layout{grid-template-columns:1fr;gap:32px}
+  #cta{padding:64px 20px}
+  .footer-top{gap:32px;padding:40px 20px}
+  .footer-bottom{padding:16px 20px}
+  .sticky-banner{padding:11px 20px}
+}
+@media(max-width:480px){h1{font-size:30px}h2{font-size:22px}}
+</style>
+</head>
+<body>
+
+<!-- STICKY BANNER -->
+<div class="sticky-banner" id="sticky-banner">
+  <div style="font-size:13px;color:rgba(255,255,255,.55)">Знижка <strong style="color:#fff">10%</strong> на передзамовлення</div>
+  <button onclick="document.getElementById('discount').scrollIntoView({behavior:'smooth'});closeBanner()" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 22px;background:#fff;color:var(--ink);border:none;cursor:pointer;font-family:var(--ff);white-space:nowrap;flex-shrink:0">Отримати знижку</button>
+  <button onclick="closeBanner()" style="background:transparent;border:none;color:rgba(255,255,255,.3);font-size:18px;cursor:pointer;flex-shrink:0;line-height:1">✕</button>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMyMiIgaGVpZ2h0PSIyODMiIHZpZXdCb3g9IjAgMCAxMzIyIDI4MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwMy4xNyAxNjcuMzAySDU3Ljc1OVYyNTEuMzUyQzU3Ljc1OSAyNzEuMjY4IDYxLjM0NDEgMjc1LjY1IDgxLjY1OTMgMjc1LjY1SDEwMy41NjhWMjc4LjgzN0gtMy4xNzg0N2UtMDVWMjc1LjY1SDcuOTY2NzNDMjguMjgyIDI3NS42NSAzMS44NjcgMjcxLjI2OCAzMS44NjcgMjUxLjM1MlYyNy40ODU1QzMxLjg2NyA3LjU2ODU2IDI4LjI4MiAzLjU4NTE4IDcuOTY2NzMgMy41ODUxOEgtMy4xNzg0N2UtMDVWMC4wMDAxMzY2NDVIMTAzLjE3QzE3NC44NyAwLjAwMDEzNjY0NSAyMTUuNTAxIDI3LjQ4NTUgMjE1LjUwMSA4My42NTEyQzIxNS41MDEgMTM5LjgxNyAxNzQuODcgMTY3LjMwMiAxMDMuMTcgMTY3LjMwMlpNOTUuOTk5NSA0Ljc4MDIxSDU3Ljc1OVYxNjIuNTIySDk1Ljk5OTVDMTcxLjI4NSAxNjIuNTIyIDE4OC4wMTYgMTI1Ljg3NSAxODguMDE2IDgzLjY1MTJDMTg4LjAxNiA0MS44MjU3IDE3MS4yODUgNC43ODAyMSA5NS45OTk1IDQuNzgwMjFaTTQyNS44NDUgMTk4Ljc3MUw0MjcuODM3IDIwMC4zNjRDNDE1LjQ4OSAyMjIuMjczIDM4MC4wMzYgMjgxLjIyNyAzMTMuMTE2IDI4MS4yMjdDMjU0LjE2MiAyODEuMjI3IDIxMy4xMzMgMjQ2LjU3MiAyMTEuOTM4IDE5MS45OTlDMjEwLjc0MyAxMzIuNjQ3IDI1OC41NDMgODMuMjUyOCAzMTUuMTA3IDgzLjI1MjhDMzU4LjUyNiA4My4yNTI4IDM5Mi4zODUgMTExLjkzMyAzOTIuMzg1IDE1NS4zNTJIMjM2LjIzNkMyMzUuMDQxIDE2NC41MTQgMjM0LjY0MyAxNzQuMDc0IDIzNS40NCAxODQuNDMxQzI0MC42MTggMjM5LjggMjc4LjA2MiAyNjYuMDkgMzIwLjI4NiAyNjguODc4QzM4My42MjEgMjcyLjg2MiA0MTUuMDkgMjE4LjI4OSA0MjUuODQ1IDE5OC43NzFaTTMwOC4zMzYgODcuNjM0NkMyNzIuODgzIDg3LjIzNjIgMjQ0LjIwMyAxMTIuMzMyIDIzNy4wMzMgMTUyLjE2NUgzNjcuMjlDMzY4Ljg4MyAxMTkuNTAyIDM1MS43NTQgODguMDMyOSAzMDguMzM2IDg3LjYzNDZaTTUzMS41NzkgODQuODQ2MkM1NDMuNTI5IDg2LjQzOTUgNTQ5LjkwMyA5MC40MjI5IDU0Ny41MTMgOTkuNTg0N0M1NDUuOTE5IDEwNy4xNTMgNTM1LjU2MyAxMDkuOTQxIDUyMy4yMTQgMTA0LjM2NUM1MDQuNDkyIDk1LjIwMyA0ODguMTYgODguODI5NiA0NzEuNDMgMTA0Ljc2M0M0NTYuMjkzIDExOC43MDUgNDQ5LjUyMiAxNDYuOTg3IDQ0OS41MjIgMTY2LjEwN1YyNTEuMzUyQzQ0OS41MjIgMjcxLjI2OCA0NTMuMTA3IDI3NS42NSA0NzMuNDIyIDI3NS42NUg0OTUuMzNWMjc4LjgzN0gzOTIuMTYxVjI3NS42NUg0MDAuMTI4QzQyMC4wNDUgMjc1LjY1IDQyNC4wMjggMjcxLjI2OCA0MjQuMDI4IDI1MS4zNTJWMTEzLjkyNUM0MjQuMDI4IDkzLjYwOTYgNDIwLjA0NSA4OS42MjYyIDQwMC4xMjggODkuNjI2MkgzOTIuMTYxVjg2LjA0MTJINDQ5LjUyMlYxNDIuNjA1QzQ1My41MDUgMTI4LjI2NSA0NTkuODc4IDExMy41MjcgNDY4LjY0MiAxMDEuNTc2QzQ4MC45OSA4NS4yNDQ1IDUwMi41MDEgODEuMjYxMSA1MzEuNTc5IDg0Ljg0NjJaTTYxNi4wNyAxNjUuMzExQzY0Ni43NDMgMTc4LjQ1NiA2OTYuNTM1IDE5MS4yMDIgNjkyLjE1MyAyMzAuNjM4QzY4OC4xNyAyNjUuNjkyIDY1NC4zMTEgMjgyLjQyMiA2MTYuODY3IDI4MS4yMjdDNTc0LjI0NSAyODAuMDMyIDU1Ni4zMiAyNTcuMzI3IDU0NS45NjMgMjU4LjkyQzU0MC4zODYgMjYwLjExNSA1MzkuMTkxIDI2OC4wODIgNTM5LjE5MSAyNzYuNDQ3QzUzOS4xOTEgMjgwLjAzMiA1MzkuMTkxIDI4Mi40MjIgNTM5LjE5MSAyODIuNDIySDUzNi40MDNWMjAyLjM1Nkg1MzkuMTkxQzUzOS4xOTEgMjAyLjM1NiA1MzkuMTkxIDIxMy4xMTEgNTM5LjE5MSAyMTcuNDkzQzUzOS4xOTEgMjU3LjMyNyA1ODMuNDA3IDI3NS42NSA2MTIuMDg3IDI3Ni44NDVDNjQyLjc1OSAyNzguNDM5IDY3Mi42MzUgMjY2LjQ4OCA2NzQuMjI4IDI0MC45OTVDNjc1LjgyMSAyMTYuMjk4IDY0OS45MjkgMjA1Ljk0MSA2MTEuNjg5IDE5MS4yMDJDNTY4LjY2OCAxNzQuNDcyIDU0Mi43NzYgMTU3Ljc0MiA1NDguMzUzIDEyMy44ODNDNTU0LjMyOCA4OC44Mjk2IDYwMC41MzUgODIuODU0NSA2MTMuMjgyIDgzLjI1MjhDNjUzLjUxNCA4NC40NDc4IDY2My40NzMgMTAwLjM4MSA2NzEuMDQxIDEwMC43OEM2NzUuODIxIDEwMC43OCA2NzYuNjE4IDk1LjIwMyA2NzYuNjE4IDg5LjYyNjJDNjc2LjYxOCA4NC44NDYyIDY3Ni42MTggODIuMDU3OCA2NzYuNjE4IDgyLjA1NzhINjc5LjAwOFYxNjIuMTI0SDY3Ni42MThDNjc2LjYxOCAxNjIuMTI0IDY3Ni42MTggMTUzLjM2IDY3Ni42MTggMTQ2Ljk4N0M2NzYuNjE4IDExMC4zNCA2NjAuMjg2IDg5LjIyNzkgNjEyLjg4NCA4Ny42MzQ2QzU5MS43NzIgODYuODM3OSA1NjQuMjg3IDk4Ljc4OCA1NjQuNjg1IDEyMy40ODVDNTY0LjY4NSAxNDUuNzkyIDU4OS4zODIgMTUzLjc1OSA2MTYuMDcgMTY1LjMxMVpNODAwLjQ2NyA4My4yNTI4Qzg2MS44MTEgODMuMjUyOCA5MDQuNDMzIDEyNC42OCA5MDQuNDMzIDE4Mi40MzlDOTA0LjQzMyAyNDAuMTk4IDg2MS44MTEgMjgxLjIyNyA4MDAuNDY3IDI4MS4yMjdDNzM4LjcyNCAyODEuMjI3IDY5Ni41MDEgMjQwLjE5OCA2OTYuNTAxIDE4Mi40MzlDNjk2LjUwMSAxMjQuNjggNzM4LjcyNCA4My4yNTI4IDgwMC40NjcgODMuMjUyOFpNODAwLjQ2NyAyNzcuNjQyQzg0OS44NjEgMjc3LjY0MiA4NzguOTQgMjM5LjQwMSA4NzguOTQgMTgyLjQzOUM4NzguOTQgMTI1LjQ3NyA4NDkuODYxIDg3LjIzNjIgODAwLjQ2NyA4Ny4yMzYyQzc1MS4wNzMgODcuMjM2MiA3MjEuOTk0IDEyNS40NzcgNzIxLjk5NCAxODIuNDM5QzcyMS45OTQgMjM5LjQwMSA3NTEuMDczIDI3Ny42NDIgODAwLjQ2NyAyNzcuNjQyWk0xMTIwLjkzIDI3NS42NUgxMTI4LjlWMjc4LjgzN0gxMDM5LjY3VjI3NS42NUgxMDQ3LjY0QzEwNjcuNTUgMjc1LjY1IDEwNzEuNTQgMjcxLjI2OCAxMDcxLjU0IDI1MS4zNTJDMTA3MS41NCAyMjEuNDc2IDEwNzEuNTQgMTc1LjI2OSAxMDcxLjU0IDE1My4zNkMxMDcxLjU0IDExMy41MjcgMTA1MC4wMyA4OC40MzEyIDEwMTYuOTYgODguNDMxMkM5NzcuMTMgODguNDMxMiA5NTAuNDQxIDEyNS4wNzggOTUwLjQ0MSAxNTQuOTU0VjI1MS4zNTJDOTUwLjQ0MSAyNzEuMjY4IDk1NC4wMjYgMjc1LjY1IDk3My45NDMgMjc1LjY1SDk4MS45MVYyNzguODM3SDg5Mi42ODJWMjc1LjY1SDkwMC42NDlDOTIwLjk2NCAyNzUuNjUgOTI0LjU0OSAyNzEuMjY4IDkyNC41NDkgMjUxLjM1MlYxMTMuOTI1QzkyNC41NDkgOTMuNjA5NiA5MjAuOTY0IDg5LjYyNjIgOTAwLjY0OSA4OS42MjYySDg5Mi42ODJWODYuMDQxMkg5NTAuNDQxVjEzMi4yNDhDOTU5LjIwNSAxMDYuNzU1IDk4NS44OTMgODMuMjUyOCAxMDIxLjM1IDgzLjI1MjhDMTA2Ny4xNSA4My4yNTI4IDEwOTcuMDMgMTA5Ljk0MSAxMDk3LjAzIDE1OC41MzlDMTA5Ny4wMyAxODcuMjE5IDEwOTcuMDMgMjUxLjM1MiAxMDk3LjAzIDI1MS4zNTJDMTA5Ny4wMyAyNzEuMjY4IDExMDAuNjEgMjc1LjY1IDExMjAuOTMgMjc1LjY1Wk0xMzE5LjgxIDI1Ni41M0wxMzIxLjggMjU4LjEyM0MxMzE1LjQzIDI2Ny42ODMgMTMwMS44OSAyODEuMjI3IDEyODMuOTYgMjgxLjIyN0MxMjY0LjQ0IDI4MS4yMjcgMTI1MS43IDI3MC4wNzMgMTI1MS43IDI0Ni41NzJDMTI1MS43IDI0My4zODUgMTI1MS43IDIxOS44ODMgMTI1MS43IDIxNi4yOThDMTI0Ny43MSAyMzcuODA4IDEyMjguMiAyNzguODM3IDExODQuMzggMjgxLjIyN0MxMTUyLjkxIDI4Mi44MiAxMTE2LjY2IDI2OC40OCAxMTE1LjQ3IDIzMy44MjVDMTExMy44NyAxOTEuOTk5IDExNTEuMzIgMTgxLjI0NCAxMTk2LjMzIDE3My42NzZDMTIzNC4xNyAxNjcuMzAyIDEyNDYuOTIgMTUxLjc2NyAxMjUxLjcgMTQzLjAwNEMxMjUxLjcgOTUuOTk5NyAxMjMwLjU5IDg2LjQzOTUgMTIwNC42OSA4Ni40Mzk1QzExODMuNTggODYuNDM5NSAxMTc0LjAyIDEwMy41NjggMTE2MS4yNyAxMTUuOTE3QzExNTEuMzIgMTI1LjQ3NyAxMTQzLjM1IDEyNS40NzcgMTEzOC41NyAxMTkuNTAyQzExMzQuNTkgMTE0LjcyMiAxMTM2Ljk4IDEwNy4xNTMgMTE0NC4xNSAxMDIuMzczQzExNjAuODggOTIuMDE2MyAxMTg0LjM4IDgzLjI1MjggMTIwNS40OSA4My4yNTI4QzEyNTAuOSA4My4yNTI4IDEyNzcuMTkgMTA1LjU2IDEyNzcuMTkgMTU2LjU0N1YyNDguOTYyQzEyNzcuMTkgMjY5LjI3NyAxMjgxLjU3IDI3NS42NSAxMjg5LjU0IDI3Ni40NDdDMTI5OS4xIDI3Ny42NDIgMTMxMi4yNCAyNjguNDggMTMxOS44MSAyNTYuNTNaTTEyNTEuNyAxOTcuMTc4QzEyNTEuNyAxNzkuMjUyIDEyNTEuNyAxNjAuNTMgMTI1MS43IDE0Ny43ODRDMTI0My4zMyAxNTcuMzQ0IDEyMzQuMTcgMTY5LjI5NCAxMTkxLjU1IDE3Ny42NTlDMTE2Ny4yNSAxODIuODM3IDExMzYuNTggMTk1LjE4NiAxMTM4LjU3IDIzMi4yMzFDMTE0MC41NiAyNjMuNyAxMTY2LjQ1IDI3Ny42NDIgMTE5NS4xMyAyNzQuODU0QzEyMjcuOCAyNzEuNjY3IDEyNTEuNyAyMzIuNjMgMTI1MS43IDE5Ny4xNzhaIiBmaWxsPSIjMUExQTFBIi8+Cjwvc3ZnPg==" alt="Persona" style="height:22px;width:auto;display:block"></div>
+  <ul class="nav-links">
+    <li><a href="#products">Продукти</a></li>
+    <li><a href="#why">Чому фотокнига</a></li>
+    <li><a href="#configurator">Ціна</a></li>
+    <li><a href="#how">Процес</a></li>
+    <li><a href="#materials">Якість</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="tel:+380993771077" title="+38 099 377 10 77" style="display:flex;align-items:center;justify-content:center;width:36px;height:36px;border:1.5px solid var(--border);color:var(--ink);margin-right:10px;transition:all .15s" onmouseover="this.style.background='var(--ink)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--ink)'">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+  </a>
+  <a href="#configurator" class="btn btn-fill" style="font-size:11px;padding:9px 22px">Створити книгу</a>
+</nav>
+
+<!-- 1. HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content fade-up">
+    <div class="c-tag" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.4)">Змінний — Hero</div>
+    <h1 style="color:#fff;max-width:760px;margin-bottom:20px;line-height:1.05">Фотокниги, створені для найцінніших спогадів</h1>
+    <p class="hero-sub">Одного дня ви згадаєте не сам день — а те, як сильно ви були щасливі. Ці моменти ми збережемо у книзі, яку захочеться брати в руки знову і знову.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <a href="#configurator" class="btn btn-fill" style="background:#fff;color:var(--ink);border-color:#fff">Створити книгу</a>
+      <a href="#how" class="btn" style="border-color:rgba(255,255,255,.4);color:#fff">Як це працює →</a>
+    </div>
+    <!-- STATS -->
+    <div style="margin-top:48px;display:flex;gap:40px;border-top:1px solid rgba(255,255,255,.12);padding-top:28px">
+      <div><div style="font-size:22px;font-weight:500;color:#fff">3 дні</div><div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px">виготовлення</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.12)"></div>
+      <div><div style="font-size:22px;font-weight:500;color:#fff">20+</div><div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px">років досвіду</div></div>
+      <div style="width:1px;background:rgba(255,255,255,.12)"></div>
+      <div><div style="font-size:22px;font-weight:500;color:#fff">100%</div><div style="font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px">ручна робота</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Layflat-палітурка</span><span class="marquee-item">Архівний друк</span><span class="marquee-item">Виготовлення 3 дні</span><span class="marquee-item">Доставка по всьому світу</span><span class="marquee-item">Ручна робота</span><span class="marquee-item">Преміум якість</span><span class="marquee-item">Більше 20 років на ринку</span><span class="marquee-item">Layflat-палітурка</span><span class="marquee-item">Архівний друк</span><span class="marquee-item">Виготовлення 3 дні</span><span class="marquee-item">Доставка по всьому світу</span><span class="marquee-item">Ручна робота</span><span class="marquee-item">Преміум якість</span><span class="marquee-item">Більше 20 років на ринку</span>
+  </div>
+</div>
+
+<!-- 3. EMOTIONAL -->
+<div id="emotional" class="fade-up" style="background:var(--white)">
+  <div style="padding:48px 48px 36px;max-width:680px">
+    <div class="c-tag">Змінний блок</div>
+    <div class="eyebrow">Для тих, хто цінує</div>
+    <h2 style="margin-top:10px;margin-bottom:14px">Фотографії є у всіх.<br>Книга — у одиниць.</h2>
+    <p style="max-width:520px">Persona перетворює ваші фото у преміальну книгу, яку хочеться брати в руки знову і знову. Зроблено так, щоб передавати далі.</p>
+  </div>
+  <div style="width:100%;height:62vh;background:var(--g1);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px">
+    <span style="font-size:40px;color:var(--g2)">▶</span>
+    <span style="font-size:11px;color:var(--g3);letter-spacing:.14em;text-transform:uppercase">[ Відео або фото · Автоплей · Без звуку · Loop ]</span>
+  </div>
+</div>
+
+<!-- 4. PRODUCTS -->
+<section id="products" class="fade-up">
+  <div style="margin-bottom:48px">
+    <div class="eyebrow">Наші продукти</div>
+    <h2 style="margin-top:10px">Три форми спогаду</h2>
+  </div>
+  <div class="products-grid">
+    <div class="pcard feat">
+      <span style="position:absolute;top:20px;right:20px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.15);color:#fff;padding:3px 9px">Хіт</span>
+      <span style="font-size:10px;letter-spacing:.16em;color:rgba(255,255,255,.3);display:block;margin-bottom:20px">01</span>
+      <div class="ph" style="aspect-ratio:4/3;margin-bottom:20px;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.3)">[ Фотокнига ]</div>
+      <div style="font-size:22px;font-weight:400;margin-bottom:4px;color:#fff">Спадщина</div>
+      <span style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:10px;display:block">Фотокнига у подарунковій коробці</span>
+      <p style="font-size:13px;line-height:1.6;margin-bottom:14px">Layflat-палітурка, вибір обкладинки та паперу. У коробці — сірій або бежевій.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div style="font-size:17px;font-weight:500;color:rgba(255,255,255,.8)">від $35</div>
+        <button onclick="openModal('book')" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:9px 18px;border:1px solid rgba(255,255,255,.4);background:transparent;color:#fff;cursor:pointer;font-family:inherit">Замовити</button>
+      </div>
+    </div>
+    <div class="pcard">
+      <span style="font-size:10px;letter-spacing:.16em;color:var(--g3);display:block;margin-bottom:20px">02</span>
+      <div class="ph" style="aspect-ratio:4/3;margin-bottom:20px">[ Волларт ]</div>
+      <div style="font-size:22px;font-weight:400;margin-bottom:4px">Обрій</div>
+      <span style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);margin-bottom:10px;display:block">Волларт з фото на стіну</span>
+      <p style="font-size:13px;line-height:1.6;margin-bottom:14px">Ваше фото у форматі настінного арт-об'єкта. Преміальний друк.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div style="font-size:17px;font-weight:500">від $40</div>
+        <button onclick="openModal('wall')" class="btn" style="font-size:10px;padding:9px 18px">Замовити</button>
+      </div>
+    </div>
+    <div class="pcard">
+      <span style="font-size:10px;letter-spacing:.16em;color:var(--g3);display:block;margin-bottom:20px">03</span>
+      <div class="ph" style="aspect-ratio:4/3;margin-bottom:20px">[ Настільне фото ]</div>
+      <div style="font-size:22px;font-weight:400;margin-bottom:4px">Миттєвість</div>
+      <span style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);margin-bottom:10px;display:block">Настільне фото у рамці</span>
+      <p style="font-size:13px;line-height:1.6;margin-bottom:14px">Архівний друк, витончена рамка. Маленький подарунок з великим змістом.</p>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div style="font-size:17px;font-weight:500">від $10</div>
+        <button onclick="openModal('frame')" class="btn" style="font-size:10px;padding:9px 18px">Замовити</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOUNT / PRE-ORDER -->
+<div id="discount" class="fade-up">
+  <div class="disc-wrap">
+    <div>
+      <div class="c-tag" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">Ядро — Знижка</div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.4);padding:3px 10px;display:inline-block;margin-bottom:18px">Передзамовлення</div>
+      <div style="font-size:clamp(22px,3vw,36px);font-weight:400;line-height:1.2;margin-bottom:16px">Десь між Pinterest<br>і сльозами щастя —<br>запишіть нас у свої плани.</div>
+      <div style="font-size:15px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:20px">Забронюйте книгу зі знижкою 10%. Залиште контакт зараз — і ми нагадаємо після весілля.</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:20px;opacity:.4">—</span>
+          <span style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">Без передоплати і зобов'язань</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:20px;opacity:.4">—</span>
+          <span style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">Знижка діє протягом 12 місяців</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="font-size:20px;opacity:.4">—</span>
+          <span style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.5">Лагідне нагадування після події</span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;justify-content:center">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:16px">Забронювати знижку</div>
+      <input type="text" class="dinput" placeholder="Ваше ім'я">
+      <input type="tel" class="dinput" placeholder="Номер телефону">
+      <input type="text" class="dinput" placeholder="Привід (весілля, ювілей, день народження...)">
+      <input type="text" class="dinput" placeholder="Дата події (місяць і рік)">
+      <button class="dsubmit">Забронювати знижку 10% →</button>
+      <div style="font-size:10px;color:rgba(255,255,255,.2);text-align:center;margin-top:8px">Надсилаючи заявку, ви погоджуєтесь з умовами</div>
+    </div>
+  </div>
+</div>
+
+<!-- 5. WHY PHOTOBOOK -->
+<section id="why" class="fade-up" style="background:var(--white)">
+  <div style="margin-bottom:48px">
+    <div class="eyebrow">Чому фотокнига</div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-bottom:64px">
+    <div>
+      <h3 style="font-size:22px;font-weight:400;line-height:1.3">Чому фотокнига —<br>це більше, ніж подарунок</h3>
+    </div>
+    <div>
+      <p style="font-size:16px;line-height:1.8;margin-bottom:20px">Квіти зів'януть. Торт буде з'їдений. Повідомлення загубляться серед тисяч інших. Ми робимо тисячі фотографій щоб не забути — але більшість із них назавжди залишаються десь між старими чатами і телефонами які давно змінили.</p>
+      <p style="font-size:16px;line-height:1.8;margin-bottom:20px">Фотокнига повертає спогадам їхню справжню цінність. Перша усмішка дитини. День весілля. Люди яких хочеться пам'ятати завжди.</p>
+      <p style="font-size:16px;line-height:1.8;font-weight:500;color:var(--ink)">Одного дня ці фото стануть безцінними. І тоді ви будете щасливі що зберегли їх не лише в пам'яті телефону — а й у пам'яті родини.</p>
+    </div>
+  </div>
+  <h2 style="margin-bottom:32px">5 причин подарувати<br>фотокнигу</h2>
+  <div class="why-5">
+    <div class="w5"><div class="w5num">01</div><div class="w5body">Квіти зів'януть. Торт з'їдять. Фотокнига залишиться — і через рік, і через двадцять.</div></div>
+    <div class="w5"><div class="w5num">02</div><div class="w5body">Особистий подарунок, створений саме для цієї людини. Неможливо купити в магазині.</div></div>
+    <div class="w5"><div class="w5num">03</div><div class="w5body">Викликає справжні емоції — не просто приємне враження на кілька хвилин.</div></div>
+    <div class="w5 dark"><div class="w5num">04</div><div class="w5body">Зберігає історію кохання, сім'ї та моментів, які формують життя.</div></div>
+    <div class="w5"><div class="w5num">05</div><div class="w5body">Річ яку переглядатимуть десятки разів — а не поставлять на полицю і забудуть.</div></div>
+  </div>
+  <div style="margin-top:1px;background:var(--bg);border:1px solid var(--border);padding:28px 32px;text-align:center">
+    <p style="font-size:16px;line-height:1.7">Одного дня ці фото стануть безцінними. І тоді ви будете раді що зберегли їх не лише в пам'яті телефону — <strong>а й у пам'яті родини.</strong></p>
+  </div>
+</section>
+
+<!-- CONFIGURATOR -->
+<div id="configurator">
+  <div class="cfg-divider"><span>Конфігуратор та ціна</span></div>
+  <div style="background:var(--ink);color:#fff">
+    <div class="cfg-header fade-up">
+      <div class="c-tag" style="border-color:rgba(255,255,255,.2);color:rgba(255,255,255,.3)">Ядро — Конфігуратор</div>
+      <div class="eyebrow">Калькулятор вартості</div>
+      <h2>Складіть свою книгу</h2>
+      <p>Оберіть параметри — ціна змінюється одразу</p>
+    </div>
+    <div class="cfg-layout">
+      <div class="cfg-preview">
+        <div class="cfg-book-wrap">
+          <canvas id="spineCanvas" width="28" height="300"></canvas>
+          <canvas id="bookCanvas" width="300" height="300"></canvas>
+        </div>
+        <div class="cpbtns">
+          <label class="cpbtn" style="cursor:pointer">↑ Фото<input type="file" accept="image/*" style="display:none" onchange="loadPhoto(event)"></label>
+          <button class="cpbtn" onclick="removePhoto()">✕</button>
+          <button class="cpbtn" onclick="zoomPhoto(1.12)">＋</button>
+          <button class="cpbtn" onclick="zoomPhoto(0.89)">－</button>
+          <button class="cpbtn pr" onclick="downloadCanvas()">↓ Зберегти</button>
+        </div>
+        <div class="cfg-price-wrap">
+          <span class="cfg-price-lbl">Орієнтовна вартість</span>
+          <div class="cfg-price-val" id="cfg-price">$100</div>
+          <div class="cfg-price-sub">фінальна ціна уточнюється менеджером</div>
+        </div>
+        <div class="drag-hint">Перетягуйте фото · Колесо миші для масштабу</div>
+      </div>
+      <div class="cfg-params">
+        <div class="cfg-tabs">
+          <button class="cfg-tab active" onclick="switchTab(this,'t-book')">Книга</button>
+          <button class="cfg-tab" onclick="switchTab(this,'t-cover')">Обкладинка</button>
+          <button class="cfg-tab" onclick="switchTab(this,'t-extras')">Додатково</button>
+          <button class="cfg-tab" onclick="switchTab(this,'t-order')">Замовлення</button>
+        </div>
+        <div class="cfg-panels">
+          <!-- TAB: Обкладинка -->
+          <div class="cfg-panel" id="t-cover">
+            <div class="cfg-group"><span class="cfg-lbl">Назва книги</span><input class="cinput" id="cfg-title" placeholder="Суголосся" oninput="renderBook()"></div>
+            <div class="cfg-group"><span class="cfg-lbl">Підпис або дата</span><input class="cinput" id="cfg-subtitle" placeholder="12 · 06 · 2024" oninput="renderBook()"></div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Колір обкладинки</span>
+              <div class="color-row" id="bg-colors">
+                <div class="cdot active" style="background:#1C1510" data-c="#1C1510" onclick="pickBg(this)"><span class="cdot-tip">Чорний</span></div>
+                <div class="cdot" style="background:#2C2E25" data-c="#2C2E25" onclick="pickBg(this)"><span class="cdot-tip">Оливка</span></div>
+                <div class="cdot" style="background:#1A2332" data-c="#1A2332" onclick="pickBg(this)"><span class="cdot-tip">Нічний</span></div>
+                <div class="cdot" style="background:#3D2B4A" data-c="#3D2B4A" onclick="pickBg(this)"><span class="cdot-tip">Слива</span></div>
+                <div class="cdot" style="background:#4A3728" data-c="#4A3728" onclick="pickBg(this)"><span class="cdot-tip">Горіх</span></div>
+                <div class="cdot" style="background:#3B4A3F" data-c="#3B4A3F" onclick="pickBg(this)"><span class="cdot-tip">Ліс</span></div>
+                <div class="cdot" style="background:#8C5C5C" data-c="#8C5C5C" onclick="pickBg(this)"><span class="cdot-tip">Бордо</span></div>
+                <div class="cdot" style="background:#F5F0E8" data-c="#F5F0E8" onclick="pickBg(this)"><span class="cdot-tip">Крем</span></div>
+                <div class="cdot" style="background:#E8E0D5" data-c="#E8E0D5" onclick="pickBg(this)"><span class="cdot-tip">Пісок</span></div>
+              </div>
+            </div>
+            <!-- photo upload — hidden for premium cover -->
+            <div class="cfg-group" id="photo-upload-group">
+              <span class="cfg-lbl">Дизайн</span>
+              <div class="cfg-opts" id="design-opts">
+                <button class="cfg-opt active" data-v="photo" onclick="pickDesign(this)">Тільки фото</button>
+                <button class="cfg-opt" data-v="symbol" onclick="pickDesign(this)">Символ</button>
+                <button class="cfg-opt" data-v="both" onclick="pickDesign(this)">Фото + символ</button>
+              </div>
+            </div>
+            <div class="cfg-group" id="symbol-group">
+              <span class="cfg-lbl">Символ</span>
+              <div class="cfg-opts" id="symbol-opts">
+                <button class="cfg-opt active" data-v="none" onclick="pickSym(this)">Без</button>
+                <button class="cfg-opt" data-v="rings" onclick="pickSym(this)">◎◎ Весілля</button>
+                <button class="cfg-opt" data-v="tree" onclick="pickSym(this)">⌥ Родовід</button>
+                <button class="cfg-opt" data-v="sprout" onclick="pickSym(this)">↟ Новонарод.</button>
+                <button class="cfg-opt" data-v="custom" onclick="document.getElementById('sym-upload').click()">↑ Свій</button>
+                <input type="file" id="sym-upload" accept="image/*" style="display:none" onchange="loadSym(event)">
+              </div>
+            </div>
+            <!-- SPINE subsection -->
+            <div style="border-top:1px solid rgba(255,255,255,.08);margin:16px 0 14px;padding-top:14px">
+              <span class="cfg-lbl" style="color:rgba(255,255,255,.5);font-size:9px;letter-spacing:.18em">Корінець</span>
+            </div>
+            <div class="cfg-group"><span class="cfg-lbl">Текст на корінці</span><input class="cinput" id="spine-text" placeholder="Persona · 2024" oninput="renderBook()"></div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Символ на корінці</span>
+              <div class="cfg-opts" id="spine-sym-opts">
+                <button class="cfg-opt active" data-v="none" onclick="pickSpineSym(this)">Без</button>
+                <button class="cfg-opt" data-v="dot" onclick="pickSpineSym(this)">·</button>
+                <button class="cfg-opt" data-v="heart" onclick="pickSpineSym(this)">♥</button>
+                <button class="cfg-opt" data-v="star" onclick="pickSpineSym(this)">✦</button>
+              </div>
+            </div>
+          </div>
+          <!-- TAB: Книга -->
+          <div class="cfg-panel active" id="t-book">
+            <div class="cfg-group">
+              <span class="cfg-lbl">Розмір (квадрат)</span>
+              <div class="cfg-opts" id="size-opts">
+                <button class="cfg-opt active" data-s="30" onclick="pickSize(this)">30×30 см</button>
+                <button class="cfg-opt" data-s="25" onclick="pickSize(this)">25×25 см</button>
+                <button class="cfg-opt" data-s="20" onclick="pickSize(this)">20×20 см</button>
+              </div>
+            </div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Тип обкладинки</span>
+              <div class="cfg-opts" id="cover-opts">
+                <button class="cfg-opt active" data-t="premium" onclick="pickCover(this)">Преміальний льон</button>
+                <button class="cfg-opt" data-t="velour" onclick="pickCover(this)">Велюр</button>
+                <button class="cfg-opt" data-t="standard" onclick="pickCover(this)">Стандартна фото</button>
+              </div>
+              <div class="info-box" id="cover-desc">Тканева обкладинка · Тільки текст і символ · Мін. 10 розворотів</div>
+            </div>
+            <div class="cfg-group" id="paper-group">
+              <span class="cfg-lbl">Тип паперу</span>
+              <div class="cfg-opts" id="paper-opts">
+                <button class="cfg-opt active" data-t="premium" onclick="pickPaper(this)">Преміум шовк</button>
+                <button class="cfg-opt" data-t="standard" onclick="pickPaper(this)">Стандартний матовий</button>
+              </div>
+            </div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Розвороти — <span id="sp-val">10</span> <span style="color:rgba(255,255,255,.25);font-size:9px" id="sp-min-note">(мін. 10)</span></span>
+              <input type="range" class="cfg-slider" id="sp-slider" min="10" max="200" value="10" oninput="updateSpreads(this.value)">
+              <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,.25);margin-top:2px"><span id="sp-min-label">10</span><span>200</span></div>
+            </div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Термін виготовлення</span>
+              <div class="cfg-opts" id="speed-opts">
+                <button class="cfg-opt active" data-v="standard" onclick="pickSpeed(this)">Стандарт — 3 дні</button>
+                <button class="cfg-opt" data-v="urgent" onclick="pickSpeed(this)">Терміново ⚡</button>
+              </div>
+              <div class="info-box" id="speed-note">3 робочих дні після затвердження макету</div>
+            </div>
+          </div>
+          <!-- TAB: Додатково -->
+          <div class="cfg-panel" id="t-extras">
+            <div class="cfg-group">
+              <span class="cfg-lbl">Подарункова коробка</span>
+              <div class="cfg-opts" id="box-opts">
+                <button class="cfg-opt active" data-v="none" onclick="pickBox(this)">Без коробки</button>
+                <button class="cfg-opt" data-v="darkgray" onclick="pickBox(this)">Темно-сіра</button>
+                <button class="cfg-opt" data-v="beige" onclick="pickBox(this)">Бежева</button>
+              </div>
+            </div>
+            <div id="card-group" style="display:none">
+              <div class="cfg-group"><span class="cfg-lbl">Напис на листівці в коробці</span><input class="cinput" id="card-text" placeholder="З любов'ю для тебе..."></div>
+            </div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Копії книги</span>
+              <div class="info-box">На кожну додаткову копію книги — <strong style="color:rgba(255,255,255,.75)">знижка 20%</strong>. Уточніть кількість і параметри у менеджера при оформленні замовлення.</div>
+              <label style="display:flex;align-items:center;gap:10px;margin-top:10px;cursor:pointer">
+                <input type="checkbox" id="copies-check" onchange="C.wantsCopies=this.checked" style="width:14px;height:14px;accent-color:#fff;cursor:pointer">
+                <span style="font-size:11px;color:rgba(255,255,255,.5)">Хочу замовити копії книги</span>
+              </label>
+            </div>
+            <div class="cfg-group">
+              <span class="cfg-lbl">Промокод</span>
+              <div style="display:flex;gap:8px">
+                <input class="cinput" id="promo-input" placeholder="Введіть промокод" style="margin-bottom:0;flex:1">
+                <button onclick="applyPromo()" style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:0 14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:inherit;flex-shrink:0">OK</button>
+              </div>
+              <div id="promo-result" style="margin-top:6px;font-size:11px;display:none"></div>
+            </div>
+            <div class="prebook-box">
+              <div style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:8px">🎁 Передбронювання — знижка 10%</div>
+              <div style="font-size:12px;color:rgba(255,255,255,.45);line-height:1.6;margin-bottom:10px">Плануєте весілля або подію наперед? Залиште контакт зараз — отримаєте знижку 10% коли будете готові замовити.</div>
+              <input class="cinput" placeholder="Ваш номер або email">
+              <button style="width:100%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;padding:9px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;font-family:inherit">Забронювати знижку 10% →</button>
+            </div>
+          </div>
+          <!-- TAB: Замовлення -->
+          <div class="cfg-panel" id="t-order">
+            <div class="cfg-group">
+              <div class="sum-line"><span class="sum-key">Розмір</span><span class="sum-val" id="s-size">30×30</span></div>
+              <div class="sum-line"><span class="sum-key">Обкладинка</span><span class="sum-val" id="s-cover">Преміальний льон</span></div>
+              <div class="sum-line"><span class="sum-key">Папір</span><span class="sum-val" id="s-paper">Стандартний</span></div>
+              <div class="sum-line"><span class="sum-key">Розвороти</span><span class="sum-val" id="s-spreads">10</span></div>
+              <div class="sum-line"><span class="sum-key">Термін</span><span class="sum-val" id="s-speed">3 дні</span></div>
+              <div class="sum-line" id="s-box-line" style="display:none"><span class="sum-key">Коробка</span><span class="sum-val" id="s-box">—</span></div>
+              <div class="sum-line" style="opacity:.4"><span class="sum-key">Копії</span><span class="sum-val" style="font-size:10px">−20% на кожну · уточнити з менеджером</span></div>
+              <div class="sum-line" id="s-promo-line" style="display:none"><span class="sum-key">Промокод</span><span class="sum-val" id="s-promo" style="color:#6fcf97">—</span></div>
+            </div>
+            <div style="border-top:1px solid rgba(255,255,255,.1);padding-top:14px;margin-bottom:16px">
+              <div style="font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:4px">Підсумок</div>
+              <div id="price-breakdown" style="font-size:11px;color:rgba(255,255,255,.3);line-height:1.8;margin-bottom:8px"></div>
+              <div style="font-size:36px;font-weight:700;color:#fff;line-height:1" id="cfg-price-big">$100</div>
+              <div style="font-size:10px;color:rgba(255,255,255,.25);margin-top:2px">USD · фінальна ціна уточнюється менеджером</div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <input type="text" class="cinput" placeholder="Ваше ім'я">
+              <input type="tel" class="cinput" placeholder="Номер телефону">
+              <textarea class="cinput" placeholder="Коментар (необов'язково)" rows="2" style="resize:none"></textarea>
+              <button class="cfg-submit">Відправити заявку →</button>
+              <div style="font-size:10px;color:rgba(255,255,255,.2);text-align:center">Перші 3 раунди правок — безкоштовно</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. HOW -->
+<section id="how" class="fade-up" style="background:var(--white)">
+  <div style="margin-bottom:48px">
+    <div class="eyebrow">Процес</div>
+    <h2 style="margin-top:10px">Від заявки до книги</h2>
+    <p style="margin-top:8px;max-width:560px">Ми беремо на себе весь дизайн фотокниги — відбір фото, верстку, оформлення. Це вже входить у вартість. Перші 3 раунди правок безкоштовно.</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step"><div class="step-num">1</div><div class="step-title">Заявка</div><div class="step-body">Заповнюєте форму або пишете нам. Обговорюємо параметри і стиль книги.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-title">Фото</div><div class="step-body">Надсилаєте фотографії. Ми відбираємо найкращі і беремо на себе весь дизайн — верстку, оформлення, типографіку.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-title">Макет</div><div class="step-body">Надсилаємо готовий PDF на затвердження. Дизайн і перші 3 правки — у вартості.</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-title">Доставка</div><div class="step-body">Нова Пошта по всій Україні та світу. 3 робочих дні або терміново.</div></div>
+  </div>
+</section>
+
+<!-- 8. MATERIALS -->
+<section id="materials" class="fade-up" style="padding:0;background:var(--white)">
+  <div style="padding:80px 48px 48px"><div class="eyebrow">Якість</div><h2 style="margin-top:10px">З чого зроблена ваша книга</h2></div>
+
+  <!-- 01 ОБКЛАДИНКА -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border)">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:16px">01</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px">Обкладинка</h3>
+      <p style="font-size:15px;line-height:1.75;margin-bottom:16px">Три матеріали — три характери. <strong>Льон</strong> — стриманий і благородний, з природною текстурою що приємна на дотик. <strong>Велюр</strong> — оксамитова м'якість, глибокий колір, відчуття розкоші з першої секунди. <strong>Фотообкладинка</strong> — ваше найкраще фото одразу на обкладинці, матовий друк без відблисків.</p>
+      <p style="font-size:13px;color:var(--g3);line-height:1.6">Усі матеріали — преміум-класу. Обкладинка не вигорає, не деформується і зберігає вигляд роками.</p>
+    </div>
+    <div class="ph" style="background:var(--g1);border:none;border-top:1px solid var(--border);border-left:1px solid var(--border);min-height:400px">[ Фото обкладинки ]</div>
+  </div>
+
+  <!-- 02 КОРІНЕЦЬ -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+    <div class="ph" style="background:var(--g1);border:none;border-top:1px solid var(--border);border-right:1px solid var(--border);min-height:400px">[ Фото корінця ]</div>
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border)">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:16px">02</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px">Кастомізований корінець</h3>
+      <p style="font-size:15px;line-height:1.75;margin-bottom:16px">Ваше ім'я, дата, слово або символ — витиснені на корінці книги. Деталь яку помічають коли книга стоїть на полиці.</p>
+      <p style="font-size:13px;color:var(--g3);line-height:1.6">Фірмовий брендинг Persona на корінці — підпис майстра, знак що це зроблено на совість.</p>
+    </div>
+  </div>
+
+  <!-- 03 LAYFLAT -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border)">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:16px">03</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px">Layflat-палітурка</h3>
+      <p style="font-size:15px;line-height:1.75;margin-bottom:16px">Книга розкривається повністю плоско — без зламу, без білої смуги посередині. Фото через весь розворот виглядає так як задумано.</p>
+      <p style="font-size:13px;color:var(--g3);line-height:1.6">Стандартні фотоальбоми ламають фото навпіл у корінці. Layflat — ні.</p>
+    </div>
+    <div class="ph" style="background:var(--g1);border:none;border-top:1px solid var(--border);border-left:1px solid var(--border);min-height:400px">[ Фото розвороту ]</div>
+  </div>
+
+  <!-- 04 ПАПІР -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+    <div class="ph" style="background:var(--g1);border:none;border-top:1px solid var(--border);border-right:1px solid var(--border);min-height:400px">[ Фото паперу ]</div>
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border)">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:16px">04</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px">Папір</h3>
+      <p style="font-size:15px;line-height:1.75;margin-bottom:16px"><strong>Шовковий преміум</strong> — м'який глянець, глибокі кольори, фото виглядають живо і об'ємно. <strong>Матовий</strong> — без відблисків, природне світло, елегантна стриманість.</p>
+      <p style="font-size:13px;color:var(--g3);line-height:1.6">Архівний друк — не вицвітає роками. Щільність паперу унеможливлює просвічування між сторінками.</p>
+    </div>
+  </div>
+
+  <!-- 05 ВІЗУАЛЬНА ГАРМОНІЯ -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border)">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:16px">05</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px">Візуальна гармонія кожного розвороту</h3>
+      <p style="font-size:15px;line-height:1.75;margin-bottom:16px">Ми працюємо з ритмом, композицією та поєднанням фотографій, щоб кожна сторінка виглядала як продуманий кадр, а вся книга — як цілісний арт-об'єкт.</p>
+      <p style="font-size:13px;color:var(--g3);line-height:1.6">3 раунди правок дозволяють довести результат до відчуття «саме так і мало бути».</p>
+    </div>
+    <div class="ph" style="background:var(--g1);border:none;border-top:1px solid var(--border);border-left:1px solid var(--border);min-height:400px">[ Фото розвороту ]</div>
+  </div>
+
+  <!-- 06 КОРОБКА -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;min-height:400px">
+    <div class="ph" style="background:var(--g1);border:none;border-top:1px solid var(--border);border-right:1px solid var(--border);min-height:400px">[ Фото коробки ]</div>
+    <div style="padding:60px 48px;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--border)">
+      <div style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);margin-bottom:16px">06</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:16px">Подарункова коробка</h3>
+      <p style="font-size:15px;line-height:1.85;color:var(--ink2)">Подарункова коробка — це перше враження ще до того, як ви відкриєте книгу. Тиша, очікування, трохи хвилювання. Вона зберігає всередині не просто фотокнигу, а моменти, які хочеться пам'ятати завжди. Листівка з вашим підписом як фінальний акорд композиції.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. REVIEWS -->
+<section id="reviews" class="fade-up" style="background:var(--white)">
+  <div style="margin-bottom:48px"><div class="eyebrow">Відгуки</div><h2 style="margin-top:10px">Вони вже тримали книгу в руках</h2></div>
+  <div class="reviews-track" id="reviews-track">
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Коли ми відкрили коробку, я не могла говорити. Просто тримала книгу і плакала."</div><div class="rev-who">Оксана та Михайло</div><div class="rev-what">Суголосся — Весільна фотокнига</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Замовляла татові на ювілей. Він людина строга. Але коли відкрив — обійняв мене і мовчав хвилину."</div><div class="rev-who">Юлія, Харків</div><div class="rev-what">Опора — Фотокнига для батька</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Якість просто шикарна. Паперу хочеться торкатись знову і знову. Коробка виглядає як щось із Парижа."</div><div class="rev-who">Марина, Київ</div><div class="rev-what">Першосвіт — Фотокнига новонародженого</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Надіслала фото — через тиждень отримала скриньку. Краще ніж уявляла."</div><div class="rev-who">Катерина, Львів</div><div class="rev-what">Суголосся — Весільна фотокнига</div></div>
+    <div class="rev-card"><div class="rev-stars">★★★★★</div><div class="rev-text">"Менеджер допоміг відібрати фото. Результат — як з глянцевого журналу."</div><div class="rev-who">Андрій, Одеса</div><div class="rev-what">Родовід — Сімейна фотокнига</div></div>
+  </div>
+</section>
+
+<!-- 10. FAQ -->
+<section id="faq" class="fade-up">
+  <div class="faq-layout">
+    <div>
+      <div class="c-tag">Змінний + ядро</div>
+      <h3 style="font-size:26px;font-weight:400;margin-bottom:12px">Питання і відповіді</h3>
+      <p style="font-size:13px;margin-bottom:18px">Залишились питання? Напишіть нам.</p>
+      <a href="https://t.me/persona" style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink)">Написати у Telegram →</a>
+    </div>
+    <div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);padding-bottom:9px;border-bottom:1px solid var(--border)">✎ Про весільну книгу</div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Скільки фото потрібно?<span class="faq-plus">+</span></div><div class="faq-a">Для книги на 20 розворотів — 80–120 фото. Ми допоможемо відібрати найкращі.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Чи можна додати текст і дати?<span class="faq-plus">+</span></div><div class="faq-a">Так — будь-який текст, цитати, дати. Обговорюємо на етапі макету.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Можна замовити дві книги?<span class="faq-plus">+</span></div><div class="faq-a">Так, знижка 20% на копію. Дуже популярний варіант як подарунок батькам.</div></div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--g3);padding-bottom:9px;margin-top:20px;border-bottom:1px solid var(--border)">◆ Загальні питання</div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Як надіслати фотографії?<span class="faq-plus">+</span></div><div class="faq-a">Google Drive, WeTransfer або Telegram — будь-який зручний спосіб.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Скільки часу займає виготовлення?<span class="faq-plus">+</span></div><div class="faq-a">3 робочих дні від затвердження макету. Є терміновий варіант — уточніть у менеджера.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Чи можна побачити макет до друку?<span class="faq-plus">+</span></div><div class="faq-a">Обов'язково. PDF з усіма розворотами. Перші 3 раунди правок — безкоштовно.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Чи доставляєте по всій Україні?<span class="faq-plus">+</span></div><div class="faq-a">Так, Нова Пошта по всій Україні.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11. CTA -->
+<section id="cta">
+  <div style="font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px"><span style="width:28px;height:1px;background:rgba(255,255,255,.2);display:block"></span>Persona<span style="width:28px;height:1px;background:rgba(255,255,255,.2);display:block"></span></div>
+  <h2>Зроблено так, щоб<br>передавати далі.</h2>
+  <span class="cta-sub">Ексклюзивна фотокнига у подарунковій коробці</span>
+  <div class="cta-actions">
+    <a href="#configurator" class="btn btn-w">Створити книгу</a>
+    <a href="https://t.me/persona" class="btn btn-wg">Написати у Telegram</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMyMiIgaGVpZ2h0PSIyODMiIHZpZXdCb3g9IjAgMCAxMzIyIDI4MyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwMy4xNyAxNjcuMzAySDU3Ljc1OVYyNTEuMzUyQzU3Ljc1OSAyNzEuMjY4IDYxLjM0NDEgMjc1LjY1IDgxLjY1OTMgMjc1LjY1SDEwMy41NjhWMjc4LjgzN0gtMy4xNzg0N2UtMDVWMjc1LjY1SDcuOTY2NzNDMjguMjgyIDI3NS42NSAzMS44NjcgMjcxLjI2OCAzMS44NjcgMjUxLjM1MlYyNy40ODU1QzMxLjg2NyA3LjU2ODU2IDI4LjI4MiAzLjU4NTE4IDcuOTY2NzMgMy41ODUxOEgtMy4xNzg0N2UtMDVWMC4wMDAxMzY2NDVIMTAzLjE3QzE3NC44NyAwLjAwMDEzNjY0NSAyMTUuNTAxIDI3LjQ4NTUgMjE1LjUwMSA4My42NTEyQzIxNS41MDEgMTM5LjgxNyAxNzQuODcgMTY3LjMwMiAxMDMuMTcgMTY3LjMwMlpNOTUuOTk5NSA0Ljc4MDIxSDU3Ljc1OVYxNjIuNTIySDk1Ljk5OTVDMTcxLjI4NSAxNjIuNTIyIDE4OC4wMTYgMTI1Ljg3NSAxODguMDE2IDgzLjY1MTJDMTg4LjAxNiA0MS44MjU3IDE3MS4yODUgNC43ODAyMSA5NS45OTk1IDQuNzgwMjFaTTQyNS44NDUgMTk4Ljc3MUw0MjcuODM3IDIwMC4zNjRDNDE1LjQ4OSAyMjIuMjczIDM4MC4wMzYgMjgxLjIyNyAzMTMuMTE2IDI4MS4yMjdDMjU0LjE2MiAyODEuMjI3IDIxMy4xMzMgMjQ2LjU3MiAyMTEuOTM4IDE5MS45OTlDMjEwLjc0MyAxMzIuNjQ3IDI1OC41NDMgODMuMjUyOCAzMTUuMTA3IDgzLjI1MjhDMzU4LjUyNiA4My4yNTI4IDM5Mi4zODUgMTExLjkzMyAzOTIuMzg1IDE1NS4zNTJIMjM2LjIzNkMyMzUuMDQxIDE2NC41MTQgMjM0LjY0MyAxNzQuMDc0IDIzNS40NCAxODQuNDMxQzI0MC42MTggMjM5LjggMjc4LjA2MiAyNjYuMDkgMzIwLjI4NiAyNjguODc4QzM4My42MjEgMjcyLjg2MiA0MTUuMDkgMjE4LjI4OSA0MjUuODQ1IDE5OC43NzFaTTMwOC4zMzYgODcuNjM0NkMyNzIuODgzIDg3LjIzNjIgMjQ0LjIwMyAxMTIuMzMyIDIzNy4wMzMgMTUyLjE2NUgzNjcuMjlDMzY4Ljg4MyAxMTkuNTAyIDM1MS43NTQgODguMDMyOSAzMDguMzM2IDg3LjYzNDZaTTUzMS41NzkgODQuODQ2MkM1NDMuNTI5IDg2LjQzOTUgNTQ5LjkwMyA5MC40MjI5IDU0Ny41MTMgOTkuNTg0N0M1NDUuOTE5IDEwNy4xNTMgNTM1LjU2MyAxMDkuOTQxIDUyMy4yMTQgMTA0LjM2NUM1MDQuNDkyIDk1LjIwMyA0ODguMTYgODguODI5NiA0NzEuNDMgMTA0Ljc2M0M0NTYuMjkzIDExOC43MDUgNDQ5LjUyMiAxNDYuOTg3IDQ0OS41MjIgMTY2LjEwN1YyNTEuMzUyQzQ0OS41MjIgMjcxLjI2OCA0NTMuMTA3IDI3NS42NSA0NzMuNDIyIDI3NS42NUg0OTUuMzNWMjc4LjgzN0gzOTIuMTYxVjI3NS42NUg0MDAuMTI4QzQyMC4wNDUgMjc1LjY1IDQyNC4wMjggMjcxLjI2OCA0MjQuMDI4IDI1MS4zNTJWMTEzLjkyNUM0MjQuMDI4IDkzLjYwOTYgNDIwLjA0NSA4OS42MjYyIDQwMC4xMjggODkuNjI2MkgzOTIuMTYxVjg2LjA0MTJINDQ5LjUyMlYxNDIuNjA1QzQ1My41MDUgMTI4LjI2NSA0NTkuODc4IDExMy41MjcgNDY4LjY0MiAxMDEuNTc2QzQ4MC45OSA4NS4yNDQ1IDUwMi41MDEgODEuMjYxMSA1MzEuNTc5IDg0Ljg0NjJaTTYxNi4wNyAxNjUuMzExQzY0Ni43NDMgMTc4LjQ1NiA2OTYuNTM1IDE5MS4yMDIgNjkyLjE1MyAyMzAuNjM4QzY4OC4xNyAyNjUuNjkyIDY1NC4zMTEgMjgyLjQyMiA2MTYuODY3IDI4MS4yMjdDNTc0LjI0NSAyODAuMDMyIDU1Ni4zMiAyNTcuMzI3IDU0NS45NjMgMjU4LjkyQzU0MC4zODYgMjYwLjExNSA1MzkuMTkxIDI2OC4wODIgNTM5LjE5MSAyNzYuNDQ3QzUzOS4xOTEgMjgwLjAzMiA1MzkuMTkxIDI4Mi40MjIgNTM5LjE5MSAyODIuNDIySDUzNi40MDNWMjAyLjM1Nkg1MzkuMTkxQzUzOS4xOTEgMjAyLjM1NiA1MzkuMTkxIDIxMy4xMTEgNTM5LjE5MSAyMTcuNDkzQzUzOS4xOTEgMjU3LjMyNyA1ODMuNDA3IDI3NS42NSA2MTIuMDg3IDI3Ni44NDVDNjQyLjc1OSAyNzguNDM5IDY3Mi42MzUgMjY2LjQ4OCA2NzQuMjI4IDI0MC45OTVDNjc1LjgyMSAyMTYuMjk4IDY0OS45MjkgMjA1Ljk0MSA2MTEuNjg5IDE5MS4yMDJDNTY4LjY2OCAxNzQuNDcyIDU0Mi43NzYgMTU3Ljc0MiA1NDguMzUzIDEyMy44ODNDNTU0LjMyOCA4OC44Mjk2IDYwMC41MzUgODIuODU0NSA2MTMuMjgyIDgzLjI1MjhDNjUzLjUxNCA4NC40NDc4IDY2My40NzMgMTAwLjM4MSA2NzEuMDQxIDEwMC43OEM2NzUuODIxIDEwMC43OCA2NzYuNjE4IDk1LjIwMyA2NzYuNjE4IDg5LjYyNjJDNjc2LjYxOCA4NC44NDYyIDY3Ni42MTggODIuMDU3OCA2NzYuNjE4IDgyLjA1NzhINjc5LjAwOFYxNjIuMTI0SDY3Ni42MThDNjc2LjYxOCAxNjIuMTI0IDY3Ni42MTggMTUzLjM2IDY3Ni42MTggMTQ2Ljk4N0M2NzYuNjE4IDExMC4zNCA2NjAuMjg2IDg5LjIyNzkgNjEyLjg4NCA4Ny42MzQ2QzU5MS43NzIgODYuODM3OSA1NjQuMjg3IDk4Ljc4OCA1NjQuNjg1IDEyMy40ODVDNTY0LjY4NSAxNDUuNzkyIDU4OS4zODIgMTUzLjc1OSA2MTYuMDcgMTY1LjMxMVpNODAwLjQ2NyA4My4yNTI4Qzg2MS44MTEgODMuMjUyOCA5MDQuNDMzIDEyNC42OCA5MDQuNDMzIDE4Mi40MzlDOTA0LjQzMyAyNDAuMTk4IDg2MS44MTEgMjgxLjIyNyA4MDAuNDY3IDI4MS4yMjdDNzM4LjcyNCAyODEuMjI3IDY5Ni41MDEgMjQwLjE5OCA2OTYuNTAxIDE4Mi40MzlDNjk2LjUwMSAxMjQuNjggNzM4LjcyNCA4My4yNTI4IDgwMC40NjcgODMuMjUyOFpNODAwLjQ2NyAyNzcuNjQyQzg0OS44NjEgMjc3LjY0MiA4NzguOTQgMjM5LjQwMSA4NzguOTQgMTgyLjQzOUM4NzguOTQgMTI1LjQ3NyA4NDkuODYxIDg3LjIzNjIgODAwLjQ2NyA4Ny4yMzYyQzc1MS4wNzMgODcuMjM2MiA3MjEuOTk0IDEyNS40NzcgNzIxLjk5NCAxODIuNDM5QzcyMS45OTQgMjM5LjQwMSA3NTEuMDczIDI3Ny42NDIgODAwLjQ2NyAyNzcuNjQyWk0xMTIwLjkzIDI3NS42NUgxMTI4LjlWMjc4LjgzN0gxMDM5LjY3VjI3NS42NUgxMDQ3LjY0QzEwNjcuNTUgMjc1LjY1IDEwNzEuNTQgMjcxLjI2OCAxMDcxLjU0IDI1MS4zNTJDMTA3MS41NCAyMjEuNDc2IDEwNzEuNTQgMTc1LjI2OSAxMDcxLjU0IDE1My4zNkMxMDcxLjU0IDExMy41MjcgMTA1MC4wMyA4OC40MzEyIDEwMTYuOTYgODguNDMxMkM5NzcuMTMgODguNDMxMiA5NTAuNDQxIDEyNS4wNzggOTUwLjQ0MSAxNTQuOTU0VjI1MS4zNTJDOTUwLjQ0MSAyNzEuMjY4IDk1NC4wMjYgMjc1LjY1IDk3My45NDMgMjc1LjY1SDk4MS45MVYyNzguODM3SDg5Mi42ODJWMjc1LjY1SDkwMC42NDlDOTIwLjk2NCAyNzUuNjUgOTI0LjU0OSAyNzEuMjY4IDkyNC41NDkgMjUxLjM1MlYxMTMuOTI1QzkyNC41NDkgOTMuNjA5NiA5MjAuOTY0IDg5LjYyNjIgOTAwLjY0OSA4OS42MjYySDg5Mi42ODJWODYuMDQxMkg5NTAuNDQxVjEzMi4yNDhDOTU5LjIwNSAxMDYuNzU1IDk4NS44OTMgODMuMjUyOCAxMDIxLjM1IDgzLjI1MjhDMTA2Ny4xNSA4My4yNTI4IDEwOTcuMDMgMTA5Ljk0MSAxMDk3LjAzIDE1OC41MzlDMTA5Ny4wMyAxODcuMjE5IDEwOTcuMDMgMjUxLjM1MiAxMDk3LjAzIDI1MS4zNTJDMTA5Ny4wMyAyNzEuMjY4IDExMDAuNjEgMjc1LjY1IDExMjAuOTMgMjc1LjY1Wk0xMzE5LjgxIDI1Ni41M0wxMzIxLjggMjU4LjEyM0MxMzE1LjQzIDI2Ny42ODMgMTMwMS44OSAyODEuMjI3IDEyODMuOTYgMjgxLjIyN0MxMjY0LjQ0IDI4MS4yMjcgMTI1MS43IDI3MC4wNzMgMTI1MS43IDI0Ni41NzJDMTI1MS43IDI0My4zODUgMTI1MS43IDIxOS44ODMgMTI1MS43IDIxNi4yOThDMTI0Ny43MSAyMzcuODA4IDEyMjguMiAyNzguODM3IDExODQuMzggMjgxLjIyN0MxMTUyLjkxIDI4Mi44MiAxMTE2LjY2IDI2OC40OCAxMTE1LjQ3IDIzMy44MjVDMTExMy44NyAxOTEuOTk5IDExNTEuMzIgMTgxLjI0NCAxMTk2LjMzIDE3My42NzZDMTIzNC4xNyAxNjcuMzAyIDEyNDYuOTIgMTUxLjc2NyAxMjUxLjcgMTQzLjAwNEMxMjUxLjcgOTUuOTk5NyAxMjMwLjU5IDg2LjQzOTUgMTIwNC42OSA4Ni40Mzk1QzExODMuNTggODYuNDM5NSAxMTc0LjAyIDEwMy41NjggMTE2MS4yNyAxMTUuOTE3QzExNTEuMzIgMTI1LjQ3NyAxMTQzLjM1IDEyNS40NzcgMTEzOC41NyAxMTkuNTAyQzExMzQuNTkgMTE0LjcyMiAxMTM2Ljk4IDEwNy4xNTMgMTE0NC4xNSAxMDIuMzczQzExNjAuODggOTIuMDE2MyAxMTg0LjM4IDgzLjI1MjggMTIwNS40OSA4My4yNTI4QzEyNTAuOSA4My4yNTI4IDEyNzcuMTkgMTA1LjU2IDEyNzcuMTkgMTU2LjU0N1YyNDguOTYyQzEyNzcuMTkgMjY5LjI3NyAxMjgxLjU3IDI3NS42NSAxMjg5LjU0IDI3Ni40NDdDMTI5OS4xIDI3Ny42NDIgMTMxMi4yNCAyNjguNDggMTMxOS44MSAyNTYuNTNaTTEyNTEuNyAxOTcuMTc4QzEyNTEuNyAxNzkuMjUyIDEyNTEuNyAxNjAuNTMgMTI1MS43IDE0Ny43ODRDMTI0My4zMyAxNTcuMzQ0IDEyMzQuMTcgMTY5LjI5NCAxMTkxLjU1IDE3Ny42NTlDMTE2Ny4yNSAxODIuODM3IDExMzYuNTggMTk1LjE4NiAxMTM4LjU3IDIzMi4yMzFDMTE0MC41NiAyNjMuNyAxMTY2LjQ1IDI3Ny42NDIgMTE5NS4xMyAyNzQuODU0QzEyMjcuOCAyNzEuNjY3IDEyNTEuNyAyMzIuNjMgMTI1MS43IDE5Ny4xNzhaIiBmaWxsPSIjZmZmZmZmIi8+Cjwvc3ZnPg==" alt="Persona" style="height:24px;width:auto;display:block;opacity:.55;margin-bottom:14px">
+      <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:24px;max-width:240px">Зроблено так, щоб передавати далі. Преміальні фотокниги по всій Україні.</p>
+      <div style="display:flex;gap:12px">
+        <a href="#" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);padding:7px 14px">Instagram</a>
+        <a href="#" style="font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.15);padding:7px 14px">TikTok</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px">Навігація</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <a href="#products" style="font-size:13px;color:rgba(255,255,255,.45)">Продукти</a>
+        <a href="#why" style="font-size:13px;color:rgba(255,255,255,.45)">Чому фотокнига</a>
+        <a href="#configurator" style="font-size:13px;color:rgba(255,255,255,.45)">Ціна</a>
+        <a href="#how" style="font-size:13px;color:rgba(255,255,255,.45)">Процес</a>
+        <a href="#materials" style="font-size:13px;color:rgba(255,255,255,.45)">Якість</a>
+        <a href="#reviews" style="font-size:13px;color:rgba(255,255,255,.45)">Відгуки</a>
+        <a href="#faq" style="font-size:13px;color:rgba(255,255,255,.45)">FAQ</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:20px">Контакти</div>
+      <a href="tel:+380993771077" style="text-decoration:none;display:block;margin-bottom:14px">
+        <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.25);margin-bottom:3px;text-transform:uppercase">Телефон</div>
+        <div style="font-size:16px;color:rgba(255,255,255,.75)">+38 099 377 10 77</div>
+      </a>
+      <a href="mailto:hello@persona.ua" style="text-decoration:none">
+        <div style="font-size:11px;letter-spacing:.1em;color:rgba(255,255,255,.25);margin-bottom:3px;text-transform:uppercase">Email</div>
+        <div style="font-size:14px;color:rgba(255,255,255,.55)">hello@persona.ua</div>
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div style="font-size:11px;color:rgba(255,255,255,.18)">© 2025 Persona. Всі права захищені.</div>
+    <div style="display:flex;gap:20px">
+      <a href="#" style="font-size:11px;color:rgba(255,255,255,.18)">Політика конфіденційності</a>
+      <a href="#" style="font-size:11px;color:rgba(255,255,255,.18)">Умови використання</a>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="order-modal">
+  <div class="modal-box">
+    <button onclick="closeModal()" style="position:absolute;top:16px;right:20px;background:transparent;border:none;font-size:22px;cursor:pointer;color:#aaa;line-height:1">✕</button>
+    <div style="font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#aaa;margin-bottom:12px">Замовлення</div>
+    <h3 style="font-size:22px;font-weight:400;margin-bottom:20px">Залишіть заявку</h3>
+    <input type="text" class="modal-input" placeholder="Ваше ім'я">
+    <input type="tel" class="modal-input" placeholder="Номер телефону">
+    <select id="modal-product" class="modal-input" style="background:#fff;color:#444">
+      <option value="">Що вас цікавить?</option>
+      <option value="book">Фотокнига (Спадщина)</option>
+      <option value="wall">Волларт (Обрій)</option>
+      <option value="frame">Настільне фото (Миттєвість)</option>
+    </select>
+    <button class="modal-submit">Відправити заявку →</button>
+    <div style="font-size:10px;color:#bbb;text-align:center;margin-top:10px">Менеджер зв'яжеться протягом години</div>
+  </div>
+</div>
+
+<script>
+/* NAV */
+/* NAV scroll */
+const nav=document.getElementById('nav');
+const navLogo=nav.querySelector('.nav-logo');
+const navLinks=nav.querySelectorAll('.nav-links a');
+const navPhone=nav.querySelector('a[href^="tel"]');
+const navBtn=nav.querySelector('a[href="#configurator"],.btn-fill[href="#configurator"],a.btn');
+window.addEventListener('scroll',()=>{
+  const scrolled=window.scrollY>80;
+  nav.style.background=scrolled?'var(--white)':'transparent';
+  nav.style.borderBottomColor=scrolled?'var(--border)':'transparent';
+  nav.style.boxShadow=scrolled?'0 1px 12px rgba(0,0,0,.06)':'none';
+  navLinks.forEach(a=>a.style.color=scrolled?'':'rgba(255,255,255,.75)');
+  if(navPhone){navPhone.style.borderColor=scrolled?'var(--border)':'rgba(255,255,255,.35)';navPhone.style.color=scrolled?'var(--ink)':'rgba(255,255,255,.75)';}
+});
+/* FADE UP */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+/* STICKY BANNER */
+let bannerClosed=false;
+function closeBanner(){bannerClosed=true;document.getElementById('sticky-banner').classList.remove('show');}
+window.addEventListener('scroll',()=>{if(!bannerClosed&&window.scrollY>400)document.getElementById('sticky-banner').classList.add('show');});
+/* TIMER removed */
+/* REVIEWS */
+const rt=document.getElementById('reviews-track');let rd={on:false,sx:0,sl:0};
+rt.addEventListener('mousedown',e=>{rd={on:true,sx:e.pageX-rt.offsetLeft,sl:rt.scrollLeft};rt.style.cursor='grabbing';});
+rt.addEventListener('mouseleave',()=>{rd.on=false;rt.style.cursor='grab';});
+rt.addEventListener('mouseup',()=>{rd.on=false;rt.style.cursor='grab';});
+rt.addEventListener('mousemove',e=>{if(!rd.on)return;e.preventDefault();rt.scrollLeft=rd.sl-(e.pageX-rt.offsetLeft-rd.sx)*1.5;});
+/* FAQ */
+function toggleFaq(el){const item=el.parentElement,was=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));if(!was)item.classList.add('open');}
+/* TABS */
+function switchTab(btn,id){document.querySelectorAll('.cfg-tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.cfg-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');document.getElementById(id).classList.add('active');}
+/* MODAL */
+function openModal(p){const m=document.getElementById('order-modal');m.style.display='flex';if(p)document.getElementById('modal-product').value=p;document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('order-modal').style.display='none';document.body.style.overflow='';}
+document.getElementById('order-modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+/* PRICING */
+const PR={
+  base:{standard:{20:20,25:25,30:30},premium:{20:35,25:40,30:50},velour:{20:35,25:40,30:50}},
+  spread:{standard:{20:3,25:4,30:5},premium:{20:4,25:5,30:6},velour:{20:4,25:5,30:6}},
+  minSpreads:{standard:5,premium:10,velour:10},
+  box:50,copyDisc:.20
+};
+const PROMOS={'PERSONA10':10,'GIFT15':15};
+const C={title:'',subtitle:'',bg:'#1C1510',design:'photo',sym:'none',customSym:null,spineText:'',spineSym:'none',photo:null,px:0,py:0,pscale:1,size:30,coverType:'premium',paper:'premium',spreads:10,speed:'standard',box:'none',wantsCopies:false,promoDiscount:0};
+function pickPaper(btn){
+  document.querySelectorAll('#paper-opts .cfg-opt').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  C.paper=btn.dataset.t;
+  calcTotal();
+}
+function calcTotal(){
+  const coverKey=C.coverType==='velour'?'velour':C.coverType;
+  const base=PR.base[coverKey][C.size];
+  const spreadKey=C.paper==='premium'?'premium':'standard';
+  const sc=PR.spread[spreadKey][C.size]*C.spreads;
+  const bc=C.box!=='none'?PR.box:0;
+  let total=base+sc+bc;
+  if(C.promoDiscount>0)total=Math.round(total*(1-C.promoDiscount/100));
+  const fmt=total+' $';
+  document.getElementById('cfg-price').textContent=fmt;
+  const big=document.getElementById('cfg-price-big');if(big)big.textContent=fmt;
+  const bd=document.getElementById('price-breakdown');
+  const coverLabels={premium:'Преміальний льон',velour:'Велюр',standard:'Стандартна фото'};
+  if(bd){let lines=[`База (${C.size}×${C.size}, ${coverLabels[C.coverType]}) — ${base} $`,`${C.spreads} розв. × ${PR.spread[spreadKey][C.size]} $ — ${sc} $`];if(bc)lines.push(`Коробка — ${bc} $`);if(C.promoDiscount)lines.push(`Промокод −${C.promoDiscount}%`);bd.innerHTML=lines.join('<br>');}
+  document.getElementById('s-size').textContent=C.size+'×'+C.size;
+  document.getElementById('s-cover').textContent=coverLabels[C.coverType];
+  const sp2=document.getElementById('s-paper');if(sp2)sp2.textContent=C.paper==='premium'?'Преміум шовк':'Стандартний матовий';
+  document.getElementById('s-spreads').textContent=C.spreads;
+  document.getElementById('s-speed').textContent=C.speed==='urgent'?'Терміново ⚡':'3 дні';
+  if(C.box!=='none'){document.getElementById('s-box-line').style.display='flex';document.getElementById('s-box').textContent=C.box==='darkgray'?'Темно-сіра':'Бежева';}else document.getElementById('s-box-line').style.display='none';
+}
+function updateSpreads(val){const min=PR.minSpreads[C.coverType],v=Math.max(min,parseInt(val));document.getElementById('sp-slider').value=v;document.getElementById('sp-val').textContent=v;C.spreads=v;calcTotal();}
+function pickSize(btn){document.querySelectorAll('#size-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.size=parseInt(btn.dataset.s);calcTotal();}
+function pickCover(btn){
+  document.querySelectorAll('#cover-opts .cfg-opt').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  C.coverType=btn.dataset.t;
+  const isPremium=C.coverType==='premium'||C.coverType==='velour';
+  document.getElementById('photo-upload-group').style.display=isPremium?'none':'block';
+  document.getElementById('paper-group').style.display='block';
+  /* Update min spreads */
+  const min=PR.minSpreads[C.coverType];
+  const sl=document.getElementById('sp-slider');sl.min=min;
+  if(C.spreads<min){C.spreads=min;sl.value=min;document.getElementById('sp-val').textContent=min;}
+  document.getElementById('sp-min-note').textContent='(мін. '+min+')';
+  document.getElementById('sp-min-label').textContent=min;
+  const descMap={premium:'Тканева обкладинка · Льон · Тільки текст і символ · Мін. 10 розворотів',velour:'Тканева обкладинка · Велюр · Тільки текст і символ · Мін. 10 розворотів',standard:'Матова фотообкладинка · Можна додати фото · Мін. 5 розворотів'};
+  document.getElementById('cover-desc').textContent=descMap[C.coverType];
+  calcTotal();
+}
+function pickSpeed(btn){document.querySelectorAll('#speed-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.speed=btn.dataset.v;document.getElementById('speed-note').textContent=C.speed==='urgent'?'⚡ Терміновий порядок — уточніть терміни у менеджера':'3 робочих дні після затвердження макету';calcTotal();}
+function pickBox(btn){document.querySelectorAll('#box-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.box=btn.dataset.v;document.getElementById('card-group').style.display=C.box!=='none'?'block':'none';calcTotal();}
+/* copies managed via checkbox only — no quantity input */
+/* pickCopies / pickCopySize removed — replaced by updateCopies input */
+function applyPromo(){const code=(document.getElementById('promo-input').value||'').toUpperCase().trim(),el=document.getElementById('promo-result');el.style.display='block';if(PROMOS[code]){C.promoDiscount=PROMOS[code];el.style.color='#6fcf97';el.textContent='✓ Промокод застосовано — знижка '+PROMOS[code]+'%';document.getElementById('s-promo-line').style.display='flex';document.getElementById('s-promo').textContent=code+' (−'+PROMOS[code]+'%)';}else{C.promoDiscount=0;el.style.color='#eb5757';el.textContent='✗ Промокод не знайдено';document.getElementById('s-promo-line').style.display='none';}calcTotal();}
+/* CANVAS */
+function autoText(hex){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return(0.299*r+0.587*g+0.114*b)/255>.5?'#1C1510':'#F5F0E8';}
+function autoAccent(hex){const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);return(0.299*r+0.587*g+0.114*b)/255>.5?'#4A3728':'#C9A96E';}
+const cv=document.getElementById('bookCanvas'),ctx=cv.getContext('2d');
+const sv=document.getElementById('spineCanvas'),sctx=sv.getContext('2d');
+let _d={on:false,sx:0,sy:0,ox:0,oy:0};
+cv.addEventListener('mousedown',e=>{if(!C.photo)return;_d={on:true,sx:e.clientX,sy:e.clientY,ox:C.px,oy:C.py};cv.style.cursor='grabbing';});
+window.addEventListener('mousemove',e=>{if(!_d.on)return;C.px=_d.ox+(e.clientX-_d.sx);C.py=_d.oy+(e.clientY-_d.sy);renderBook();});
+window.addEventListener('mouseup',()=>{_d.on=false;cv.style.cursor=C.photo?'grab':'default';});
+cv.addEventListener('wheel',e=>{if(!C.photo)return;e.preventDefault();C.pscale=Math.max(.2,Math.min(6,C.pscale*(e.deltaY>0?.92:1.09)));renderBook();},{passive:false});
+function zoomPhoto(f){if(!C.photo)return;C.pscale=Math.max(.2,Math.min(6,C.pscale*f));renderBook();}
+function renderBook(){
+  C.title=(document.getElementById('cfg-title')||{value:''}).value;C.subtitle=(document.getElementById('cfg-subtitle')||{value:''}).value;
+  const W=cv.width,H=cv.height,tc=autoText(C.bg),ac=autoAccent(C.bg);
+  ctx.clearRect(0,0,W,H);ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);
+  if((C.design==='photo'||C.design==='both')&&C.photo){const img=C.photo,bs=Math.max(W/img.width,H/img.height);const dw=img.width*bs*C.pscale,dh=img.height*bs*C.pscale;ctx.save();ctx.globalAlpha=.62;ctx.drawImage(img,(W-dw)/2+C.px,(H-dh)/2+C.py,dw,dh);ctx.restore();ctx.fillStyle=C.bg;ctx.globalAlpha=.4;ctx.fillRect(0,0,W,H);ctx.globalAlpha=1;cv.style.cursor='grab';}
+  ctx.strokeStyle=ac;ctx.globalAlpha=.2;ctx.lineWidth=1;ctx.strokeRect(12,12,W-24,H-24);ctx.globalAlpha=1;
+  const showSym=(C.design==='symbol'||C.design==='both')&&C.sym!=='none';
+  if(showSym){if(C.sym==='custom'&&C.customSym){const ss=42;ctx.drawImage(C.customSym,W/2-ss/2,H*.25-ss/2,ss,ss);}else drawSym(ctx,C.sym,W/2,H*.25,ac);}
+  ctx.fillStyle=tc;ctx.textAlign='center';ctx.textBaseline='middle';const tY=showSym?H*.52:H/2;
+  if(C.title){ctx.font='400 26px system-ui,sans-serif';const words=C.title.split(' ');let lines=[],line='';for(const w of words){const t=line?line+' '+w:w;if(ctx.measureText(t).width>W-44){lines.push(line);line=w;}else line=t;}lines.push(line);const lh=34,sy2=tY-((lines.length-1)*lh)/2;lines.forEach((l,i)=>ctx.fillText(l,W/2,sy2+i*lh));}else{ctx.globalAlpha=.18;ctx.font='300 14px system-ui,sans-serif';ctx.fillText('Назва книги',W/2,H/2);ctx.globalAlpha=1;}
+  if(C.subtitle){ctx.fillStyle=ac;ctx.globalAlpha=.65;ctx.font='300 10px system-ui,sans-serif';ctx.fillText(C.subtitle.toUpperCase(),W/2,H*.82);ctx.globalAlpha=1;}
+  ctx.strokeStyle=ac;ctx.globalAlpha=.15;ctx.lineWidth=.5;ctx.beginPath();ctx.moveTo(24,H-26);ctx.lineTo(W-24,H-26);ctx.stroke();ctx.globalAlpha=1;
+  renderSpine();
+}
+function drawSym(c,type,x,y,color){
+  c.strokeStyle=color;c.fillStyle=color;c.globalAlpha=.65;c.lineWidth=1.2;
+  if(type==='rings'){
+    /* Two interlocked circles — wedding rings */
+    const r=14,off=10;
+    c.beginPath();c.arc(x-off,y,r,0,Math.PI*2);c.stroke();
+    c.beginPath();c.arc(x+off,y,r,0,Math.PI*2);c.stroke();
+  } else if(type==='tree'){
+    /* Minimalist bare tree — family tree */
+    const bx=x,by=y+18;
+    /* trunk */
+    c.beginPath();c.moveTo(bx,by);c.lineTo(bx,by-14);c.stroke();
+    /* main branches */
+    c.beginPath();c.moveTo(bx,by-14);c.lineTo(bx-18,by-28);c.stroke();
+    c.beginPath();c.moveTo(bx,by-14);c.lineTo(bx+18,by-28);c.stroke();
+    /* left sub-branches */
+    c.beginPath();c.moveTo(bx-18,by-28);c.lineTo(bx-26,by-38);c.stroke();
+    c.beginPath();c.moveTo(bx-18,by-28);c.lineTo(bx-10,by-38);c.stroke();
+    /* right sub-branches */
+    c.beginPath();c.moveTo(bx+18,by-28);c.lineTo(bx+10,by-38);c.stroke();
+    c.beginPath();c.moveTo(bx+18,by-28);c.lineTo(bx+26,by-38);c.stroke();
+    /* center branch */
+    c.beginPath();c.moveTo(bx,by-14);c.lineTo(bx,by-30);c.stroke();
+    c.beginPath();c.moveTo(bx,by-30);c.lineTo(bx-7,by-40);c.stroke();
+    c.beginPath();c.moveTo(bx,by-30);c.lineTo(bx+7,by-40);c.stroke();
+    /* roots */
+    c.beginPath();c.moveTo(bx,by);c.lineTo(bx-8,by+8);c.stroke();
+    c.beginPath();c.moveTo(bx,by);c.lineTo(bx+8,by+8);c.stroke();
+  } else if(type==='sprout'){
+    /* Sprout with two leaves — newborn */
+    const bx=x,by=y+18;
+    /* stem */
+    c.beginPath();c.moveTo(bx,by);c.lineTo(bx,by-28);c.stroke();
+    /* ground line */
+    c.beginPath();c.moveTo(bx-12,by);c.lineTo(bx+12,by);c.stroke();
+    /* left leaf */
+    c.beginPath();
+    c.moveTo(bx,by-18);
+    c.bezierCurveTo(bx-2,by-28,bx-16,by-28,bx-14,by-18);
+    c.bezierCurveTo(bx-10,by-14,bx-2,by-16,bx,by-18);
+    c.stroke();
+    /* right leaf */
+    c.beginPath();
+    c.moveTo(bx,by-22);
+    c.bezierCurveTo(bx+2,by-32,bx+16,by-32,bx+14,by-22);
+    c.bezierCurveTo(bx+10,by-18,bx+2,by-20,bx,by-22);
+    c.stroke();
+  }
+  c.globalAlpha=1;
+}
+function renderSpine(){const SW=sv.width,SH=sv.height,tc=autoText(C.bg),ac=autoAccent(C.bg);sctx.clearRect(0,0,SW,SH);sctx.fillStyle=C.bg;sctx.fillRect(0,0,SW,SH);sctx.strokeStyle=ac;sctx.globalAlpha=.15;sctx.lineWidth=1;sctx.strokeRect(2,2,SW-4,SH-4);sctx.globalAlpha=1;const st=(document.getElementById('spine-text')||{value:''}).value;if(st){sctx.save();sctx.fillStyle=tc;sctx.globalAlpha=.65;sctx.font='300 8px system-ui,sans-serif';sctx.textAlign='center';sctx.textBaseline='middle';sctx.translate(SW/2,SH/2);sctx.rotate(-Math.PI/2);sctx.fillText(st.toUpperCase(),0,0);sctx.restore();sctx.globalAlpha=1;}if(C.spineSym!=='none'){const sym=C.spineSym==='dot'?'·':C.spineSym==='heart'?'♥':'✦';sctx.fillStyle=ac;sctx.globalAlpha=.55;sctx.font='11px system-ui,sans-serif';sctx.textAlign='center';sctx.textBaseline='middle';sctx.fillText(sym,SW/2,20);sctx.globalAlpha=1;}}
+function loadPhoto(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{C.photo=img;C.px=0;C.py=0;C.pscale=1;renderBook();};img.src=ev.target.result;};r.readAsDataURL(f);}
+function removePhoto(){C.photo=null;C.px=0;C.py=0;C.pscale=1;cv.style.cursor='default';renderBook();}
+function loadSym(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.onload=()=>{C.customSym=img;C.sym='custom';renderBook();};img.src=ev.target.result;};r.readAsDataURL(f);}
+function downloadCanvas(){const a=document.createElement('a');a.download='persona-cover.png';a.href=cv.toDataURL('image/png');a.click();}
+function pickBg(el){document.querySelectorAll('#bg-colors .cdot').forEach(d=>d.classList.remove('active'));el.classList.add('active');C.bg=el.dataset.c;renderBook();}
+function pickDesign(btn){document.querySelectorAll('#design-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.design=btn.dataset.v;document.getElementById('symbol-group').style.opacity=C.design==='photo'?'.35':'1';renderBook();}
+function pickSym(btn){document.querySelectorAll('#symbol-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.sym=btn.dataset.v;renderBook();}
+function pickSpineSym(btn){document.querySelectorAll('#spine-sym-opts .cfg-opt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');C.spineSym=btn.dataset.v;renderSpine();}
+renderBook();calcTotal();
+</script>
+</body>
+</html>
