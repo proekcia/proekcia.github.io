@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find \"/Users/kirsava/Downloads\" -name \"*.webp\" -newer \"/Users/kirsava/Downloads/Original Artwork/style.css\" 2>/dev/null)",
+      "Bash(cp \"/Users/kirsava/Downloads/Original Artworks/Hero.webp\" \"/Users/kirsava/Downloads/Original Artwork/images/hero-bg.webp\" && echo \"Done\")",
+      "Bash(mkdir -p \"/Users/kirsava/Downloads/Original Artwork/.claude\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(ls /usr/local/bin/ | grep -E \"node|serve|http\" 2>/dev/null; ls /opt/homebrew/bin/ | grep -E \"node|serve|http\" 2>/dev/null; which ruby 2>/dev/null)",
+      "Bash(ls /Applications/ | grep -i node; find /Applications -name \"node\" -maxdepth 5 2>/dev/null | head -5)",
+      "Bash(sed -n '129,145p' \"/Users/kirsava/Downloads/Original Artwork/style.css\")",
+      "Bash(sed -n '748,765p' \"/Users/kirsava/Downloads/Original Artwork/style.css\")",
+      "Bash(cp \"/Users/kirsava/Downloads/magnific_img2_LUC6W8mswO.jpeg\" \"/Users/kirsava/Downloads/Original Artwork/images/custom-neck.jpeg\")",
+      "Bash(find \"/Users/kirsava\" -maxdepth 4 -newer \"/Users/kirsava/Downloads/magnific_extreme-macro-shot-of-a-t_DBPiuf4pcl 1.png\" -type f \\\\\\( -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.png\" -o -name \"*.webp\" \\\\\\) 2>/dev/null | head -10)",
+      "Bash(mv \"/Users/kirsava/Downloads/Original Artwork/persona\" /Users/kirsava/Downloads/persona)",
+      "Read(//Users/kirsava/Downloads/**)",
+      "WebFetch(domain:www.jonite.com)",
+      "Bash(pkill -f \"http.server 8123\")",
+      "Bash(mkdir -p \"/Users/kirsava/Downloads/persona-editorial/assets\")",
+      "Bash(cp \"/Users/kirsava/Downloads/persona/assets/persona-logo.svg\" \"/Users/kirsava/Downloads/persona-editorial/assets/persona-logo.svg\")",
+      "Bash(pkill -f \"http.server 8124\")",
+      "Bash(mkdir -p \"/Users/kirsava/Downloads/persona-refero/assets\")",
+      "Bash(cp \"/Users/kirsava/Downloads/persona/assets/persona-logo.svg\" \"/Users/kirsava/Downloads/persona-refero/assets/persona-logo.svg\")",
+      "Bash(pkill -f \"http.server 8125\")",
+      "Bash(pkill -f \"http.server 8126\")",
+      "Bash(pkill -f \"http.server 8127\")",
+      "Bash(pkill -f \"http.server 8128\")",
+      "Bash(pkill -f \"http.server 8129\")"
+    ]
+  }
+}

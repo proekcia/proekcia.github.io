@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "landing",
+      "runtimeExecutable": "/Applications/Adobe Photoshop 2025/Adobe Photoshop 2025.app/Contents/MacOS/node",
+      "runtimeArgs": ["/Users/kirsava/Downloads/Original Artwork/server.js"],
+      "port": 3000
+    }
+  ]
+}
