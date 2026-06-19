@@ -242,7 +242,7 @@
         <span class="custom__photo-label">DTG PICTURE</span>
       </div>
       <div class="custom__photo custom__photo--embroidery">
-        <img id="custom-img-embroidery" class="js-parallax" src="images/custom-embroidery.png" alt="Embroidery example">
+        <img id="custom-img-embroidery" class="js-parallax" src="images/custom-embroidery.jpg" alt="Embroidery example">
       </div>
       <div class="custom__photo custom__photo--neck">
         <img id="custom-img-neck" class="js-parallax" src="images/custom-neck.jpeg" alt="Neck label example">
@@ -295,21 +295,21 @@
         <div class="ourworks__item"><img src="images/our_works_3.webp" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_4.webp" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_5.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_6.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_7.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_8.webp" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_6.jpg" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_7.jpg" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_8.jpg" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_9.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_10.webp" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_10.jpg" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_1.webp" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_2.webp" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_3.webp" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_4.webp" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_5.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_6.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_7.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_8.webp" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_6.jpg" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_7.jpg" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_8.jpg" alt=""></div>
         <div class="ourworks__item"><img src="images/our_works_9.webp" alt=""></div>
-        <div class="ourworks__item"><img src="images/our_works_10.webp" alt=""></div>
+        <div class="ourworks__item"><img src="images/our_works_10.jpg" alt=""></div>
       </div>
     </div>
 
@@ -900,7 +900,7 @@
       ]
     },
     dyeing: {
-      image: 'images/DYEING.webp',
+      image: 'images/DYEING.jpg',
       heading: 'Sewn first. Dyed after.',
       sections: [
         {
@@ -1194,6 +1194,21 @@
     update();
   })();
 
+</script>
+
+<script>
+  // Graceful fade-in: photos ease in as they finish loading instead of
+  // popping in abruptly (helps with the large images on first load).
+  (function () {
+    document.querySelectorAll('img:not(.craft__img)').forEach(function (img) {
+      if (img.complete && img.naturalWidth) return; // already loaded — leave as is
+      img.style.opacity = '0';
+      img.style.transition = 'opacity 0.5s ease';
+      var show = function () { img.style.opacity = '1'; };
+      img.addEventListener('load', show, { once: true });
+      img.addEventListener('error', show, { once: true });
+    });
+  })();
 </script>
 </body>
 </html>
