@@ -2,8 +2,8 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const ROOT = '/Users/kirsava/Downloads/Original Artwork';
-const PORT = 3000;
+const ROOT = '/Users/kirsava/Documents/GitHub/proekcia.github.io';
+const PORT = 8000;
 
 const MIME = {
   '.html': 'text/html',
@@ -21,9 +21,14 @@ const MIME = {
 };
 
 http.createServer((req, res) => {
-  let urlPath = req.url.split('?')[0];
-  if (urlPath === '/') urlPath = '/index.html';
-  const filePath = path.join(ROOT, urlPath);
+  let urlPath = decodeURIComponent(req.url.split('?')[0]);
+  let filePath = path.join(ROOT, urlPath);
+  // Directory (or trailing slash) -> serve its index.html, like GitHub Pages.
+  try {
+    if (urlPath.endsWith('/') || fs.statSync(filePath).isDirectory()) {
+      filePath = path.join(filePath, 'index.html');
+    }
+  } catch (e) { /* statSync may throw for missing path; fall through to readFile 404 */ }
   const ext = path.extname(filePath);
   fs.readFile(filePath, (err, data) => {
     if (err) { res.writeHead(404); res.end('Not found'); return; }

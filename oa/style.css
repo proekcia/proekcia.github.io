@@ -47,6 +47,21 @@ a {
   color: inherit;
 }
 
+/* Anchor targets: offset the jump so the section heading clears the fixed nav
+   (nav is ~60px on desktop, ~40px on mobile). */
+.collection,
+.card,
+.craft,
+.customization,
+.ourworks,
+.pricing,
+.howitworks,
+.founder,
+.faq,
+.project {
+  scroll-margin-top: clamp(56px, 8vh, 96px);
+}
+
 
 /* ============================================================
    HERO
@@ -498,11 +513,13 @@ html {
   margin-top: 0.22vh;
 }
 
-/* Footer — bottom right */
+/* Footer — bottom right, aligned to the product-name column (% so it tracks
+   the cards regardless of scrollbar width, unlike vw). */
 .collection__footer {
   position: absolute;
   top: 93vh;
-  left: 50.97vw;
+  left: 50%;
+  padding-left: 0.97vw;
 }
 
 .collection__customize-label {
@@ -911,22 +928,25 @@ html {
 .craft {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
+  align-items: stretch;
   overflow: hidden;
   background: #fff;
 }
 
-/* Left: info panel */
+/* Left: info panel — flow layout so it grows with the text instead of clipping */
 .craft__info {
   flex: 0 0 50%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12.07vh 0.97vw 6vh;
 }
 
 .craft__label {
-  position: absolute;
-  left: 0.97vw;
-  top: 12.07vh;
+  position: static;
+  margin-bottom: 8.4vh;
   font-weight: 700;
   font-size: max(14px, 1.25vw);   /* 18px / 1440 */
   line-height: 1.22;
@@ -935,10 +955,8 @@ html {
 
 /* Tab navigation */
 .craft__tabs {
-  position: absolute;
-  left: 0.97vw;
-  right: calc(0.35vw + 15px);
-  top: 22.97vh;
+  position: static;
+  margin-bottom: 7.9vh;
   display: flex;
   justify-content: space-between;
 }
@@ -977,12 +995,9 @@ html {
 
 /* Content area */
 .craft__content {
-  position: absolute;
-  left: 23.60vw;
-  top: 32.96vh;
-  right: 0.97vw;
-  bottom: 0;
-  overflow-y: auto;
+  position: static;
+  margin-left: 22.63vw; /* 23.60vw - 0.97vw panel padding → keeps the indented column */
+  overflow: visible;
 }
 
 .craft__content-heading {
@@ -1106,6 +1121,7 @@ html {
     top: auto;
     right: auto;
     bottom: auto;
+    margin-left: 0;
     overflow-y: visible;
   }
 
@@ -1359,26 +1375,23 @@ html {
 .ourworks {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   background: #fff;
   overflow: hidden;
   margin-top: 5.625vw;
-  scroll-margin-top: 8vh;
 }
 
-/* Right: text content (top portion) */
+/* Right: text content (top portion) — flows; bottom padding reserves room above the pinned photo strip */
 .ourworks__info {
-  position: absolute;
-  left: 51.02%;
-  right: 0;
-  top: 0;
-  bottom: 57%;
+  position: relative;
+  margin-left: 51.02%;
+  padding: 4vh 3.88vw 50vh 0;
 }
 
 .ourworks__label {
-  position: absolute;
-  left: 0.06vw;
-  top: 0;
+  position: static;
+  margin-bottom: 4vh;
   font-weight: 700;
   font-size: max(14px, 1.25vw);
   line-height: 1.22;
@@ -1386,12 +1399,8 @@ html {
 }
 
 .ourworks__text {
-  position: absolute;
-  left: 0.06vw;
-  top: 17.02%; /* 6.69% / 39.31% */
-  right: 3.88vw;
-  bottom: 0;
-  overflow: hidden;
+  position: static;
+  overflow: visible;
   display: flex;
   flex-direction: column;
   gap: 1.9vh;
@@ -1409,8 +1418,9 @@ html {
   position: absolute;
   left: 0;
   right: 0;
-  top: 46%;
+  top: auto;
   bottom: 0;
+  height: 46vh;
   overflow: hidden;
 }
 
@@ -1452,6 +1462,7 @@ html {
 
   .ourworks__info {
     position: static;
+    margin-left: 0;
     padding: 0 4.27vw 8.53vw;
   }
 
@@ -1908,7 +1919,8 @@ html {
 .howitworks {
   position: relative;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   background: #fff;
   overflow: hidden;
 }
@@ -1925,26 +1937,24 @@ html {
 }
 
 .howitworks__steps {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  position: static;
   display: flex;
+  align-items: stretch;
+  min-height: 100vh;
 }
 
+/* Each step is a flow column: number → body (auto height) → photo pinned to the bottom */
 .howitworks__step {
   flex: 0 0 20%;
-  position: relative;
-  padding-left: 0.97vw;
-  padding-right: 0.5vw;
+  display: flex;
+  flex-direction: column;
+  padding: 38vh 0.5vw 0 0.97vw;
 }
 
 .howitworks__step-photo {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  margin-top: auto;
+  width: 100%;
   aspect-ratio: 7 / 9;
   overflow: hidden;
 }
@@ -1957,27 +1967,21 @@ html {
 }
 
 .howitworks__step-num {
-  position: absolute;
-  top: 38%;
-  left: 0.97vw;
-  right: 0.5vw;
+  position: static;
   font-weight: 700;
   font-size: max(12px, 0.694vw);
   line-height: 1.2;
   color: #010101;
-  margin-bottom: 0;
+  margin-bottom: 0.8vh;
 }
 
 .howitworks__step-body {
-  position: absolute;
-  top: 41%;
-  bottom: 47%;
-  left: 0.97vw;
-  right: 0.5vw;
+  position: static;
+  overflow: visible;
+  margin-bottom: 3vh;
   font-size: max(12px, 0.694vw);
   line-height: 1.5;
   color: #828282;
-  overflow: hidden;
 }
 
 /* ── HOW IT WORKS mobile ── */
@@ -2480,6 +2484,7 @@ html {
     display: block;
     padding: 8.53vw 4.27vw 2.67vw;
     font-size: 4.8vw;
+    white-space: normal;
   }
 
   .project__meta {
@@ -2553,9 +2558,9 @@ html {
     left: 52vw;
   }
 
-  /* Craftsmanship: adjust content offset */
+  /* Craftsmanship: slightly wider content indent on tablet */
   .craft__content {
-    left: 26vw;
+    margin-left: 25vw;
   }
 
   /* Pricing panel: scale spacing */
@@ -2590,35 +2595,8 @@ html {
   .pricing__lbl-row { margin-bottom: 1.5vh; }
   .pricing__summary { margin-bottom: 2vh; }
 
-  /* Other 100vh sections: allow vertical scroll if content overflows */
-  .craft__content,
-  .ourworks__text {
-    overflow-y: auto;
-    scrollbar-width: none;
-  }
-
-  .craft__content::-webkit-scrollbar,
-  .ourworks__text::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* HOW IT WORKS: at short viewports aspect-ratio makes photos too tall,
-     revert to fixed % positioning so text is never covered */
-  .howitworks__step-photo {
-    top: 57%;
-    bottom: 0;
-    aspect-ratio: unset;
-    height: auto;
-  }
-
-  .howitworks__step-num {
-    top: 42%;
-  }
-
-  .howitworks__step-body {
-    top: 45%;
-    bottom: 43%;
-  }
+  /* craft / our works / how it works now use flow layouts that grow to fit
+     the text on any height, so no short-viewport special-casing is needed. */
 }
 
 /* ============================================================

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Original Artworks</title>
-  <link rel="stylesheet" href="style.css?v=85">
+  <link rel="stylesheet" href="style.css?v=91">
 </head>
 <body>
 
@@ -192,8 +192,8 @@
       </div>
 
       <div class="card__actions">
-        <a href="#" class="card__configure">CONFIGURE THIS ITEM</a>
-        <a href="#" class="card__sample">ORDER SAMPLE</a>
+        <a href="#pricing" class="card__configure">CONFIGURE THIS ITEM</a>
+        <a href="#start-a-project" class="card__sample">ORDER SAMPLE</a>
       </div>
 
     </div>
@@ -219,7 +219,7 @@
     </div>
 
     <div class="craft__visual">
-      <img class="craft__img" id="craft-img" src="images/craft-material.jpg" alt="">
+      <img class="craft__img" id="craft-img" src="images/craft-material.webp" alt="">
     </div>
 
   </section>
@@ -1035,6 +1035,26 @@
   calcProduct.addEventListener('change', updateCalc);
 
   updateCalc();
+
+  // CONFIGURE THIS ITEM → jump to the calculator with this product preselected
+  const cardConfigure = card.querySelector('.card__configure');
+  if (cardConfigure) {
+    cardConfigure.addEventListener('click', () => {
+      const name = card.querySelector('.card__name').textContent.trim().toUpperCase();
+      const opt = [...calcProduct.options].find(o => o.text.trim().toUpperCase() === name);
+      if (opt) { calcProduct.selectedIndex = opt.index; updateCalc(); }
+    });
+  }
+
+  // ORDER SAMPLE → open the project form with the product name in the message
+  const cardSample = card.querySelector('.card__sample');
+  if (cardSample) {
+    cardSample.addEventListener('click', () => {
+      const name = card.querySelector('.card__name').textContent.trim();
+      const textarea = document.querySelector('.project__textarea');
+      if (textarea) textarea.value = `Sample request: ${name}`;
+    });
+  }
 
   // REQUEST A QUOTE → pre-fill START A PROJECT textarea
   const pricingCta = document.getElementById('pricing-cta');
