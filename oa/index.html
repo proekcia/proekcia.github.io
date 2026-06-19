@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Original Artworks</title>
-  <link rel="stylesheet" href="style.css?v=91">
+  <link rel="stylesheet" href="style.css?v=96">
 </head>
 <body>
 
   <!-- ===== HERO ===== -->
   <section class="hero">
-    <img class="hero__bg" src="images/hero.webp" alt="">
+    <img class="hero__bg js-parallax" src="images/hero.webp" alt="">
 
     <nav class="hero__nav">
       <a href="#" class="hero__logo">
@@ -219,7 +219,9 @@
     </div>
 
     <div class="craft__visual">
-      <img class="craft__img" id="craft-img" src="images/craft-material.webp" alt="">
+      <div class="craft__parallax js-parallax">
+        <img class="craft__img" id="craft-img" src="images/craft-material.webp" alt="">
+      </div>
     </div>
 
   </section>
@@ -230,20 +232,20 @@
 
     <div class="custom__gallery">
       <div class="custom__photo custom__photo--garment">
-        <img id="custom-img-garment" src="images/custom-garment.jpeg" alt="Garment color options">
+        <img id="custom-img-garment" class="js-parallax" src="images/custom-garment.jpeg" alt="Garment color options">
       </div>
       <div class="custom__photo custom__photo--silk">
-        <img id="custom-img-silk" src="images/custom-silk.jpeg" alt="Silk screen printing">
+        <img id="custom-img-silk" class="js-parallax" src="images/custom-silk.jpeg" alt="Silk screen printing">
       </div>
       <div class="custom__photo custom__photo--dtg">
-        <img id="custom-img-dtg" src="images/dtg_sample.jpeg" alt="DTG print example">
+        <img id="custom-img-dtg" class="js-parallax-pan" src="images/dtg_sample.jpeg" alt="DTG print example">
         <span class="custom__photo-label">DTG PICTURE</span>
       </div>
       <div class="custom__photo custom__photo--embroidery">
-        <img id="custom-img-embroidery" src="images/custom-embroidery.png" alt="Embroidery example">
+        <img id="custom-img-embroidery" class="js-parallax" src="images/custom-embroidery.png" alt="Embroidery example">
       </div>
       <div class="custom__photo custom__photo--neck">
-        <img id="custom-img-neck" src="images/custom-neck.jpeg" alt="Neck label example">
+        <img id="custom-img-neck" class="js-parallax" src="images/custom-neck.jpeg" alt="Neck label example">
       </div>
     </div>
 
@@ -318,7 +320,7 @@
   <section class="pricing" id="pricing">
 
     <div class="pricing__visual">
-      <img src="images/PRICE%20CALCULATOR.webp" alt="Price Calculator" class="pricing__visual-img">
+      <img src="images/PRICE%20CALCULATOR.webp" alt="Price Calculator" class="pricing__visual-img js-parallax">
       <h2 class="pricing__visual-title">Your next merch<br>starts here.</h2>
     </div>
 
@@ -368,7 +370,7 @@
         </div>
         <div class="pricing__stepper">
           <button class="pricing__step-btn" id="calc-minus">−</button>
-          <span class="pricing__step-val" id="calc-qty">100</span>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" class="pricing__step-val" id="calc-qty" value="100" aria-label="Quantity">
           <button class="pricing__step-btn" id="calc-plus">+</button>
         </div>
       </div>
@@ -409,31 +411,31 @@
       <div class="howitworks__step howitworks__step--1">
         <p class="howitworks__step-num">1. GET IN TOUCH</p>
         <p class="howitworks__step-body">Reach out through the website — send us a question or a full brief straight away. We respond the same day or the next morning, always.</p>
-        <div class="howitworks__step-photo"><img src="images/Get%20in%20touch.webp" alt="Get in touch"></div>
+        <div class="howitworks__step-photo"><img class="js-parallax" src="images/Get%20in%20touch.webp" alt="Get in touch"></div>
       </div>
 
       <div class="howitworks__step howitworks__step--2">
         <p class="howitworks__step-num">2. BRIEF &amp; APPROVAL</p>
         <p class="howitworks__step-body">We go through every detail together — garment type, artwork, quantities, finish. If you already have sketches or a tech pack, even better. Once the final design and price are confirmed, we move forward.</p>
-        <div class="howitworks__step-photo"><img src="images/Brief%20%26%20Approval.webp" alt="Brief & Approval"></div>
+        <div class="howitworks__step-photo"><img class="js-parallax" src="images/Brief%20%26%20Approval.webp" alt="Brief & Approval"></div>
       </div>
 
       <div class="howitworks__step howitworks__step--3">
         <p class="howitworks__step-num">3. PRODUCTION</p>
         <p class="howitworks__step-body">Every piece is made to order — no excess, no waste. We work against fast fashion and take sustainability seriously. Each garment is cut, sewn and finished with the care that premium quality demands.</p>
-        <div class="howitworks__step-photo"><img src="images/Production.webp" alt="Production"></div>
+        <div class="howitworks__step-photo"><img class="js-parallax" src="images/Production.webp" alt="Production"></div>
       </div>
 
       <div class="howitworks__step howitworks__step--4">
         <p class="howitworks__step-num">4. QUALITY CONTROL</p>
         <p class="howitworks__step-body">Before anything leaves production, every unit is checked individually. Our quality standards are high — nothing ships until we are fully satisfied with the result.</p>
-        <div class="howitworks__step-photo"><img src="images/Quality%20control.webp" alt="Quality control"></div>
+        <div class="howitworks__step-photo"><img class="js-parallax" src="images/Quality%20control.webp" alt="Quality control"></div>
       </div>
 
       <div class="howitworks__step howitworks__step--5">
         <p class="howitworks__step-num">5. PACKAGING &amp; DELIVERY</p>
         <p class="howitworks__step-body">Each garment is packed in branded zip bags designed for safe transit. We ship worldwide with trusted global carriers — fully tracked, every time.</p>
-        <div class="howitworks__step-photo"><img src="images/Packaging%20%26%20delivery.webp" alt="Packaging & delivery"></div>
+        <div class="howitworks__step-photo"><img class="js-parallax" src="images/Packaging%20%26%20delivery.webp" alt="Packaging & delivery"></div>
       </div>
 
     </div>
@@ -555,7 +557,7 @@
   <section class="project" id="start-a-project">
 
     <div class="project__photo">
-      <img src="images/hoodie девушка.jpeg" alt="">
+      <img src="images/hoodie девушка.jpeg" alt="" class="js-parallax">
     </div>
 
     <p class="project__title">A SKETCH ON A NAPKIN IS ENOUGH TO START.</p>
@@ -733,20 +735,38 @@
     ).join('');
   }
 
-  // Gallery arrows
-  card.querySelector('.card__gallery-prev').addEventListener('click', () => {
-    galleryIdx = (galleryIdx - 1 + galleryImages.length) % galleryImages.length;
+  // Gallery navigation (arrows + swipe)
+  function galleryGo(dir) {
+    galleryIdx = (galleryIdx + dir + galleryImages.length) % galleryImages.length;
     cardMainImg.src = galleryImages[galleryIdx];
-  });
-  card.querySelector('.card__gallery-next').addEventListener('click', () => {
-    galleryIdx = (galleryIdx + 1) % galleryImages.length;
-    cardMainImg.src = galleryImages[galleryIdx];
-  });
+  }
+  card.querySelector('.card__gallery-prev').addEventListener('click', () => galleryGo(-1));
+  card.querySelector('.card__gallery-next').addEventListener('click', () => galleryGo(1));
 
-  // Collection items
+  // Reusable horizontal-swipe detector (touch). Swipe left → next, right → prev.
+  function addSwipe(el, onLeft, onRight) {
+    let x0 = null, y0 = null;
+    el.addEventListener('touchstart', e => {
+      const t = e.changedTouches[0]; x0 = t.clientX; y0 = t.clientY;
+    }, { passive: true });
+    el.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - x0, dy = t.clientY - y0;
+      x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.4) (dx < 0 ? onLeft : onRight)();
+    }, { passive: true });
+  }
+
+  // Swipe through the product photos
+  addSwipe(card.querySelector('.card__visual'), () => galleryGo(1), () => galleryGo(-1));
+
+  // Collection items — open the product card (ignore taps that were actually swipes)
+  let collectionSwiped = false;
   document.querySelectorAll('.collection__item').forEach(item => {
     item.addEventListener('click', e => {
       e.preventDefault();
+      if (collectionSwiped) { collectionSwiped = false; return; }
       renderCard(item.dataset.product);
       document.getElementById('product-card').scrollIntoView({ behavior: 'smooth' });
     });
@@ -785,10 +805,34 @@
 
   updateCarousel();
 
+  // Swipe the collection carousel on touch
+  addSwipe(
+    collectionGrid.parentElement,
+    () => { collectionSwiped = true; setTimeout(() => collectionSwiped = false, 400);
+            if (collectionOffset < getCarouselConfig().maxOffset) { collectionOffset++; updateCarousel(); } },
+    () => { collectionSwiped = true; setTimeout(() => collectionSwiped = false, 400);
+            if (collectionOffset > 0) { collectionOffset--; updateCarousel(); } }
+  );
+
   const nav = document.querySelector('.hero__nav');
   window.addEventListener('scroll', () => {
     nav.classList.toggle('hero__nav--scrolled', window.scrollY > 60);
   }, { passive: true });
+
+  // Keep the anchor scroll offset (--nav-h) equal to the actual (scrolled) nav height,
+  // so jumping to a section never hides the heading nor reveals the previous block.
+  function setNavH() {
+    const had = nav.classList.contains('hero__nav--scrolled');
+    const prevT = nav.style.transition;
+    nav.style.transition = 'none';
+    if (!had) nav.classList.add('hero__nav--scrolled');
+    const h = Math.round(nav.getBoundingClientRect().height);
+    if (!had) nav.classList.remove('hero__nav--scrolled');
+    nav.style.transition = prevT;
+    document.documentElement.style.setProperty('--nav-h', h + 'px');
+  }
+  setNavH();
+  window.addEventListener('resize', setNavH, { passive: true });
 
   const burger = document.querySelector('.hero__burger');
   const mobileNav = document.querySelector('.mobile-nav');
@@ -1006,7 +1050,6 @@
     const discount     = getDiscount(calcQty);
     const total        = subtotalRaw * (1 - discount);
 
-    calcQtyEl.textContent   = calcQty;
     calcCpuEl.textContent   = pricePerUnit.toFixed(2).replace('.00', '') + ' EUR';
     calcTotalEl.textContent = Math.round(total) + ' EUR';
   }
@@ -1022,15 +1065,28 @@
     });
   });
 
-  // quantity stepper
-  calcMinus.addEventListener('click', () => {
-    if (calcQty > 100) calcQty -= 10;
+  // quantity: +/- step 50, plus free manual entry; minimum 100 (MOQ)
+  const QTY_MIN = 100, QTY_STEP = 50;
+
+  function setQty(n) {
+    if (isNaN(n)) n = QTY_MIN;
+    calcQty = Math.max(QTY_MIN, Math.round(n));
+    calcQtyEl.value = calcQty;
     updateCalc();
+  }
+
+  calcMinus.addEventListener('click', () => setQty(calcQty - QTY_STEP));
+  calcPlus.addEventListener('click',  () => setQty(calcQty + QTY_STEP));
+
+  // manual entry: keep digits only, update live while typing, clamp on blur/Enter
+  calcQtyEl.addEventListener('input', () => {
+    const digits = calcQtyEl.value.replace(/[^0-9]/g, '');
+    if (calcQtyEl.value !== digits) calcQtyEl.value = digits;
+    const v = parseInt(digits, 10);
+    if (!isNaN(v)) { calcQty = v; updateCalc(); }
   });
-  calcPlus.addEventListener('click', () => {
-    calcQty += 10;
-    updateCalc();
-  });
+  calcQtyEl.addEventListener('blur', () => setQty(parseInt(calcQtyEl.value, 10)));
+  calcQtyEl.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); calcQtyEl.blur(); } });
 
   calcProduct.addEventListener('change', updateCalc);
 
@@ -1063,7 +1119,7 @@
       const product  = calcProduct.options[calcProduct.selectedIndex].text;
       const artwork  = calcArtwork.querySelector('.is-active')?.textContent || '';
       const label    = calcLabel.querySelector('.is-active')?.textContent || '';
-      const qty      = calcQtyEl.textContent;
+      const qty      = calcQtyEl.value;
       const total    = calcTotalEl.textContent;
       const msg = `Product: ${product}\nQuantity: ${qty} units\nArtwork: ${artwork}\nNeck label: ${label}\nEstimated total: ${total}`;
       const textarea = document.querySelector('.project__textarea');
@@ -1100,6 +1156,43 @@
       if (!isOpen) item.classList.add('is-open');
     });
   });
+
+  // Parallax on feature photos — subtle motion on scroll.
+  //  .js-parallax      → transform shift+scale (used where the img has no other transform)
+  //  .js-parallax-pan  → pans object-position instead (safe where the img already uses
+  //                      transform: craft tab animation, DTG scale framing, etc.)
+  (function () {
+    const shiftItems = Array.from(document.querySelectorAll('.js-parallax'));
+    const panItems   = Array.from(document.querySelectorAll('.js-parallax-pan'));
+    if (!shiftItems.length && !panItems.length) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const SPEED = 0.18;   // transform shift, fraction of height
+    const SCALE = 1.28;   // matches CSS bleed; keeps edges hidden during shift
+    const PAN   = 22;     // object-position pan range, in %
+    let ticking = false;
+    function progressOf(img, vh) {
+      const box = img.parentElement.getBoundingClientRect();
+      if (box.bottom < -120 || box.top > vh + 120) return null; // off-screen
+      return { p: (box.top + box.height / 2 - vh / 2) / vh, h: box.height };
+    }
+    function update() {
+      const vh = window.innerHeight;
+      shiftItems.forEach(img => {
+        const r = progressOf(img, vh); if (!r) return;
+        const p = Math.max(-0.65, Math.min(0.65, r.p)); // clamp so shift stays within the scale bleed
+        img.style.transform = 'translate3d(0,' + (-p * SPEED * r.h).toFixed(1) + 'px,0) scale(' + SCALE + ')';
+      });
+      panItems.forEach(img => {
+        const r = progressOf(img, vh); if (!r) return;
+        img.style.objectPosition = '50% ' + (50 + r.p * PAN).toFixed(1) + '%';
+      });
+      ticking = false;
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  })();
 
 </script>
 </body>

@@ -47,6 +47,21 @@ a {
   color: inherit;
 }
 
+/* Parallax photos — JS sets transform on scroll. The slight scale gives the
+   image bleed so the vertical shift never reveals the container edges. */
+.js-parallax {
+  will-change: transform;
+  transform: scale(1.28);
+}
+/* Pan variant — animates object-position, so it never touches transform */
+.js-parallax-pan {
+  will-change: object-position;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-parallax { transform: none; }
+  .js-parallax-pan { object-position: 50% 50% !important; }
+}
+
 /* Anchor targets: offset the jump so the section heading clears the fixed nav
    (nav is ~60px on desktop, ~40px on mobile). */
 .collection,
@@ -59,7 +74,7 @@ a {
 .founder,
 .faq,
 .project {
-  scroll-margin-top: clamp(56px, 8vh, 96px);
+  scroll-margin-top: var(--nav-h, 60px);
 }
 
 
@@ -1032,6 +1047,13 @@ html {
 .craft__visual {
   flex: 0 0 50%;
   background: #F6F6F6;
+  overflow: hidden;
+}
+
+/* Parallax wrapper — JS moves this layer; the img keeps its own tab animation */
+.craft__parallax {
+  width: 100%;
+  height: 100%;
 }
 
 .craft__visual img {
@@ -1698,6 +1720,27 @@ html {
   border: 1px solid rgba(0,0,0,0.15);
   font-size: max(12px, 0.694vw);
   color: #010101;
+}
+
+/* Editable quantity field (user can type any number) */
+input.pricing__step-val {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  text-align: center;
+  font-family: inherit;
+  -moz-appearance: textfield;
+  appearance: textfield;
+  border-radius: 0;
+}
+input.pricing__step-val:focus {
+  outline: none;
+  border-color: rgba(0,0,0,0.55);
+}
+input.pricing__step-val::-webkit-outer-spin-button,
+input.pricing__step-val::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 /* lead time + cost per unit */
