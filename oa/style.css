@@ -608,8 +608,8 @@ html {
   .collection__grid {
     display: grid;
     grid-auto-flow: column;
-    grid-template-rows: repeat(1, auto); /* single row on mobile so products fit; swipe for more */
-    grid-auto-columns: 50vw;
+    grid-template-rows: repeat(2, auto); /* 2×2 — all 4 products visible */
+    grid-auto-columns: 42vw;             /* slightly smaller so both rows fit without cropping */
   }
 
   .collection__item {
