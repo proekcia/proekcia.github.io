@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Original Artworks</title>
-  <link rel="stylesheet" href="style.css?v=102">
+  <link rel="stylesheet" href="style.css?v=103">
 </head>
 <body>
 
@@ -780,7 +780,7 @@
 
   function getCarouselConfig() {
     return window.innerWidth <= 768
-      ? { step: 42, unit: 'vw', maxOffset: 1 }  // mobile: 2×2 grid (4 products), swipe to the 5th column
+      ? { step: 50, unit: 'vw', maxOffset: 1 }  // mobile: full-width 2×2; page once to the COMING SOON column
       : { step: 25, unit: 'vw', maxOffset: 1 };  // desktop: one step (4 visible of 5)
   }
 
