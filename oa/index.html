@@ -785,17 +785,20 @@
   }
 
   function updateCarousel() {
-    const { step, unit, maxOffset } = getCarouselConfig();
+    const { step, unit } = getCarouselConfig();
     collectionGrid.style.transform = `translateX(-${collectionOffset * step}${unit})`;
-    prevArrow.style.opacity = collectionOffset === 0 ? '0.2' : '1';
-    nextArrow.style.opacity = collectionOffset === maxOffset ? '0.2' : '1';
   }
 
+  // Arrows loop, so a click always flips to the next/previous view
   prevArrow.addEventListener('click', () => {
-    if (collectionOffset > 0) { collectionOffset--; updateCarousel(); }
+    const n = getCarouselConfig().maxOffset + 1;
+    collectionOffset = (collectionOffset - 1 + n) % n;
+    updateCarousel();
   });
   nextArrow.addEventListener('click', () => {
-    if (collectionOffset < getCarouselConfig().maxOffset) { collectionOffset++; updateCarousel(); }
+    const n = getCarouselConfig().maxOffset + 1;
+    collectionOffset = (collectionOffset + 1) % n;
+    updateCarousel();
   });
 
   window.addEventListener('resize', () => {
