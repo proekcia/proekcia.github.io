@@ -2800,4 +2800,36 @@ input.pricing__step-val::-webkit-inner-spin-button {
 
   /* Collection: shorter cards so the 2×2 fits roughly one screen */
   .collection__card { height: 34vh; aspect-ratio: auto; }
+
+  /* --- Buttons / calculator controls / form fields / tabs: their vw sizes
+     balloon on wide landscape, so cap them to a compact, tappable size --- */
+  .card__actions { gap: 1.6vh; }
+  .card__configure,
+  .card__sample { font-size: max(13px, 2.7vh); padding: 1.7vh 4vw; }
+  .craft__tab { font-size: max(11px, 2.2vh); padding-bottom: 0.6vh; }
+  .collection__customize-label,
+  .collection__see-options { font-size: max(12px, 2.5vh); }
+
+  .pricing__select,
+  .pricing__cta { font-size: max(13px, 2.7vh); }
+  .pricing__select-wrap,
+  .pricing__stepper,
+  .pricing__cta { height: 6vh; }
+  .pricing__btn { font-size: max(12px, 2.3vh); padding: 1.1vh 2vw; }
+  .pricing__step-btn { width: 6vh; }
+  .pricing__step-val { font-size: max(13px, 2.6vh); }
+  .pricing__field { margin-bottom: 1.4vh; }
+  .pricing__lbl,
+  .pricing__lbl-row { margin-bottom: 0.8vh; }
+  .pricing__summary { margin-bottom: 1.4vh; }
+
+  .project__form { gap: 1.6vh; }
+  .project__field { flex: 0 0 6vh; padding: 0 3vw; }
+  .project__field--textarea { flex: 0 0 16vh; padding: 1.4vh 3vw; }
+  .project__input,
+  .project__textarea { font-size: max(13px, 2.6vh); }
+  .project__upload { flex: 0 0 13vh; }
+  .project__upload-main { font-size: max(12px, 2.4vh); }
+  .project__upload-sub { font-size: max(10px, 1.9vh); }
+  .project__submit { font-size: max(13px, 2.7vh); padding: 1.6vh; }
 }
