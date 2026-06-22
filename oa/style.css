@@ -2733,6 +2733,41 @@ input.pricing__step-val::-webkit-inner-spin-button {
 }
 
 /* ============================================================
+   WIDE MOBILE / SMALL TABLET (481–768px) — the mobile layout's
+   vw-based fonts & controls balloon at these widths (this also
+   covers landscape phones, regardless of the orientation media
+   feature). Cap them in px so nothing gets huge.
+   ============================================================ */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero__eyebrow,
+  .hero__title { font-size: min(6.4vw, 30px); }
+  .mobile-nav__links a { font-size: min(6.4vw, 28px); }
+  .mobile-nav__cta { font-size: min(4.27vw, 18px); }
+
+  .collection__title, .craft__label, .custom__label, .ourworks__label,
+  .howitworks__label, .pricing__title, .faq__title, .project__title,
+  .founder__label, .card__name, .collection__coming-label,
+  .pricing__visual-title { font-size: min(4.8vw, 26px); }
+
+  .craft__content-heading, .craft__section-title, .craft__section-body,
+  .custom__block-title, .custom__block-body, .custom__techniques p,
+  .ourworks__text p, .howitworks__step-num, .howitworks__step-body,
+  .card__desc, .card__specs dt, .card__specs dd, .card__price, .card__moq,
+  .faq__question, .faq__answer-inner p, .project__meta p,
+  .collection__desc, .pricing__lbl, .pricing__note,
+  .craft__tab, .pricing__btn, .pricing__select, .pricing__step-val,
+  .pricing__cta, .project__input, .project__textarea, .project__submit,
+  .project__upload-main, .collection__customize-label, .collection__see-options,
+  .card__configure, .card__sample { font-size: min(3.6vw, 16px); }
+
+  /* Cap the tallest photos so they don't dominate */
+  .howitworks__step-photo,
+  .project__photo,
+  .founder__photo,
+  .ourworks__scroll-wrap { max-height: 60vh; }
+}
+
+/* ============================================================
    LANDSCAPE PHONES (wide but short) — keep everything compact
    & legible. Fonts are sized in vh so they can't balloon with
    the wide viewport the way vw does.
