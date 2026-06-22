@@ -586,13 +586,14 @@ html {
 
   .collection {
     height: auto;
+    min-height: 0; /* drop the desktop 106vh so there's no empty space on mobile */
     overflow: visible;
     padding-bottom: 12.8vw;
   }
 
   .collection__header {
     position: static;
-    padding: 12.8vw 4.27vw 6.4vw;
+    padding: 6.4vw 4.27vw 6.4vw; /* tighter top gap so products aren't pushed off-screen */
   }
 
   .collection__title {
