@@ -598,18 +598,20 @@ html {
 
   .collection__title {
     font-size: 4.8vw;   /* 18px / 375 */
-    margin-bottom: 3.2vw;
+    margin-bottom: 0;
   }
 
+  /* Hide the intro copy on mobile so the full-width 2×2 products fit without scrolling */
   .collection__desc {
-    font-size: 3.2vw;
+    display: none;
   }
 
+  /* Static full-width 2×2 grid (no carousel on mobile) — all 4 products fill the screen */
   .collection__grid {
     display: grid;
-    grid-auto-flow: column;
-    grid-template-rows: repeat(2, auto); /* 2×2 — all 4 products visible */
-    grid-auto-columns: 42vw;             /* slightly smaller so both rows fit without cropping */
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    transform: none !important; /* never shift on mobile, even though the carousel JS runs */
   }
 
   .collection__item {
@@ -617,8 +619,11 @@ html {
     min-width: 0;
   }
 
+  /* No carousel on mobile: hide the arrows and the COMING SOON placeholder */
+  .collection__arrow { display: none; }
+
   .collection__item--coming-soon {
-    display: grid;
+    display: none;
   }
 
   .collection__card {
