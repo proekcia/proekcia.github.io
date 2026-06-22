@@ -2751,16 +2751,16 @@ input.pricing__step-val::-webkit-inner-spin-button {
   /* Mobile-nav overlay scaled to the short height */
   .mobile-nav { gap: 2.4vh; padding: 5vh 4vw; overflow-y: auto; }
   .mobile-nav__links { gap: 2.4vh; }
-  .mobile-nav__links a { font-size: 4.6vh; }
-  .mobile-nav__cta { font-size: 3.2vh; padding: 1.8vh 6vw; }
+  .mobile-nav__links a { font-size: max(17px, 4.6vh); }
+  .mobile-nav__cta { font-size: max(13px, 3.2vh); padding: 1.8vh 6vw; }
 
   /* --- Hero: compact, capped, no overlap with the nav --- */
   .hero__content { position: absolute; top: auto; bottom: 16vh; left: 4vw; right: 4vw; }
   .hero__eyebrow,
-  .hero__title { font-size: 4.6vh; line-height: 1.16; margin-left: 0; }
-  .hero__bottom-cta { bottom: 4vh; font-size: 2.4vh; }
+  .hero__title { font-size: max(19px, 4.6vh); line-height: 1.16; margin-left: 0; }
+  .hero__bottom-cta { bottom: 4vh; font-size: max(11px, 2.4vh); }
 
-  /* --- Tame oversized headings / labels across sections --- */
+  /* --- Tame oversized headings / labels across sections (readable floor + vh cap) --- */
   .collection__title,
   .craft__label,
   .custom__label,
@@ -2772,7 +2772,7 @@ input.pricing__step-val::-webkit-inner-spin-button {
   .founder__label,
   .card__name,
   .collection__coming-label,
-  .pricing__visual-title { font-size: 4.2vh; line-height: 1.18; }
+  .pricing__visual-title { font-size: max(17px, 4.2vh); line-height: 1.18; }
 
   /* Body copy / smaller labels */
   .craft__content-heading, .craft__section-title, .craft__section-body,
@@ -2780,5 +2780,24 @@ input.pricing__step-val::-webkit-inner-spin-button {
   .ourworks__text p, .howitworks__step-num, .howitworks__step-body,
   .card__desc, .card__specs dt, .card__specs dd, .card__price, .card__moq,
   .faq__question, .faq__answer-inner p, .project__meta p,
-  .collection__desc, .pricing__lbl, .pricing__btn, .pricing__note { font-size: 2.7vh; }
+  .collection__desc, .pricing__lbl, .pricing__btn, .pricing__note { font-size: max(13px, 2.7vh); line-height: 1.4; }
+
+  /* --- Photos/blocks: their heights are vw-based for portrait and balloon to
+     2–3× the screen on wide landscape. Cap them in vh so each block stays
+     about one screen tall. --- */
+  .card__visual,
+  .craft__visual { height: 78vh; }
+  .pricing__visual { height: 72vh; }
+  .ourworks__scroll-wrap { height: 74vh; }
+  .custom__photo--garment,
+  .custom__photo--neck { height: 60vh; }
+  .custom__photo--silk,
+  .custom__photo--dtg,
+  .custom__photo--embroidery { height: 44vh; }
+  .howitworks__step-photo,
+  .project__photo,
+  .founder__photo { height: 62vh; aspect-ratio: auto; }
+
+  /* Collection: shorter cards so the 2×2 fits roughly one screen */
+  .collection__card { height: 34vh; aspect-ratio: auto; }
 }
