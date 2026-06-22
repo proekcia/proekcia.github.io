@@ -2731,3 +2731,54 @@ input.pricing__step-val::-webkit-inner-spin-button {
     margin-top: 4.27vw;
   }
 }
+
+/* ============================================================
+   LANDSCAPE PHONES (wide but short) — keep everything compact
+   & legible. Fonts are sized in vh so they can't balloon with
+   the wide viewport the way vw does.
+   ============================================================ */
+@media (orientation: landscape) and (max-height: 540px) and (max-width: 1024px) {
+
+  /* --- Nav: use the burger; inline links overflow short, wide phones --- */
+  .hero__nav { padding: 2.6vh 3vw 0; align-items: center; }
+  .hero__nav--scrolled { height: auto; padding: 1.6vh 3vw; }
+  .hero__nav-right,
+  .hero__nav-start { display: none; }
+  .hero__burger { display: flex; }
+  .mobile-nav { display: flex; }
+  .hero__logo svg { width: auto; height: 2.6vh; }
+
+  /* Mobile-nav overlay scaled to the short height */
+  .mobile-nav { gap: 2.4vh; padding: 5vh 4vw; overflow-y: auto; }
+  .mobile-nav__links { gap: 2.4vh; }
+  .mobile-nav__links a { font-size: 4.6vh; }
+  .mobile-nav__cta { font-size: 3.2vh; padding: 1.8vh 6vw; }
+
+  /* --- Hero: compact, capped, no overlap with the nav --- */
+  .hero__content { position: absolute; top: auto; bottom: 16vh; left: 4vw; right: 4vw; }
+  .hero__eyebrow,
+  .hero__title { font-size: 4.6vh; line-height: 1.16; margin-left: 0; }
+  .hero__bottom-cta { bottom: 4vh; font-size: 2.4vh; }
+
+  /* --- Tame oversized headings / labels across sections --- */
+  .collection__title,
+  .craft__label,
+  .custom__label,
+  .ourworks__label,
+  .howitworks__label,
+  .pricing__title,
+  .faq__title,
+  .project__title,
+  .founder__label,
+  .card__name,
+  .collection__coming-label,
+  .pricing__visual-title { font-size: 4.2vh; line-height: 1.18; }
+
+  /* Body copy / smaller labels */
+  .craft__content-heading, .craft__section-title, .craft__section-body,
+  .custom__block-title, .custom__block-body, .custom__techniques p,
+  .ourworks__text p, .howitworks__step-num, .howitworks__step-body,
+  .card__desc, .card__specs dt, .card__specs dd, .card__price, .card__moq,
+  .faq__question, .faq__answer-inner p, .project__meta p,
+  .collection__desc, .pricing__lbl, .pricing__btn, .pricing__note { font-size: 2.7vh; }
+}
