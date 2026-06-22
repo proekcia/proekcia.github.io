@@ -650,10 +650,20 @@ html {
 
   .collection__see-options { margin-top: 0; }
 
+  /* Bigger, easy-to-tap arrows on mobile (44px target) with a subtle backdrop */
   .collection__arrow {
     display: flex;
-    padding: 8px;
+    padding: 14px;
+    background: rgba(255, 255, 255, 0.72);
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
   }
+  .collection__arrow svg {
+    width: 9px;
+    height: auto;
+  }
+  .collection__arrow--prev { left: 2.13vw; }
+  .collection__arrow--next { right: 2.13vw; }
 
   .collection__arrow--prev { left: 1.07vw; }
   .collection__arrow--next { right: 1.07vw; }
