@@ -1408,7 +1408,8 @@ html {
 .ourworks__info {
   position: relative;
   margin-left: 51.02%;
-  padding: 4vh 3.88vw 50vh 0;
+  /* bottom padding reserves room above the photo strip (which is 25vw*9/7 tall) */
+  padding: 4vh 3.88vw calc(25vw * 9 / 7 + 4vh) 0;
 }
 
 .ourworks__label {
@@ -1442,7 +1443,7 @@ html {
   right: 0;
   top: auto;
   bottom: 0;
-  height: 46vh;
+  height: calc(25vw * 9 / 7); /* items are 25vw wide → 7/9 portrait, matching the other photos */
   overflow: hidden;
 }
 
@@ -1511,7 +1512,7 @@ html {
   .ourworks__scroll-wrap {
     position: relative;
     left: auto; right: auto; top: auto; bottom: auto;
-    height: 100vw;
+    height: calc(100vw * 9 / 7); /* items are 100vw wide → 7/9 portrait (no longer square) */
     overflow: hidden;
     margin-top: 8.53vw;
   }

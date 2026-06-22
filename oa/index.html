@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Original Artworks</title>
-  <link rel="stylesheet" href="style.css?v=96">
+  <link rel="stylesheet" href="style.css?v=97">
 </head>
 <body>
 
@@ -984,10 +984,10 @@
     img.classList.add('is-leaving');
     content.classList.add('is-hidden');
 
-    setTimeout(() => {
+    const swap = () => {
+      img.src = data.image;
       img.classList.remove('is-leaving');
       img.classList.add('is-entering');
-      img.src = data.image;
 
       content.innerHTML =
         `<p class="craft__content-heading">${data.heading}</p>` +
@@ -1004,7 +1004,16 @@
           content.classList.remove('is-hidden');
         });
       });
-    }, 350);
+    };
+
+    // Swap only once BOTH the fade-out finished and the new image is decoded,
+    // so it never fades in a half-loaded/blank image (the source of the lag).
+    let faded = false, ready = false;
+    const go = () => { if (faded && ready) swap(); };
+    const pre = new Image();
+    pre.onload = pre.onerror = () => { ready = true; go(); };
+    pre.src = data.image; // cached → fires immediately
+    setTimeout(() => { faded = true; go(); }, 350);
   }
 
   document.querySelectorAll('.craft__tab').forEach(tab => {
@@ -1177,14 +1186,18 @@
     }
     function update() {
       const vh = window.innerHeight;
-      shiftItems.forEach(img => {
-        const r = progressOf(img, vh); if (!r) return;
-        const p = Math.max(-0.65, Math.min(0.65, r.p)); // clamp so shift stays within the scale bleed
-        img.style.transform = 'translate3d(0,' + (-p * SPEED * r.h).toFixed(1) + 'px,0) scale(' + SCALE + ')';
+      // READ phase first (all getBoundingClientRect), then WRITE phase — avoids
+      // layout thrashing that makes scrolling janky on mobile.
+      const shiftData = shiftItems.map(img => ({ img, r: progressOf(img, vh) }));
+      const panData   = panItems.map(img => ({ img, r: progressOf(img, vh) }));
+      shiftData.forEach(d => {
+        if (!d.r) return;
+        const p = Math.max(-0.65, Math.min(0.65, d.r.p)); // clamp so shift stays within the scale bleed
+        d.img.style.transform = 'translate3d(0,' + (-p * SPEED * d.r.h).toFixed(1) + 'px,0) scale(' + SCALE + ')';
       });
-      panItems.forEach(img => {
-        const r = progressOf(img, vh); if (!r) return;
-        img.style.objectPosition = '50% ' + (50 + r.p * PAN).toFixed(1) + '%';
+      panData.forEach(d => {
+        if (!d.r) return;
+        d.img.style.objectPosition = '50% ' + (50 + d.r.p * PAN).toFixed(1) + '%';
       });
       ticking = false;
     }
