@@ -550,6 +550,7 @@ strong{ font-weight:500; }
 .why__text p{ font-size:clamp(15px,1.2vw,18px); line-height:1.5; color:var(--carbon); max-width:56ch; }
 .why__text p + p{ margin-top:clamp(14px,1.4vw,20px); }
 .why__media .ph{ width:100%; }
+.why__photo{ width:100%; height:clamp(400px,50vw,640px); object-fit:cover; display:block; }
 
 /* ---------- LIGHTBOX (збільшення фото) ---------- */
 .is-zoomable{ cursor:zoom-in; }
