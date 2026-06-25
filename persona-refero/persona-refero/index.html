@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Persona — Приватне видавництво. Пам'ять, яка має форму.</title>
+  <meta name="description" content="Persona — приватне видавництво люкс-сегменту. Персональні фотокниги ручної роботи в естетиці журнального глянцю." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css?v=69" />
+</head>
+<body>
+
+  <!-- ============ INTRO OVERLAY ============ -->
+  <div class="intro" aria-hidden="true"><img src="assets/persona-logo.svg" alt="Persona" class="intro__logo" /></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="wrap nav__inner">
+      <a href="#top" class="nav__logo" aria-label="Persona">
+        <img src="assets/persona-logo.svg" alt="Persona" />
+      </a>
+      <nav class="nav__menu" aria-label="Головна навігація">
+        <button type="button" class="nav__events-btn" id="eventsOpen" aria-haspopup="true" aria-expanded="false">Події</button>
+        <a href="#aesthetics">Естетика</a>
+        <a href="#collections">Колекції</a>
+        <a href="#editions">Видання</a>
+        <a href="#process">Процес</a>
+        <a href="#preorder">Передзамовлення</a>
+        <a href="#faq">FAQ</a>
+        <a href="#reviews">Відгуки</a>
+        <a href="#configurator" class="pill">Створити книгу</a>
+      </nav>
+      <button class="nav__burger" id="burger" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <nav class="mobile-nav__menu">
+      <a href="?event=wedding">Весілля</a>
+      <a href="?event=birthday">День народження</a>
+      <a href="?event=newborn">Народження дитини</a>
+      <a href="./">Загальна сторінка</a>
+      <a href="#aesthetics">Естетика</a>
+      <a href="#collections">Колекції</a>
+      <a href="#editions">Видання</a>
+      <a href="#process">Процес</a>
+      <a href="#preorder">Передзамовлення</a>
+      <a href="#faq">FAQ</a>
+      <a href="#reviews">Відгуки</a>
+      <a href="#configurator">Створити книгу</a>
+    </nav>
+  </div>
+
+  <!-- ============ ПОВНОЕКРАННЕ МЕНЮ ПОДІЙ ============ -->
+  <div class="events" id="eventsMenu" aria-hidden="true">
+    <button class="events__close" id="eventsClose" aria-label="Закрити" type="button">×</button>
+    <div class="events__inner">
+      <p class="events__label">Оберіть подію</p>
+      <nav class="events__menu" aria-label="Події">
+        <a href="?event=wedding">Весілля</a>
+        <a href="?event=birthday">День народження</a>
+        <a href="?event=newborn">Народження дитини</a>
+      </nav>
+      <a href="./" class="events__reset">Загальна сторінка</a>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============ HERO (pure typographic) ============ -->
+    <section class="hero" id="hero">
+      <video class="hero__video" autoplay muted loop playsinline preload="auto">
+        <source src="assets/hero.mp4?v=1" type="video/mp4" />
+      </video>
+      <div class="wrap">
+        <div class="hero__inner">
+          <p class="tagline">Приватне видавництво Persona</p>
+          <h1 class="hero__title">
+            <span class="line"><span>Спогади,</span></span>
+            <span class="line"><span>що мають</span></span>
+            <span class="line"><span>форму</span></span>
+          </h1>
+          <p class="hero__subtitle" id="heroSubtitle"><strong>Фотографії є у всіх. Книга — у одиниць.</strong>Persona перетворює ваші фото у преміальну книгу, яку хочеться брати в руки знову і знову. Зроблено так, щоб передавати далі.</p>
+          <a href="#contact" class="pill pill--lg">Довірити історію видавництву</a>
+        </div>
+        <div class="hero__meta">
+          <span>Персональний арт-куратор</span>
+          <span>Естетика журнального глянцю</span>
+          <span>Мануфактурне виробництво</span>
+          <span>Архівна якість сімейної реліквії</span>
+          <span>Абсолютно конфіденційно</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК 2 · ЕСТЕТИКА ============ -->
+    <section class="section" id="aesthetics">
+      <div class="wrap aesthetics__inner">
+        <p class="meta meta--head reveal">Філософія</p>
+        <h2 class="display reveal">Естетика тихої розкоші</h2>
+
+        <div class="aesthetics__row">
+          <ol class="points">
+            <li class="point" data-img="0">
+              <span class="point__no">01</span>
+              <div class="point__body">
+                <h3>Абсолютна геометрія</h3>
+                <p>Бездоганний зріз, ідеальні кути та монолітна форма — завдяки високоточному різанню.</p>
+              </div>
+            </li>
+            <li class="point" data-img="1">
+              <span class="point__no">02</span>
+              <div class="point__body">
+                <h3>Палітурні матеріали еталонної якості</h3>
+                <p>Еталонні тканини італійської Manifattura del Seveso, що з 1917 року розкривають статус через дотик.</p>
+              </div>
+            </li>
+            <li class="point" data-img="2">
+              <span class="point__no">03</span>
+              <div class="point__body">
+                <h3>Інтрига першого відкриття</h3>
+                <p>Текстура арт-картону Fedrigoni та напівпрозора калька, що делікатно приховує першу сторінку.</p>
+              </div>
+            </li>
+            <li class="point" data-img="3">
+              <span class="point__no">04</span>
+              <div class="point__body">
+                <h3>Справжній срібний друк</h3>
+                <p>Технологія зі 150-річною історією: кінематографічна глибина кольору та збереження понад 100 років.</p>
+              </div>
+            </li>
+            <li class="point" data-img="4">
+              <span class="point__no">05</span>
+              <div class="point__body">
+                <h3>Мінімалізм поза часом</h3>
+                <p>Статус без зайвого декору — лаконічність, простір, тактильні матеріали та делікатна персоналізація.</p>
+              </div>
+            </li>
+          </ol>
+
+          <div class="aesthetics__stack" aria-hidden="true">
+          <div class="stack__inner">
+            <figure class="stack__img stack__img--0" data-speed="1.0"><img src="assets/aes-1.webp" alt="" loading="lazy" /></figure>
+            <figure class="stack__img stack__img--1" data-speed="0.45"><img src="assets/aes-2.webp" alt="" loading="lazy" /></figure>
+            <figure class="stack__img stack__img--2" data-speed="1.35"><img src="assets/aes-3.webp" alt="" loading="lazy" /></figure>
+            <figure class="stack__img stack__img--3" data-speed="0.3"><img src="assets/aes-4.webp" alt="" loading="lazy" /></figure>
+            <figure class="stack__img stack__img--4" data-speed="0.85"><img src="assets/aes-5.webp" alt="" loading="lazy" /></figure>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК 3 · ВИДАВНИЧІ КОЛЕКЦІЇ ============ -->
+    <section class="section" id="collections">
+      <div class="wrap">
+        <p class="meta meta--head reveal">Видавничі колекції</p>
+        <h2 class="display reveal">Книга як арт-об'єкт</h2>
+
+        <div class="carousel" data-carousel>
+        <div class="carousel__viewport">
+        <div class="cases cases--row" data-stagger>
+          <article class="case reveal">
+            <p class="meta">Wedding Editorial</p>
+            <h3 class="case__title">Весільне видання</h3>
+            <div class="ph ph--landscape"></div>
+            <p class="case__desc">Кінематографічна режисура вашого головного дня. Від ранкових зборів до фінального танцю — збережено у форматі fine-art глянцю.</p>
+          </article>
+          <article class="case reveal">
+            <p class="meta">Family Legacy</p>
+            <h3 class="case__title">Родовід</h3>
+            <div class="ph ph--landscape"></div>
+            <p class="case__desc">Монументальний родинний архів. Зібрання історії поколінь під однією обкладинкою. Книга, цінність якої з роками лише зростає.</p>
+          </article>
+          <article class="case reveal">
+            <p class="meta">Newborn Fine-Art</p>
+            <h3 class="case__title">Нове життя</h3>
+            <div class="ph ph--landscape"></div>
+            <p class="case__desc">Естетика перших днів. Делікатна кутюрна верстка та тактильні матеріали для збереження найкрихкіших моментів.</p>
+          </article>
+          <article class="case reveal">
+            <p class="meta">The Visionary</p>
+            <h3 class="case__title">Візіонер</h3>
+            <div class="ph ph--landscape"></div>
+            <p class="case__desc">Статусний літопис бізнес-тріумфу. Ексклюзивний подарунок, де історія успіху розкривається через масштаб особистості лідера.</p>
+          </article>
+          <article class="case case--wide reveal">
+            <p class="meta">Milestones</p>
+            <h3 class="case__title">Знакові події</h3>
+            <div class="ph ph--wide"></div>
+            <p class="case__desc">Масштабні ювілеї, ексклюзивні подорожі чи особисті портфоліо. Ваш персональний тріумф, оформлений як виставковий арт-об'єкт.</p>
+          </article>
+        </div>
+        </div>
+        <button class="carousel__arrow carousel__arrow--prev" type="button" aria-label="Попередні колекції">‹</button>
+        <button class="carousel__arrow carousel__arrow--next" type="button" aria-label="Наступні колекції">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ЧОМУ ФОТОКНИГА ============ -->
+    <section class="section why" id="why">
+      <div class="wrap why__grid">
+        <div class="why__text">
+          <h2 class="display reveal">Чому фотокнига — це більше, ніж подарунок</h2>
+          <p class="reveal">Квіти зів’януть. Торт буде з’їдений. Повідомлення загубляться серед тисяч інших. Ми робимо тисячі фотографій, щоб не забути — але більшість із них назавжди залишаються десь між старими чатами і телефонами, які давно змінили.</p>
+          <p class="reveal">Фотокнига повертає спогадам їхню справжню цінність. Перша усмішка дитини. День весілля. Люди, яких хочеться пам’ятати завжди.</p>
+          <p class="reveal">Одного дня ці фото стануть безцінними. І тоді ви будете щасливі, що зберегли їх не лише в пам’яті телефону — а й у пам’яті родини.</p>
+        </div>
+        <div class="why__media reveal">
+          <div class="ph ph--portrait"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ВИДАННЯ · ФОРМАТИ + КАЛЬКУЛЯТОР ============ -->
+    <section class="section" id="editions">
+      <div class="wrap">
+        <p class="meta meta--head reveal">01 — Видання</p>
+        <h2 class="display reveal">Оберіть формат</h2>
+
+        <div class="compare-wrap reveal">
+          <div class="compare">
+            <div class="compare__corner">Характеристики</div>
+            <div class="compare__head">
+              <img class="compare__photo" src="assets/light.jpg?v=1" alt="Light" loading="lazy" />
+              <h3 class="compare__name">Light</h3>
+              <p class="compare__from" data-from="light"></p>
+              <button class="pill pill--full edition__select" data-select="Light">Обрати Light</button>
+            </div>
+            <div class="compare__head compare__head--featured">
+              <img class="compare__photo" src="assets/grand.jpg?v=1" alt="Grand" loading="lazy" />
+              <h3 class="compare__name">Grand</h3>
+              <p class="compare__from" data-from="grand"></p>
+              <button class="pill pill--full edition__select" data-select="Grand">Обрати Grand</button>
+            </div>
+            <div class="compare__head">
+              <img class="compare__photo" src="assets/premium.jpg?v=1" alt="Premium" loading="lazy" />
+              <h3 class="compare__name">Premium</h3>
+              <p class="compare__from" data-from="premium"></p>
+              <button class="pill pill--full edition__select" data-select="Premium">Обрати Premium</button>
+            </div>
+
+            <div class="compare__label">Тип обкладинки</div>
+            <div class="compare__cell">Паперова ламінована</div>
+            <div class="compare__cell">Італійський палітурний матеріал</div>
+            <div class="compare__cell">Італійський палітурний матеріал</div>
+
+            <div class="compare__label">Фотообкладинка</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+
+            <div class="compare__label">Текст</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+
+            <div class="compare__label">Графічний елемент</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+
+            <div class="compare__label">Тип паперу</div>
+            <div class="compare__cell">Стандарт</div>
+            <div class="compare__cell">Fedrigoni</div>
+            <div class="compare__cell">Fedrigoni</div>
+
+            <div class="compare__label">Форзац</div>
+            <div class="compare__cell compare__cell--off">—</div>
+            <div class="compare__cell">З італійського картону</div>
+            <div class="compare__cell">З італійського картону</div>
+
+            <div class="compare__label">Калька</div>
+            <div class="compare__cell compare__cell--off">—</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+            <div class="compare__cell compare__cell--yes">✓</div>
+
+            <div class="compare__label">Подарункова коробка</div>
+            <div class="compare__cell compare__cell--off">—</div>
+            <div class="compare__cell">Графіт / слонова кістка</div>
+            <div class="compare__cell compare__cell--off">—</div>
+          </div>
+        </div>
+
+        <!-- ============ КОНФІГУРАТОР ФОТОКНИГИ ============ -->
+        <!-- Структура генерується з config.js — розмітка лишається мінімальною -->
+        <div class="cfg reveal" id="configurator" aria-label="Конфігуратор фотокниги">
+
+          <!-- ЛІВА ЧАСТИНА · ВІЗУАЛІЗАТОР -->
+          <div class="cfg__stage">
+            <p class="meta meta--head cfg__stage-label">02 — Оберіть параметри</p>
+            <div class="cfg__viewer">
+              <div class="book" id="book">
+                <div class="book__face book__cover" id="bookCover">
+                  <div class="book__spinestrip linen"></div>
+                  <div class="book__hinge"></div>
+                  <div class="book__panel linen" id="bookPanel">
+                    <div class="book__photo" id="bookPhoto"></div>
+                    <div class="book__plaque" id="bookPlaque"><span class="book__text" id="bookText"></span></div>
+                  </div>
+                  <div class="book__sheen"></div>
+                </div>
+                <div class="book__face book__back linen"></div>
+                <div class="book__face book__spine linen" id="bookSpine"></div>
+                <div class="book__face book__edge"></div>
+                <div class="book__face book__top"></div>
+                <div class="book__face book__bottom"></div>
+              </div>
+              <div class="book__shadow" id="bookShadow"></div>
+            </div>
+
+            <div class="cfg__priceblock">
+              <p class="cfg__price"><span id="cfgPrice">—</span></p>
+            </div>
+          </div>
+
+          <!-- ПРАВА ЧАСТИНА · ПАНЕЛЬ НАЛАШТУВАНЬ -->
+          <div class="cfg__panel">
+            <div class="opt">
+              <p class="opt__label">Видання</p>
+              <div class="opt__choices" id="optPackage"></div>
+            </div>
+
+            <div class="opt">
+              <p class="opt__label">Формат</p>
+              <div class="opt__choices" id="optFormat"></div>
+            </div>
+
+            <div class="opt">
+              <p class="opt__label">Тип обкладинки</p>
+              <div class="opt__choices" id="optCover"></div>
+            </div>
+
+            <!-- Тканина: кольори + напис -->
+            <div class="opt cfg__fabric" id="fabricGroup">
+              <p class="opt__label">Колір тканини · <span id="colorName" class="cfg__valname"></span></p>
+              <div class="cfg__swatches" id="optColor"></div>
+
+              <div class="field cfg__field">
+                <label for="coverText">Текст на обкладинці <span class="cfg__opt-tag">необов’язково</span></label>
+                <input type="text" id="coverText" name="coverText" maxlength="40" placeholder="Напр. Anna & Marko · 2026" autocomplete="off" />
+              </div>
+            </div>
+
+            <!-- Фото: завантаження -->
+            <div class="opt cfg__photo" id="photoGroup" hidden>
+              <p class="opt__label">Фото обкладинки</p>
+              <label class="cfg__upload" id="uploadLabel">
+                <input type="file" id="coverPhoto" accept="image/*" hidden />
+                <span class="cfg__upload-icon" aria-hidden="true">＋</span>
+                <span class="cfg__upload-text" id="uploadText">Завантажити фото</span>
+              </label>
+              <button type="button" class="cfg__remove" id="removePhoto" hidden>Прибрати фото</button>
+            </div>
+
+            <!-- Розвороти -->
+            <div class="opt">
+              <p class="opt__label">Кількість розворотів</p>
+              <div class="cfg__stepper">
+                <button type="button" class="cfg__step" id="spreadMinus" aria-label="Менше розворотів">−</button>
+                <input type="text" inputmode="numeric" class="cfg__count" id="spreadInput" value="10" aria-label="Кількість розворотів" />
+                <button type="button" class="cfg__step" id="spreadPlus" aria-label="Більше розворотів">+</button>
+              </div>
+              <p class="cfg__hint" id="spreadHint"></p>
+            </div>
+
+            <a href="#contact" class="pill pill--full pill--lg cfg__cta" id="cfgCta">Замовити цю конфігурацію</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК 5 · ПРОЦЕС ============ -->
+    <section class="section" id="process">
+      <div class="wrap">
+        <p class="meta meta--head reveal">Процес та персональна відповідальність</p>
+        <h2 class="display reveal">За кожною книгою стоять люди</h2>
+
+        <div class="process" data-stagger>
+          <article class="process__item reveal">
+            <span class="process__no">01</span>
+            <h3>Персональний арт-куратор</h3>
+            <p>Ваш особистий помічник та представник на мануфактурі. Він детально вивчає ваші побажання, повністю синхронізує роботу дизайнера, друкаря та палітурника, контролює строки та втілення. Перед пакуванням особисто інспектує кожен розворот і надсилає вам відеозвіт.</p>
+          </article>
+          <article class="process__item reveal">
+            <span class="process__no">02</span>
+            <h3>Certificate of Excellence</h3>
+            <p>До кожної книги додається унікальний паспорт видання. Фахівці — арт-куратор, інженер препресу, друкар та майстер палітурки — ставлять власні підписи на сертифікаті, несучи пряму персональну відповідальність за бездоганність вашої книги.</p>
+          </article>
+          <article class="process__item reveal">
+            <span class="process__no">03</span>
+            <h3>Абсолютна приватність</h3>
+            <p>За вашим запитом куратор повністю видаляє всі файли з серверів мануфактури відразу після отримання альбому.</p>
+            <p class="process__accent">Бо щастя іноді любить тишу.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК 05 · ПЕРЕДЗАМОВЛЕННЯ ============ -->
+    <section class="section preorder" id="preorder">
+      <div class="wrap">
+        <p class="meta meta--head reveal">Передзамовлення</p>
+        <h2 class="display reveal">Десь між Pinterest<br>і сльозами щастя —<br>запишіть нас у свої плани.</h2>
+
+        <div class="preorder__grid">
+          <div class="preorder__intro reveal">
+            <ul class="preorder__perks">
+              <li>
+                <span class="preorder__perk-no">01</span>
+                <div>
+                  <h3>Фіксація ціни</h3>
+                  <p>Вартість видання закріплюється в день передзамовлення і не залежить від майбутніх змін.</p>
+                </div>
+              </li>
+              <li>
+                <span class="preorder__perk-no">02</span>
+                <div>
+                  <h3>Бронь у графіку</h3>
+                  <p>Резервуємо для вас місце у виробничому графіку мануфактури — навіть у пік сезону.</p>
+                </div>
+              </li>
+              <li>
+                <span class="preorder__perk-no">03</span>
+                <div>
+                  <h3>Делікатне нагадування</h3>
+                  <p>Куратор зв’яжеться завчасно — щоб ви не пропустили жоден важливий кадр вашої історії.</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <form class="preorder__form reveal" id="preorderForm" novalidate>
+            <p class="preorder__form-title">Заявка на передзамовлення</p>
+            <div class="field">
+              <label for="poName">Ім’я</label>
+              <input type="text" id="poName" name="name" placeholder="Ваше ім’я" required />
+            </div>
+            <div class="field">
+              <label for="poPhone">Телефон</label>
+              <input type="tel" id="poPhone" name="phone" placeholder="+380 __ ___ __ __" required />
+            </div>
+            <div class="field">
+              <label for="poEvent">Подія</label>
+              <div class="select-wrap">
+                <select id="poEvent" name="event">
+                  <option>Весілля</option>
+                  <option>Річниця</option>
+                  <option>Народження дитини</option>
+                  <option>Ювілей</option>
+                  <option>Інша подія</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="poDate">Дата події</label>
+              <input type="date" id="poDate" name="date" required />
+            </div>
+            <button type="submit" class="pill pill--full pill--lg">Оформити передзамовлення</button>
+            <p class="form-note" id="preorderNote" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ БЛОК 06 · КОЛЕКЦІЯ СПОГАДІВ ============ -->
+    <section class="section" id="memories">
+      <div class="wrap">
+        <p class="meta meta--head reveal">Колекція спогадів від Persona</p>
+        <h2 class="display reveal">Інтер'єрний друк та фото</h2>
+
+        <div class="cases cases--three" data-stagger>
+          <article class="case reveal">
+            <p class="meta">Signature Books</p>
+            <h3 class="case__title">Елітарні фотокниги</h3>
+            <div class="ph ph--landscape"></div>
+            <p class="case__desc">Флагманський продукт нашого приватного видавництва. Книга в естетиці журнального глянцю з архівною якістю сімейної реліквії, що збирається вручну з матеріалів італійських майстерень.</p>
+          </article>
+          <article class="case reveal">
+            <p class="meta">Wall Art Collection</p>
+            <h3 class="case__title">Галерейний волл-арт</h3>
+            <div class="ph ph--landscape"></div>
+            <p class="case__desc">Перетворіть інтер'єр на персональну виставку. Створюємо монументальні художні полотна, класичні постери та унікальні сота-фрейми.</p>
+          </article>
+          <article class="case case--wide reveal">
+            <p class="meta">Desktop Art</p>
+            <h3 class="case__title">Настільні арт-об'єкти</h3>
+            <div class="ph ph--wide"></div>
+            <p class="case__desc">Преміальні фотокартки та настільні фотографії, що стають витонченим акцентом вашого робочого простору чи вітальні.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="wrap">
+        <p class="meta meta--head reveal">FAQ</p>
+        <h2 class="display reveal">Часті запитання</h2>
+
+        <div class="faq" data-stagger>
+          <details class="faq__item reveal">
+            <summary>Скільки часу займає виготовлення книги?</summary>
+            <div class="faq__a"><p>Зазвичай 3–4 тижні від моменту погодження макета. У пік сезону раджу оформити передзамовлення заздалегідь.</p></div>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Як відбувається процес замовлення?</summary>
+            <div class="faq__a"><p>Ви залишаєте заявку → арт-куратор зв'язується й обговорює деталі → ви надсилаєте фото → дизайнер готує макет → після вашого погодження книга йде у виробництво.</p></div>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Скільки фотографій поміститься у книгу?</summary>
+            <div class="faq__a"><p>Залежить від кількості розворотів. Куратор допоможе відібрати найкращі кадри й гармонійно їх розмістити.</p></div>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Чи можу я обрати оформлення сам?</summary>
+            <div class="faq__a"><p>Так. Формат, обкладинку, колір, напис і кількість розворотів ви задаєте в конфігураторі, а дизайнер втілює це з урахуванням ваших побажань.</p></div>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Які матеріали ви використовуєте?</summary>
+            <div class="faq__a"><p>Італійські палітурні тканини, арт-картон Fedrigoni та справжній срібний друк. Усе збирається вручну з архівною якістю збереження понад 100 років.</p></div>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Чи можна замовити з іншого міста або країни?</summary>
+            <div class="faq__a"><p>Так, працюємо дистанційно й надсилаємо готову книгу кур'єром у будь-яку точку.</p></div>
+          </details>
+          <details class="faq__item reveal">
+            <summary>Що робити, якщо якісних фото небагато?</summary>
+            <div class="faq__a"><p>Це не проблема: куратор підкаже, як відібрати наявні кадри, а за потреби порадить фотографа.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ВІДГУКИ ============ -->
+    <section class="section" id="reviews">
+      <div class="wrap">
+        <p class="meta meta--head reveal">Відгуки</p>
+        <h2 class="display reveal">Емоції, що залишаються</h2>
+
+        <div class="quotes" data-stagger>
+          <figure class="quote reveal">
+            <blockquote>Відкрила книгу — і розплакалася. Це не альбом, це наш день, який знову можна тримати в руках.</blockquote>
+            <figcaption>Анна — весілля</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote>Якість неймовірна: щільні сторінки, ідеальний друк і тканина, яку приємно тримати. Відчувається рівень.</blockquote>
+            <figcaption>Дмитро та Олена</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote>Гортаємо з донькою щовечора. Тепер це улюблений ритуал нашої родини.</blockquote>
+            <figcaption>Марія — сімейна книга</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote>Куратор продумав усе до дрібниць. Я лише надіслала фото — а отримала витвір мистецтва.</blockquote>
+            <figcaption>Ірина</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote>Дарували батькам на річницю. Сліз радості було більше, ніж на самому святі.</blockquote>
+            <figcaption>Олександр</figcaption>
+          </figure>
+          <figure class="quote reveal">
+            <blockquote>Це книга, яку хочеться передати дітям. Відчуття реліквії, а не просто подарунка.</blockquote>
+            <figcaption>Софія та Назар</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ЗАЯВКА ============ -->
+    <section class="section contact" id="contact">
+      <div class="wrap">
+        <p class="meta meta--head reveal">Заявка</p>
+        <h2 class="display reveal">Довірте свою історію видавництву</h2>
+        <div class="contact__grid">
+          <p class="contact__lead reveal">Залиште контакти — арт-куратор зв'яжеться з вами та підготує персональну пропозицію.</p>
+          <form class="contact__form reveal" id="leadForm" novalidate>
+            <div class="field">
+              <label for="name">Ім'я</label>
+              <input type="text" id="name" name="name" placeholder="Ваше ім'я" required />
+            </div>
+            <div class="field">
+              <label for="phone">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+380 __ ___ __ __" required />
+            </div>
+            <div class="field">
+              <label for="leadEvent">Подія / привід</label>
+              <input type="text" id="leadEvent" name="event" placeholder="Напр. весілля, річниця, народження дитини" />
+            </div>
+            <div class="field">
+              <label for="leadComment">Коментар</label>
+              <textarea id="leadComment" name="comment" rows="4" placeholder="Ваші побажання. Сюди автоматично потраплятимуть обрані колекції та конфігурація з калькулятора."></textarea>
+            </div>
+            <div class="field">
+              <label for="leadPromo">Промокод <span class="cfg__opt-tag">за наявності</span></label>
+              <input type="text" id="leadPromo" name="promo" placeholder="Введіть промокод" autocomplete="off" />
+            </div>
+            <input type="hidden" id="formEdition" name="edition" value="" />
+            <button type="submit" class="pill pill--full pill--lg">Надіслати заявку</button>
+            <p class="form-note" id="formNote" hidden></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <img src="assets/persona-logo.svg" alt="Persona" class="footer__logo" />
+        <nav class="footer__nav">
+          <a href="#aesthetics">Естетика</a>
+          <a href="#collections">Колекції</a>
+          <a href="#editions">Видання</a>
+          <a href="#process">Процес</a>
+          <a href="#preorder">Передзамовлення</a>
+          <a href="#contact">Заявка</a>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <span>© Persona — Приватне видавництво</span>
+        <span>hello@persona.ua</span>
+        <span>Instagram</span>
+        <a class="footer__credit" href="https://proekcia.com" target="_blank" rel="noopener">Створено в proekcia.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js?v=27"></script>
+  <script src="config.js?v=4"></script>
+  <script src="configurator.js?v=11"></script>
+</body>
+</html>
