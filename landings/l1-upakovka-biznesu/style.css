@@ -1974,6 +1974,10 @@ blockquote[class^="review-type-"]{
 }
 .form__field::placeholder{color:rgba(255,255,255,.5);}
 .form__consent{font-size:var(--fs-micro);color:rgba(255,255,255,.5);}
+/* заявка (Б13): клієнт попросив ОКРЕМИЙ hover саме для цієї кнопки —
+   не чорний, як у решти .btn--primary сайтом, а сіро-синій фон
+   (--c-blue-bg) з чорним текстом. */
+.form__submit:hover{background:var(--c-blue-bg);color:var(--c-black);}
 
 /* ---------- Б13.5 CTA popup — 1:1 з Figma fileKey 1ygqv99i4TRUF6WZamYXri,
    node 777:7338 "PC/Form": біла панель виїжджає справа поверх
