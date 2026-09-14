@@ -1989,8 +1989,19 @@ blockquote[class^="review-type-"]{
   z-index:2000;
   visibility:hidden;
   pointer-events:none;
+  /* закриття мало виглядати миттєвим "зникненням", бо visibility:hidden
+     вмикався одразу разом зі зняттям .is-open — саме тому попап заїжджав
+     з анімацією, а виїжджав ні. Тепер visibility теж анімована: на
+     закритті вона перемикається лише ПІСЛЯ того, як translateX/opacity
+     встигли доїхати (delay = .4s = тривалість transform/opacity нижче),
+     а на відкритті — без затримки, миттєво. */
+  transition:visibility 0s linear .4s;
 }
-.cta-modal.is-open{visibility:visible;pointer-events:auto;}
+.cta-modal.is-open{
+  visibility:visible;
+  pointer-events:auto;
+  transition:visibility 0s linear 0s;
+}
 .cta-modal__backdrop{
   position:absolute;
   inset:0;
