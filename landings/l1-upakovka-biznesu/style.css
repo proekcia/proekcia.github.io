@@ -1428,10 +1428,7 @@ em.accent{
   width:100%;
   height:100%;
   object-fit:cover;
-  transition:transform .4s;
 }
-.case-card:hover .case-card__cover img,
-.case-card:hover .case-card__cover video{transform:scale(1.2);}
 
 .cases-viewall{margin-top:var(--gap-block);text-align:center;}
 
