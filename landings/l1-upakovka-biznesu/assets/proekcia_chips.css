@@ -1,0 +1,45 @@
+/* Proekcia — vector chips / buttons / number markers for HTML & HTML→PDF.
+   Use this instead of make_chip.py whenever the deliverable is HTML or a PDF
+   produced from HTML (weasyprint / Playwright / wkhtmltopdf). Fully vector:
+   crisp at any zoom, no JPEG halo, tiny output.
+
+   Fonts: load Stolzl via @font-face from assets/fonts/ (see below). */
+
+@font-face { font-family:"Stolzl"; font-weight:300; src:url("assets/fonts/Stolzl-Light.ttf");   }
+@font-face { font-family:"Stolzl"; font-weight:400; src:url("assets/fonts/Stolzl-Book.ttf");    }
+@font-face { font-family:"Stolzl"; font-weight:500; src:url("assets/fonts/Stolzl-Medium.ttf");  }
+@font-face { font-family:"Stolzl"; font-weight:700; src:url("assets/fonts/Stolzl-Bold.ttf");    }
+
+/* ---- Chip (tag pill): fully rounded, radius = half height ---------------- */
+.pk-chip{
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:"Stolzl",sans-serif; font-weight:400;
+  font-size:10.5px; line-height:1; letter-spacing:0.7px;
+  padding:6px 10px; border-radius:999px; white-space:nowrap;
+  border:none; box-shadow:none;            /* flat, never a shadow */
+}
+.pk-chip--outline{ background:#FFFFFF; color:#0D0D0D; border:0.7px solid #8A9AB5; }
+.pk-chip--grey   { background:#EEEEEE; color:#0D0D0D; }
+.pk-chip--orange { background:#FF4613; color:#FFFFFF; }
+.pk-chip--green  { background:#00FF1E; color:#0D0D0D; }
+.pk-chip--dark   { background:#0D0D0D; color:#FFFFFF; }
+.pk-chip--value  { background:#C6D1E5; color:#0D0D0D; }   /* spec-row value chip */
+
+/* ---- CTA button: medium radius ------------------------------------------ */
+.pk-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:"Stolzl",sans-serif; font-weight:400;
+  font-size:12.5px; line-height:1; letter-spacing:0.3px;
+  padding:11px 22px; border-radius:9px; white-space:nowrap;
+  border:none; box-shadow:none; cursor:pointer;
+}
+.pk-btn--orange{ background:#FF4613; color:#FFFFFF; }
+.pk-btn--dark  { background:#0D0D0D; color:#FFFFFF; }
+
+/* ---- Number marker: black circle, white number -------------------------- */
+.pk-num{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:26px; height:26px; border-radius:50%;
+  background:#0D0D0D; color:#FFFFFF;
+  font-family:"Stolzl",sans-serif; font-weight:400; font-size:11.5px; line-height:1;
+}
