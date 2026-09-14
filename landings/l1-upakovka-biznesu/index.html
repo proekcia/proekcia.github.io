@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Упаковка бізнесу під ключ: смисли, сайт і реклама, що продають — Proekcia</title>
 <meta name="description" content="Повний цикл в одній системі — від смислів і бренду до сайту й реклами, що приносить заявки. З 2013, 100+ проєктів. Комплексний маркетинг від Proekcia.">
+<!-- мітка збірки для режиму коментування (comments-widget.js) — бампати
+     разом із ?v= у style.css при кожному деплої, щоб коментар показував,
+     чи стосується він уже застарілої версії сторінки. -->
+<meta name="build" content="2026-09-14-v186">
 <link rel="icon" href="assets/logo/Icon_logo_black.svg">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.1.14/swiper-bundle.min.css">
 <link rel="stylesheet" href="style.css?v=186">
@@ -145,7 +149,7 @@
     </div>
   </section>
 
-  <section class="hero__band">
+  <section class="hero__band" id="hero-band">
     <div class="section-box">
       <div class="container">
         <div class="row">
@@ -1009,7 +1013,7 @@ UBER в Україні</h3></div>
   </section>
 
   <!-- ============================= Б14 · SEO-ТЕКСТ (релевантний) ============================= -->
-  <section class="section container section--tight">
+  <section class="section container section--tight" id="seo-text-section">
     <div class="seo-text">
       <h3>Комплексний маркетинг та упаковка бізнесу під ключ</h3>
       <p class="mt-block">Proekcia — студія упаковки бізнесу, яка поєднує глибоке смислове опрацювання з рекламою, що доставляє ці смисли ринку. Ми надаємо послуги комплексного інтернет маркетингу: від аудиту й позиціонування до брендингу, розробки лендингу або сайту та запуску реклами. Комплексний маркетинг у нашому виконанні — це не набір розрізнених підрядників, а брендинг і реклама під ключ в одній системі: сайт та реклама під ключ говорять одним меседжем.</p>
@@ -1028,7 +1032,7 @@ UBER в Україні</h3></div>
      landing has no /portfolio/, /kontakty/ etc. of its own. Everything
      else (contacts, socials, legal, connect button) is the real,
      external proekcia.com destination. -->
-<footer class="site-footer">
+<footer class="site-footer" id="site-footer">
   <div class="container">
     <div class="site-footer__grid">
 
@@ -1368,5 +1372,10 @@ UBER в Україні</h3></div>
     });
   });
 </script>
+
+<!-- ============================= РЕЖИМ КОМЕНТУВАННЯ (тимчасовий, на час
+     ревʼю; прибрати після завершення роботи — видалити comments-widget.js
+     і цей один рядок, більше ніде нічого не займано) ============================= -->
+<script src="comments-widget.js"></script>
 </body>
 </html>
