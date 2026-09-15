@@ -123,6 +123,17 @@
     return found;
   }
 
+  function deleteComment(id) {
+    var all = readAllRaw();
+    var before = all.list.length;
+    var list = all.list.filter(function (c) { return c.id !== id; });
+    if (list.length !== before) {
+      writeAllRaw(list);
+      return true;
+    }
+    return false;
+  }
+
   /* ---------------------------- ім'я автора -------------------------- */
 
   function getStoredName() {
@@ -560,6 +571,22 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
       document.body.removeChild(overlay);
     });
 
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'pc-btn pc-btn-secondary';
+    deleteBtn.style.color = '#C0392B';
+    deleteBtn.textContent = 'Видалити';
+    deleteBtn.addEventListener('click', function () {
+      if (deleteBtn.dataset.confirm === '1') {
+        deleteComment(comment.id);
+        document.body.removeChild(overlay);
+        renderPins();
+        refreshBadge();
+      } else {
+        deleteBtn.dataset.confirm = '1';
+        deleteBtn.textContent = 'Точно видалити?';
+      }
+    });
+
     box.appendChild(statusEl);
     box.appendChild(meta);
     box.appendChild(quote);
@@ -568,6 +595,7 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     var row = document.createElement('div');
     row.className = 'pc-row';
     row.style.marginTop = '10px';
+    row.appendChild(deleteBtn);
     row.appendChild(closeBtn);
     box.appendChild(row);
 
@@ -740,6 +768,29 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
         meta.className = 'pc-meta';
         meta.textContent = c.author + ' · ' + new Date(c.createdAt).toLocaleString('uk-UA') + ' · збірка ' + c.build;
         item.appendChild(meta);
+
+        var itemDeleteBtn = document.createElement('button');
+        itemDeleteBtn.className = 'pc-btn pc-btn-secondary';
+        itemDeleteBtn.style.color = '#C0392B';
+        itemDeleteBtn.style.marginTop = '8px';
+        itemDeleteBtn.style.minHeight = '36px';
+        itemDeleteBtn.style.padding = '6px 12px';
+        itemDeleteBtn.style.fontSize = '13px';
+        itemDeleteBtn.textContent = 'Видалити';
+        itemDeleteBtn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (itemDeleteBtn.dataset.confirm === '1') {
+            deleteComment(c.id);
+            document.body.removeChild(overlay);
+            renderPins();
+            refreshBadge();
+            openPanel();
+          } else {
+            itemDeleteBtn.dataset.confirm = '1';
+            itemDeleteBtn.textContent = 'Точно видалити?';
+          }
+        });
+        item.appendChild(itemDeleteBtn);
 
         item.addEventListener('click', function () {
           if (located) {
