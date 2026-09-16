@@ -1,31 +1,23 @@
 /* ============================================================================
    РЕЖИМ КОМЕНТУВАННЯ — тимчасовий інструмент для збору правок від клієнта й
-   команди прямо на живому лендінгу.
+   команди прямо на живому лендінгу. Працює повністю локально (без сервера,
+   без сторонніх сервісів): усе зберігається в localStorage ТОГО браузера, де
+   лишили коментар. Автор сам натискає «Забрати» і надсилає текст ведучому
+   розробнику (Claude Code) в чат.
 
-   Сховище — Cloudflare Worker (API_BASE нижче) + KV, спільне для всіх
-   відвідувачів: коментар, лишений будь-ким, стає видимий власнику проєкту
-   (і Claude — через прямий запит до того самого API) без ручного копіювання
-   тексту. Дивись comments-api-worker.js — код воркера й інструкція деплою.
+   ПРИБРАТИ ПІСЛЯ РОБОТИ: видалити цей файл і один рядок
+   <script src="comments-widget.js"></script> з index.html. Більше ніде
+   нічого не займано.
 
-   Якщо API_BASE порожній (Worker ще не підключений) — віджет автоматично
-   працює у старому локальному режимі (localStorage тільки в цьому браузері),
-   щоб сторінка не ламалась, поки деплой не завершено.
-
-   ПРИБРАТИ ПІСЛЯ РОБОТИ: видалити цей файл, comments-api-worker.js і один
-   рядок <script src="comments-widget.js"> з index.html. Більше ніде нічого
-   не займано.
+   Формат зберігання: JSONL (один JSON-об'єкт на рядок) у localStorage під
+   ключем STORAGE_KEY — рядок за рядком, щоб одна побита строка не валила
+   читання решти (кожен рядок парситься в try/catch окремо).
    ============================================================================ */
 (function () {
   'use strict';
 
-  // ЗАПОВНИТИ після деплою Cloudflare Worker (див. comments-api-worker.js):
-  // приклад "https://proekcia-comments.<субдомен>.workers.dev"
-  var API_BASE = '';
-
-  var STORAGE_KEY = 'proekcia_comments_v1'; // локальний фолбек-режим
+  var STORAGE_KEY = 'proekcia_comments_v1';
   var NAME_KEY = 'proekcia_commenter_name';
-  var DEVICE_KEY = 'proekcia_device_id';
-  var ADMIN_KEY_STORAGE = 'proekcia_admin_key';
   var WIDGET_CLASS = 'pc-widget-root';
   var MAX_TEXT_LEN = 2000;
   var MAX_NAME_LEN = 80;
@@ -56,33 +48,10 @@
     return location.pathname;
   }
 
-  function getDeviceId() {
-    try {
-      var id = localStorage.getItem(DEVICE_KEY);
-      if (!id) {
-        id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : uid();
-        localStorage.setItem(DEVICE_KEY, id);
-      }
-      return id;
-    } catch (e) {
-      return 'anon';
-    }
-  }
-
-  function getAdminKey() {
-    try { return localStorage.getItem(ADMIN_KEY_STORAGE) || ''; } catch (e) { return ''; }
-  }
-
-  function setAdminKey(v) {
-    try { localStorage.setItem(ADMIN_KEY_STORAGE, v); } catch (e) { /* ignore */ }
-  }
-
-  /* --------------------- сховище: API або localStorage --------------------- */
-  // Усі функції нижче async і повертають ОДНАКОВУ форму відповіді незалежно
-  // від режиму (API чи локально), щоб решта віджета не знала різниці.
-  // {list, brokenCount, error}
-
-  function readAllRawLocal() {
+  /* ------------------------- сховище (JSONL) ------------------------ */
+  // Повертає {list, brokenCount} — побиті рядки пропускаються, а не валять
+  // читання решти (вимога з ТЗ).
+  function readAllRaw() {
     var raw = '';
     try {
       raw = localStorage.getItem(STORAGE_KEY) || '';
@@ -110,9 +79,13 @@
     return { list: list, brokenCount: brokenCount };
   }
 
-  function writeAllRawLocal(list) {
+  function writeAllRaw(list) {
     var lines = list.map(function (c) {
-      try { return JSON.stringify(c); } catch (e) { return null; }
+      try {
+        return JSON.stringify(c);
+      } catch (e) {
+        return null;
+      }
     }).filter(Boolean);
     try {
       localStorage.setItem(STORAGE_KEY, lines.join('\n'));
@@ -122,115 +95,59 @@
     }
   }
 
-  function isReviewMode() {
-    return !!getAdminKey();
+  function getCommentsForThisPage() {
+    var all = readAllRaw();
+    return {
+      list: all.list.filter(function (c) { return c.page === getPageKey(); }),
+      brokenCount: all.brokenCount
+    };
   }
 
-  async function apiGet(page) {
-    var qs = new URLSearchParams({ page: page });
-    var key = getAdminKey();
-    if (key) {
-      qs.set('key', key);
-    } else {
-      qs.set('deviceId', getDeviceId());
-    }
-    var res = await fetch(API_BASE + '/comments?' + qs.toString());
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    var list = await res.json();
-    return { list: list, brokenCount: 0 };
+  function appendComment(comment) {
+    var all = readAllRaw();
+    all.list.push(comment);
+    return writeAllRaw(all.list);
   }
 
-  async function fetchCommentsForPage() {
-    if (!API_BASE) {
-      var all = readAllRawLocal();
-      return {
-        list: all.list.filter(function (c) { return c.page === getPageKey(); }),
-        brokenCount: all.brokenCount,
-        error: null
-      };
-    }
-    try {
-      var r = await apiGet(getPageKey());
-      r.error = null;
-      return r;
-    } catch (e) {
-      return { list: [], brokenCount: 0, error: 'Не вдалося завантажити коментарі з сервера. Перевірте з’єднання.' };
-    }
+  function updateComment(id, patch) {
+    var all = readAllRaw();
+    var found = false;
+    var list = all.list.map(function (c) {
+      if (c.id === id) {
+        found = true;
+        return Object.assign({}, c, patch);
+      }
+      return c;
+    });
+    if (found) writeAllRaw(list);
+    return found;
   }
 
-  async function appendComment(comment) {
-    if (!API_BASE) {
-      var all = readAllRawLocal();
-      all.list.push(comment);
-      return { ok: writeAllRawLocal(all.list) };
+  function deleteComment(id) {
+    var all = readAllRaw();
+    var before = all.list.length;
+    var list = all.list.filter(function (c) { return c.id !== id; });
+    if (list.length !== before) {
+      writeAllRaw(list);
+      return true;
     }
-    try {
-      var res = await fetch(API_BASE + '/comments', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(comment)
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return { ok: true };
-    } catch (e) {
-      return { ok: false, error: 'Не вдалося зберегти коментар. Перевірте з’єднання й спробуйте ще раз.' };
-    }
-  }
-
-  async function updateComment(id, patch) {
-    if (!API_BASE) {
-      var all = readAllRawLocal();
-      var found = false;
-      var list = all.list.map(function (c) {
-        if (c.id === id) { found = true; return Object.assign({}, c, patch); }
-        return c;
-      });
-      if (found) writeAllRawLocal(list);
-      return { ok: found };
-    }
-    var key = getAdminKey();
-    if (!key) return { ok: false, error: 'Потрібен ключ перегляду всіх, щоб міняти статус.' };
-    try {
-      var res = await fetch(API_BASE + '/comments/' + encodeURIComponent(id) + '?key=' + encodeURIComponent(key), {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(patch)
-      });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return { ok: true };
-    } catch (e) {
-      return { ok: false, error: 'Не вдалося оновити статус.' };
-    }
-  }
-
-  async function deleteComment(id) {
-    if (!API_BASE) {
-      var all = readAllRawLocal();
-      var before = all.list.length;
-      var list = all.list.filter(function (c) { return c.id !== id; });
-      if (list.length !== before) { writeAllRawLocal(list); return { ok: true }; }
-      return { ok: false };
-    }
-    var qs = new URLSearchParams({ deviceId: getDeviceId() });
-    var key = getAdminKey();
-    if (key) qs.set('key', key);
-    try {
-      var res = await fetch(API_BASE + '/comments/' + encodeURIComponent(id) + '?' + qs.toString(), { method: 'DELETE' });
-      if (!res.ok) throw new Error('HTTP ' + res.status);
-      return { ok: true };
-    } catch (e) {
-      return { ok: false, error: 'Не вдалося видалити коментар.' };
-    }
+    return false;
   }
 
   /* ---------------------------- ім'я автора -------------------------- */
 
   function getStoredName() {
-    try { return localStorage.getItem(NAME_KEY) || ''; } catch (e) { return ''; }
+    try {
+      return localStorage.getItem(NAME_KEY) || '';
+    } catch (e) {
+      return '';
+    }
   }
 
   function storeName(name) {
-    try { localStorage.setItem(NAME_KEY, name); } catch (e) { /* ignore */ }
+    try {
+      localStorage.setItem(NAME_KEY, name);
+    } catch (e) { /* ignore */ }
   }
 
   /* ------------------------- прив'язка (якорі) ----------------------- */
@@ -307,10 +224,12 @@
   }
 
   // Пошук елемента за текстом — найменший елемент, чий видимий текст
-  // містить потрібний фрагмент (найточніше накриття). Беремо innerText
-  // (візуальний порядок), а не textContent (сирий DOM-порядок) — інакше
-  // цитата не збігається з пошуком там, де CSS змінює візуальний порядок
-  // відносно DOM (виявлено живим тестом на hero-заголовку).
+  // містить потрібний фрагмент (найточніше накриття).
+  // ВАЖЛИВО: беремо innerText (візуальний порядок, як бачить людина), а не
+  // textContent (сирий DOM-порядок) — інакше цитата, записана через
+  // innerText в getQuoteAndContext, не збігається з пошуком для елементів,
+  // де CSS змінює візуальний порядок відносно DOM (виявлено тестом на
+  // hero-заголовку: підпис у дужках стоїть в DOM між рядками заголовка).
   function findElementByText(needle) {
     needle = normalizeWs(needle);
     if (!needle) return null;
@@ -323,13 +242,17 @@
       var t = normalizeWs(el.innerText || el.textContent || '');
       if (t && t.indexOf(needle) !== -1) {
         var len = t.length;
-        if (len < bestLen) { best = el; bestLen = len; }
+        if (len < bestLen) {
+          best = el;
+          bestLen = len;
+        }
       }
     }
     return best;
   }
 
   // Пошук цілі при відкритті: id → цитата (+контекст) → CSS-шлях.
+  // Повертає {el, method} або null, якщо ціль «зникла».
   function locateTarget(anchor) {
     if (anchor.id) {
       var byId = document.getElementById(anchor.id);
@@ -370,7 +293,7 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 .pc-composer input[type=text], .pc-composer textarea { width: 100%; font-size: 16px; padding: 10px 12px; border: 1px solid rgba(0,0,0,.2); border-radius: 8px; font-family: inherit; margin-bottom: 10px; resize: vertical; }\
 .pc-composer textarea { min-height: 80px; }\
 .pc-composer .pc-quote-preview { font-size: 13px; color: #666; background: #F4F5F7; border-left: 3px solid #FF4613; padding: 8px 10px; margin-bottom: 10px; max-height: 70px; overflow: auto; }\
-.pc-composer .pc-row { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }\
+.pc-composer .pc-row { display: flex; gap: 8px; justify-content: flex-end; }\
 .pc-btn { padding: 10px 16px; border-radius: 8px; border: none; font-size: 15px; font-weight: 600; cursor: pointer; min-height: 44px; }\
 .pc-btn-primary { background: #FF4613; color: #fff; }\
 .pc-btn-secondary { background: #EEE; color: #333; }\
@@ -391,10 +314,8 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 .pc-status-rejected { background: #FADADA; color: #8A2020; }\
 .pc-panel-section { border-top: 1px solid rgba(0,0,0,.1); padding: 14px 16px; }\
 .pc-panel-section h4 { margin: 0 0 8px; font-size: 14px; }\
-.pc-panel-section textarea, .pc-panel-section input[type=text] { width: 100%; font-size: 16px; padding: 8px; border-radius: 8px; border: 1px solid rgba(0,0,0,.2); font-family: inherit; }\
-.pc-panel-section textarea { min-height: 100px; }\
+.pc-panel-section textarea { width: 100%; font-size: 16px; padding: 8px; border-radius: 8px; border: 1px solid rgba(0,0,0,.2); min-height: 100px; font-family: inherit; }\
 .pc-hint { font-size: 12px; color: #888; margin-top: 6px; }\
-.pc-mode-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: #17181A; color: #fff; margin-left: 8px; }\
 @media (max-width: 480px) { .pc-fab span.pc-fab-text { display: none; } .pc-fab { padding: 14px; } }\
 ';
 
@@ -407,7 +328,11 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 
   /* ------------------------------- стан ------------------------------ */
 
-  var state = { modeOn: false };
+  var state = {
+    modeOn: false,
+    pendingClick: null // {el, x, y, selectionText} поки відкритий composer
+  };
+
   var els = {}; // кеш DOM-вузлів віджета
 
   /* -------------------------- ім'я (composer) ------------------------- */
@@ -527,26 +452,14 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
           build: getBuildStamp(),
           createdAt: new Date().toISOString(),
           author: author,
-          deviceId: getDeviceId(),
           text: truncate(text, MAX_TEXT_LEN),
           anchor: anchor,
           status: 'new',
           reply: ''
         };
-        saveBtn.disabled = true;
-        saveBtn.textContent = 'Зберігаю…';
-        appendComment(comment).then(function (res) {
-          if (!res.ok) {
-            err.textContent = res.error || 'Не вдалося зберегти.';
-            err.style.display = 'block';
-            saveBtn.disabled = false;
-            saveBtn.textContent = 'Зберегти';
-            return;
-          }
-          closeComposer();
-          renderPins();
-          refreshBadge();
-        });
+        appendComment(comment);
+        closeComposer();
+        renderPins();
       });
     });
   }
@@ -571,14 +484,9 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     return '';
   }
 
-  var _renderToken = 0;
-
-  async function renderPins() {
-    var myToken = ++_renderToken;
-    var data = await fetchCommentsForPage();
-    if (myToken !== _renderToken) return; // прийшла новіша відповідь — цю відкидаємо
+  function renderPins() {
     clearPins();
-    _missingCounter = 0;
+    var data = getCommentsForThisPage();
     data.list.forEach(function (c) {
       var located = locateTarget(c.anchor);
       var pin = document.createElement('div');
@@ -656,10 +564,6 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
       replyBox.appendChild(replyText);
     }
 
-    var errLine = document.createElement('div');
-    errLine.className = 'pc-error';
-    errLine.style.display = 'none';
-
     var closeBtn = document.createElement('button');
     closeBtn.className = 'pc-btn pc-btn-secondary';
     closeBtn.textContent = 'Закрити';
@@ -673,18 +577,10 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     deleteBtn.textContent = 'Видалити';
     deleteBtn.addEventListener('click', function () {
       if (deleteBtn.dataset.confirm === '1') {
-        deleteBtn.disabled = true;
-        deleteComment(comment.id).then(function (res) {
-          if (!res.ok) {
-            errLine.textContent = res.error || 'Не вдалося видалити.';
-            errLine.style.display = 'block';
-            deleteBtn.disabled = false;
-            return;
-          }
-          document.body.removeChild(overlay);
-          renderPins();
-          refreshBadge();
-        });
+        deleteComment(comment.id);
+        document.body.removeChild(overlay);
+        renderPins();
+        refreshBadge();
       } else {
         deleteBtn.dataset.confirm = '1';
         deleteBtn.textContent = 'Точно видалити?';
@@ -696,7 +592,6 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     box.appendChild(quote);
     box.appendChild(text);
     box.appendChild(replyBox);
-    box.appendChild(errLine);
     var row = document.createElement('div');
     row.className = 'pc-row';
     row.style.marginTop = '10px';
@@ -745,15 +640,19 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 
   /* -------------------------------- панель --------------------------------- */
 
-  function formatExport(list) {
-    if (list.length === 0) {
+  function formatExport() {
+    var data = getCommentsForThisPage();
+    if (data.list.length === 0) {
       return 'Коментарів немає (0).';
     }
     var byBlock = {};
     var order = [];
-    list.forEach(function (c) {
+    data.list.forEach(function (c) {
       var key = c.anchor.id || '(без id)';
-      if (!byBlock[key]) { byBlock[key] = []; order.push(key); }
+      if (!byBlock[key]) {
+        byBlock[key] = [];
+        order.push(key);
+      }
       byBlock[key].push(c);
     });
     var lines = [];
@@ -777,13 +676,10 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
   }
 
   function applyStatusUpdates(raw) {
-    // Локальний фолбек-режим: формат рядка
-    // "id: c_xxx status: done reply: текст відповіді".
-    // В API-режимі статуси міняються напряму через ключ (updateComment),
-    // цей парсер лишається для сумісності зі старим локальним режимом.
+    // Формат рядка: "id: c_xxx status: done reply: текст відповіді"
+    // Простий, стійкий до дрібних відхилень парсер.
     var updated = 0;
     var lines = raw.split('\n');
-    var promises = [];
     lines.forEach(function (line) {
       var idMatch = line.match(/id:\s*(\S+)/);
       if (!idMatch) return;
@@ -793,14 +689,12 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
       var patch = {};
       if (statusMatch) patch.status = statusMatch[1].toLowerCase();
       if (replyMatch) patch.reply = truncate(normalizeWs(replyMatch[1]), MAX_TEXT_LEN);
-      if (Object.keys(patch).length) {
-        promises.push(updateComment(id, patch).then(function (res) { if (res.ok) updated++; }));
-      }
+      if (Object.keys(patch).length && updateComment(id, patch)) updated++;
     });
-    return Promise.all(promises).then(function () { return updated; });
+    return updated;
   }
 
-  async function openPanel() {
+  function openPanel() {
     var overlay = document.createElement('div');
     overlay.className = WIDGET_CLASS + ' pc-panel-backdrop';
     var panel = document.createElement('div');
@@ -808,8 +702,9 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 
     var head = document.createElement('div');
     head.className = 'pc-panel-head';
+    var data = getCommentsForThisPage();
     var h3 = document.createElement('h3');
-    h3.textContent = 'Завантаження…';
+    h3.textContent = 'Мої коментарі (' + data.list.length + ')';
     var closeBtn = document.createElement('button');
     closeBtn.className = 'pc-panel-close';
     closeBtn.textContent = '×';
@@ -821,36 +716,6 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 
     var body = document.createElement('div');
     body.className = 'pc-panel-body';
-    var loading = document.createElement('div');
-    loading.className = 'pc-hint';
-    loading.textContent = 'Завантаження…';
-    body.appendChild(loading);
-
-    panel.appendChild(head);
-    panel.appendChild(body);
-    overlay.appendChild(panel);
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) document.body.removeChild(overlay);
-    });
-    document.body.appendChild(overlay);
-
-    var data = await fetchCommentsForPage();
-    body.innerHTML = '';
-
-    h3.textContent = (isReviewMode() ? 'Усі коментарі' : 'Мої коментарі') + ' (' + data.list.length + ')';
-    if (isReviewMode()) {
-      var modeBadge = document.createElement('span');
-      modeBadge.className = 'pc-mode-badge';
-      modeBadge.textContent = 'РЕЖИМ ОГЛЯДУ';
-      head.insertBefore(modeBadge, closeBtn);
-    }
-
-    if (data.error) {
-      var errBanner = document.createElement('div');
-      errBanner.className = 'pc-error';
-      errBanner.textContent = data.error;
-      body.appendChild(errBanner);
-    }
 
     if (data.brokenCount > 0) {
       var warn = document.createElement('div');
@@ -860,7 +725,7 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
       body.appendChild(warn);
     }
 
-    if (data.list.length === 0 && !data.error) {
+    if (data.list.length === 0) {
       var empty = document.createElement('div');
       empty.className = 'pc-hint';
       empty.textContent = 'Коментарів немає (0).';
@@ -915,13 +780,11 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
         itemDeleteBtn.addEventListener('click', function (e) {
           e.stopPropagation();
           if (itemDeleteBtn.dataset.confirm === '1') {
-            deleteComment(c.id).then(function (res) {
-              if (!res.ok) return;
-              document.body.removeChild(overlay);
-              renderPins();
-              refreshBadge();
-              openPanel();
-            });
+            deleteComment(c.id);
+            document.body.removeChild(overlay);
+            renderPins();
+            refreshBadge();
+            openPanel();
           } else {
             itemDeleteBtn.dataset.confirm = '1';
             itemDeleteBtn.textContent = 'Точно видалити?';
@@ -945,21 +808,22 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     exportTitle.textContent = 'Забрати до роботи';
     var exportArea = document.createElement('textarea');
     exportArea.readOnly = true;
-    exportArea.value = formatExport(data.list);
+    exportArea.value = formatExport();
     var copyBtn = document.createElement('button');
     copyBtn.className = 'pc-btn pc-btn-primary';
     copyBtn.style.marginTop = '8px';
     copyBtn.textContent = 'Скопіювати';
     copyBtn.addEventListener('click', function () {
       exportArea.select();
+      var copied = false;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(exportArea.value).then(function () {
           copyBtn.textContent = 'Скопійовано ✓';
         }).catch(function () {
-          try { document.execCommand('copy'); copyBtn.textContent = 'Скопійовано ✓'; } catch (e) { /* ignore */ }
+          try { document.execCommand('copy'); copyBtn.textContent = 'Скопійовано ✓'; } catch (e) { copied = false; }
         });
       } else {
-        try { document.execCommand('copy'); copyBtn.textContent = 'Скопійовано ✓'; } catch (e) { /* ignore */ }
+        try { document.execCommand('copy'); copyBtn.textContent = 'Скопійовано ✓'; } catch (e) { copied = false; }
       }
     });
     exportSection.appendChild(exportTitle);
@@ -967,65 +831,40 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     exportSection.appendChild(copyBtn);
     var exportHint = document.createElement('div');
     exportHint.className = 'pc-hint';
-    exportHint.textContent = API_BASE
-      ? 'Синхронізовано автоматично — надсилати текст необов’язково.'
-      : 'Скопіюй і надішли цей текст у чат.';
+    exportHint.textContent = 'Скопіюй і надішли цей текст у чат.';
     exportSection.appendChild(exportHint);
 
-    // «Ключ перегляду всіх» — вводиться один раз власником проєкту, щоб
-    // бачити коментарі ВСІХ відвідувачів (а не тільки свої) і міняти статуси.
-    var keySection = document.createElement('div');
-    keySection.className = 'pc-panel-section';
-    var keyTitle = document.createElement('h4');
-    keyTitle.textContent = 'Ключ перегляду всіх (для власника)';
-    var keyInput = document.createElement('input');
-    keyInput.type = 'text';
-    keyInput.placeholder = 'Встав сюди ключ, якщо він у тебе є';
-    keyInput.value = getAdminKey();
-    var keyBtn = document.createElement('button');
-    keyBtn.className = 'pc-btn pc-btn-secondary';
-    keyBtn.style.marginTop = '8px';
-    keyBtn.textContent = 'Зберегти ключ';
-    var keyHint = document.createElement('div');
-    keyHint.className = 'pc-hint';
-    keyBtn.addEventListener('click', function () {
-      setAdminKey(normalizeWs(keyInput.value));
-      keyHint.textContent = 'Збережено. Відкрий список ще раз.';
+    var importSection = document.createElement('div');
+    importSection.className = 'pc-panel-section';
+    var importTitle = document.createElement('h4');
+    importTitle.textContent = 'Вставити відповідь (статуси)';
+    var importArea = document.createElement('textarea');
+    importArea.placeholder = 'Встав сюди текст зі статусами, який тобі надіслали';
+    var importBtn = document.createElement('button');
+    importBtn.className = 'pc-btn pc-btn-secondary';
+    importBtn.style.marginTop = '8px';
+    importBtn.textContent = 'Застосувати';
+    var importResult = document.createElement('div');
+    importResult.className = 'pc-hint';
+    importBtn.addEventListener('click', function () {
+      var n = applyStatusUpdates(importArea.value);
+      importResult.textContent = 'Оновлено коментарів: ' + n + '.';
+      renderPins();
     });
-    keySection.appendChild(keyTitle);
-    keySection.appendChild(keyInput);
-    keySection.appendChild(keyBtn);
-    keySection.appendChild(keyHint);
+    importSection.appendChild(importTitle);
+    importSection.appendChild(importArea);
+    importSection.appendChild(importBtn);
+    importSection.appendChild(importResult);
 
+    panel.appendChild(head);
+    panel.appendChild(body);
     panel.appendChild(exportSection);
-    panel.appendChild(keySection);
-
-    if (!API_BASE) {
-      // Старий локальний фолбек — статуси через вставлений текст.
-      var importSection = document.createElement('div');
-      importSection.className = 'pc-panel-section';
-      var importTitle = document.createElement('h4');
-      importTitle.textContent = 'Вставити відповідь (статуси)';
-      var importArea = document.createElement('textarea');
-      importArea.placeholder = 'Встав сюди текст зі статусами, який тобі надіслали';
-      var importBtn = document.createElement('button');
-      importBtn.className = 'pc-btn pc-btn-secondary';
-      importBtn.style.marginTop = '8px';
-      importBtn.textContent = 'Застосувати';
-      var importResult = document.createElement('div');
-      importResult.className = 'pc-hint';
-      importBtn.addEventListener('click', function () {
-        applyStatusUpdates(importArea.value).then(function (n) {
-          importResult.textContent = 'Оновлено коментарів: ' + n + '.';
-          renderPins();
-        });
-      });
-      importSection.appendChild(importTitle);
-      importSection.appendChild(importArea);
-      importSection.appendChild(importBtn);
-      importSection.appendChild(importResult);
-      panel.appendChild(importSection);
-    }
+    panel.appendChild(importSection);
+    overlay.appendChild(panel);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) document.body.removeChild(overlay);
+    });
+    document.body.appendChild(overlay);
   }
 
   /* ------------------------------- FAB-кнопки -------------------------------- */
@@ -1036,11 +875,13 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 
     var listBtn = document.createElement('button');
     listBtn.className = 'pc-fab pc-fab-list';
+    var data = getCommentsForThisPage();
+    listBtn.innerHTML = '';
     var listIcon = document.createElement('span');
     listIcon.textContent = '📋';
     var listCount = document.createElement('span');
     listCount.className = 'pc-badge';
-    listCount.textContent = '0';
+    listCount.textContent = String(data.list.length);
     listBtn.appendChild(listIcon);
     listBtn.appendChild(listCount);
     listBtn.addEventListener('click', openPanel);
@@ -1066,10 +907,10 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     document.body.appendChild(stack);
   }
 
-  async function refreshBadge() {
-    if (!els.listCount) return;
-    var data = await fetchCommentsForPage();
-    els.listCount.textContent = String(data.list.length);
+  function refreshBadge() {
+    if (els.listCount) {
+      els.listCount.textContent = String(getCommentsForThisPage().list.length);
+    }
   }
 
   /* -------------------------------- запуск ----------------------------------- */
@@ -1078,12 +919,17 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
     injectStyle();
     buildFab();
     renderPins();
-    refreshBadge();
     document.addEventListener('mouseup', onDocMouseUp, true);
     document.addEventListener('click', onDocClickCapture, true);
     window.addEventListener('resize', function () {
       renderPins();
     });
+    var origAppend = appendComment;
+    appendComment = function (c) {
+      var ok = origAppend(c);
+      refreshBadge();
+      return ok;
+    };
   }
 
   if (document.readyState === 'loading') {
@@ -1094,17 +940,12 @@ html.pc-mode-on, html.pc-mode-on body { cursor: crosshair !important; }\
 
   // Публічний доступ для самоперевірок/діагностики з консолі.
   window.__proekciaComments = {
-    fetchCommentsForPage: fetchCommentsForPage,
-    appendComment: appendComment,
-    updateComment: updateComment,
-    deleteComment: deleteComment,
+    readAllRaw: readAllRaw,
+    writeAllRaw: writeAllRaw,
+    getCommentsForThisPage: getCommentsForThisPage,
     locateTarget: locateTarget,
     formatExport: formatExport,
     applyStatusUpdates: applyStatusUpdates,
-    getDeviceId: getDeviceId,
-    getAdminKey: getAdminKey,
-    setAdminKey: setAdminKey,
-    STORAGE_KEY: STORAGE_KEY,
-    get API_BASE() { return API_BASE; }
+    STORAGE_KEY: STORAGE_KEY
   };
 })();
