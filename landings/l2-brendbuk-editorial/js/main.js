@@ -106,9 +106,11 @@
     burger.addEventListener('click', function () {
       setState(burger.getAttribute('aria-expanded') !== 'true');
     });
-    if (close) close.addEventListener('click', function () {
+    if (close) close.addEventListener('click', function (e) {
       setState(false);
-      burger.focus();
+      /* фокус повертаємо на бургер лише при активації з клавіатури
+         (e.detail === 0), інакше після кліку мишею він обводиться помаранчевим */
+      if (e.detail === 0) burger.focus();
     });
 
     panel.addEventListener('click', function (e) {
