@@ -103,10 +103,10 @@
     pointer-events:none;
   }
   .hero__cat-head{
-    position:absolute;left:12.5%;top:0;width:75%;height:50%;
+    position:absolute;left:9.722%;top:0;width:80.556%;height:55.556%;
     background-image:url(../images/hero/cat-head.webp);
-    background-size:400% 300%;      /* спрайт 4×3 */
-    background-position:0% 100%;
+    background-size:400% 400%;      /* спрайт 4×4, 16 положень по колу */
+    background-position:0% 0%;
     will-change:background-position;
   }
 }
