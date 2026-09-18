@@ -1,0 +1,119 @@
+/* =========================================================================
+   PROEKCIA · Брендбук — 01. TOKENS
+   Єдине джерело правди для кольору, типографіки, сітки та ритму.
+   Нічого, крім змінних і @font-face. Міняєте бренд — міняєте цей файл.
+   ========================================================================= */
+
+/* ---- Fonts: Stolzl (основний) + Nyght Serif Italic (акцент). Лише 2 гарнітури.
+        woff2 згенеровано з оригінальних ttf студії (≈23 КБ на накреслення). --- */
+@font-face{
+  font-family:"Stolzl"; font-style:normal; font-weight:300; font-display:swap;
+  src:url("../assets/fonts/Stolzl-Light.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Stolzl"; font-style:normal; font-weight:400; font-display:swap;
+  src:url("../assets/fonts/Stolzl-Book.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Stolzl"; font-style:normal; font-weight:500; font-display:swap;
+  src:url("../assets/fonts/Stolzl-Medium.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Stolzl"; font-style:normal; font-weight:700; font-display:swap;
+  src:url("../assets/fonts/Stolzl-Bold.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Nyght Serif"; font-style:italic; font-weight:500; font-display:swap;
+  src:url("../assets/fonts/NyghtSerif-MediumItalic.woff2") format("woff2");
+}
+
+:root{
+  /* ---- Колір ------------------------------------------------------------
+     Фірмова палітра Proekcia (значення 1:1 з :root бойового сайту й слайдів
+     презентації). Основа сторінки — синьо-сірий #D7E3F5; білий і темніші
+     відтінки синьо-сірого дають ритм поверхонь; чорний тримає типографіку;
+     помаранчевий #FF4613 лишається акцентом-маркером, а не фоном. */
+  --ink:#0D0D0D;            /* чорний бренду */
+  --ink-70:#44536C;         /* основний допоміжний текст (контраст 6.0:1) */
+  --ink-55:#54637D;         /* другорядний текст (4.5:1) */
+  --ink-38:#6F7F99;         /* службові цифри, підписи (3.4:1) */
+  --paper:#D7E3F5;          /* фірмовий синьо-сірий — основний фон */
+  --paper-2:#C6D1E5;        /* друга поверхня: врізки */
+  --paper-3:#AABCD7;        /* третя поверхня: плейсхолдери, hover */
+  --white:#FFFFFF;          /* поверхня-контраст для «світлих» секцій */
+  --rule:#AABCD7;           /* лінійки сітки */
+  --rule-soft:rgba(13,13,13,.12);
+  --accent:#FF4613;         /* фірмовий помаранчевий */
+  --accent-ink:#FFFFFF;
+  --third:#7D8CA3;          /* третій колір бренду */
+
+  /* темні секції (маніфест, фінальний CTA) — як чорні роздільники презентації */
+  --night:#0D0D0D;
+  --night-fg:#E9EFF9;
+  --night-fg-55:rgba(233,239,249,.62);
+  --night-rule:rgba(233,239,249,.20);
+
+  --focus:#FF4613;
+
+  /* ---- Типографіка ------------------------------------------------------ */
+  --ff:"Stolzl","Helvetica Neue",Arial,system-ui,sans-serif;
+  --ff-accent:"Nyght Serif",Georgia,"Times New Roman",serif;
+
+  /* плинна шкала: від 360px до 1680px */
+  --fs-display:clamp(3.1rem,11.2vw,10.5rem);   /* hero */
+  --fs-h2:clamp(2.1rem,5.6vw,4.75rem);         /* заголовок секції */
+  --fs-h3:clamp(1.45rem,2.9vw,2.35rem);        /* підзаголовок / рівень */
+  --fs-h4:clamp(1.12rem,1.7vw,1.4rem);
+  --fs-statement:clamp(1.9rem,4.6vw,3.9rem);   /* великі твердження */
+  --fs-lead:clamp(1.06rem,1.6vw,1.45rem);
+  --fs-body:clamp(1rem,1.1vw,1.1rem);
+  --fs-small:clamp(.88rem,.95vw,.95rem);
+  --fs-label:clamp(.7rem,.8vw,.78rem);
+  --fs-num:clamp(.72rem,.85vw,.82rem);
+
+  --lh-display:0.92;
+  --lh-tight:1.04;
+  --lh-head:1.1;
+  --lh-text:1.55;
+
+  --ls-display:-0.035em;
+  --ls-head:-0.025em;
+  --ls-label:0.14em;
+
+  /* ---- Сітка й ритм ----------------------------------------------------- */
+  --page-max:1680px;
+  --gutter:clamp(1.25rem,4.4vw,4.5rem);   /* бокові поля сторінки */
+  --col-gap:clamp(1rem,2.2vw,2.5rem);
+  --row-gap:clamp(1.75rem,3vw,3rem);
+
+  --sp-1:.5rem;
+  --sp-2:.875rem;
+  --sp-3:1.25rem;
+  --sp-4:1.75rem;
+  --sp-5:2.5rem;
+  --sp-6:3.5rem;
+  --sp-7:5rem;
+  --sp-8:7rem;
+  --section-y:clamp(4.5rem,9.5vw,11rem);  /* вертикальні поля секції */
+
+  --header-h:clamp(58px,6.2vw,76px);
+
+  --radius-pill:999px;
+  --radius-sm:10px;
+
+  /* ---- Рух -------------------------------------------------------------- */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --dur-fast:180ms;
+  --dur:420ms;
+  --dur-slow:900ms;
+}
+
+/* На вузьких екранах display-рядок обмежує найдовше слово («розсипається»
+   в Nyght Serif ≈9.7em). 8.8vw гарантує, що воно вміщується в рядок
+   і не розривається переносом навіть на 360px. */
+@media (max-width:900px){
+  :root{
+    --fs-display:clamp(2.2rem,8.8vw,5.4rem);
+    --fs-statement:clamp(1.7rem,5.4vw,2.6rem);
+  }
+}

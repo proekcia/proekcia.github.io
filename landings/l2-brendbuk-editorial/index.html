@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="uk" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Брендбук для бізнесу — сенси, візуальна система, правила · Proekcia</title>
+<meta name="description" content="Брендбук від студії Proekcia: сенсовий каркас, візуальна система і практичні шаблони. Щоб команда й підрядники працювали без здогадок, а бренд залишався цілісним.">
+<meta name="theme-color" content="#D7E3F5">
+<link rel="canonical" href="https://proekcia.com/brendbuk/">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="uk_UA">
+<meta property="og:title" content="Бренд, який не розсипається на частини — брендбук від Proekcia">
+<meta property="og:description" content="Сенси, візуальна система і практичні правила в одному документі. Щоб бренд виглядав як бренд — незалежно від ситуації.">
+<meta property="og:site_name" content="Proekcia">
+
+<link rel="icon" href="assets/logo/Icon_logo_black.svg" type="image/svg+xml">
+
+<!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
+     Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
+     завантаження файлу коштувало б дорожче за виграш. -->
+<link rel="stylesheet" href="css/tokens.css?v=34">
+<link rel="stylesheet" href="css/base.css?v=34">
+<link rel="stylesheet" href="css/components.css?v=34">
+<link rel="stylesheet" href="css/sections.css?v=34">
+<script>document.documentElement.classList.remove('no-js');</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Service",
+  "name":"Брендбук",
+  "serviceType":"Розробка брендбуку",
+  "description":"Брендбук: сенси бренду, візуальна система і практичні шаблони в одному документі.",
+  "provider":{
+    "@type":"Organization",
+    "name":"Proekcia",
+    "description":"Студія дизайну та маркетингу",
+    "url":"https://proekcia.com",
+    "telephone":"+380734174813",
+    "sameAs":["https://www.instagram.com/proekcia_studio/"]
+  }
+}
+</script>
+</head>
+
+<body>
+<a class="skip-link" href="#main">Перейти до вмісту</a>
+
+<!-- ============================================================== HEADER
+     Мінімальна закріплена шапка. На ≤1024px навігація згортається у
+     повноекранне меню (.menu). WP: меню — wp_nav_menu('primary'). -->
+<header class="header" id="header">
+  <div class="header__inner">
+    <a class="header__logo" href="#top" aria-label="Proekcia — на початок">
+      <img src="assets/logo/Vector.svg" alt="Proekcia" width="136" height="24">
+    </a>
+
+    <nav class="header__nav" id="nav" aria-label="Основна навігація">
+      <a href="#define">Про брендбук</a>
+      <a href="#levels">Рівні</a>
+      <a href="#layers">3 шари</a>
+      <a href="#flow">Процес</a>
+      <a href="#work">Портфоліо</a>
+      <a href="#reviews">Відгуки</a>
+    </nav>
+
+    <a class="btn btn--primary btn--sm header__cta" href="#final" data-cta>
+      Обговорити брендбук
+      <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+    </a>
+
+    <button class="burger" id="burger" type="button" aria-label="Відкрити меню" aria-expanded="false" aria-controls="menu">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- мобільне меню -->
+<nav class="menu" id="menu" aria-label="Мобільна навігація">
+  <ul class="menu__links">
+    <li><a href="#define">Про брендбук</a></li>
+    <li><a href="#levels">Рівні</a></li>
+    <li><a href="#layers">3 шари</a></li>
+    <li><a href="#flow">Процес</a></li>
+    <li><a href="#work">Портфоліо</a></li>
+    <li><a href="#reviews">Відгуки</a></li>
+    <li><a href="#final" class="accent" data-cta>Обговорити брендбук</a></li>
+  </ul>
+  <div class="menu__foot">
+    <a href="tel:+380734174813">+38 073 417 48 13</a>
+    <a href="https://www.instagram.com/proekcia_studio/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://proekcia.com" target="_blank" rel="noopener">proekcia.com</a>
+  </div>
+</nav>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============================================================== s01 · HERO
+     Обкладинка презентації. Типографіка замість графіки.
+     WP: eyebrow_left, eyebrow_right, title_lines[], lead, cta_primary, cta_secondary. -->
+<section class="hero wrap" id="hero">
+  <div class="hero__meta">
+    <span class="label">Proekcia — студія дизайну та маркетингу</span>
+    <span class="label">Презентація послуги · 2026</span>
+  </div>
+
+  <div>
+    <h1 class="hero__title">
+      <span class="line">Бренд, який</span>
+      <span class="line">не <span class="em accent">розсипається</span></span>
+      <span class="line">на частини</span>
+    </h1>
+  </div>
+
+  <div class="hero__bottom">
+    <p class="lead hero__lead">Брендбук — це коли кожен елемент бренду працює як частина цілого, формуючи сильне перше враження, впізнаваність і довіру.</p>
+
+    <div class="hero__actions">
+      <a class="btn btn--primary" href="#final" data-cta>
+        Обговорити брендбук
+        <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="#layers">Що входить у брендбук</a>
+    </div>
+
+    <a class="hero__scroll" href="#brand">
+      Гортайте
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4" stroke="currentColor" stroke-width="1.4"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================== s02 · 01 ЩО ТАКЕ БРЕНД
+     Слайди 3–5 презентації. WP: title, text, image, closing_statement. -->
+<section class="section" id="brand" aria-labelledby="brand-title">
+  <div class="wrap grid">
+    <div class="brand__head reveal">
+      <span class="label label--accent">01 — Що таке бренд?</span>
+      <h2 class="h2 mt-s" id="brand-title">Це не про продавати сміття під виглядом чогось цінного</h2>
+      <div class="text mt-m">
+        <p>А про те, як зробити правду цікавою. Це будь-яка етикетка, обгортка або людина, яка асоціюється з якістю і викликає довіру.</p>
+        <p><strong class="strong">Бренд = асоціації.</strong></p>
+      </div>
+    </div>
+
+    <figure class="brand__media reveal" style="--reveal-delay:120ms">
+      <div class="media media--ratio media--plain" style="--ratio:660/440">
+        <img src="images/presentation/trash_bag.webp" alt="Чорний пакет для сміття, обклеєний логотипами люксових брендів" width="660" height="440" loading="lazy" decoding="async">
+      </div>
+    </figure>
+
+    <div class="brand__close reveal">
+      <p class="statement">Сильний бренд — <span class="em">чесний</span> бренд</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s03 · 02 ЩО ТАКЕ БРЕНДБУК
+     Слайди 6–7: «це документ, що фіксує». WP: title, rows[] {num, title, desc}. -->
+<section class="section section--white" id="define" aria-labelledby="define-title">
+  <div class="wrap grid">
+    <div class="define__head reveal">
+      <span class="label label--accent">02 — Що таке брендбук?</span>
+      <h2 class="h2 mt-s" id="define-title">Це документ, що фіксує</h2>
+      <p class="text text--narrow mt-s">Не «логотип, кольори і шрифти». Система, у якій кожен елемент пояснений і має своє місце.</p>
+    </div>
+
+    <div class="define__body reveal" style="--reveal-delay:120ms">
+      <ol class="bigrows">
+        <li class="bigrows__item">
+          <span class="num">01</span>
+          <span>
+            <span class="bigrows__title">Сенси бренду</span>
+            <span class="bigrows__desc">Те, що лежить в основі ще до візуалу чи стилю: чому бренд існує, що він думає і що обіцяє.</span>
+          </span>
+        </li>
+        <li class="bigrows__item">
+          <span class="num">02</span>
+          <span>
+            <span class="bigrows__title">Візуальний стиль</span>
+            <span class="bigrows__desc">Логотип і його варіації, палітра, шрифти, носії — як цілісна система, а не набір файлів.</span>
+          </span>
+        </li>
+        <li class="bigrows__item">
+          <span class="num">03</span>
+          <span>
+            <span class="bigrows__title">Практичні приклади та шаблони</span>
+            <span class="bigrows__desc">Зразки і сценарії дій, щоб команда або підрядники одразу працювали без здогадок.</span>
+          </span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s04 · 03 ЩО ВІН ДАЄ БІЗНЕСУ
+     Слайд 9. Порядок панелей — як на слайді: спершу «з брендбуком», далі «без».
+     WP: panel_with{title,items[],image}, panel_without{...}. -->
+<section class="section" id="value" aria-labelledby="value-title">
+  <div class="wrap">
+    <div class="reveal mb-l">
+      <span class="label label--accent">03 — Що він дає вашому бізнесу?</span>
+      <h2 class="h2 mt-s" id="value-title">Різниця, яку видно в роботі</h2>
+    </div>
+
+    <div class="contrast">
+      <div class="panel panel--with reveal">
+        <div class="panel__label">
+          <span class="label">З системою</span>
+        </div>
+        <h3 class="panel__title">З брендбуком<br>працює так</h3>
+        <ul class="panel__list">
+          <li><span>Єдина мова комунікації</span></li>
+          <li><span>Швидкість створення нового контенту</span></li>
+          <li><span>Узгодженість усіх матеріалів</span></li>
+          <li><span>Захист від хаотичних рішень</span></li>
+          <li><span>Формування впізнаваності</span></li>
+        </ul>
+        <div class="panel__media">
+          <div class="media media--ratio" style="--ratio:940/655">
+            <img src="images/presentation/dance_globe.webp" alt="Персонажі танцюють у колі в унісон" width="940" height="655" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel--without reveal" style="--reveal-delay:120ms">
+        <div class="panel__label">
+          <span class="label">Без системи</span>
+        </div>
+        <h3 class="panel__title">Без брендбуку<br>виглядає так</h3>
+        <ul class="panel__list">
+          <li><span>Один логотип — 7 кольорів</span></li>
+          <li><span>Реклама не схожа на сайт</span></li>
+          <li><span>SMM «як хто придумав»</span></li>
+          <li><span>Власник пояснює бренд кожному підряднику наново</span></li>
+        </ul>
+        <div class="panel__media">
+          <div class="media media--ratio media--plain" style="--ratio:480/390">
+            <img src="images/presentation/steve_jobs.webp" alt="Портрет із намальованими помаранчевими сльозами" width="480" height="390" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s05 · 04 НА ПРАКТИЦІ
+     Слайди 10–12: ілюстрація «лебідь, рак і щука» + ланцюжок «дія → результат».
+     WP: title, text, image, rows[] {from, to}. -->
+<section class="section" id="flow" aria-labelledby="flow-title">
+  <div class="wrap grid">
+    <div class="flow__head reveal">
+      <span class="label label--accent">04 — На практиці</span>
+      <h2 class="h2 mt-s" id="flow-title">Для чого потрібен брендбук на практиці</h2>
+      <p class="text text--narrow mt-s">Один дизайнер робить одне, інший — інше. Брендбук вмикається щоразу, коли до бренду торкається хтось новий.</p>
+    </div>
+
+    <figure class="flow__media reveal" style="--reveal-delay:120ms">
+      <div class="media media--pill media--ratio" style="--ratio:1400/598">
+        <img src="images/presentation/abbey_road.webp" alt="Лебідь, щука і рак переходять дорогу в різному темпі" width="1400" height="598" loading="lazy" decoding="async">
+      </div>
+      <figcaption class="figure__cap">Класика: кожен тягне у свій бік</figcaption>
+    </figure>
+
+    <div class="flow__rows">
+      <div class="flowrow reveal">
+        <span class="flowrow__from">Найняли дизайнера</span>
+        <span class="flowrow__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3v6h9M9.5 5.5 12.5 9l-3 3.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
+        <span class="flowrow__to">Є з чим працювати</span>
+      </div>
+      <div class="flowrow reveal" style="--reveal-delay:90ms">
+        <span class="flowrow__from">Замовили сайт</span>
+        <span class="flowrow__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3v6h9M9.5 5.5 12.5 9l-3 3.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
+        <span class="flowrow__to">Є напрям і стиль</span>
+      </div>
+      <div class="flowrow reveal" style="--reveal-delay:180ms">
+        <span class="flowrow__from">Запускаєте рекламу</span>
+        <span class="flowrow__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3v6h9M9.5 5.5 12.5 9l-3 3.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
+        <span class="flowrow__to">Є візуальні і словесні шаблони</span>
+      </div>
+      <div class="flowrow reveal" style="--reveal-delay:270ms">
+        <span class="flowrow__from">Розвиваєтесь</span>
+        <span class="flowrow__arrow" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M3 3v6h9M9.5 5.5 12.5 9l-3 3.5" stroke="currentColor" stroke-width="1.3"/></svg></span>
+        <span class="flowrow__to">Не втрачаєте цілісність</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s06 · 05 ДЛЯ КОГО
+     Слайди 13–14. WP: cards[] {num, text}, statement. -->
+<section class="section section--paper2" id="who" aria-labelledby="who-title">
+  <div class="wrap grid">
+    <div class="who__head reveal">
+      <span class="label label--accent">05 — Для кого</span>
+      <h2 class="h2 mt-s" id="who-title">Для кого брендбук обов'язковий</h2>
+    </div>
+
+    <div class="who__cards">
+      <div class="who__card reveal">
+        <span class="num">01</span>
+        <p>Якщо ваша команда складається більше ніж з 1 людини</p>
+      </div>
+      <div class="who__card reveal" style="--reveal-delay:90ms">
+        <span class="num">02</span>
+        <p>Часто замовляєте дизайн, контент або рекламу</p>
+      </div>
+      <div class="who__card reveal" style="--reveal-delay:180ms">
+        <span class="num">03</span>
+        <p>Будуєте щось більше, ніж «тимчасово попрацюємо»</p>
+      </div>
+    </div>
+
+    <div class="who__statement reveal">
+      <p class="statement">Брендбук — це не обов'язково складно, але обов'язково потрібно. Щоб бренд виглядав як бренд — <span class="em">незалежно від ситуації</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s07 · 06 РІВНІ
+     Слайди 15–16. Цін немає навмисно: формат обговорюється.
+     WP: levels[] {num, name, desc}, cta, image. -->
+<section class="section" id="levels" aria-labelledby="levels-title">
+  <div class="wrap grid">
+    <div class="levels__head reveal">
+      <span class="label label--accent">06 — Рівні</span>
+      <h2 class="h2 mt-s" id="levels-title">Які бувають рівні брендбуку</h2>
+    </div>
+
+    <figure class="levels__media reveal" style="--reveal-delay:120ms">
+      <div class="media media--ratio media--plain" style="--ratio:846/955">
+        <img src="images/presentation/glass_bowls.webp" alt="Три скляні напівсфери, складені одна на одну" width="846" height="955" loading="lazy" decoding="async">
+      </div>
+    </figure>
+
+    <div class="levels__list">
+      <div class="level reveal">
+        <span class="num">01</span>
+        <div>
+          <h3 class="level__name">Базовий</h3>
+          <p class="level__desc">Тільки візуальна концепція</p>
+        </div>
+      </div>
+      <div class="level reveal" style="--reveal-delay:90ms">
+        <span class="num">02</span>
+        <div>
+          <h3 class="level__name">Розширений</h3>
+          <p class="level__desc">Не лише візуал, але й сенси</p>
+        </div>
+      </div>
+      <div class="level reveal" style="--reveal-delay:180ms">
+        <span class="num">03</span>
+        <div>
+          <h3 class="level__name">Повний</h3>
+          <p class="level__desc">Є все: сенси, візуал, приклади і шаблони</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="levels__cta reveal">
+      <p class="text text--narrow mb-s">Який рівень закриє вашу задачу — залежить від того, що вже є і куди рухаєтесь. Це й розбираємо в першій розмові.</p>
+      <a class="btn btn--ghost" href="#final" data-cta>
+        Обговорити формат
+        <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s08 · 07 ТРИ ШАРИ
+     Слайди 17–24. Ліворуч — липкий індекс (JS підсвічує активний шар).
+     WP: layers[] {num, name, title, text, items[], image}. -->
+<section class="section section--white" id="layers" aria-labelledby="layers-title">
+  <div class="wrap grid">
+    <div class="layers__intro reveal">
+      <span class="label label--accent">07 — Структура</span>
+      <h2 class="h2 mt-s" id="layers-title">Структура повного брендбуку складається з трьох шарів</h2>
+      <div class="layers__stack" aria-hidden="true">
+        <span>Сенсовий</span>
+        <span>Візуальний</span>
+        <span>Прикладний</span>
+      </div>
+    </div>
+
+    <div class="layers__rail">
+      <nav class="rail" id="layersRail" aria-label="Шари брендбуку">
+        <button type="button" data-target="layer-1" aria-current="true"><span class="num">01</span> Сенсовий</button>
+        <button type="button" data-target="layer-2"><span class="num">02</span> Візуальний</button>
+        <button type="button" data-target="layer-3"><span class="num">03</span> Прикладний</button>
+      </nav>
+    </div>
+
+    <div class="layers__body">
+
+      <article class="layer" id="layer-1">
+        <div class="layer__kicker">
+          <span class="num">Шар 01</span><span class="label">Сенси бренду</span>
+        </div>
+        <h3 class="layer__title reveal">Цей розділ формує <span class="em">сенсовий каркас</span> бренду</h3>
+        <p class="text layer__text reveal">Те, що лежить в його основі ще до візуалу чи стилю. Це не про те, як бренд виглядає, а про те, що він думає, чим дихає, чому існує і що обіцяє.</p>
+
+        <div class="qwords reveal" aria-hidden="true">
+          <span class="em">Навіщо?</span><span class="em">Хто ми?</span><span class="em">Для кого?</span>
+          <span class="em">Як?</span><span class="em">Чому?</span><span class="em">Що?</span>
+        </div>
+
+        <div class="layer__grid">
+          <div class="reveal">
+            <span class="label block mb-s">У цьому шарі визначається</span>
+            <ul class="speclist">
+              <li><span class="num">01</span><span>Чому бренд має саме таку назву</span></li>
+              <li><span class="num">02</span><span>У чому його суть і роль на ринку</span></li>
+              <li><span class="num">03</span><span>Які проблеми клієнтів він вирішує</span></li>
+              <li><span class="num">04</span><span>У чому його позиціонування й відмінність</span></li>
+              <li><span class="num">05</span><span>Про що, з ким і як він говорить</span></li>
+            </ul>
+          </div>
+          <figure class="layer__media reveal" style="--reveal-delay:120ms">
+            <div class="media media--ratio media--plain" style="--ratio:940/752">
+              <img src="images/presentation/thinking_man.webp" alt="Фігура, що сидить у задумі, з питанням «Навіщо?»" width="940" height="752" loading="lazy" decoding="async">
+            </div>
+          </figure>
+        </div>
+
+        <p class="text reveal mt-m">Це простір, де все, що було «десь у голові», оформлюється в конкретні формулювання, меседжі, фрази й обіцянки. А все, що було інтуїтивним — розкладено по полицях.</p>
+      </article>
+
+      <article class="layer" id="layer-2">
+        <div class="layer__kicker">
+          <span class="num">Шар 02</span><span class="label">Візуальна система</span>
+        </div>
+        <h3 class="layer__title reveal">Дизайн — це <span class="em">не прикраса</span></h3>
+        <p class="text layer__text reveal">Це про структуру і логіку, пріоритети і маршрут для ока, довіру, яка зчитується без слів, та емоцію, яка веде до дії.</p>
+
+        <div class="layer__grid">
+          <div class="reveal">
+            <span class="label block mb-s">Що може включати</span>
+            <ul class="speclist">
+              <li><span class="num">01</span><span>Логотип: основна версія, варіації</span></li>
+              <li><span class="num">02</span><span>Кольорова палітра</span></li>
+              <li><span class="num">03</span><span>Шрифти: основні та додаткові</span></li>
+              <li><span class="num">04</span><span>Стиль ілюстрацій (якщо є)</span></li>
+              <li><span class="num">05</span><span>Фотостиль (якщо є)</span></li>
+              <li><span class="num">06</span><span>Патерни, кнопки, іконки тощо</span></li>
+              <li><span class="num">07</span><span>Умовні / уявні носії стилю</span></li>
+            </ul>
+          </div>
+          <figure class="layer__media reveal" style="--reveal-delay:120ms">
+            <div class="media media--ratio media--plain" style="--ratio:940/900">
+              <img src="images/presentation/green_cube.webp" alt="Об'ємна геометрична форма на помаранчевому тлі" width="940" height="900" loading="lazy" decoding="async">
+            </div>
+          </figure>
+        </div>
+      </article>
+
+      <article class="layer" id="layer-3">
+        <div class="layer__kicker">
+          <span class="num">Шар 03</span><span class="label">Прикладний</span>
+        </div>
+        <h3 class="layer__title reveal">Найпрактичніша частина брендбуку</h3>
+        <p class="text layer__text reveal">Вона перекладає стиль і сенси у візуальні приклади, шаблони і сценарії дій, щоб команда або підрядники могли одразу працювати без здогадок.</p>
+
+        <div class="reveal mt-l">
+          <ul class="speclist">
+            <li><span class="num">→</span><span>Конкретні приклади замість абстрактних правил</span></li>
+            <li><span class="num">→</span><span>Шаблони, які беруть у роботу без переузгоджень</span></li>
+            <li><span class="num">→</span><span>Сценарії дій для типових задач</span></li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s09 · МАНІФЕСТ
+     Слайд 25 — фінал розділу 07. WP: statement, text, quote. -->
+<section class="section section--night on-night" id="manifesto" aria-labelledby="manifesto-title">
+  <div class="wrap manifesto">
+    <div class="reveal">
+      <span class="label">Брендбук як система</span>
+    </div>
+    <h2 class="manifesto__statement reveal" id="manifesto-title">Брендбук — не просто «опис стилю». Це спосіб тримати <span class="em">цілісність у дії</span>: текстах, візуалах, стратегії, дрібницях.</h2>
+
+    <div class="manifesto__grid">
+      <div class="text reveal">
+        <p>Брендбук — це інструкція з виживання у світі, де багато шуму. Його задача — захищати цілісність. Бо хаос у деталях руйнує довіру, а послідовність її створює.</p>
+        <p>Це не обмеження. Це каркас, завдяки якому бренд може рости, змінюватись і масштабуватись — не втрачаючи себе. Менше правок — більше сенсу.</p>
+      </div>
+      <blockquote class="manifesto__quote reveal" style="--reveal-delay:120ms">
+        Коли все, що бачить клієнт, звучить в унісон — народжується впізнаваність
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s10 · 08 ЩО ДАЛІ
+     Слайди 26–29. WP: after_brandbook[], after_traffic[], garage{title, note, image}. -->
+<section class="section" id="next" aria-labelledby="next-title">
+  <div class="wrap grid">
+    <div class="next__head reveal">
+      <span class="label label--accent">08 — Що далі</span>
+      <h2 class="h2 mt-s" id="next-title">Брендбук готовий. <span class="em">Що далі?</span></h2>
+      <p class="text text--narrow mt-s">Брендбук — не фінальна точка, а точка, з якої все інше нарешті можна робити швидко.</p>
+    </div>
+
+    <div class="next__cols">
+      <div class="next__col reveal">
+        <h3 class="h4">Що ми можемо зробити після брендбуку</h3>
+        <ul class="pillset">
+          <li><span class="pill">Перші робочі носії бренду</span></li>
+          <li><span class="pill">Рекламні креативи</span></li>
+          <li><span class="pill">Сайт / лендінг</span></li>
+          <li><span class="pill">Трафік з Google Ads, Meta Ads тощо</span></li>
+        </ul>
+      </div>
+
+      <div class="next__col reveal" style="--reveal-delay:120ms">
+        <h3 class="h4">А що після запуску трафіку?</h3>
+        <p class="text mb-s">Ми можемо не лише запустити рекламу, а й протестувати:</p>
+        <ul class="pillset">
+          <li><span class="pill">Які меседжі працюють</span></li>
+          <li><span class="pill">Які візуали клікають</span></li>
+          <li><span class="pill">Яка аудиторія приносить заявки / продажі</span></li>
+          <li><span class="pill pill--solid">І оптимізувати все під реальні задачі</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="garage reveal">
+      <div class="garage__inner">
+        <div>
+          <h3 class="garage__title">Ми упаковуємо та просуваємо ваш бізнес</h3>
+          <p class="garage__note">Proekcia — як творчий гараж, куди власник може пригнати свій бізнес на прокачку.</p>
+        </div>
+        <div class="garage__media">
+          <img src="images/presentation/f1_pitstop.webp" alt="Команда механіків обслуговує болід на піт-стопі" width="1400" height="418" loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s11 · 09 ПОРТФОЛІО
+     Блок перенесено з #blog («Наші роботи») на proekcia.com: та сама картка
+     (теги-пігулки → обкладинка-відео 4:5 → назва великими → підзаголовок),
+     ті самі ширини (82.9vw / 42.06vw / 21.6vw), проміжки (20 / 37px),
+     лінійки зверху і зліва та кеглі. Карусель нативна (scroll-snap).
+     Кейси — наші, брендбукові; кнопка «Усі роботи» — доповнення до оригіналу.
+     WP: CPT portfolio → {cover, video, title, subtitle, tags[], url}. -->
+<section class="section section-blog-posts" id="work" aria-labelledby="work-title">
+  <div class="wrap">
+    <span class="label label--accent section-eyebrow reveal">09 — Портфоліо</span>
+    <h2 class="section-title reveal" id="work-title">Наші роботи</h2>
+
+    <div class="loop-posts" id="worksTrack" tabindex="0" role="region" aria-label="Наші роботи — гортайте горизонтально">
+      <div class="loop-item reveal">
+        <div class="list-tags"><div class="list-tags__track"><span class="tag">Лого</span><span class="tag">Стиль</span><span class="tag">Сенси</span><span class="tag">Брендбук</span></div></div>
+        <a class="loop-item-link" href="https://proekcia.com/portfolio/toptrend/" target="_blank" rel="noopener">
+          <div class="loop-item-thumb loop-item-thumb-video">
+            <img src="images/portfolio/toptrend-poster.svg" alt="Кейс Toptrend" width="834" height="1042" loading="lazy" decoding="async">
+            <video src="images/portfolio/toptrend.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+          <h3 class="loop-item-name">Toptrend</h3>
+          <div class="loop-item-subtitle">Магазин, що цікаво досліджувати</div>
+        </a>
+      </div>
+      <div class="loop-item reveal">
+        <div class="list-tags"><div class="list-tags__track"><span class="tag">Сенси</span><span class="tag">Брендбук</span><span class="tag">Закордон</span><span class="tag">Лого</span><span class="tag">Неймінг</span><span class="tag">Стиль</span></div></div>
+        <a class="loop-item-link" href="https://proekcia.com/portfolio/un-kisu/" target="_blank" rel="noopener">
+          <div class="loop-item-thumb loop-item-thumb-video">
+            <img src="images/portfolio/un-kisu-poster.webp" alt="Кейс Un Kisu" width="2048" height="2560" loading="lazy" decoding="async">
+            <video src="images/portfolio/un-kisu.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+          <h3 class="loop-item-name">Un Kisu</h3>
+          <div class="loop-item-subtitle">Поцілунок удачі</div>
+        </a>
+      </div>
+      <div class="loop-item reveal">
+        <div class="list-tags"><div class="list-tags__track"><span class="tag">Лого</span><span class="tag">Стиль</span><span class="tag">Брендбук</span></div></div>
+        <a class="loop-item-link" href="https://proekcia.com/portfolio/thehrdwood/" target="_blank" rel="noopener">
+          <div class="loop-item-thumb loop-item-thumb-video">
+            <img src="images/portfolio/thehrdwood-poster.webp" alt="Кейс TheHrdWood" width="620" height="775" loading="lazy" decoding="async">
+            <video src="images/portfolio/thehrdwood.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+          <h3 class="loop-item-name">TheHrdWood</h3>
+          <div class="loop-item-subtitle">Дерев'яні аксесуари для робочого простору</div>
+        </a>
+      </div>
+      <div class="loop-item reveal">
+        <div class="list-tags"><div class="list-tags__track"><span class="tag">Лого</span><span class="tag">Неймінг</span><span class="tag">Брендбук</span></div></div>
+        <a class="loop-item-link" href="https://proekcia.com/portfolio/koloskotch/" target="_blank" rel="noopener">
+          <div class="loop-item-thumb loop-item-thumb-video">
+            <img src="images/portfolio/koloskotch-poster.webp" alt="Кейс Koloskotch: брендбук" width="620" height="775" loading="lazy" decoding="async">
+            <video src="images/portfolio/koloskotch.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+          </div>
+          <h3 class="loop-item-name">Koloskotch: брендбук</h3>
+          <div class="loop-item-subtitle">Міцний скотч для міцного бізнесу</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="works__foot reveal">
+      <a class="btn-bordered" href="https://proekcia.com/portfolio/" target="_blank" rel="noopener">Переглянути всі роботи</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================== s12 · ВІДГУКИ
+     Блок перенесено з #reviews на proekcia.com: та сама структура
+     (blockquote.review-type-{text|video|audio|img} → фото 4:5 → ім'я →
+     компанія помаранчевим → знак цитати → текст → «Читати повний відгук» →
+     «Переглянути кейс»), ті самі 28 відгуків у тому самому порядку,
+     ті самі розміри картки (74vw / 300px / 18.75vw) і відступи (20/32/48px).
+     Відмінність одна: карусель нативна (scroll-snap) замість Swiper.
+     WP: CPT review → {photo, name, company, short, full, case_url, video_url, audio, screenshot}. -->
+<section class="section section-reviews" id="reviews" aria-labelledby="reviews-title">
+  <div class="wrap reviews__layout">
+    <span class="label label--accent section-eyebrow reviews__eyebrow reveal">09 — Відгуки</span>
+    <h2 class="section-title reveal" id="reviews-title">Відгуки клієнтів</h2>
+
+    <div class="reviews__nav">
+        <button class="rnav" type="button" data-dir="-1" aria-label="Попередні відгуки" aria-controls="reviewsTrack"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></button>
+        <button class="rnav" type="button" data-dir="1" aria-label="Наступні відгуки" aria-controls="reviewsTrack"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></button>
+    </div>
+
+    <div class="reviews-slider" id="reviewsTrack" tabindex="0" role="region" aria-label="Відгуки клієнтів — гортайте горизонтально">
+      <blockquote class="review-type-video">
+        <div class="review-author-photo video">
+          <img src="images/reviews/vladyslav-joymarket.webp" alt="Владислав" width="400" height="500" loading="lazy" decoding="async">
+          <a class="video-play-btn" href="https://youtube.com/shorts/8Qwz7v0bmSM?si=x0klEou94sGhsv0U" target="_blank" rel="noopener" title="Відтворити відео" aria-label="Відтворити відеовідгук: Владислав"><span class="icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M10.666 8L23.9993 16L10.666 24V8Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Владислав</span>
+          <span class="author-company">Маркетинг директор JoyMarket</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Після того, як почали працювати з вами, від минулого року ми зробили X5 до обороту, що дуже жорстко насправді зриває голову. Вам велике дякую за вашу структуру, велике дякую за поради, які ви даєте....…</p>
+          <button class="review-more" type="button" data-full="review-full-1">Читати повний відгук</button>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/joymarket/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-audio">
+        <div class="review-author-photo">
+          <img src="images/reviews/znimok-ekrana-2026-09-10-o-11-26-31.webp" alt="Кирило Пасенюк" width="400" height="500" loading="lazy" decoding="async">
+          <audio class="review-audio" controls preload="none" src="images/reviews/vidguk-kyrylo-pasenyuk-firma.ogg" aria-label="Аудіовідгук: Кирило Пасенюк"></audio>
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Кирило Пасенюк</span>
+          <span class="author-company">Фірма, власник</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Так, ну що я можу сказати про проєкцію? Проєкція фактично стала проєкцією моїх абстракцій, які я собі в голові малював. Але на то й вони і абстракції, що вони не чіткі, якісь лише виключно ідеї. А...…</p>
+          <button class="review-more" type="button" data-full="review-full-2">Читати повний відгук</button>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/firma/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-video">
+        <div class="review-author-photo video">
+          <img src="images/reviews/guma-stalor.webp" alt="Євгеній Гума" width="400" height="500" loading="lazy" decoding="async">
+          <a class="video-play-btn" href="https://youtube.com/shorts/S3I03Mg7ivo" target="_blank" rel="noopener" title="Відтворити відео" aria-label="Відтворити відеовідгук: Євгеній Гума"><span class="icon"><svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M10.666 8L23.9993 16L10.666 24V8Z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Євгеній Гума</span>
+          <span class="author-company">Stalor, власник</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Ми раніше називалися BUDMAT, таких компаній в Україні штук 40, тому постійно була плутанина. Я зрозумів, що бізнес переріс назву — став чимось більшим, системнішим, і виникла потреба в ребрендингу з...…</p>
+          <button class="review-more" type="button" data-full="review-full-3">Читати повний відгук</button>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/stalor/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-audio">
+        <div class="review-author-photo">
+          <img src="images/reviews/oleksiy-reels.webp" alt="Олексій Головащук" width="400" height="500" loading="lazy" decoding="async">
+          <audio class="review-audio" controls preload="none" src="images/reviews/reels_review.mp3" aria-label="Аудіовідгук: Олексій Головащук"></audio>
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Олексій Головащук</span>
+          <span class="author-company">Reels Studio, власник</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>ROMI зріс з 215% до 750% на тому самому бюджеті — ефективність зросла втричі. Дякую Proekcia за роботу, звернусь ще!</p>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/reels/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/frame-1430103880-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/frame-1430103880-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/loivi/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-text">
+        <div class="review-author-photo">
+          <img src="images/reviews/photo-2026-08-31-10-22-43.webp" alt="Артем Корнеев" width="400" height="500" loading="lazy" decoding="async">
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Артем Корнеев</span>
+          <span class="author-company">TheHrdwood, власник</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Ми 10 років продавали на Etsy і Amazon, і в якийсь момент захотілось будувати бренд поза маркетплейсами. Старий чорно-білий логотип просто приївся. Влад (арт-директор) знався вочевидь на своїй...…</p>
+          <button class="review-more" type="button" data-full="review-full-6">Читати повний відгук</button>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/thehrdwood/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/photo-2026-07-16-13-49-48-1-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/photo-2026-07-16-13-49-48-1-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/un-kisu/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1173-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1173-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1175-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1175-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/villa-boisseree-2/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1184-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1184-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1181-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1181-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/uborka24/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1174-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1174-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1185-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1185-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1176-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1176-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/san-teh-rai/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1177-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1177-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/brusme/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1183-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1183-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/ne/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1186-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1186-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/yantos/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1182-1-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1182-1-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1180-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1180-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/alisa-reklama-internet-magazynu/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1179-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1179-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/hm-furnitura/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/img-1178-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/img-1178-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/553868180-18153200020403562-1785916603483418709--shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/553868180-18153200020403562-1785916603483418709--shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/pokrivlya-czentr/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-img">
+        <a href="images/reviews/yantos-shot.webp" target="_blank" rel="noopener" aria-label="Відкрити скріншот відгуку">
+          <img src="images/reviews/yantos-shot.webp" alt="Скріншот відгуку клієнта" width="620" height="1115" loading="lazy" decoding="async">
+        </a>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/yantos-wire/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-text">
+        <div class="review-author-photo">
+          <img src="images/reviews/majya-hudonazarova-rens.webp" alt="Майя Худоназарова" width="400" height="500" loading="lazy" decoding="async">
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Майя Худоназарова</span>
+          <span class="author-company">Маркетинг-директор Rens</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Завдяки професіоналізму команди «Проекція» для нашої компанії було успішно розроблено два сайти. Хочемо особливо відзначити структурований підхід до роботи: чітке дотримання термінів, своєчасний...…</p>
+          <button class="review-more" type="button" data-full="review-full-24">Читати повний відгук</button>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/rens/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-text">
+        <cite class="review-author">
+          <span class="author-name">Андрій</span>
+          <span class="author-company">Сітка Захід</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Найбільше в роботі сподобався професіоналізм, свій підхід до створення продукту та зворотній зв’язок. Рекомендую.</p>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/sitka-zahid/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-text">
+        <div class="review-author-photo">
+          <img src="images/reviews/ivan-ivanovych-feko.webp" alt="Іван Іванович" width="400" height="500" loading="lazy" decoding="async">
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Іван Іванович</span>
+          <span class="author-company">ФЕКО, директор</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Рівень залученості на рівні не підрядника, а партнера.</p>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-text">
+        <div class="review-author-photo">
+          <img src="images/reviews/kseniya-csd.webp" alt="Ксенія" width="400" height="500" loading="lazy" decoding="async">
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Ксенія</span>
+          <span class="author-company">CSD, маркетолог</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Сподобалася лояльність до некомпетентності замовника, бажання пояснити, як потрібно, і допомогти замовнику прийняти правильне рішення, відсутність нав’язування непотрібних послуг, гнучкість,...…</p>
+          <button class="review-more" type="button" data-full="review-full-27">Читати повний відгук</button>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/csd/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+      <blockquote class="review-type-text">
+        <div class="review-author-photo">
+          <img src="images/reviews/oleksandr-bogachyk-brushme.webp" alt="Олександр Богачик" width="400" height="500" loading="lazy" decoding="async">
+        </div>
+        <cite class="review-author">
+          <span class="author-name">Олександр Богачик</span>
+          <span class="author-company">Brushme, власник</span>
+        </cite>
+        <div class="review-text">
+          <svg class="svg-icon-quote" width="27" height="24" viewBox="0 0 27 24" fill="none" aria-hidden="true"><path d="M6.84989 2H13.0148L8.39112 11.4085C10.6364 12.1972 11.759 13.8498 11.759 16.3662C11.759 18.0188 11.2072 19.3709 10.1036 20.4225C9 21.4742 7.61099 22 5.93658 22C4.41438 22 3.0444 21.5493 1.82664 20.6479C0.60888 19.7089 0 18.1502 0 15.9718C0 13.7934 2.2833 9.13615 6.84989 2ZM22.3763 11.4085C24.6216 12.1972 25.7442 13.8498 25.7442 16.3662C25.7442 18.0188 25.1924 19.3709 24.0888 20.4225C22.9852 21.4742 21.5962 22 19.9218 22C18.3996 22 17.0296 21.5493 15.8118 20.6479C14.5941 19.7089 13.9852 18.1502 13.9852 15.9718C13.9852 13.7934 16.2685 9.13615 20.8351 2H27L22.3763 11.4085Z" fill="currentColor"/></svg>
+          <p>Дуже сподобалась ваша чесність, пластичність, віжн, креативність.</p>
+        </div>
+        <div class="review-project-link">
+          <a href="https://proekcia.com/portfolio/brusme/" target="_blank" rel="noopener"><span class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.5455 4.99473L20.4398 11.889L13.5455 18.7833L12.4848 17.7226L17.5686 12.6389L4.5299 12.64V11.1381L17.5686 11.1391L12.4848 6.05539L13.5455 4.99473Z" fill="currentColor"/></svg></span><span class="inner-text">Переглянути кейс</span></a>
+        </div>
+      </blockquote>
+    </div>
+  </div>
+
+  <!-- повні тексти відгуків (відкриваються у діалозі) -->
+  <div class="review-full hide" id="review-full-1" data-name="Владислав" data-company="Маркетинг директор JoyMarket"><p>Після того, як почали працювати з вами, від минулого року ми зробили X5 до обороту, що дуже жорстко насправді зриває голову. Вам велике дякую за вашу структуру, велике дякую за поради, які ви даєте. Дуже кайфово з вами працювати, дуже подобається, як ви систематично все розставляєте. Результати просто капець. Я дуже радий, що знайшов вас, тому ще раз вам щиро дякую, дуже кайфую.</p></div>
+  <div class="review-full hide" id="review-full-2" data-name="Кирило Пасенюк" data-company="Фірма, власник"><p>Так, ну що я можу сказати про проєкцію? Проєкція фактично стала проєкцією моїх абстракцій, які я собі в голові малював. Але на то й вони і абстракції, що вони не чіткі, якісь лише виключно ідеї. А проєкція їх реалізувала. І це було супер круто, бо це не були там повна й точна, чітка реалізація того, що я собі там малював, тому що воно було абстрактним, але і тому, що вони допомогли це в деталях фактично вибудувати. І це було дуже органічно, і це мені дуже подобалося на всіх етапах нашої співпраці. І це більш того було чітко за тайм рутом, який було запропоновано, не було затримок, все було супер чітко, супер якісно. Окрім цього, окрім створення сайту, у нас був досвід створення відео, що теж мені дуже сподобалося, тому що це був фактично такий підхід дуже творчий, і результат мені теж дуже сподобався. Тому дуже раджу.</p></div>
+  <div class="review-full hide" id="review-full-3" data-name="Євгеній Гума" data-company="Stalor, власник"><p>Ми раніше називалися BUDMAT, таких компаній в Україні штук 40, тому постійно була плутанина. Я зрозумів, що бізнес переріс назву — став чимось більшим, системнішим, і виникла потреба в ребрендингу з перейменуванням. Ми звернулися до агенції «Proekcia», поспілкувалися з Владиславом. Перейменувалися в «Stalor», осучаснили візуал, оформили сайти, офіси — все в одному стилі. Завдяки унікальній назві ми змогли запустити брендову рекламу, люди почали гуглити назву компанії, менеджерам стало простіше продавати. Владислав не робив під диктовку — враховував побажання, але від багатьох речей мене відмовляв. І ще: коли я обирав пакет, він порадив взяти дешевший і сказав — краще потім прийдеш і дооформиш, що буде потрібно. Можу рекомендувати цю агенцію для співпраці.</p></div>
+  <div class="review-full hide" id="review-full-6" data-name="Артем Корнеев" data-company="TheHrdwood, власник"><p>Ми 10 років продавали на Etsy і Amazon, і в якийсь момент захотілось будувати бренд поза маркетплейсами. Старий чорно-білий логотип просто приївся. Влад (арт-директор) знався вочевидь на своїй справі, хороший бриф та комунікація, прозорі терміни та вартість. Круто було спостерігати як лого оживає і змінюється від ітерації до ітерації – видно що реально шукали форму. Мій час при цьому майже не витрачався. По результату – компанія ніби отримала форму. Свій колір, шрифт, стиль. Навіть співробітники якось всередині вже зрозуміли – «контора серйозна» )) Лого на гравіюванні по дереву виглядає дуже стильно. Всі матеріали нарешті виглядають цілісно. Раджу всім хто хоче свіжий дизайн та хоче виглядати сучасно!</p></div>
+  <div class="review-full hide" id="review-full-24" data-name="Майя Худоназарова" data-company="Маркетинг-директор Rens"><p>Завдяки професіоналізму команди «Проекція» для нашої компанії було успішно розроблено два сайти. Хочемо особливо відзначити структурований підхід до роботи: чітке дотримання термінів, своєчасний документообіг та злагоджену комунікацію на всіх етапах проєктів. Команда завжди глибоко занурювалася в специфіку нашого бізнесу, пропонувала сучасні та актуальні рішення. Дякуємо команді «Проекція» за професіоналізм, відповідальність та якісну співпрацю!</p></div>
+  <div class="review-full hide" id="review-full-27" data-name="Ксенія" data-company="CSD, маркетолог"><p>Сподобалася лояльність до некомпетентності замовника, бажання пояснити, як потрібно, і допомогти замовнику прийняти правильне рішення, відсутність нав’язування непотрібних послуг, гнучкість, вміння почути та побачити бажання клієнта і реалізувати їх.</p></div>
+
+  <dialog class="review-dialog" id="reviewDialog" aria-label="Повний текст відгуку">
+    <button class="review-dialog__close" type="button" aria-label="Закрити">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+    <div class="review-dialog__body"></div>
+  </dialog>
+</section>
+
+<!-- ============================================================== s13 · КОНТАКТИ
+     Слайд 31. WP: title, lead, cta[], contacts[], person{name, role}. -->
+<section class="section section--night on-night" id="final" aria-labelledby="final-title">
+  <div class="wrap grid">
+    <div class="final__head reveal">
+      <span class="label">09 — Контакти</span>
+      <h2 class="final__title mt-m" id="final-title">Є бренд.<br>Але немає <span class="em">системи?</span></h2>
+      <p class="lead mt-m">Розкажіть, що вже є — логотип, сайт, реклама. Разом подивимось, якого рівня брендбук закриє задачу.</p>
+
+      <div class="final__actions">
+        <a class="btn btn--accent" href="https://telegram.me/Yakushenkov" target="_blank" rel="noopener" data-cta>
+          Обговорити брендбук
+          <svg class="btn__arrow" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+        </a>
+        <a class="btn btn--night" href="tel:+380734174813">Зателефонувати</a>
+      </div>
+    </div>
+
+    <div class="final__contacts reveal" style="--reveal-delay:120ms">
+      <div class="contact-list">
+        <a href="tel:+380734174813"><span>+38 073 417 48 13</span><span>Телефон</span></a>
+        <a href="https://proekcia.com" target="_blank" rel="noopener"><span>proekcia.com</span><span>Сайт</span></a>
+        <a href="https://www.instagram.com/proekcia_studio/" target="_blank" rel="noopener"><span>proekcia_studio</span><span>Instagram</span></a>
+      </div>
+      <p class="final__person">
+        <span class="night-fg">Влад Якушенков</span>
+        <span>Засновник та арт-директор</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================== ПОПАП CTA
+     Панель 1:1 з #modal-callback на proekcia.com: висувається справа на всю
+     висоту (0.85s, cubic-bezier(.16,1,.3,1) — той самий f-slideInPrevX із
+     fancybox), підкладка rgba(0,0,0,.2) з фейдом, біле полотно 590px,
+     заголовок великими, «залиті» поля з лейблом усередині, помаранчева
+     кнопка. Текст адаптований під лендинг.
+     УВАГА: форма ще нікуди не відправляє — підставте адресу в data-endpoint
+     (WP/CRM/бот), інакше заявка нікуди не піде. Див. initCtaModal. -->
+<dialog class="cta-modal" id="ctaModal" aria-labelledby="ctaModalTitle">
+  <button class="cta-modal__close" type="button" aria-label="Закрити" data-cta-close>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M13 1L1 13M1 1l12 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+  </button>
+
+  <div class="cta-modal__inner">
+    <h2 class="cta-modal__title" id="ctaModalTitle">Обговорити<br>брендбук</h2>
+    <p class="cta-modal__text">Залиште контакти — зателефонуємо, розберемо ваш випадок і підкажемо, якого рівня брендбук закриє задачу.</p>
+
+    <form class="cta-form" id="ctaForm" novalidate data-endpoint="">
+      <div class="form-group">
+        <label for="cta-name">Ваше ім'я</label>
+        <input id="cta-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div class="form-group">
+        <label for="cta-phone">Номер телефону</label>
+        <input id="cta-phone" name="phone" type="tel" autocomplete="tel" required>
+      </div>
+      <div class="form-group">
+        <label for="cta-msg">Про ваш бізнес</label>
+        <textarea id="cta-msg" name="msg" rows="4"></textarea>
+      </div>
+
+      <button class="cta-form__submit" type="submit">Очікую дзвінок</button>
+      <p class="cta-form__note">Натискаючи кнопку, ви погоджуєтесь на обробку персональних даних</p>
+    </form>
+
+    <div class="cta-modal__done" hidden>
+      <p class="cta-modal__done-title">Дякуємо, заявку прийнято</p>
+      <p class="cta-modal__text">Зателефонуємо найближчим часом. Якщо зручніше написати — <a href="https://telegram.me/Yakushenkov" target="_blank" rel="noopener">Telegram</a> або <a href="tel:+380734174813">+38 073 417 48 13</a>.</p>
+    </div>
+  </div>
+</dialog>
+
+
+<footer class="footer on-night">
+  <div class="wrap footer__inner">
+    <span>© <span id="year">2026</span> Proekcia — студія дизайну та маркетингу</span>
+    <span><a href="https://proekcia.com" target="_blank" rel="noopener">proekcia.com</a></span>
+  </div>
+</footer>
+
+<script src="js/main.js?v=34" defer></script>
+</body>
+</html>

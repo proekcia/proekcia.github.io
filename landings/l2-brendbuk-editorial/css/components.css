@@ -1,0 +1,410 @@
+/* =========================================================================
+   PROEKCIA · Брендбук — 03. COMPONENTS
+   Перевикористовувані елементи: кнопки, лейбли-пігулки, шапка, мобільне меню,
+   медіа-рамки, картка кейсу, рядок «до → після», контакти, футер.
+   Секційної логіки тут немає — лише компоненти.
+   ========================================================================= */
+
+/* ============================ КНОПКА ===================================== */
+.btn{
+  display:inline-flex;align-items:center;gap:.7em;
+  min-height:52px;                 /* зручно для пальця */
+  padding:.9em 1.5em;
+  border-radius:var(--radius-pill);
+  font-size:var(--fs-small);
+  font-weight:400;
+  letter-spacing:-.005em;
+  line-height:1;
+  white-space:nowrap;
+  transition:background var(--dur-fast) var(--ease),
+             color var(--dur-fast) var(--ease),
+             border-color var(--dur-fast) var(--ease),
+             transform var(--dur-fast) var(--ease);
+}
+.btn:active{transform:translateY(1px);}
+
+.btn__arrow{
+  width:1em;height:1em;flex:0 0 auto;
+  transition:transform var(--dur) var(--ease);
+}
+.btn:hover .btn__arrow{transform:translateX(.28em);}
+
+.btn--primary{background:var(--ink);color:var(--white);}
+.btn--primary:hover{background:var(--accent);}
+
+.btn--accent{background:var(--accent);color:var(--accent-ink);}
+.btn--accent:hover{background:var(--ink);}
+
+.btn--ghost{border:1px solid var(--ink);color:var(--ink);}
+.btn--ghost:hover{background:var(--ink);color:var(--white);}
+
+.btn--night{border:1px solid var(--night-rule);color:var(--night-fg);}
+.btn--night:hover{background:var(--night-fg);color:var(--ink);border-color:var(--night-fg);}
+
+.btn--sm{min-height:42px;padding:.7em 1.15em;font-size:var(--fs-label);letter-spacing:.02em;}
+
+/* ============================ ПІГУЛКА / ТЕГ ============================== */
+/* Форма з презентації: контурна «пігулка» з великим радіусом. */
+.pill{
+  display:inline-flex;align-items:center;gap:.6em;
+  padding:.62em 1.05em;
+  border:1px solid var(--rule);
+  border-radius:var(--radius-pill);
+  font-size:var(--fs-small);
+  color:var(--ink-70);
+  background:transparent;
+}
+.pill--solid{background:var(--ink);border-color:var(--ink);color:var(--white);}
+.pill--accent{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);}
+.pill--night{border-color:var(--night-rule);color:var(--night-fg);}
+
+/* маркер-цифра з презентації: чорне коло, світла цифра */
+.dot-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:0 0 auto;
+  width:2.6em;height:2.6em;border-radius:50%;
+  background:var(--ink);color:var(--white);
+  font-size:var(--fs-label);letter-spacing:.04em;
+  font-variant-numeric:tabular-nums;
+}
+.section--night .dot-num{background:var(--night-fg);color:var(--ink);}
+
+/* ============================ ШАПКА ====================================== */
+.header{
+  position:fixed;inset:0 0 auto 0;z-index:100;
+  height:var(--header-h);
+  display:flex;align-items:center;
+  background:transparent;
+  transition:background var(--dur) var(--ease),
+             border-color var(--dur) var(--ease),
+             backdrop-filter var(--dur) var(--ease);
+  border-bottom:1px solid transparent;
+}
+.header.is-stuck{
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(14px) saturate(1.1);
+  border-bottom-color:var(--rule-soft);
+}
+.header__inner{
+  width:100%;max-width:var(--page-max);margin-inline:auto;
+  padding-inline:var(--gutter);
+  display:flex;align-items:center;gap:var(--sp-4);
+}
+.header__logo{flex:0 0 auto;display:block;}
+.header__logo img{width:clamp(104px,9vw,136px);height:auto;}
+
+.header__nav{
+  display:flex;align-items:center;gap:clamp(1rem,1.9vw,2.1rem);
+  margin-inline:auto;
+}
+.header__nav a{
+  font-size:var(--fs-small);
+  color:var(--ink-70);
+  padding-block:.4rem;
+  position:relative;
+  transition:color var(--dur-fast) var(--ease);
+}
+.header__nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur) var(--ease);
+}
+.header__nav a:hover,.header__nav a[aria-current="true"]{color:var(--ink);}
+.header__nav a:hover::after,.header__nav a[aria-current="true"]::after{transform:scaleX(1);}
+
+.header__cta{margin-left:auto;}
+
+.burger{
+  display:none;
+  width:46px;height:46px;margin-left:auto;
+  align-items:center;justify-content:center;
+  border-radius:50%;border:1px solid var(--rule);
+}
+.burger span{
+  display:block;width:18px;height:1.5px;background:var(--ink);
+  position:relative;transition:background var(--dur-fast) var(--ease);
+}
+.burger span::before,.burger span::after{
+  content:"";position:absolute;left:0;width:18px;height:1.5px;background:var(--ink);
+  transition:transform var(--dur) var(--ease);
+}
+.burger span::before{top:-5px;}
+.burger span::after{top:5px;}
+.burger[aria-expanded="true"] span{background:transparent;}
+.burger[aria-expanded="true"] span::before{transform:translateY(5px) rotate(45deg);}
+.burger[aria-expanded="true"] span::after{transform:translateY(-5px) rotate(-45deg);}
+
+@media (max-width:1023.98px){
+  .header__nav,.header__cta{display:none;}
+  .burger{display:inline-flex;}
+}
+
+/* шапка над темною секцією — інвертується */
+.header.is-over-night.is-stuck{
+  background:color-mix(in srgb,var(--night) 86%,transparent);
+  border-bottom-color:var(--night-rule);
+}
+.header.is-over-night .header__logo img{filter:invert(1);}
+.header.is-over-night .header__nav a{color:var(--night-fg-55);}
+.header.is-over-night .header__nav a:hover,
+.header.is-over-night .header__nav a[aria-current="true"]{color:var(--night-fg);}
+.header.is-over-night .header__cta.btn--primary{background:var(--night-fg);color:var(--ink);}
+.header.is-over-night .header__cta.btn--primary:hover{background:var(--accent);color:var(--white);}
+.header.is-over-night .burger{border-color:var(--night-rule);}
+.header.is-over-night .burger span,
+.header.is-over-night .burger span::before,
+.header.is-over-night .burger span::after{background:var(--night-fg);}
+
+/* коли меню відкрите — шапка стає частиною темного оверлею */
+body.is-locked .header,
+body.is-locked .header.is-stuck{
+  background:transparent;backdrop-filter:none;border-bottom-color:transparent;
+}
+body.is-locked .header__logo img{filter:invert(1);}
+body.is-locked .burger{border-color:var(--night-rule);}
+body.is-locked .burger span,
+body.is-locked .burger span::before,
+body.is-locked .burger span::after{background:var(--night-fg);}
+body.is-locked .burger[aria-expanded="true"] span{background:transparent;}
+
+/* ============================ МОБІЛЬНЕ МЕНЮ ============================== */
+.menu{
+  position:fixed;inset:0;z-index:99;
+  background:var(--night);color:var(--night-fg);
+  padding:calc(var(--header-h) + var(--sp-5)) var(--gutter) var(--sp-5);
+  display:flex;flex-direction:column;justify-content:space-between;gap:var(--sp-5);
+  overflow-y:auto;
+  opacity:0;visibility:hidden;
+  transform:translateY(-1.5%);
+  transition:opacity var(--dur) var(--ease),transform var(--dur) var(--ease),visibility var(--dur);
+}
+.menu.is-open{opacity:1;visibility:visible;transform:none;}
+.menu__links{display:flex;flex-direction:column;gap:.35em;}
+.menu__links a{
+  font-size:clamp(1.9rem,8vw,2.6rem);
+  font-weight:500;letter-spacing:var(--ls-head);line-height:1.1;
+}
+.menu__links a:hover{color:var(--accent);}
+.menu__foot{display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);align-items:center;}
+.menu__foot a{font-size:var(--fs-small);color:var(--night-fg-55);}
+.menu__foot a:hover{color:var(--night-fg);}
+
+/* ============================ МЕДІА ====================================== */
+.media{
+  position:relative;overflow:hidden;
+  background:var(--paper-3);
+  border-radius:var(--radius-sm);
+}
+.media--pill{border-radius:clamp(20px,4vw,56px);}
+.media img,.media video{width:100%;height:100%;object-fit:cover;display:block;}
+.media--ratio{aspect-ratio:var(--ratio,16/10);}
+.media--plain{background:transparent;}   /* рендери з власним фоном */
+
+.figure__cap{
+  margin-top:.8rem;
+  font-size:var(--fs-label);
+  letter-spacing:.04em;
+  color:var(--ink-38);
+}
+
+/* ============================ РЯДОК «ДО → ПІСЛЯ» ========================= */
+/* Компонент секції 05 (сценарії) — форма з презентації: дві пігулки і стрілка. */
+.flowrow{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  gap:clamp(.75rem,1.6vw,1.5rem);
+  padding-block:clamp(1rem,1.8vw,1.6rem);
+  border-top:1px solid var(--rule);
+}
+.flowrow:last-child{border-bottom:1px solid var(--rule);}
+.flowrow__from,.flowrow__to{
+  display:flex;align-items:center;min-height:56px;
+  padding:.85em 1.3em;border-radius:var(--radius-pill);
+  font-size:clamp(.95rem,1.35vw,1.2rem);
+  line-height:1.25;
+}
+.flowrow__from{border:1px solid var(--rule);color:var(--ink-70);}
+.flowrow__to{background:var(--ink);color:var(--white);}
+.flowrow__arrow{
+  display:flex;align-items:center;justify-content:center;
+  width:clamp(38px,3.4vw,52px);aspect-ratio:1;
+  border:1px solid var(--rule);border-radius:50%;
+  color:var(--ink-55);
+}
+.flowrow__arrow svg{width:42%;height:auto;}
+/* на появі підсвічуємо лише стрілку — акцент лишається стриманим */
+.flowrow__arrow{transition:color var(--dur-slow) var(--ease),border-color var(--dur-slow) var(--ease);}
+.flowrow.is-in .flowrow__arrow{color:var(--accent);border-color:var(--accent);}
+
+@media (max-width:720px){
+  .flowrow{grid-template-columns:minmax(0,1fr);gap:.55rem;}
+  .flowrow__arrow{transform:rotate(90deg);margin-inline:auto;}
+}
+
+/* ============================ СПИСОК-ПЕРЕЛІК ============================= */
+.speclist{border-top:1px solid var(--rule);}
+.speclist li{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(.9rem,2vw,2rem);
+  align-items:baseline;
+  padding-block:clamp(.85rem,1.5vw,1.25rem);
+  border-bottom:1px solid var(--rule);
+}
+.speclist li > span:last-child{font-size:clamp(1rem,1.35vw,1.2rem);}
+.section--night .speclist,.section--night .speclist li{border-color:var(--night-rule);}
+
+/* ============================ КРУГЛА КНОПКА-СТРІЛКА ====================== */
+.rnav{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex:none;
+  border:1px solid var(--ink);border-radius:50%;
+  color:var(--ink);background:transparent;
+  transition:background var(--dur-fast) var(--ease),
+             color var(--dur-fast) var(--ease),
+             border-color var(--dur-fast) var(--ease),
+             opacity var(--dur-fast) var(--ease);
+}
+.rnav svg{width:45%;height:auto;}
+.rnav[data-dir="-1"] svg{transform:rotate(180deg);}
+.rnav:hover{background:var(--ink);color:var(--white);border-color:var(--ink);}
+.rnav[disabled]{opacity:.3;pointer-events:none;}
+
+/* ============================ КОНТАКТИ =================================== */
+.contact-list{display:flex;flex-direction:column;}
+.contact-list a{
+  display:flex;align-items:baseline;justify-content:space-between;gap:var(--sp-3);
+  padding-block:clamp(.9rem,1.5vw,1.15rem);
+  border-top:1px solid var(--night-rule);
+  font-size:clamp(1.05rem,1.8vw,1.5rem);
+  transition:color var(--dur-fast) var(--ease),padding-left var(--dur) var(--ease);
+}
+.contact-list a:last-child{border-bottom:1px solid var(--night-rule);}
+.contact-list a:hover{color:var(--accent);padding-left:.5rem;}
+.contact-list span:last-child{font-size:var(--fs-label);letter-spacing:var(--ls-label);
+  text-transform:uppercase;color:var(--night-fg-55);}
+
+
+/* ============================ ПОПАП CTA =================================
+   Панель із #modal-callback на proekcia.com. Числа зняті getComputedStyle()
+   на живому сайті при 390 і 1440px: ширина 590px, падінги 45.36/56.7,
+   заголовок 3.75vw (10.26vw на мобільному), поле 67px із «залитим» фоном
+   rgba(0,0,0,.08) і лейблом усередині, кнопка #FF4613 з радіусом 9px.
+   Анімація — той самий f-slideInPrevX: 0.85s cubic-bezier(.16,1,.3,1).   */
+.cta-modal{
+  width:min(590px,100%);max-width:100%;
+  height:100%;max-height:100%;
+  margin:0 0 0 auto;                 /* притиснута до правого краю */
+  padding:0;border:0;
+  background:var(--white);color:var(--ink);
+  overflow-y:auto;overscroll-behavior:contain;
+}
+.cta-modal::backdrop{background:rgba(0,0,0,.2);}
+
+/* відкриття: полотно виїжджає справа, підкладка проявляється */
+.cta-modal[open]{animation:cta-slide-in .85s cubic-bezier(.16,1,.3,1) both;}
+.cta-modal[open]::backdrop{animation:cta-fade-in .85s cubic-bezier(.16,1,.3,1) both;}
+.cta-modal.is-closing{animation:cta-slide-out .45s cubic-bezier(.16,1,.3,1) both;}
+.cta-modal.is-closing::backdrop{animation:cta-fade-out .45s cubic-bezier(.16,1,.3,1) both;}
+@keyframes cta-slide-in{from{transform:translateX(100%);}to{transform:translateX(0);}}
+@keyframes cta-slide-out{from{transform:translateX(0);}to{transform:translateX(100%);}}
+@keyframes cta-fade-in{from{opacity:0;}to{opacity:1;}}
+@keyframes cta-fade-out{from{opacity:1;}to{opacity:0;}}
+@media (prefers-reduced-motion:reduce){
+  .cta-modal[open],.cta-modal[open]::backdrop,
+  .cta-modal.is-closing,.cta-modal.is-closing::backdrop{animation:none;}
+}
+
+.cta-modal__inner{padding:5.125vw;}
+@media only screen and (min-width:992px){
+  .cta-modal__inner{padding:3.15vw 3.15vw 3.15vw 3.94vw;}
+}
+
+.cta-modal__close{
+  position:absolute;top:11px;right:19px;
+  display:flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  background:var(--ink);color:var(--white);
+  transition:background var(--dur-fast) var(--ease);
+}
+.cta-modal__close:hover{background:var(--accent);}
+
+.cta-modal__title{
+  font-weight:500;text-transform:uppercase;
+  line-height:1.1;letter-spacing:-.0144em;
+  font-size:10.26vw;
+}
+@media only screen and (min-width:768px){ .cta-modal__title{font-size:5.73vw;} }
+@media only screen and (min-width:992px){ .cta-modal__title{font-size:3.75vw;} }
+
+.cta-modal__text{
+  margin-top:1.1rem;color:var(--ink-70);
+  font-size:4.1vw;line-height:1.35;max-width:34ch;
+}
+@media only screen and (min-width:768px){ .cta-modal__text{font-size:2.08vw;} }
+@media only screen and (min-width:992px){ .cta-modal__text{font-size:1.05vw;} }
+.cta-modal__text a{text-decoration:underline;text-underline-offset:.2em;}
+.cta-modal__text a:hover{color:var(--accent);}
+
+/* ---- поля: «залиті», лейбл усередині зверху ---- */
+.cta-form{margin-top:clamp(1.5rem,4vw,2.25rem);}
+.cta-form .form-group{position:relative;margin-bottom:5.74px;}
+.cta-form label{
+  position:absolute;top:12px;left:24px;
+  color:var(--ink-38);font-size:16px;line-height:1.4;
+  pointer-events:none;
+}
+.cta-form input,
+.cta-form textarea{
+  display:block;width:100%;
+  padding:35.2px 24px 12.8px;
+  border:0;border-radius:4px;
+  background:rgba(13,13,13,.08);
+  color:var(--ink);font-family:var(--ff);font-size:16px;line-height:1.2;
+  transition:background var(--dur-fast) var(--ease),box-shadow var(--dur-fast) var(--ease);
+}
+.cta-form input{height:67px;}
+.cta-form textarea{height:240px;resize:vertical;}
+.cta-form input:hover,.cta-form textarea:hover{background:rgba(13,13,13,.12);}
+.cta-form input:focus,.cta-form textarea:focus{
+  outline:0;background:rgba(13,13,13,.12);
+  box-shadow:inset 0 0 0 1px var(--ink);
+}
+.cta-form .form-group.has-error input,
+.cta-form .form-group.has-error textarea{box-shadow:inset 0 0 0 1px var(--accent);}
+.cta-form .form-group.has-error label{color:var(--accent);}
+
+.cta-form__submit{
+  width:100%;margin-top:17.22px;
+  padding:18px 27px;border-radius:9px;
+  background:var(--accent);color:var(--white);
+  font-family:var(--ff);font-size:4.62vw;line-height:1.2;
+  transition:background var(--dur-fast) var(--ease);
+}
+@media only screen and (min-width:768px){ .cta-form__submit{font-size:2.34vw;} }
+@media only screen and (min-width:992px){ .cta-form__submit{font-size:1.25vw;} }
+.cta-form__submit:hover{background:var(--ink);}
+.cta-form__submit[disabled]{opacity:.6;pointer-events:none;}
+
+.cta-form__note{
+  margin-top:1rem;color:var(--ink-38);
+  font-size:var(--fs-label);line-height:1.4;
+}
+
+.cta-modal__done{padding-top:clamp(1.5rem,4vw,2.25rem);}
+.cta-modal__done-title{font-size:var(--fs-h4);font-weight:500;}
+
+/* ============================ ФУТЕР ====================================== */
+.footer{
+  background:var(--night);color:var(--night-fg-55);
+  padding-block:var(--sp-5);
+  font-size:var(--fs-small);
+}
+.footer__inner{
+  display:flex;flex-wrap:wrap;gap:var(--sp-3) var(--sp-5);
+  align-items:center;justify-content:space-between;
+  border-top:1px solid var(--night-rule);padding-top:var(--sp-4);
+}
+.footer a:hover{color:var(--night-fg);}
