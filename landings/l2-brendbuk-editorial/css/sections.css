@@ -385,32 +385,80 @@
   .who__card p{margin-left:0;width:100%;}
 }
 
-/* ===================== s07 · РІВНІ ======================================= */
-.levels__head{grid-column:1 / span 5;}
-.levels__media{grid-column:9 / span 4;grid-row:1 / span 2;align-self:start;}
-.levels__list{grid-column:1 / span 7;margin-top:var(--sp-4);}
-.levels__cta{grid-column:1 / span 7;margin-top:var(--sp-4);}
+/* ===================== s07 · РІВНІ =======================================
+   Макет Figma 1920: ліва колонка 879 (кол. 1–7), картинка 743.53×932.91
+   притиснута до правого краю сторінки (виходить за поле контенту).
+   Рядок рівня 129.66: номер 13.1/20, назва 38.4/40 капсом, підпис 15.2/24. */
+.levels{position:relative;overflow:hidden;
+  padding-block:clamp(.5rem,.476vw,8px) clamp(2rem,2.976vw,50px);}
+.levels .grid{row-gap:0;}              /* вертикальні відступи задані вручну */
+.levels__head{grid-column:1 / span 7;}
+.levels__head .label{display:block;}   /* без базової лінії — підпис рівно на 8px */
+.levels__head .h2{
+  margin-top:clamp(1.2rem,3.69vw,62px);
+  max-width:96%;                        /* 844.28 від колонки 879.33 */
+}
+.levels__list{grid-column:1 / span 7;margin-top:clamp(2rem,3.87vw,65px);}
+.levels__cta{grid-column:1 / span 7;margin-top:clamp(2.5rem,4.702vw,79px);}
+
+/* картинка йде до правого краю екрана, як у макеті */
+.levels__media{
+  position:absolute;top:clamp(12px,1.196vw,20px);right:0;
+  width:clamp(240px,38.73vw,743.53px);
+  margin:0;
+}
+.levels__media img{display:block;width:100%;height:auto;}
 
 .level{
-  display:grid;grid-template-columns:auto minmax(0,1fr);
-  gap:clamp(1rem,2.2vw,2.2rem);
-  align-items:start;
-  padding-block:clamp(1.1rem,2.2vw,1.8rem);
+  display:grid;grid-template-columns:clamp(34px,3.19vw,53.6px) minmax(0,1fr);
+  gap:0;align-items:start;
+  padding-top:clamp(1rem,1.595vw,26.8px);
+  padding-bottom:clamp(1rem,1.982vw,33.3px);
   border-top:1px solid var(--rule);
 }
 .level:last-of-type{border-bottom:1px solid var(--rule);}
-.level__name{font-size:clamp(1.5rem,3vw,2.4rem);line-height:1.05;text-transform:uppercase;}
-.level__desc{margin-top:.45rem;color:var(--ink-55);font-size:var(--fs-small);}
+.level .num{
+  padding-top:3px;
+  font-size:clamp(11px,.78vw,13.1px);line-height:1.527;
+  letter-spacing:.06em;color:var(--ink-38);
+}
+.level__name{
+  font-size:clamp(1.4rem,2.286vw,38.4px);
+  font-weight:500;line-height:1.042;letter-spacing:-.025em;
+  text-transform:uppercase;
+}
+.level__desc{
+  margin-top:4.5px;
+  font-size:clamp(.9rem,.905vw,15.2px);line-height:1.579;
+  letter-spacing:-.0116em;color:var(--ink-55);
+}
+
+/* абзац і кнопка під списком */
+.levels__cta .text{
+  max-width:62.13%;                     /* 546.36 від колонки 879.33 */
+  font-size:clamp(1rem,1.048vw,17.6px);line-height:1.534;
+  letter-spacing:-.01em;color:var(--ink-70);
+}
+.levels__cta .btn{
+  margin-top:clamp(1rem,1.385vw,23.3px);
+  min-height:clamp(44px,3.095vw,52px);
+  padding-inline:clamp(1rem,1.417vw,23.8px);
+  gap:clamp(.5rem,.613vw,10.3px);
+  font-size:clamp(.9rem,.905vw,15.2px);
+}
+.levels__cta .btn__arrow{width:clamp(12px,.904vw,15.19px);height:auto;}
+
 @media (max-width:1280px){
   .levels__head,.levels__list,.levels__cta{grid-column:1 / span 8;}
-  .levels__media{grid-column:10 / span 3;}
 }
 @media (max-width:860px){
   /* на вузькому екрані порядок читання: заголовок → рівні → ілюстрація → CTA */
   .levels__head{order:1;}
+  .levels__head .h2{max-width:none;}
   .levels__list{order:2;}
-  .levels__media{order:3;max-width:260px;margin-top:var(--sp-3);}
+  .levels__media{position:static;order:3;width:min(320px,72%);margin:var(--sp-4) auto 0;}
   .levels__cta{order:4;}
+  .levels__cta .text{max-width:none;}
 }
 
 /* ===================== s08 · ТРИ ШАРИ ==================================== */
