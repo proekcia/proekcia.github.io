@@ -462,7 +462,7 @@
   .levels__head .h2{max-width:none;}
   .levels__list{order:2;}
   /* картинка притиснута до правого краю екрана, як і на десктопі */
-  .levels__media{position:static;order:3;width:min(420px,96%);
+  .levels__media{position:static;order:3;width:min(460px,calc(100% + var(--gutter)));
     margin:var(--sp-4) calc(-1 * var(--gutter)) 0 auto;}
   .levels__cta{order:4;}
   .levels__cta .text{max-width:none;}
