@@ -191,9 +191,10 @@
   .hero__word--buk{left:57.692%;top:21.953%;width:37.18%;text-align:right;}
 
   .hero__letter{display:block;}
-  /* +10% до розміру (низ лишився на місці) і ще -10px угору */
-  .hero__letter--r{left:15.294%;top:11.648%;bottom:auto;width:13.000%;height:11.147%;}
-  .hero__letter--k{left:82.551%;top:23.530%;bottom:auto;width:11.664%;height:9.339%;}
+  /* +18.8% до розміру від макета, низ на 2px нижче за макетний
+     (тобто на 8px нижче за попередній варіант) */
+  .hero__letter--r{left:14.774%;top:11.911%;bottom:auto;width:14.038%;height:12.039%;}
+  .hero__letter--k{left:82.086%;top:23.937%;bottom:auto;width:12.595%;height:10.087%;}
 
   .hero__cutout{left:.946%;bottom:0;top:auto;width:98.108%;margin:0;max-width:none;}
 
