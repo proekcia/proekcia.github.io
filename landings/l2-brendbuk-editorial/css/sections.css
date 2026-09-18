@@ -463,6 +463,8 @@
     margin:var(--sp-4) calc(-1 * var(--gutter)) 0 auto;}
   .levels__cta{order:4;}
   .levels__cta .text{max-width:none;}
+  /* кнопка на всю ширину, щоб не виглядала збоку */
+  .levels__cta .btn{display:flex;width:100%;justify-content:center;}
 }
 
 /* ===================== s08 · ТРИ ШАРИ ==================================== */
