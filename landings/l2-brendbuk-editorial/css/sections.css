@@ -89,28 +89,6 @@
   }
 }
 
-/* ---- кіт, що веде головою за курсором (тільки з мишею) ----
-   .hero__cat — нерухома основа (кадр із ролика), .hero__cat-head — шар
-   голови: спрайт 4×4 із 13 кадрів, кадр вибирає JS. Геометрія підібрана
-   так, щоб кіт став рівно там само, де стояв прозорий cutout.webp. */
-.hero__cat{display:none;}
-@media only screen and (min-width:768px){
-  .hero-cat-on .hero__cutout{visibility:hidden;}
-  .hero-cat-on .hero__cat{
-    display:block;position:absolute;
-    left:25.57%;bottom:-.235%;width:50.57%;aspect-ratio:1;
-    background:url(../images/hero/cat-base.webp) center / 100% 100% no-repeat;
-    pointer-events:none;
-  }
-  .hero__cat-head{
-    position:absolute;left:9.722%;top:0;width:80.556%;height:55.556%;
-    background-image:url(../images/hero/cat-head.webp);
-    background-size:400% 400%;      /* спрайт 4×4, 16 положень по колу */
-    background-position:0% 0%;
-    will-change:background-position;
-  }
-}
-
 /* ---- лід ---- */
 .hero__lead{
   margin-top:6vw;

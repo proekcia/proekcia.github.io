@@ -75,53 +75,6 @@
     window.addEventListener('resize', onScroll, { passive: true });
   }
 
-  /* ---------- 1c. Кіт веде головою за курсором ------------------------- */
-  function initCatHead() {
-    var cat = document.querySelector('.hero__cat');
-    var head = cat && cat.querySelector('.hero__cat-head');
-    if (!head) return;
-    if (!window.matchMedia('(pointer:fine)').matches) return;   /* тільки миша */
-    if (reduced.matches) return;
-    if (!window.matchMedia('(min-width:768px)').matches) return;
-
-    /* 16 положень голови по колу: кадр 0 — погляд ліворуч (180°),
-       далі за годинниковою стрілкою з кроком 22.5°. */
-    var N = 16, COLS = 4, ROWS = 4, STEP = 360 / N;
-    var HX = 0.447, HY = 0.261;      /* центр голови в межах .hero__cat */
-    var targetAng = 180, curAng = 180, raf = 0;
-
-    var apply = function (k) {
-      head.style.backgroundPosition =
-        ((k % COLS) * 100 / (COLS - 1)) + '% ' +
-        (Math.floor(k / COLS) * 100 / (ROWS - 1)) + '%';
-    };
-
-    var wrap = function (a) { return ((a + 180) % 360 + 360) % 360 - 180; };
-
-    var step = function () {
-      raf = 0;
-      curAng = wrap(curAng + wrap(targetAng - curAng) * 0.18);   /* м'яке доведення */
-      var k = Math.round(wrap(180 - curAng) / STEP);
-      apply(((k % N) + N) % N);
-      if (Math.abs(wrap(targetAng - curAng)) > 0.4) raf = window.requestAnimationFrame(step);
-    };
-
-    var sheet = new Image();
-    sheet.onload = function () {
-      document.body.classList.add('hero-cat-on');
-      apply(0);
-      window.addEventListener('mousemove', function (e) {
-        var r = cat.getBoundingClientRect();
-        var dx = e.clientX - (r.left + r.width * HX);
-        var dy = e.clientY - (r.top + r.height * HY);
-        if (dx * dx + dy * dy < 3600) return;      /* просто під носом — не смикаємось */
-        targetAng = Math.atan2(-dy, dx) * 180 / Math.PI;
-        if (!raf) raf = window.requestAnimationFrame(step);
-      }, { passive: true });
-    };
-    sheet.src = 'images/hero/cat-head.webp';
-  }
-
   /* ---------- 2. Меню (панель #sidenav, як на сайті) --------------------- */
   function initMenu() {
     var panel = document.getElementById('sidenav');
@@ -518,7 +471,6 @@
   function init() {
     initHeader();
     initHeaderTheme();
-    initCatHead();
     initMenu();
     initReveal();
     initNavSpy();
