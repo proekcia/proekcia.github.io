@@ -148,14 +148,14 @@
 .hamburger__box{
   position:relative;display:block;flex:none;
   width:56.5px;height:29.2px;border-radius:352px;   /* з мобільного макета */
-  background:var(--white);
+  background:var(--ink);          /* за замовчуванням чорна пігулка */
 }
 .hamburger__inner,
 .hamburger__inner::before,
 .hamburger__inner::after{
   position:absolute;left:50%;
   width:22.21px;height:2px;border-radius:352px;   /* риски жирніші */
-  background:var(--ink);          /* за замовчуванням чорні */
+  background:var(--white);        /* з білими рисками */
   transition:transform var(--dur) var(--ease),opacity var(--dur-fast) var(--ease);
 }
 
@@ -185,7 +185,8 @@
 }
 .site-header.is-over-accent .site-header__logo img{filter:invert(1) brightness(2);}
 .site-header.is-over-accent .hamburger{color:var(--white);}
-/* помаранчеві риски — тільки над помаранчевим фоном */
+/* над помаранчевим фоном — навпаки: біла пігулка з помаранчевими рисками */
+.site-header.is-over-accent .hamburger__box{background:var(--white);}
 .site-header.is-over-accent .hamburger__inner::before,
 .site-header.is-over-accent .hamburger__inner::after{background:var(--accent);}
 .site-header.is-over-accent .site-header__nav a{color:rgba(255,255,255,.85);}
