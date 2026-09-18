@@ -27,7 +27,7 @@
 }
 @media only screen and (max-width:767px){ .hero{padding:0;} }
 /* до 992px композиція йде потоком одразу під шапкою, а не притискається донизу */
-@media only screen and (max-width:991px){ .hero{align-items:stretch;} }
+@media only screen and (max-width:767px){ .hero{align-items:flex-end;} }
 
 .hero__stage{
   position:relative;
@@ -35,7 +35,7 @@
   container-type:inline-size;
   padding:calc(var(--header-h) + 6vw) var(--gutter) 4vw;
 }
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__stage{
     aspect-ratio:1680 / 1004;
     padding:0;
@@ -60,7 +60,7 @@
   font-size:20vw;
   line-height:1;
 }
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__word{
     font-size:21.664cqw;      /* 363.965 / 1680 */
     line-height:26.012cqw;    /* 437 / 1680 */
@@ -75,7 +75,7 @@
   margin:4vw auto 0;
   pointer-events:none;        /* прозорий слот не має перехоплювати кліки */
 }
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__cutout{
     left:26.25%;bottom:0;top:auto;
     width:46.31%;max-width:none;margin:0;
@@ -91,7 +91,7 @@
   color:var(--white);max-width:28ch;
 }
 @media only screen and (min-width:768px){ .hero__lead{font-size:2.2vw;} }
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__lead{
     left:72.56%;top:26.57%;width:23.214%;margin:0;   /* нижче, ніж у макеті, на ~40px */
     font-size:1.3095cqw;      /* 22 / 1680 */
@@ -103,7 +103,7 @@
   display:flex;flex-direction:column;gap:2.5vw;
   margin-top:7vw;
 }
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__actions{display:contents;}
 }
 .hero__btn{
@@ -115,7 +115,7 @@
   transition:background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease);
 }
 @media only screen and (min-width:768px){ .hero__btn{font-size:2.2vw;} }
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__btn{
     justify-content:space-between;
     left:0;width:23.214%;                      /* по лівому краю лого */
@@ -150,13 +150,54 @@
 }
 .hero__letter--r{background-image:url("../images/hero/letter-r.svg");}
 .hero__letter--k{background-image:url("../images/hero/letter-k.svg");}
-@media only screen and (min-width:992px){
+@media only screen and (min-width:768px){
   .hero__letter{display:block;}
   /* низ контуру = низ білої літери, яку він накриває: у «р» це кінець
      виносного елемента (59.87% висоти сцени), у «к» — базова лінія (90.01%).
      Обидва числа зміряні canvas-метриками шрифту на живій сторінці. */
   .hero__letter--r{left:13.921%;top:auto;bottom:42.67%;width:13.770%;height:35.107%;}
   .hero__letter--k{left:83.91%;top:auto;bottom:11.90%;width:12.353%;height:29.414%;}
+}
+
+
+/* ---- мобільна версія: окремий артборд 390×693 з Figma ----
+   Усі координати — відсотки від нього, кеглі — cqw, тому композиція
+   масштабується від 360 до 767px так само, як намальована. */
+@media only screen and (max-width:767px){
+  .hero__stage{
+    aspect-ratio:390 / 693;
+    padding:0;
+  }
+  .hero__word,
+  .hero__cutout,
+  .hero__btn,
+  .hero__letter{position:absolute;}
+
+  .hero__word{
+    font-size:21.383cqw;      /* 83.3923 / 390 */
+    line-height:25.641cqw;    /* 100 / 390 */
+  }
+  .hero__word--brand{left:2.446%;top:8.939%;width:67.95%;}
+  .hero__word--buk{left:57.692%;top:21.953%;width:37.18%;text-align:right;}
+
+  .hero__letter{display:block;}
+  .hero__letter--r{left:15.885%;top:14.104%;bottom:auto;width:11.818%;height:10.134%;}
+  .hero__letter--k{left:83.082%;top:25.821%;bottom:auto;width:10.603%;height:8.491%;}
+
+  .hero__cutout{left:.946%;bottom:0;top:auto;width:98.108%;margin:0;max-width:none;}
+
+  .hero__lead{display:none;}   /* у мобільному макеті цього абзацу немає */
+
+  .hero__actions{display:contents;}
+  .hero__btn{
+    top:39.6%;height:5.181%;min-height:0;
+    width:44.872%;
+    font-size:2.7494cqw;      /* 10.7228 / 390 */
+    border-radius:704px;
+  }
+  .hero__btn--primary{left:5.128%;justify-content:space-between;padding:0 4.126%;}
+  .hero__btn--primary svg{width:2.749cqw;min-width:0;}
+  .hero__btn--ghost{left:50%;justify-content:center;padding:0;border-width:.7px;}
 }
 
 /* ===================== s02 · ЩО ТАКЕ БРЕНД ============================== */

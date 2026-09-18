@@ -92,7 +92,7 @@
   padding:1.6vw var(--gutter);
   display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);
 }
-@media only screen and (max-width:767px){ .site-header__inner{padding-block:.9rem;} }
+@media only screen and (max-width:767px){ .site-header__inner{padding:12px 20px;} }
 
 /* посилання в рядку — від 992px; нижче їх замінює бургер */
 /* навігація точно по центру рядка, незалежно від ширини лого і кнопки */
@@ -131,7 +131,7 @@
 .site-header.is-over-night .site-header__cta:hover{background:var(--ink);color:var(--white);}
 .site-header.is-over-night .site-header__cta{background:var(--night-fg);color:var(--ink);}
 
-.site-header__logo{display:block;flex:none;width:150px;}
+.site-header__logo{display:block;flex:none;width:150px;}   /* 150×32 у мобільному макеті */
 @media only screen and (min-width:768px){ .site-header__logo{width:12.53vw;max-width:200px;} }
 .site-header__logo img{width:100%;height:auto;}
 
@@ -144,31 +144,29 @@
 /* до 992px кнопка менша і в інверсії: біла пігулка з чорними рисками */
 .hamburger__box{
   position:relative;display:block;flex:none;
-  width:46px;height:24px;border-radius:151px;
+  width:56.5px;height:29.2px;border-radius:352px;   /* з мобільного макета */
   background:var(--white);
 }
 .hamburger__inner,
 .hamburger__inner::before,
 .hamburger__inner::after{
   position:absolute;left:50%;
-  width:18px;height:1.8px;
-  background:var(--ink);
+  width:22.21px;height:1.27px;border-radius:352px;
+  background:var(--accent);       /* риски помаранчеві, як у макеті */
   transition:transform var(--dur) var(--ease),opacity var(--dur-fast) var(--ease);
 }
 
 .hamburger__inner{top:50%;transform:translate(-50%,-50%);background:transparent;}
-.hamburger__inner::before{content:"";top:-3.6px;transform:translateX(-50%);}
-.hamburger__inner::after{content:"";top:3.6px;transform:translateX(-50%);}
+.hamburger__inner::before{content:"";top:-3.49px;transform:translateX(-50%);}
+.hamburger__inner::after{content:"";top:3.49px;transform:translateX(-50%);}
 
 /* стан «відкрито» — лінії складаються в хрестик */
-.hamburger.is-active .hamburger__inner::before{transform:translateX(-50%) translateY(3.6px) rotate(45deg);}
-.hamburger.is-active .hamburger__inner::after{transform:translateX(-50%) translateY(-3.6px) rotate(-45deg);}
+.hamburger.is-active .hamburger__inner::before{transform:translateX(-50%) translateY(3.49px) rotate(45deg);}
+.hamburger.is-active .hamburger__inner::after{transform:translateX(-50%) translateY(-3.49px) rotate(-45deg);}
 
 .hamburger:hover .hamburger__box{background:var(--accent);}
-.hamburger:hover .hamburger__inner,
 .hamburger:hover .hamburger__inner::before,
 .hamburger:hover .hamburger__inner::after{background:var(--white);}
-.hamburger:hover .hamburger__inner{background:transparent;}
 
 /* над помаранчевим героєм шапка світла */
 .site-header.is-over-accent:not(.is-stuck) .site-header__logo img{filter:invert(1) brightness(2);}
