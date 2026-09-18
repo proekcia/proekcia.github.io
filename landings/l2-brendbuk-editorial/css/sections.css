@@ -312,7 +312,21 @@
   .contrast{grid-template-columns:minmax(0,1fr);}
 }
 
-/* ===================== s05 · БРЕНДБУК У РЕАЛЬНІЙ РОБОТІ ================== */
+/* ===================== s05 · БРЕНДБУК У РЕАЛЬНІЙ РОБОТІ ==================
+   Макет Figma 1920: ліва колонка 485 (кол. 1–4), права 879 (кол. 6–12) —
+   сітка вже дає рівно ці ширини. Заголовок 96/79 у чотири рядки,
+   лід 19.92/31, картинка 879×472 з готовою маскою в самому PNG. */
+.flow__title{
+  font-size:clamp(2.4rem,5.714vw,96px);
+  font-weight:500;line-height:.823;letter-spacing:-.0198em;
+}
+.flow__lead{
+  font-size:clamp(1rem,1.186vw,19.92px);
+  line-height:1.556;letter-spacing:-.01em;color:var(--ink-70);
+}
+.flow__media img{display:block;width:100%;height:auto;}
+@media (max-width:860px){ .flow__title{line-height:.95;} .flow__title br{display:none;} }
+
 .flow__head{grid-column:1 / span 4;grid-row:1 / span 2;align-self:start;}
 .flow__media{grid-column:6 / span 7;grid-row:1;}
 .flow__rows{grid-column:6 / span 7;grid-row:2;margin-top:var(--sp-4);}

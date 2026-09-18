@@ -329,31 +329,39 @@
 /* Компонент секції 05 (сценарії) — форма з презентації: дві пігулки і стрілка. */
 .flowrow{
   display:grid;
-  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  /* 411 / 57 / 411 від 879 — як у макеті, чорне коло рівно в проміжку */
+  grid-template-columns:46.758% 6.485% 46.758%;
   align-items:center;
-  gap:clamp(.75rem,1.6vw,1.5rem);
-  padding-block:clamp(1rem,1.8vw,1.6rem);
+  gap:0;
+  padding-block:clamp(1rem,1.542vw,25.9px);
   border-top:1px solid var(--rule);
 }
 .flowrow:last-child{border-bottom:1px solid var(--rule);}
 .flowrow__from,.flowrow__to{
-  display:flex;align-items:center;min-height:56px;
-  padding:.85em 1.3em;border-radius:var(--radius-pill);
-  font-size:clamp(.95rem,1.35vw,1.2rem);
-  line-height:1.25;
+  display:flex;align-items:center;
+  border-radius:999px;
+  font-size:clamp(.95rem,1.143vw,19.2px);
+  line-height:1.25;letter-spacing:-.00917em;
 }
-.flowrow__from{border:1px solid var(--rule);color:var(--ink-70);}
-.flowrow__to{background:var(--ink);color:var(--white);}
+.flowrow__from{
+  min-height:clamp(46px,3.512vw,59px);
+  padding-left:clamp(1rem,1.545vw,25.95px);padding-right:1rem;
+  border:1px solid var(--ink);color:var(--ink);
+}
+.flowrow__to{
+  min-height:clamp(44px,3.393vw,57px);
+  padding-left:clamp(1rem,1.485vw,24.95px);padding-right:1rem;
+  background:var(--ink);color:var(--white);
+}
+/* чорне коло зі стрілкою — стик двох пігулок */
 .flowrow__arrow{
   display:flex;align-items:center;justify-content:center;
-  width:clamp(38px,3.4vw,52px);aspect-ratio:1;
-  border:1px solid var(--rule);border-radius:50%;
-  color:var(--ink-55);
+  justify-self:center;
+  width:clamp(38px,3.43vw,57.63px);aspect-ratio:1;
+  border-radius:50%;
+  background:var(--ink);color:var(--white);
 }
-.flowrow__arrow svg{width:42%;height:auto;}
-/* на появі підсвічуємо лише стрілку — акцент лишається стриманим */
-.flowrow__arrow{transition:color var(--dur-slow) var(--ease),border-color var(--dur-slow) var(--ease);}
-.flowrow.is-in .flowrow__arrow{color:var(--accent);border-color:var(--accent);}
+.flowrow__arrow svg{width:41.4%;height:auto;}
 
 @media (max-width:720px){
   .flowrow{grid-template-columns:minmax(0,1fr);gap:.55rem;}
