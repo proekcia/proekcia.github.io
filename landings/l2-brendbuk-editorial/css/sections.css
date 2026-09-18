@@ -108,6 +108,7 @@
 }
 .hero__btn{
   display:flex;align-items:center;justify-content:center;gap:1em;
+  font-family:var(--ff-display);
   min-height:56px;padding:1em 2em;
   border-radius:1570px;
   font-size:4.2vw;line-height:1;letter-spacing:-.005em;
@@ -132,7 +133,7 @@
   border:1.57px solid rgba(255,255,255,.85);
   color:rgba(255,255,255,.85);
 }
-.hero__btn--ghost:hover{background:rgba(255,255,255,.85);color:var(--accent);}
+.hero__btn--ghost:hover{background:var(--ink);color:var(--white);border-color:var(--ink);}
 
 /* ---- зелені контури літер: лягають поверх «р» і «к» ---- */
 .hero__letter{
@@ -147,8 +148,8 @@
 .hero__letter--k{background-image:url("../images/hero/letter-k.svg");}
 @media only screen and (min-width:992px){
   .hero__letter{display:block;}
-  .hero__letter--r{left:15.825%;top:15.72%;width:11.974%;height:30.528%;}
-  .hero__letter--k{left:83.91%;top:51.02%;width:10.742%;height:25.577%;}
+  .hero__letter--r{left:15.825%;top:20.7%;width:11.974%;height:30.528%;}
+  .hero__letter--k{left:83.91%;top:56%;width:10.742%;height:25.577%;}
 }
 
 /* ===================== s02 · ЩО ТАКЕ БРЕНД ============================== */
@@ -498,6 +499,7 @@
 @media only screen and (min-width:992px){ .works__foot{margin-top:3.36vw;} }
 .btn-bordered{
   display:inline-flex;align-items:center;justify-content:center;
+  font-family:var(--ff-display);
   border:1px solid var(--ink);border-radius:10em;
   background:transparent;color:var(--ink);
   font-size:3.59vw;line-height:1;padding:1.5em 3em;
@@ -657,6 +659,7 @@ blockquote[class^="review-type-"]{
 .review-project-link{margin-top:auto;padding-top:1.5em;}
 .review-project-link a{
   display:flex;flex-wrap:nowrap;align-items:center;gap:.86em;
+  font-family:var(--ff-display);
   border-radius:10em;color:var(--ink);
   font-size:3.59vw;line-height:1;text-transform:uppercase;white-space:nowrap;
   transition:background .3s,color .3s;
