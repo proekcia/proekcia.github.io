@@ -214,6 +214,7 @@
   opacity:0;visibility:hidden;
   transition:transform .5s var(--ease),opacity .3s var(--ease),visibility 0s linear .5s;
 }
+.sidenav:focus{outline:none;}   /* панель отримує фокус програмно, рамка тут зайва */
 .sidenav.is-open{
   transform:translateY(0);opacity:1;visibility:visible;
   transition:transform .5s var(--ease),opacity .3s var(--ease);

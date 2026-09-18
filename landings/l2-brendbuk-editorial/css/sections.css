@@ -25,9 +25,15 @@
   color:var(--white);
   overflow:hidden;
 }
-@media only screen and (max-width:767px){ .hero{padding:calc(var(--header-h) + 90px) 0 0;} }
-/* до 992px композиція йде потоком одразу під шапкою, а не притискається донизу */
-@media only screen and (max-width:767px){ .hero{align-items:flex-end;} }
+/* до 768px екран рівно на висоту вьюпорта: низ помаранчевого блоку —
+   це нижній край будь-якого екрана, а артборд масштабується так,
+   щоб цілком уміститись під шапкою. */
+@media only screen and (max-width:767px){
+  .hero{
+    height:100svh;min-height:0;padding:0;
+    align-items:flex-end;justify-content:center;
+  }
+}
 
 .hero__stage{
   position:relative;
@@ -167,6 +173,9 @@
   .hero__stage{
     aspect-ratio:390 / 693;
     padding:0;
+    /* ширина обмежена і екраном, і його висотою: на низьких екранах
+       композиція зменшується пропорційно, а не вилазить за край */
+    width:min(100%, calc((100svh - var(--header-h)) * 390 / 693));
   }
   .hero__word,
   .hero__cutout,

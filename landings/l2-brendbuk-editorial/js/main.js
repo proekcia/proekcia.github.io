@@ -94,9 +94,11 @@
       var header = document.getElementById('header');
       if (header && state) header.classList.remove('is-hidden');
       if (state) {
+        /* фокус переводимо на саму панель, а не на перше посилання (ним було
+           лого) — інакше при кліку по бургеру лого обводиться помаранчевим */
         window.requestAnimationFrame(function () {
-          var first = panel.querySelector('a');
-          if (first) first.focus();
+          panel.setAttribute('tabindex', '-1');
+          panel.focus({ preventScroll: true });
         });
       }
     };
