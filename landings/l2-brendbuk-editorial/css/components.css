@@ -92,6 +92,30 @@
 }
 @media only screen and (max-width:767px){ .site-header__inner{padding-block:.9rem;} }
 
+/* посилання в рядку — від 992px; нижче їх замінює бургер */
+.site-header__nav{
+  display:none;align-items:center;
+  gap:clamp(1rem,1.9vw,2.1rem);
+  margin-left:auto;
+}
+@media only screen and (min-width:992px){ .site-header__nav{display:flex;} }
+.site-header__nav a{
+  position:relative;
+  font-size:max(.94vw,14px);
+  color:var(--ink-70);
+  padding-block:.4rem;white-space:nowrap;
+  transition:color var(--dur-fast) var(--ease);
+}
+.site-header__nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:currentColor;transform:scaleX(0);transform-origin:left;
+  transition:transform var(--dur) var(--ease);
+}
+.site-header__nav a:hover,
+.site-header__nav a[aria-current="true"]{color:var(--ink);}
+.site-header__nav a:hover::after,
+.site-header__nav a[aria-current="true"]::after{transform:scaleX(1);}
+
 .site-header__logo{display:block;flex:none;width:150px;}
 @media only screen and (min-width:768px){ .site-header__logo{width:12.53vw;max-width:200px;} }
 .site-header__logo img{width:100%;height:auto;}
@@ -101,19 +125,13 @@
   display:inline-flex;align-items:center;gap:12px;flex:none;
   color:var(--ink);
 }
-.hamburger__label{
-  display:none;
-  font-size:max(.833vw,13px);line-height:1;
-  letter-spacing:-.02em;text-transform:uppercase;
-}
-@media only screen and (min-width:992px){ .hamburger__label{display:inline-block;} }
+@media only screen and (min-width:992px){ .site-header .hamburger{display:none;} }
 /* до 992px кнопка менша і в інверсії: біла пігулка з чорними рисками */
 .hamburger__box{
   position:relative;display:block;flex:none;
   width:46px;height:24px;border-radius:151px;
   background:var(--white);
 }
-@media only screen and (min-width:992px){ .hamburger__box{width:68px;height:35px;background:var(--ink);} }
 .hamburger__inner,
 .hamburger__inner::before,
 .hamburger__inner::after{
@@ -122,25 +140,15 @@
   background:var(--ink);
   transition:transform var(--dur) var(--ease),opacity var(--dur-fast) var(--ease);
 }
-@media only screen and (min-width:992px){
-  .hamburger__inner,
-  .hamburger__inner::before,
-  .hamburger__inner::after{width:26.45px;height:2px;background:var(--white);}
-}
+
 .hamburger__inner{top:50%;transform:translate(-50%,-50%);background:transparent;}
 .hamburger__inner::before{content:"";top:-3.6px;transform:translateX(-50%);}
 .hamburger__inner::after{content:"";top:3.6px;transform:translateX(-50%);}
-@media only screen and (min-width:992px){
-  .hamburger__inner::before{top:-4.53px;}
-  .hamburger__inner::after{top:4.53px;}
-}
+
 /* стан «відкрито» — лінії складаються в хрестик */
 .hamburger.is-active .hamburger__inner::before{transform:translateX(-50%) translateY(3.6px) rotate(45deg);}
 .hamburger.is-active .hamburger__inner::after{transform:translateX(-50%) translateY(-3.6px) rotate(-45deg);}
-@media only screen and (min-width:992px){
-  .hamburger.is-active .hamburger__inner::before{transform:translateX(-50%) translateY(4.53px) rotate(45deg);}
-  .hamburger.is-active .hamburger__inner::after{transform:translateX(-50%) translateY(-4.53px) rotate(-45deg);}
-}
+
 .hamburger:hover .hamburger__box{background:var(--accent);}
 .hamburger:hover .hamburger__inner,
 .hamburger:hover .hamburger__inner::before,
@@ -150,9 +158,10 @@
 /* над помаранчевим героєм шапка світла */
 .site-header.is-over-accent:not(.is-stuck) .site-header__logo img{filter:invert(1) brightness(2);}
 .site-header.is-over-accent:not(.is-stuck) .hamburger{color:var(--white);}
-@media only screen and (min-width:992px){
-  .site-header.is-over-accent:not(.is-stuck) .hamburger__box{background:var(--ink);}
-}
+.site-header.is-over-accent:not(.is-stuck) .site-header__nav a{color:rgba(255,255,255,.85);}
+.site-header.is-over-accent:not(.is-stuck) .site-header__nav a:hover,
+.site-header.is-over-accent:not(.is-stuck) .site-header__nav a[aria-current="true"]{color:var(--white);}
+
 
 /* над темною секцією — те саме, але лого просто інвертується */
 .site-header.is-over-night.is-stuck{
@@ -161,6 +170,8 @@
 }
 .site-header.is-over-night .site-header__logo img{filter:invert(1);}
 .site-header.is-over-night .hamburger{color:var(--night-fg);}
+.site-header.is-over-night .site-header__nav a{color:var(--night-fg-55);}
+.site-header.is-over-night .site-header__nav a:hover{color:var(--night-fg);}
 .site-header.is-over-night .hamburger__box{background:var(--night-fg);}
 .site-header.is-over-night .hamburger__inner::before,
 .site-header.is-over-night .hamburger__inner::after{background:var(--ink);}

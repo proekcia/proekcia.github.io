@@ -12,16 +12,23 @@
    масштабується разом із шириною екрана, як у макеті.
    До 992px — звичайний потік: заголовок, лід, фото, кнопки.          */
 
+/* Помаранчеве полотно — на весь екран (без блакитних полів), а сама
+   композиція лишається у своїх межах із макета: відступ 6.25vw з боків
+   (120px при 1920) і притиснута до низу, щоб кіт стояв на нижньому краї. */
 .hero{
-  margin:0 6.25vw;
+  margin:0;
+  padding:0 6.25vw;
+  min-height:100svh;
+  display:flex;align-items:flex-end;
   background:var(--accent);
   color:var(--white);
   overflow:hidden;
 }
-@media only screen and (max-width:767px){ .hero{margin:0;} }
+@media only screen and (max-width:767px){ .hero{padding:0;} }
 
 .hero__stage{
   position:relative;
+  width:100%;
   container-type:inline-size;
   padding:calc(var(--header-h) + 6vw) 5.5vw 4vw;
 }
@@ -77,13 +84,13 @@
 .hero__lead{
   margin-top:6vw;
   font-size:4.1vw;line-height:1.1;
-  letter-spacing:-.05em;font-variant:small-caps;
+  letter-spacing:-.03em;
   color:var(--white);max-width:28ch;
 }
 @media only screen and (min-width:768px){ .hero__lead{font-size:2.2vw;} }
 @media only screen and (min-width:992px){
   .hero__lead{
-    left:72.56%;top:17.729%;width:23.214%;margin:0;
+    left:72.56%;top:21.5%;width:23.214%;margin:0;   /* трохи нижче, ніж у макеті */
     font-size:1.3095cqw;      /* 22 / 1680 */
   }
 }
@@ -127,6 +134,8 @@
 /* ---- зелені контури літер: лягають поверх «р» і «к» ---- */
 .hero__letter{
   display:none;
+  z-index:2;                 /* контури лягають поверх білих літер */
+  pointer-events:none;
   background-repeat:no-repeat;
   background-position:center;
   background-size:contain;
