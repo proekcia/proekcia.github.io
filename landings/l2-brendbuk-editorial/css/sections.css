@@ -294,17 +294,11 @@
 }
 .panel__list li::before{flex:none;line-height:1.576;}
 
-/* блакитне полотно під картинкою — притиснуте до низу картки */
-.panel__media{
-  position:relative;margin-top:auto;
-  aspect-ratio:664 / 463;
-  border-radius:10px;overflow:hidden;
-  background:var(--paper);
-}
-.panel__media img{
-  position:absolute;inset:0;
-  width:100%;height:100%;object-fit:cover;
-}
+/* Картинка притиснута до низу картки. Блакитне полотно вже всередині
+   PNG (вирізаний об'єкт виступає над ним), тому тут ні фону, ні обрізання:
+   просто картинка на всю ширину, низом по нижньому краю контейнера. */
+.panel__media{margin-top:auto;}
+.panel__media img{display:block;width:100%;height:auto;}
 
 .panel--without{background:var(--white);color:var(--ink-70);}
 .panel--without .panel__title{color:var(--ink);}
