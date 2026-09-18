@@ -353,18 +353,20 @@
   border-top:1.33px solid rgba(0,0,0,.2);
   border-left:1.33px solid rgba(0,0,0,.2);
 }
-/* верхня частина комірки — ілюстрація; підпис починається на 362.51 */
-.who__art{position:relative;height:clamp(200px,21.578vw,362.51px);flex:none;}
+/* Верхня частина комірки — ілюстрація; підпис починається на 362.51.
+   Пропорції беремо з макета (512.3×362.51), тому і пігулка, і персонаж
+   рахуються від однієї величини й тримаються разом на будь-якому екрані. */
+.who__art{position:relative;aspect-ratio:512.3 / 362.51;flex:none;}
 .who__pill{
   position:absolute;
-  left:16.18%;top:33.2%;width:67.47%;
+  left:16.18%;bottom:24.61%;width:67.47%;
   aspect-ratio:345.67 / 153.38;
   background:var(--accent);border-radius:999px;
 }
-/* координати персонажів — з макета, у відсотках від комірки 512.3×362.51 */
+/* персонажі прив'язані низом до пігулки — на всіх екранах */
 .who__art img{
   position:absolute;
-  left:var(--x);top:var(--y);width:var(--w);
+  left:var(--x);bottom:var(--b);width:var(--w);
   height:auto;max-width:none;
 }
 .who__card p{
@@ -456,7 +458,9 @@
   .levels__head{order:1;}
   .levels__head .h2{max-width:none;}
   .levels__list{order:2;}
-  .levels__media{position:static;order:3;width:min(320px,72%);margin:var(--sp-4) auto 0;}
+  /* картинка притиснута до правого краю екрана, як і на десктопі */
+  .levels__media{position:static;order:3;width:min(320px,72%);
+    margin:var(--sp-4) calc(-1 * var(--gutter)) 0 auto;}
   .levels__cta{order:4;}
   .levels__cta .text{max-width:none;}
 }
