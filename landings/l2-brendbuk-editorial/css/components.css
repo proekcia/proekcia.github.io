@@ -353,13 +353,13 @@
   padding-left:clamp(1rem,1.485vw,24.95px);padding-right:1rem;
   background:var(--ink);color:var(--white);
 }
-/* чорне коло зі стрілкою — стик двох пігулок */
+/* коло зі стрілкою — чорний контур, прозоре всередині */
 .flowrow__arrow{
   display:flex;align-items:center;justify-content:center;
   justify-self:center;
   width:clamp(38px,3.43vw,57.63px);aspect-ratio:1;
   border-radius:50%;
-  background:var(--ink);color:var(--white);
+  border:1px solid var(--ink);background:transparent;color:var(--ink);
 }
 .flowrow__arrow svg{width:41.4%;height:auto;}
 
