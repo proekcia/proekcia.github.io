@@ -329,8 +329,8 @@
 /* Компонент секції 05 (сценарії) — форма з презентації: дві пігулки і стрілка. */
 .flowrow{
   display:grid;
-  /* 411 / 57 / 411 від 879 — як у макеті, чорне коло рівно в проміжку */
-  grid-template-columns:46.758% 6.485% 46.758%;
+  /* пігулки впритул до кола: коло займає свою ширину, решта — порівну */
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
   align-items:center;
   gap:0;
   padding-block:clamp(1rem,1.542vw,25.9px);
