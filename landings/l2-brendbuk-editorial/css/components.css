@@ -155,7 +155,7 @@
 .hamburger__inner::after{
   position:absolute;left:50%;
   width:22.21px;height:2px;border-radius:352px;   /* риски жирніші */
-  background:var(--accent);       /* риски помаранчеві, як у макеті */
+  background:var(--ink);          /* за замовчуванням чорні */
   transition:transform var(--dur) var(--ease),opacity var(--dur-fast) var(--ease);
 }
 
@@ -185,6 +185,9 @@
 }
 .site-header.is-over-accent .site-header__logo img{filter:invert(1) brightness(2);}
 .site-header.is-over-accent .hamburger{color:var(--white);}
+/* помаранчеві риски — тільки над помаранчевим фоном */
+.site-header.is-over-accent .hamburger__inner::before,
+.site-header.is-over-accent .hamburger__inner::after{background:var(--accent);}
 .site-header.is-over-accent .site-header__nav a{color:rgba(255,255,255,.85);}
 .site-header.is-over-accent .site-header__nav a:hover,
 .site-header.is-over-accent .site-header__nav a[aria-current="true"]{color:var(--white);}
