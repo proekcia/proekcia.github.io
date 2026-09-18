@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=81">
-<link rel="stylesheet" href="css/base.css?v=81">
-<link rel="stylesheet" href="css/components.css?v=81">
-<link rel="stylesheet" href="css/sections.css?v=81">
+<link rel="stylesheet" href="css/tokens.css?v=82">
+<link rel="stylesheet" href="css/base.css?v=82">
+<link rel="stylesheet" href="css/components.css?v=82">
+<link rel="stylesheet" href="css/sections.css?v=82">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -329,8 +329,8 @@
 
 <!-- ============================================================== s06 · 05 ДЛЯ КОГО
      Слайди 13–14. WP: cards[] {num, text}, statement. -->
-<section class="section section--paper2" id="who" aria-labelledby="who-title">
-  <div class="wrap grid">
+<section class="section who" id="who" aria-labelledby="who-title">
+  <div class="wrap">
     <div class="who__head reveal">
       <span class="label label--accent">05 — Для кого</span>
       <h2 class="h2 mt-s" id="who-title">Для кого брендбук обов'язковий</h2>
@@ -338,21 +338,21 @@
 
     <div class="who__cards">
       <div class="who__card reveal">
-        <span class="num">01</span>
+        <div class="who__art" aria-hidden="true"><span class="who__pill"></span></div>
         <p>Якщо ваша команда складається більше ніж з 1 людини</p>
       </div>
       <div class="who__card reveal" style="--reveal-delay:90ms">
-        <span class="num">02</span>
+        <div class="who__art" aria-hidden="true"><span class="who__pill"></span></div>
         <p>Часто замовляєте дизайн, контент або рекламу</p>
       </div>
       <div class="who__card reveal" style="--reveal-delay:180ms">
-        <span class="num">03</span>
+        <div class="who__art" aria-hidden="true"><span class="who__pill"></span></div>
         <p>Будуєте щось більше, ніж «тимчасово попрацюємо»</p>
       </div>
     </div>
 
     <div class="who__statement reveal">
-      <p class="statement">Брендбук — це не обов'язково складно, але обов'язково потрібно. Щоб бренд виглядав як бренд — <span class="em">незалежно від ситуації</span>.</p>
+      <p class="statement">Брендбук — це не обов'язково складно, але обов'язково потрібно. Щоб бренд виглядав як бренд — незалежно від ситуації.</p>
     </div>
   </div>
 </section>
@@ -1058,6 +1058,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=81" defer></script>
+<script src="js/main.js?v=82" defer></script>
 </body>
 </html>

@@ -338,22 +338,48 @@
   .flow__media,.flow__rows{grid-column:5 / span 8;}
 }
 
-/* ===================== s06 · ДЛЯ КОГО ==================================== */
-.who__head{grid-column:1 / span 12;}
-.who__cards{
-  grid-column:1 / span 12;
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(1rem,2.4vw,2.5rem);
-  margin-top:clamp(1.5rem,3vw,2.5rem);
+/* ===================== s06 · ДЛЯ КОГО ====================================
+   Макет Figma 1920: поля секції 54 зверху і 126 знизу, три комірки по 512
+   без проміжків, у кожної лінійка зверху і ліворуч rgba(0,0,0,.2).
+   Усередині комірки помаранчева пігулка 345.67×153.38 (радіус 114.46),
+   під нею підпис 20/31 з відступом 63.37 і шириною 384.58.
+   Внизу твердження 45px в один інтерліньяж на всю ширину. */
+.who{padding-block:clamp(2.5rem,3.214vw,54px) clamp(3.5rem,7.5vw,126px);}
+.who__head{margin-bottom:clamp(2.5rem,4.881vw,82px);}
+.who__cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));}
+.who__card{
+  display:flex;flex-direction:column;
+  min-height:clamp(320px,28.067vw,471.52px);
+  border-top:1.33px solid rgba(0,0,0,.2);
+  border-left:1.33px solid rgba(0,0,0,.2);
 }
-.who__card{padding-top:clamp(1rem,1.6vw,1.4rem);border-top:1px solid var(--ink);}
-.who__card p{margin-top:.8rem;font-size:clamp(1rem,1.4vw,1.25rem);color:var(--ink-70);}
-.who__statement{
-  grid-column:1 / span 12;
-  margin-top:clamp(3rem,7vw,6rem);
+/* верхня частина комірки — ілюстрація; підпис починається на 362.51 */
+.who__art{position:relative;height:clamp(200px,21.578vw,362.51px);flex:none;}
+.who__pill{
+  position:absolute;
+  left:16.18%;top:33.2%;width:67.47%;
+  aspect-ratio:345.67 / 153.38;
+  background:var(--accent);border-radius:999px;
+}
+.who__art img{
+  position:absolute;bottom:0;
+  width:auto;height:auto;max-width:none;
+}
+.who__card p{
+  margin-left:12.37%;width:75.07%;
+  font-size:clamp(1rem,1.19vw,20px);
+  line-height:1.55;letter-spacing:-.0088em;
+  color:rgba(0,0,0,.6);
+}
+.who__statement{margin-top:clamp(3rem,5.238vw,88px);}
+.who__statement .statement{
+  font-size:clamp(1.5rem,2.679vw,45px);
+  font-weight:400;line-height:1;letter-spacing:-.0347em;color:var(--ink);
 }
 @media (max-width:860px){
-  .who__cards{grid-template-columns:minmax(0,1fr);gap:var(--sp-3);}
+  .who__cards{grid-template-columns:minmax(0,1fr);}
+  .who__card{border-left:0;min-height:0;padding-bottom:var(--sp-4);}
+  .who__card p{margin-left:0;width:100%;}
 }
 
 /* ===================== s07 · РІВНІ ======================================= */
