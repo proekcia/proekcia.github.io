@@ -85,7 +85,7 @@
     if (reduced.matches) return;
     if (!window.matchMedia('(min-width:768px)').matches) return;
 
-    var N = 13, COLS = 4, ROWS = 4;
+    var N = 12, COLS = 4, ROWS = 3;
     var target = (N - 1) / 2, current = target, raf = 0;
 
     var apply = function (k) {
