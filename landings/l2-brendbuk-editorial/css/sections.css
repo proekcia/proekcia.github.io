@@ -366,7 +366,7 @@
   aspect-ratio:345.67 / 153.38;
   background:var(--accent);border-radius:999px;
 }
-/* персонажі прив'язані низом до пігулки — на всіх екранах */
+/* персонажі стоять рівно на нижньому краї пігулки (24.61% = низ пігулки) */
 .who__art img{
   position:absolute;
   left:var(--x);bottom:var(--b);width:var(--w);
