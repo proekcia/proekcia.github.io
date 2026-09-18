@@ -93,7 +93,7 @@
 @media only screen and (min-width:768px){ .hero__lead{font-size:2.2vw;} }
 @media only screen and (min-width:992px){
   .hero__lead{
-    left:72.56%;top:25.3%;width:23.214%;margin:0;   /* нижче, ніж у макеті, на ~30px */
+    left:72.56%;top:26.57%;width:23.214%;margin:0;   /* нижче, ніж у макеті, на ~40px */
     font-size:1.3095cqw;      /* 22 / 1680 */
   }
 }
@@ -155,8 +155,8 @@
   /* низ контуру = низ білої літери, яку він накриває: у «р» це кінець
      виносного елемента (59.87% висоти сцени), у «к» — базова лінія (90.01%).
      Обидва числа зміряні canvas-метриками шрифту на живій сторінці. */
-  .hero__letter--r{left:15.825%;top:auto;bottom:40.13%;width:11.974%;height:30.528%;}
-  .hero__letter--k{left:83.91%;top:auto;bottom:9.99%;width:10.742%;height:25.577%;}
+  .hero__letter--r{left:15.825%;top:auto;bottom:41.40%;width:11.974%;height:30.528%;}
+  .hero__letter--k{left:83.91%;top:auto;bottom:11.26%;width:10.742%;height:25.577%;}
 }
 
 /* ===================== s02 · ЩО ТАКЕ БРЕНД ============================== */
