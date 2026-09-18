@@ -17,7 +17,8 @@
    (120px при 1920) і притиснута до низу, щоб кіт стояв на нижньому краї. */
 .hero{
   margin:0;
-  padding:0 6.25vw;
+  padding:0 var(--gutter);      /* той самий відступ, що й у шапки — щоб
+                                   «Бренд» і кнопки стояли рівно під лого */
   min-height:100svh;
   display:flex;align-items:flex-end;
   background:var(--accent);
@@ -25,12 +26,14 @@
   overflow:hidden;
 }
 @media only screen and (max-width:767px){ .hero{padding:0;} }
+/* до 992px композиція йде потоком одразу під шапкою, а не притискається донизу */
+@media only screen and (max-width:991px){ .hero{align-items:stretch;} }
 
 .hero__stage{
   position:relative;
   width:100%;
   container-type:inline-size;
-  padding:calc(var(--header-h) + 6vw) 5.5vw 4vw;
+  padding:calc(var(--header-h) + 6vw) var(--gutter) 4vw;
 }
 @media only screen and (min-width:992px){
   .hero__stage{
@@ -62,7 +65,7 @@
     font-size:21.664cqw;      /* 363.965 / 1680 */
     line-height:26.012cqw;    /* 437 / 1680 */
   }
-  .hero__word--brand{left:2.212%;top:12.766%;width:68.69%;}
+  .hero__word--brand{left:0;top:12.766%;width:68.69%;}
   .hero__word--buk{left:58.185%;top:51.975%;width:37.56%;text-align:right;}
 }
 
@@ -114,7 +117,7 @@
 @media only screen and (min-width:992px){
   .hero__btn{
     justify-content:space-between;
-    left:4.167%;width:23.214%;                 /* 70 / 390 від 1680 */
+    left:0;width:23.214%;                      /* по лівому краю лого */
     height:4.762cqw;min-height:0;              /* 80 / 1680 */
     padding:0 2.134cqw;                        /* 35.85 / 1680 */
     font-size:1.4224cqw;                       /* 23.8964 / 1680 */
