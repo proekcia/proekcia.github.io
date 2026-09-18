@@ -23,18 +23,23 @@
   function initHeaderTheme() {
     var header = document.getElementById('header');
     var nights = document.querySelectorAll('.section--night');
-    if (!header || !nights.length) return;
+    var accents = document.querySelectorAll('.section--accent');
+    if (!header || (!nights.length && !accents.length)) return;
 
     var ticking = false;
     var check = function () {
       ticking = false;
       var band = header.getBoundingClientRect().height * 0.6;
-      var over = false;
-      nights.forEach(function (s) {
-        var r = s.getBoundingClientRect();
-        if (r.top <= band && r.bottom >= band) over = true;
-      });
-      header.classList.toggle('is-over-night', over);
+      var hit = function (list) {
+        var found = false;
+        list.forEach(function (s) {
+          var r = s.getBoundingClientRect();
+          if (r.top <= band && r.bottom >= band) found = true;
+        });
+        return found;
+      };
+      header.classList.toggle('is-over-night', hit(nights));
+      header.classList.toggle('is-over-accent', hit(accents));
     };
     var onScroll = function () {
       if (ticking) return;
@@ -47,44 +52,46 @@
     window.addEventListener('resize', onScroll, { passive: true });
   }
 
-  /* ---------- 2. Мобільне меню ----------------------------------------- */
+  /* ---------- 2. Меню (панель #sidenav, як на сайті) --------------------- */
   function initMenu() {
+    var panel = document.getElementById('sidenav');
     var burger = document.getElementById('burger');
-    var menu = document.getElementById('menu');
-    if (!burger || !menu) return;
+    var close = document.getElementById('burgerClose');
+    if (!panel || !burger) return;
 
-    var open = function (state) {
-      menu.classList.toggle('is-open', state);
+    panel.removeAttribute('hidden');
+
+    var setState = function (state) {
+      panel.classList.toggle('is-open', state);
       burger.setAttribute('aria-expanded', String(state));
       burger.setAttribute('aria-label', state ? 'Закрити меню' : 'Відкрити меню');
+      burger.classList.toggle('is-active', state);
       document.body.classList.toggle('is-locked', state);
       if (state) {
-        // чекаємо кадр: до перерахунку стилів елемент ще не фокусується
         window.requestAnimationFrame(function () {
-          var first = menu.querySelector('a');
+          var first = panel.querySelector('a');
           if (first) first.focus();
         });
       }
     };
 
     burger.addEventListener('click', function () {
-      open(burger.getAttribute('aria-expanded') !== 'true');
+      setState(burger.getAttribute('aria-expanded') !== 'true');
+    });
+    if (close) close.addEventListener('click', function () {
+      setState(false);
+      burger.focus();
     });
 
-    menu.addEventListener('click', function (e) {
-      if (e.target.closest('a')) open(false);
+    panel.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setState(false);
     });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && menu.classList.contains('is-open')) {
-        open(false);
+      if (e.key === 'Escape' && panel.classList.contains('is-open')) {
+        setState(false);
         burger.focus();
       }
-    });
-
-    // меню — тільки для вузьких екранів; на ресайзі вгору закриваємо
-    window.addEventListener('resize', function () {
-      if (window.innerWidth >= 1024 && menu.classList.contains('is-open')) open(false);
     });
   }
 
@@ -111,7 +118,7 @@
 
   /* ---------- 4. Активний пункт навігації ------------------------------- */
   function initNavSpy() {
-    var links = Array.prototype.slice.call(document.querySelectorAll('.header__nav a'));
+    var links = Array.prototype.slice.call(document.querySelectorAll('.sidenav__links a[href^="#"]'));
     if (!links.length || !('IntersectionObserver' in window)) return;
 
     var map = {};
@@ -355,11 +362,14 @@
     document.querySelectorAll('[data-cta]').forEach(function (btn) {
       btn.addEventListener('click', function (e) {
         e.preventDefault();
-        var menu = document.getElementById('menu');
-        if (menu && menu.classList.contains('is-open')) {
-          menu.classList.remove('is-open');
+        var panel = document.getElementById('sidenav');
+        if (panel && panel.classList.contains('is-open')) {
+          panel.classList.remove('is-open');
           var burger = document.getElementById('burger');
-          if (burger) burger.setAttribute('aria-expanded', 'false');
+          if (burger) {
+            burger.setAttribute('aria-expanded', 'false');
+            burger.classList.remove('is-active');
+          }
         }
         open(btn);
       });

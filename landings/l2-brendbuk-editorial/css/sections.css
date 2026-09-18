@@ -5,57 +5,138 @@
    Брейкпоінти: 1280 / 1024 / 860 / 560.
    ========================================================================= */
 
-/* ===================== s01 · HERO ======================================== */
+/* ===================== s01 · HERO ======================================
+   Перенесено з Figma (фрейм 1920 → помаранчевий блок 1680×1004, відступ
+   120px з боків = 6.25vw). Від 992px це пропорційний артборд: діти
+   позиціоновані у % від нього, кеглі — у cqw, тому вся композиція
+   масштабується разом із шириною екрана, як у макеті.
+   До 992px — звичайний потік: заголовок, лід, фото, кнопки.          */
+
 .hero{
-  min-height:100svh;
-  padding-top:calc(var(--header-h) + clamp(1rem,2.6vw,2.5rem));
-  padding-bottom:clamp(1.25rem,2.6vw,2.25rem);
-  display:flex;flex-direction:column;justify-content:space-between;
-  gap:clamp(1rem,2.2vw,2rem);
+  margin:0 6.25vw;
+  background:var(--accent);
+  color:var(--white);
+  overflow:hidden;
 }
-.hero__meta{
-  display:flex;justify-content:space-between;gap:var(--sp-3);
-  padding-bottom:clamp(.7rem,1.5vw,1.1rem);
-  border-bottom:1px solid var(--rule);
-}
-.hero__title{
-  font-size:var(--fs-display);
-  font-weight:500;
-  line-height:var(--lh-display);
-  letter-spacing:var(--ls-display);
-  text-transform:uppercase;
-  margin-block:clamp(.5rem,1.2vw,1rem) 0;
-  text-wrap:pretty;
-}
-.hero__title .line{display:block;}
-.hero__title .em{text-transform:none;font-size:1.02em;letter-spacing:-.02em;}
-/* рядок, що «розсипається» — легкий зсув літер, вимикається у reduced-motion */
-.hero__title .split span{display:inline-block;}
+@media only screen and (max-width:767px){ .hero{margin:0;} }
 
-.hero__bottom{
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;
-  align-items:end;
-  gap:var(--sp-4);
-  padding-top:clamp(1rem,1.9vw,1.5rem);
-  border-top:1px solid var(--rule);
+.hero__stage{
+  position:relative;
+  container-type:inline-size;
+  padding:calc(var(--header-h) + 6vw) 5.5vw 4vw;
 }
-.hero__lead{max-width:34ch;}
-.hero__actions{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center;}
-.hero__scroll{
-  display:inline-flex;align-items:center;gap:.6em;
-  font-size:var(--fs-label);letter-spacing:var(--ls-label);
-  text-transform:uppercase;color:var(--ink-38);
+@media only screen and (min-width:992px){
+  .hero__stage{
+    aspect-ratio:1680 / 1004;
+    padding:0;
+  }
+  /* позиціонуємо кожен елемент окремо: .hero__title і .hero__actions —
+     display:contents, тому селектор "> *" їх дітей не дістає */
+  .hero__word,
+  .hero__cutout,
+  .hero__lead,
+  .hero__btn,
+  .hero__letter{position:absolute;}
 }
-.hero__scroll svg{width:1em;height:1em;animation:nudge 2.6s var(--ease) infinite;}
-@keyframes nudge{0%,100%{transform:translateY(0);}50%{transform:translateY(4px);}}
 
-@media (max-width:1023.98px){
-  .hero__bottom{grid-template-columns:minmax(0,1fr);align-items:start;gap:var(--sp-3);}
-  .hero__scroll{display:none;}
+/* ---- гігантська типографіка ---- */
+.hero__title{display:contents;}
+.hero__word{
+  display:block;
+  font-family:var(--ff-display);   /* Stolzl Regular, як у макеті */
+  font-weight:400;
+  letter-spacing:-.05em;
+  color:var(--white);
+  font-size:20vw;
+  line-height:1;
 }
-@media (max-width:560px){
-  .hero__meta{flex-direction:column;gap:.3rem;}
+@media only screen and (min-width:992px){
+  .hero__word{
+    font-size:21.664cqw;      /* 363.965 / 1680 */
+    line-height:26.012cqw;    /* 437 / 1680 */
+  }
+  .hero__word--brand{left:2.212%;top:12.766%;width:68.69%;}
+  .hero__word--buk{left:58.185%;top:51.975%;width:37.56%;text-align:right;}
+}
+
+/* ---- вирізане фото ---- */
+.hero__cutout{
+  display:block;width:78%;max-width:520px;height:auto;
+  margin:4vw auto 0;
+  pointer-events:none;        /* прозорий слот не має перехоплювати кліки */
+}
+@media only screen and (min-width:992px){
+  .hero__cutout{
+    left:26.25%;bottom:0;top:auto;
+    width:46.31%;max-width:none;margin:0;
+    object-fit:contain;object-position:bottom;
+  }
+}
+
+/* ---- лід ---- */
+.hero__lead{
+  margin-top:6vw;
+  font-size:4.1vw;line-height:1.1;
+  letter-spacing:-.05em;font-variant:small-caps;
+  color:var(--white);max-width:28ch;
+}
+@media only screen and (min-width:768px){ .hero__lead{font-size:2.2vw;} }
+@media only screen and (min-width:992px){
+  .hero__lead{
+    left:72.56%;top:17.729%;width:23.214%;margin:0;
+    font-size:1.3095cqw;      /* 22 / 1680 */
+  }
+}
+
+/* ---- кнопки ---- */
+.hero__actions{
+  display:flex;flex-direction:column;gap:2.5vw;
+  margin-top:7vw;
+}
+@media only screen and (min-width:992px){
+  .hero__actions{display:contents;}
+}
+.hero__btn{
+  display:flex;align-items:center;justify-content:center;gap:1em;
+  min-height:56px;padding:1em 2em;
+  border-radius:1570px;
+  font-size:4.2vw;line-height:1;letter-spacing:-.005em;
+  transition:background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease),border-color var(--dur-fast) var(--ease);
+}
+@media only screen and (min-width:768px){ .hero__btn{font-size:2.2vw;} }
+@media only screen and (min-width:992px){
+  .hero__btn{
+    justify-content:space-between;
+    left:4.167%;width:23.214%;                 /* 70 / 390 від 1680 */
+    height:4.762cqw;min-height:0;              /* 80 / 1680 */
+    padding:0 2.134cqw;                        /* 35.85 / 1680 */
+    font-size:1.4224cqw;                       /* 23.8964 / 1680 */
+  }
+  .hero__btn--primary{top:70.128%;}            /* 704.08 / 1004 */
+  .hero__btn--ghost{top:78.07%;}               /* 783.83 / 1004 */
+}
+.hero__btn--primary{background:var(--paper);color:var(--ink);}
+.hero__btn--primary svg{width:1.422cqw;min-width:18px;height:auto;flex:none;}
+.hero__btn--primary:hover{background:var(--ink);color:var(--white);}
+.hero__btn--ghost{
+  border:1.57px solid rgba(255,255,255,.85);
+  color:rgba(255,255,255,.85);
+}
+.hero__btn--ghost:hover{background:rgba(255,255,255,.85);color:var(--accent);}
+
+/* ---- зелені контури літер: лягають поверх «р» і «к» ---- */
+.hero__letter{
+  display:none;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:contain;
+}
+.hero__letter--r{background-image:url("../images/hero/letter-r.svg");}
+.hero__letter--k{background-image:url("../images/hero/letter-k.svg");}
+@media only screen and (min-width:992px){
+  .hero__letter{display:block;}
+  .hero__letter--r{left:15.825%;top:15.72%;width:11.974%;height:30.528%;}
+  .hero__letter--k{left:83.91%;top:51.02%;width:10.742%;height:25.577%;}
 }
 
 /* ===================== s02 · ЩО ТАКЕ БРЕНД ============================== */

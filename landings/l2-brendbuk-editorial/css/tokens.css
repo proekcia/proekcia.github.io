@@ -18,6 +18,12 @@
   font-family:"Stolzl"; font-style:normal; font-weight:500; font-display:swap;
   src:url("../assets/fonts/Stolzl-Medium.woff2") format("woff2");
 }
+/* Regular — окрема родина, як на сайті студії: у Stolzl це не те саме,
+   що Book (наш вагою 400), і потрібне лише для великої типографіки. */
+@font-face{
+  font-family:"Stolzl Regular"; font-style:normal; font-weight:400; font-display:swap;
+  src:url("../assets/fonts/Stolzl-Regular.woff2") format("woff2");
+}
 @font-face{
   font-family:"Stolzl"; font-style:normal; font-weight:700; font-display:swap;
   src:url("../assets/fonts/Stolzl-Bold.woff2") format("woff2");
@@ -58,6 +64,7 @@
   /* ---- Типографіка ------------------------------------------------------ */
   --ff:"Stolzl","Helvetica Neue",Arial,system-ui,sans-serif;
   --ff-accent:"Nyght Serif",Georgia,"Times New Roman",serif;
+  --ff-display:"Stolzl Regular","Stolzl","Helvetica Neue",Arial,sans-serif;
 
   /* плинна шкала: від 360px до 1680px */
   --fs-display:clamp(3.1rem,11.2vw,10.5rem);   /* hero */
