@@ -75,6 +75,45 @@
     window.addEventListener('resize', onScroll, { passive: true });
   }
 
+  /* ---------- 1c. Кіт веде головою за курсором ------------------------- */
+  function initCatHead() {
+    var cat = document.querySelector('.hero__cat');
+    var head = cat && cat.querySelector('.hero__cat-head');
+    if (!head) return;
+    /* тільки миша, тільки без вимкненої анімації, тільки від 768px */
+    if (!window.matchMedia('(pointer:fine)').matches) return;
+    if (reduced.matches) return;
+    if (!window.matchMedia('(min-width:768px)').matches) return;
+
+    var N = 13, COLS = 4, ROWS = 4;
+    var target = (N - 1) / 2, current = target, raf = 0;
+
+    var apply = function (k) {
+      head.style.backgroundPosition =
+        ((k % COLS) * 100 / (COLS - 1)) + '% ' +
+        (Math.floor(k / COLS) * 100 / (ROWS - 1)) + '%';
+    };
+
+    var step = function () {
+      raf = 0;
+      current += (target - current) * 0.16;          /* м'яке доведення */
+      apply(Math.max(0, Math.min(N - 1, Math.round(current))));
+      if (Math.abs(target - current) > 0.01) raf = window.requestAnimationFrame(step);
+    };
+
+    /* картинки вантажимо лише коли вони справді потрібні */
+    var sheet = new Image();
+    sheet.onload = function () {
+      document.body.classList.add('hero-cat-on');
+      apply(Math.round(current));
+      window.addEventListener('mousemove', function (e) {
+        target = Math.max(0, Math.min(1, e.clientX / window.innerWidth)) * (N - 1);
+        if (!raf) raf = window.requestAnimationFrame(step);
+      }, { passive: true });
+    };
+    sheet.src = 'images/hero/cat-head.webp';
+  }
+
   /* ---------- 2. Меню (панель #sidenav, як на сайті) --------------------- */
   function initMenu() {
     var panel = document.getElementById('sidenav');
@@ -471,6 +510,7 @@
   function init() {
     initHeader();
     initHeaderTheme();
+    initCatHead();
     initMenu();
     initReveal();
     initNavSpy();
