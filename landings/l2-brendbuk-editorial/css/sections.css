@@ -171,6 +171,7 @@
   .hero__word,
   .hero__cutout,
   .hero__btn,
+  .hero__lead,
   .hero__letter{position:absolute;}
 
   .hero__word{
@@ -186,14 +187,14 @@
 
   .hero__cutout{left:.946%;bottom:0;top:auto;width:98.108%;margin:0;max-width:none;}
 
-  /* У мобільному артборді місця під абзац немає, тому він живе над ним —
-     у вільній помаранчевій смузі під шапкою. Прив'язка bottom:100% означає
-     «низ абзаца = верх артборду», тож він ніколи на нього не налазить. */
+  /* Абзац із мобільного макета: 206.54×52 @ 18.6,187.44, кегль 11.651/110%. */
   .hero__lead{
-    display:block;position:absolute;
-    left:20px;right:20px;top:auto;bottom:calc(100% + 3vw);
-    width:auto;max-width:none;margin:0;
-    font-size:3.45vw;line-height:1.25;letter-spacing:-.02em;
+    display:block;
+    left:4.769%;top:27.048%;right:auto;bottom:auto;
+    width:52.959%;max-width:none;margin:0;
+    font-size:2.98744cqw;      /* 11.651 / 390 */
+    line-height:1.1;letter-spacing:-.05em;
+    text-transform:none;
   }
 
   .hero__actions{display:contents;}
