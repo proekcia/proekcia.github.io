@@ -168,6 +168,12 @@
 .hamburger:hover .hamburger__inner::before,
 .hamburger:hover .hamburger__inner::after{background:var(--white);}
 
+/* у відкритій панелі кнопка — чорне коло 32x32 з білим хрестиком */
+#burgerClose .hamburger__box{width:32px;height:32px;border-radius:50%;background:var(--ink);}
+#burgerClose .hamburger__inner::before,
+#burgerClose .hamburger__inner::after{width:12.7px;background:var(--white);}
+#burgerClose:hover .hamburger__box{background:var(--accent);}
+
 /* над помаранчевим героєм шапка світла */
 .site-header.is-over-accent:not(.is-stuck) .site-header__logo img{filter:invert(1) brightness(2);}
 .site-header.is-over-accent:not(.is-stuck) .hamburger{color:var(--white);}
@@ -208,36 +214,85 @@
   width:100%;max-width:var(--page-max);margin-inline:auto;
   padding:1.6vw var(--gutter) 3.8vw;
 }
-@media only screen and (max-width:767px){ .sidenav__inner{padding:.9rem var(--gutter) 2.5rem;} }
+@media only screen and (max-width:991px){
+  .sidenav{height:100svh;}                    /* на мобільному — на весь екран */
+  .sidenav__inner{padding:12px 12px 2rem;}
+}
 
 .sidenav__top{display:flex;align-items:center;justify-content:space-between;gap:var(--sp-3);}
 
+/* ---- сітка меню ----
+   До 992px — розкладка мобільного меню з сайту: посилання великим кеглем,
+   чорна кнопка-пігулка на всю ширину, дві колонки контактів, лінійка,
+   перемикач мови. Від 992px — чотири колонки, як у десктопному #sidenav. */
 .sidenav__grid{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(1.5rem,3vw,2.5rem);
-  margin-top:clamp(1.75rem,4vw,3rem);
+  column-gap:clamp(1rem,3vw,2rem);row-gap:0;
+  margin-top:clamp(1.5rem,5vw,2.5rem);
 }
-@media only screen and (min-width:992px){
-  .sidenav__grid{grid-template-columns:auto repeat(3,minmax(0,1fr));gap:2.5vw;}
-}
-.sidenav__col--lang{display:flex;gap:1rem;align-items:flex-start;}
-.sidenav__col--lang a{font-size:max(.833vw,14px);color:var(--ink-55);}
-.sidenav__col--lang a.is-active,.sidenav__col--lang a:hover{color:var(--ink);}
-
+.sidenav__col--menu{grid-column:1 / -1;}
 .sidenav__label{
-  margin-bottom:1rem;
-  font-size:max(.84vw,13px);letter-spacing:.02em;
+  margin-bottom:1.5rem;
+  font-size:max(.84vw,16px);letter-spacing:.02em;
   text-transform:uppercase;color:var(--ink-38);
 }
-.sidenav__links{display:flex;flex-direction:column;gap:.9rem;}
+.sidenav__label--menu{display:none;}          /* на мобільному підпису немає */
+.sidenav__links{display:flex;flex-direction:column;gap:14.4px;}
 .sidenav__links a{
-  display:block;font-size:max(1.575vw,20px);line-height:1.2;
+  display:block;
+  font-size:max(1.575vw,28px);font-weight:500;line-height:1.2;
   letter-spacing:var(--ls-head);
   transition:color var(--dur-fast) var(--ease);
 }
 .sidenav__links a:hover{color:var(--accent);}
-.sidenav__links--small a{font-size:max(.84vw,16px);line-height:1.4;letter-spacing:-.01em;}
-.sidenav__cta{margin-top:clamp(1.25rem,2.5vw,2rem);}
+.sidenav__links--small a{font-size:max(.84vw,18px);font-weight:400;line-height:1.4;letter-spacing:-.01em;}
+
+/* чорна кнопка на всю ширину — тільки до 992px, як на сайті */
+.sidenav__cta{
+  grid-column:1 / -1;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin:2rem 0 2.5rem;padding:20.26px 32px;
+  border-radius:320px;
+  background:var(--ink);color:var(--white);
+  font-family:var(--ff-display);
+  font-size:16px;line-height:1.5;text-transform:uppercase;
+  transition:background var(--dur-fast) var(--ease);
+}
+.sidenav__cta:hover{background:var(--accent);}
+.sidenav__cta svg{flex:none;}
+
+.sidenav__col--socials,
+.sidenav__col--contacts{padding-bottom:2rem;}
+
+.sidenav__col--lang{
+  grid-column:1 / -1;
+  display:flex;gap:1rem;align-items:center;
+  padding-top:1.5rem;border-top:1px solid var(--rule);
+}
+.sidenav__col--lang a{font-size:16px;color:var(--ink-55);}
+.sidenav__col--lang a.is-active,.sidenav__col--lang a:hover{color:var(--ink);}
+
+@media only screen and (min-width:992px){
+  .sidenav__grid{
+    grid-template-columns:auto repeat(3,minmax(0,1fr));
+    column-gap:2.5vw;align-items:start;
+  }
+  .sidenav__col--lang{
+    grid-column:1;order:-1;
+    padding-top:0;border-top:0;align-items:flex-start;
+  }
+  .sidenav__col--menu{grid-column:2;}
+  .sidenav__col--socials,
+  .sidenav__col--contacts{grid-column:auto;padding-bottom:0;}
+  .sidenav__label--menu{display:block;}
+  .sidenav__cta{display:none;}               /* на десктопі кнопка живе в шапці */
+}
+
+/* мобільна геометрія меню, зміряна на proekcia.com при 390px */
+@media only screen and (max-width:991px){
+  .sidenav__grid{margin-top:44px;}            /* перше посилання на y=88 */
+  .sidenav__links a{line-height:1;}           /* висота рядка 28px */
+}
 
 /* ============================ МЕДІА ====================================== */
 .media{
