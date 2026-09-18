@@ -191,8 +191,9 @@
   .hero__word--buk{left:57.692%;top:21.953%;width:37.18%;text-align:right;}
 
   .hero__letter{display:block;}
-  .hero__letter--r{left:15.885%;top:14.104%;bottom:auto;width:11.818%;height:10.134%;}
-  .hero__letter--k{left:83.082%;top:25.821%;bottom:auto;width:10.603%;height:8.491%;}
+  /* +10% до розміру (низ лишився на місці) і ще -10px угору */
+  .hero__letter--r{left:15.294%;top:11.648%;bottom:auto;width:13.000%;height:11.147%;}
+  .hero__letter--k{left:82.551%;top:23.530%;bottom:auto;width:11.664%;height:9.339%;}
 
   .hero__cutout{left:.946%;bottom:0;top:auto;width:98.108%;margin:0;max-width:none;}
 
