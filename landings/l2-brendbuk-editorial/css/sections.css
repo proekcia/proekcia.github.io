@@ -25,7 +25,7 @@
   color:var(--white);
   overflow:hidden;
 }
-@media only screen and (max-width:767px){ .hero{padding:0;} }
+@media only screen and (max-width:767px){ .hero{padding:calc(var(--header-h) + 90px) 0 0;} }
 /* до 992px композиція йде потоком одразу під шапкою, а не притискається донизу */
 @media only screen and (max-width:767px){ .hero{align-items:flex-end;} }
 
@@ -186,7 +186,15 @@
 
   .hero__cutout{left:.946%;bottom:0;top:auto;width:98.108%;margin:0;max-width:none;}
 
-  .hero__lead{display:none;}   /* у мобільному макеті цього абзацу немає */
+  /* У мобільному артборді місця під абзац немає, тому він живе над ним —
+     у вільній помаранчевій смузі під шапкою. Прив'язка bottom:100% означає
+     «низ абзаца = верх артборду», тож він ніколи на нього не налазить. */
+  .hero__lead{
+    display:block;position:absolute;
+    left:20px;right:20px;top:auto;bottom:calc(100% + 3vw);
+    width:auto;max-width:none;margin:0;
+    font-size:3.45vw;line-height:1.25;letter-spacing:-.02em;
+  }
 
   .hero__actions{display:contents;}
   .hero__btn{
