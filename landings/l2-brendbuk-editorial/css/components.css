@@ -78,9 +78,12 @@
 .site-header{
   position:fixed;inset:0 0 auto 0;z-index:1899;
   background:transparent;
-  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease);
+  transition:background var(--dur) var(--ease),border-color var(--dur) var(--ease),
+             transform .45s var(--ease);
   border-bottom:1px solid transparent;
 }
+/* гортаємо вниз — шапка йде вгору, гортаємо вгору — повертається */
+.site-header.is-hidden{transform:translateY(-100%);}
 .site-header.is-stuck{
   background:color-mix(in srgb,var(--paper) 92%,transparent);
   backdrop-filter:blur(14px) saturate(1.1);

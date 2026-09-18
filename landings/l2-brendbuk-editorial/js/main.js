@@ -8,15 +8,38 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  /* ---------- 1. Шапка: фон після скролу ------------------------------- */
+  /* ---------- 1. Шапка: фон після скролу + ховається на скрол униз ------ */
   function initHeader() {
     var header = document.getElementById('header');
     if (!header) return;
-    var onScroll = function () {
-      header.classList.toggle('is-stuck', window.scrollY > 24);
+    var sidenav = document.getElementById('sidenav');
+    var last = window.scrollY;
+    var ticking = false;
+
+    var update = function () {
+      ticking = false;
+      var y = window.scrollY;
+      var delta = y - last;
+      header.classList.toggle('is-stuck', y > 24);
+
+      /* поки меню відкрите — шапка завжди на місці */
+      var menuOpen = sidenav && sidenav.classList.contains('is-open');
+      if (menuOpen || y <= header.offsetHeight) {
+        header.classList.remove('is-hidden');
+      } else if (delta > 4) {
+        header.classList.add('is-hidden');      /* гортаємо вниз — ховаємо */
+      } else if (delta < -4) {
+        header.classList.remove('is-hidden');   /* гортаємо вгору — показуємо */
+      }
+      last = y;
     };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+
+    update();
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }, { passive: true });
   }
 
   /* ---------- 1b. Шапка над темними секціями: інверсія ------------------ */
@@ -67,6 +90,9 @@
       burger.setAttribute('aria-label', state ? 'Закрити меню' : 'Відкрити меню');
       burger.classList.toggle('is-active', state);
       document.body.classList.toggle('is-locked', state);
+      /* відкрите меню завжди з шапкою — інакше після закриття її не видно */
+      var header = document.getElementById('header');
+      if (header && state) header.classList.remove('is-hidden');
       if (state) {
         window.requestAnimationFrame(function () {
           var first = panel.querySelector('a');
