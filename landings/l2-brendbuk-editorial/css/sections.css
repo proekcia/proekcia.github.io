@@ -361,9 +361,11 @@
   aspect-ratio:345.67 / 153.38;
   background:var(--accent);border-radius:999px;
 }
+/* координати персонажів — з макета, у відсотках від комірки 512.3×362.51 */
 .who__art img{
-  position:absolute;bottom:0;
-  width:auto;height:auto;max-width:none;
+  position:absolute;
+  left:var(--x);top:var(--y);width:var(--w);
+  height:auto;max-width:none;
 }
 .who__card p{
   margin-left:12.37%;width:75.07%;
