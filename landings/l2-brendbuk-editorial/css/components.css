@@ -114,17 +114,21 @@
   background:currentColor;transform:scaleX(0);transform-origin:left;
   transition:transform var(--dur) var(--ease);
 }
+/* на наведенні текст перемикається на Stolzl Regular */
 .site-header__nav a:hover,
-.site-header__nav a[aria-current="true"]{color:var(--ink);}
+.site-header__nav a[aria-current="true"]{color:var(--ink);font-family:var(--ff-display);}
 .site-header__nav a:hover::after,
 .site-header__nav a[aria-current="true"]::after{transform:scaleX(1);}
 
 /* кнопка в шапці — від 992px, поруч із навігацією */
 .site-header__cta{display:none;flex:none;}
 @media only screen and (min-width:992px){ .site-header__cta{display:inline-flex;} }
-/* над помаранчевим героєм — світла пігулка, як у першому екрані */
+/* над помаранчевим героєм — світла пігулка, як у першому екрані,
+   на наведенні (у будь-якому стані) чорна з білим текстом */
 .site-header.is-over-accent:not(.is-stuck) .site-header__cta{background:var(--paper);color:var(--ink);}
-.site-header.is-over-accent:not(.is-stuck) .site-header__cta:hover{background:var(--white);}
+.site-header__cta:hover,
+.site-header.is-over-accent:not(.is-stuck) .site-header__cta:hover,
+.site-header.is-over-night .site-header__cta:hover{background:var(--ink);color:var(--white);}
 .site-header.is-over-night .site-header__cta{background:var(--night-fg);color:var(--ink);}
 
 .site-header__logo{display:block;flex:none;width:150px;}

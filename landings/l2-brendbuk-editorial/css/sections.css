@@ -127,7 +127,11 @@
   .hero__btn--ghost{top:78.07%;}               /* 783.83 / 1004 */
 }
 .hero__btn--primary{background:var(--paper);color:var(--ink);}
-.hero__btn--primary svg{width:1.422cqw;min-width:18px;height:auto;flex:none;}
+.hero__btn--primary svg{
+  width:1.422cqw;min-width:18px;height:auto;flex:none;
+  transition:transform var(--dur) var(--ease);
+}
+.hero__btn--primary:hover svg{transform:translateX(.28em);}   /* як у кнопці шапки */
 .hero__btn--primary:hover{background:var(--ink);color:var(--white);}
 .hero__btn--ghost{
   border:1.57px solid rgba(255,255,255,.85);
