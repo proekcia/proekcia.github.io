@@ -695,7 +695,12 @@
   .garage__text{position:static;height:auto;}
   .garage__title,.garage__note,.garage__btn{position:static;}
   .garage__note{margin-top:var(--sp-3);max-width:none;}
-  .garage__btn{margin-top:var(--sp-4);}
+  .garage__btn{
+    margin-top:var(--sp-4);max-width:100%;
+    min-height:44px;padding-inline:1.15rem;gap:.5rem;
+    font-size:15px;
+  }
+  .garage__btn svg{width:14px;}
   .garage__media{position:static;width:100%;transform:none;margin-top:var(--sp-4);}
 }
 
