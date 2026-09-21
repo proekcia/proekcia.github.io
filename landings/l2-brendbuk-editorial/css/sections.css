@@ -588,11 +588,13 @@
   margin-top:clamp(1.25rem,3.78vw,63.5px);
 }
 .pillset li{display:flex;margin:-1px;}   /* рамки сусідів зливаються, як у макеті */
+/* примусовий перенос рядка — щоб пігулки групувались саме як у макеті */
+.pillset__break{flex:0 0 100%;height:0;margin:0;}
 .next .pill{
   display:inline-flex;align-items:center;justify-content:center;
   text-align:center;
   min-height:clamp(58px,6.222vw,104.52px);
-  padding:0 clamp(1.1rem,2.396vw,40.26px);
+  padding:0 clamp(.9rem,2.1vw,40.26px);
   border:1px solid var(--ink);border-radius:2000px;
   font-size:clamp(.95rem,1.318vw,22.14px);
   line-height:1.1;letter-spacing:-.05em;
@@ -610,7 +612,13 @@
   background:transparent;color:var(--ink);
   border:1px solid var(--ink);
 }
-.pillset--one{max-width:65%;}            /* 519.35 від 1536 */
+.pillset--one{max-width:68%;}
+/* другий рядок — дві пігулки в пропорціях макета (287.52 / 231.52),
+   тому вони ніколи не розповзаються на два рядки */
+.pillset--one li:nth-child(4){flex:0 0 55.4%;}
+.pillset--one li:nth-child(5){flex:0 0 44.6%;}
+.pillset--one li:nth-child(4) .pill,
+.pillset--one li:nth-child(5) .pill{width:100%;}
 .pillset--one li:last-child{flex:1 0 100%;}
 .pillset--one li:last-child .pill{width:100%;}
 
@@ -682,6 +690,8 @@
   /* пігулки на всю ширину, однакові; рамки сусідів накладаються рівно
      на товщину лінії, тому між ними одна лінія, а не дві */
   .pillset li{flex:1 0 100%;margin:0 0 -1px;}
+  .pillset--one li:nth-child(4),
+  .pillset--one li:nth-child(5){flex:1 0 100%;}   /* на мобільному теж на всю ширину */
   .next .pill{width:100%;}
   .pillset li:has(.pillset__arrow){display:none;}
   /* картинка з руками — на всю ширину екрана */
