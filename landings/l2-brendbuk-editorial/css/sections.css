@@ -634,17 +634,26 @@
 /* дужки — справжні гліфи шрифта, як у макеті (52×140 при 1920) */
 .manifesto__brace{
   position:absolute;left:0;top:50%;
-  transform:translateY(-50%);
-  font-family:"Stolzl",var(--ff);font-weight:300;   /* Light — тонші дужки */
+  /* Light — найтонше накреслення Stolzl; стиснення по горизонталі
+     робить штрих ще тоншим, не змінюючи висоту дужки */
+  transform:translateY(-50%) scaleX(.72);
+  transform-origin:left center;
+  font-family:"Stolzl",var(--ff);font-weight:300;
   font-size:clamp(84px,7.98vw,134px);   /* гліф «(» = 1.044 кегля */
   line-height:1;
   color:rgba(255,255,255,.85);
   pointer-events:none;
 }
-.manifesto__brace--right{left:auto;right:0;}
+.manifesto__brace--right{left:auto;right:0;transform-origin:right center;}
+/* між 992 і 1280 колонка цитати з макета завузька — розширюємо, щоб
+   перенос лишався після «звучить» */
+@media (min-width:992px) and (max-width:1280px){
+  .manifesto__quote{max-width:56%;}
+}
 .manifesto__quote-text{
-  font-size:clamp(1rem,1.19vw,20px);
-  line-height:1.55;letter-spacing:-.01em;color:var(--white);
+  font-weight:300;                       /* Light — тонше накреслення */
+  font-size:clamp(1rem,1.4286vw,24px);   /* 20 -> 24, перенос після «звучить» */
+  line-height:1.38;letter-spacing:-.01em;color:var(--white);
 }
 
 /* ---- помаранчева кнопка ---- */
