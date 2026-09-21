@@ -230,7 +230,7 @@
    асоціації.» тим самим кеглем, але Medium. Праворуч картинка 754.5×695.5
    з відступом 22.1 від верху секції. Розміри переведені у vw від 1680 —
    саме там ширина контенту дорівнює 1536 з макета. */
-.brand{padding-block:0;background:var(--paper);}
+.brand{padding-block:clamp(2rem,4.762vw,80px) 0;background:var(--paper);}
 .brand__wrap{position:relative;min-height:clamp(0px,51.607vw,867px);}
 .brand__head .label{display:block;}
 .brand__head{
