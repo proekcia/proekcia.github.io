@@ -532,13 +532,19 @@
 }
 .lyr__list li:first-child{border-top:0;padding-top:0;}
 .lyr__i{font-size:clamp(11px,.78vw,13.1px);line-height:1.5;letter-spacing:.06em;opacity:.55;}
-.lyr__media{margin:0;border-radius:clamp(10px,1.19vw,20px);overflow:hidden;}
-.lyr__media img{display:block;width:100%;height:auto;}
+/* картинка заповнює картку по висоті */
+.lyr__media{
+  margin:0;align-self:stretch;
+  border-radius:clamp(10px,1.19vw,20px);overflow:hidden;
+}
+.lyr__media img{display:block;width:100%;height:100%;object-fit:cover;}
 
 /* на вузьких екранах картки просто йдуть одна за одною */
 @media (max-width:991px){
   .layers__head,.layers__lead{max-width:none;}
   .layers__stack{gap:clamp(1rem,4vw,1.5rem);padding-bottom:0;}
+  .lyr__media{align-self:auto;}
+  .lyr__media img{height:auto;}
   .lyr{
     position:static;min-height:0;
     grid-template-columns:minmax(0,1fr);
