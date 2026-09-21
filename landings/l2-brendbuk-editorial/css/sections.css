@@ -570,13 +570,17 @@
   display:flex;align-items:center;
   padding-inline:clamp(1.6rem,3.4vw,57px);
 }
+/* дужки — справжні гліфи шрифта, як у макеті (52×140 при 1920) */
 .manifesto__brace{
-  position:absolute;left:0;top:0;bottom:0;
-  width:clamp(20px,3.095vw,52px);
+  position:absolute;left:0;top:50%;
+  transform:translateY(-50%);
+  font-family:var(--ff-display);
+  font-size:clamp(84px,7.98vw,134px);   /* гліф «(» = 1.044 кегля */
+  line-height:1;
   color:rgba(255,255,255,.85);
+  pointer-events:none;
 }
 .manifesto__brace--right{left:auto;right:0;}
-.manifesto__brace svg{width:100%;height:100%;display:block;}
 .manifesto__quote-text{
   font-size:clamp(1rem,1.19vw,20px);
   line-height:1.55;letter-spacing:-.01em;color:var(--white);
@@ -620,7 +624,7 @@
     min-height:18.95vw;
     padding-inline:9.5vw;
   }
-  .manifesto__brace{width:7.18vw;}
+  .manifesto__brace{font-size:18.15vw;}   /* 74px при 390 */
   .manifesto__quote-text{
     font-size:min(3.205vw,15px);line-height:1.28;    /* 12.5/16 при 390 */
   }
