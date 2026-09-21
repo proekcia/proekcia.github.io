@@ -224,55 +224,49 @@
 }
 
 /* ===================== s02 · ЩО ТАКЕ БРЕНД ==============================
-   Композиція по лівому краю на фірмовому синьо-сірому: текст ліворуч
-   (підпис, заголовок у три рядки, абзац, формула «Бренд = асоціації»),
-   фото праворуч, висновок під лінією на всю ширину. */
-.brand__head{grid-column:1 / span 6;}
+   Макет Figma 1920: поля 192, висота секції 867, фон #D7E3F5. Текст
+   ліворуч (підпис на 172 від верху, крок між блоками 26.27), заголовок
+   64/64 у колонці 707, абзац 17.6/27 у колонці 684, знизу — «Бренд =
+   асоціації.» тим самим кеглем, але Medium. Праворуч картинка 754.5×695.5
+   з відступом 22.1 від верху секції. Розміри переведені у vw від 1680 —
+   саме там ширина контенту дорівнює 1536 з макета. */
+.brand{padding-block:0;background:var(--paper);}
+.brand__wrap{position:relative;min-height:clamp(0px,51.607vw,867px);}
+.brand__head .label{display:block;}
+.brand__head{
+  padding-top:clamp(2.5rem,10.238vw,172px);
+  padding-bottom:clamp(2.5rem,8.893vw,149.4px);
+  max-width:clamp(300px,42.084vw,707px);
+}
 .brand__title{
-  margin-top:clamp(1rem,1.445vw,24.3px);
-  font-size:clamp(1.6rem,2.857vw,48px);
-  font-weight:500;line-height:1.08;letter-spacing:-.025em;
+  margin-top:clamp(.75rem,1.564vw,26.3px);
+  font-size:clamp(2rem,3.81vw,64px);
+  font-weight:500;line-height:1;letter-spacing:-.0297em;color:var(--ink);
 }
-.brand__media{
-  grid-column:8 / span 5;align-self:start;margin:0;
-}
-.brand__media img{display:block;width:100%;height:auto;}
 .brand__lead{
-  margin-top:clamp(1.25rem,2.38vw,40px);
-  max-width:46ch;
+  margin-top:clamp(.7rem,1.385vw,23.3px);
+  max-width:clamp(300px,40.711vw,684px);
   font-size:clamp(1rem,1.048vw,17.6px);
   line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
 }
-/* «Бренд = асоціації» — формула з двох пігулок */
-.brand__eq{
-  display:flex;align-items:center;flex-wrap:wrap;
-  gap:clamp(.5rem,.833vw,14px);
-  margin-top:clamp(1.25rem,2.38vw,40px);
+.brand__strong{
+  margin-top:clamp(.6rem,1.223vw,20.5px);
+  font-size:clamp(1rem,1.048vw,17.6px);
+  font-weight:500;line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
 }
-.brand__eq span{
-  display:inline-flex;align-items:center;
-  min-height:clamp(44px,3.81vw,64px);
-  padding:0 clamp(1rem,1.667vw,28px);
-  border:1px solid var(--ink);border-radius:999px;
-  font-size:clamp(1rem,1.19vw,20px);letter-spacing:-.01em;color:var(--ink);
+.brand__media{
+  position:absolute;right:var(--gutter);top:clamp(8px,1.317vw,22.1px);
+  width:clamp(0px,44.911vw,754.5px);margin:0;
 }
-.brand__eq-sign{
-  border-color:transparent!important;
-  padding:0!important;min-height:0!important;
-  font-size:clamp(1.2rem,1.667vw,28px);color:var(--accent);
-}
-.brand__statement{
-  grid-column:1 / span 12;
-  margin-top:clamp(2.5rem,5.36vw,90px);
-  padding-top:clamp(1.5rem,2.4vw,40px);
-  border-top:1px solid var(--rule);
-  font-size:clamp(1.7rem,3.81vw,64px);
-  font-weight:500;line-height:1.04;letter-spacing:-.025em;color:var(--ink);
-}
+.brand__media img{display:block;width:100%;height:auto;}
 
-@media (max-width:1280px){
-  .brand__head{grid-column:1 / span 5;}
-  .brand__media{grid-column:7 / span 6;}
+@media (max-width:991px){
+  .brand__wrap{min-height:0;}
+  .brand__head{
+    max-width:none;
+    padding-top:clamp(2.5rem,12vw,64px);padding-bottom:0;
+  }
+  .brand__media{position:static;width:100%;margin-top:clamp(1.5rem,6vw,32px);}
 }
 
 /* ===================== s03 · ЩО ТАКЕ БРЕНДБУК ============================ */
