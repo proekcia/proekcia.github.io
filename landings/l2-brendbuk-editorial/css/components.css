@@ -368,6 +368,8 @@
   .flowrow{grid-template-columns:minmax(0,1fr);gap:0;}
   .flowrow__arrow{transform:rotate(90deg);margin-inline:auto;}
   .flowrow__from,.flowrow__to{min-height:clamp(46px,13vw,54px);}
+  /* коло тієї самої висоти, що й пігулки */
+  .flowrow__arrow{width:clamp(46px,13vw,54px);}
 }
 
 /* ============================ СПИСОК-ПЕРЕЛІК ============================= */
