@@ -574,7 +574,7 @@
 .manifesto__brace{
   position:absolute;left:0;top:50%;
   transform:translateY(-50%);
-  font-family:var(--ff-display);
+  font-family:"Stolzl",var(--ff);font-weight:300;   /* Light — тонші дужки */
   font-size:clamp(84px,7.98vw,134px);   /* гліф «(» = 1.044 кегля */
   line-height:1;
   color:rgba(255,255,255,.85);
