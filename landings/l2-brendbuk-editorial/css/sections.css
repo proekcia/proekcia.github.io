@@ -612,6 +612,7 @@
   background:transparent;color:var(--ink);
   border:1px solid var(--ink);
 }
+.pillset__arrow--ghost svg{width:41.9%;}   /* 43.17 від 103, як у макеті */
 .pillset--one{max-width:68%;}
 /* другий рядок — дві пігулки в пропорціях макета (287.52 / 231.52),
    тому вони ніколи не розповзаються на два рядки */
