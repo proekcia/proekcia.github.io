@@ -262,6 +262,9 @@
 
 @media (max-width:991px){
   .brand__wrap{min-height:0;}
+  /* пакет звисає трохи нижче межі секції, поверх білого блока 02 */
+  .brand{z-index:1;}
+  .brand__media{position:relative;z-index:2;margin-bottom:calc(-1 * clamp(36px,14vw,72px));}
   .brand__head{
     max-width:none;
     padding-top:clamp(2.5rem,12vw,64px);padding-bottom:0;
@@ -322,8 +325,8 @@
 .define__media img{display:block;width:100%;height:100%;object-fit:cover;}
 
 @media (max-width:991px){
-  /* фото притиснуте до низу секції, без поля під ним */
-  .define{padding-bottom:0;}
+  /* фото притиснуте до низу секції; зверху — запас під пакет із блока 01 */
+  .define{padding-top:calc(clamp(1.25rem,2.619vw,44px) + clamp(36px,14vw,72px));padding-bottom:0;}
   .define__head,.define .bigrows{max-width:none;}
   .define__media{
     position:static;width:100%;
