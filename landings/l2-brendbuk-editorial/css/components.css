@@ -364,8 +364,10 @@
 .flowrow__arrow svg{width:41.4%;height:auto;}
 
 @media (max-width:720px){
-  .flowrow{grid-template-columns:minmax(0,1fr);gap:.55rem;}
+  /* колонкою: пігулки однакової висоти і торкаються кола */
+  .flowrow{grid-template-columns:minmax(0,1fr);gap:0;}
   .flowrow__arrow{transform:rotate(90deg);margin-inline:auto;}
+  .flowrow__from,.flowrow__to{min-height:clamp(46px,13vw,54px);}
 }
 
 /* ============================ СПИСОК-ПЕРЕЛІК ============================= */
