@@ -677,6 +677,10 @@
   .next__block,.next__title,.pillset--one,.pillset--two{max-width:none;}
   .next__arts{position:static;inset:auto;}
   .next__art{position:static;left:auto;top:auto;width:100%;margin:clamp(1.5rem,5vw,2.5rem) 0 0;}
+  /* пігулки на всю ширину, однакові, впритул одна до одної; кола зі стрілками прибрано */
+  .pillset li{flex:1 0 100%;margin:0;}
+  .next .pill{width:100%;}
+  .pillset li:has(.pillset__arrow){display:none;}
   .next__block--two{margin-left:0;margin-top:clamp(2.5rem,7vw,4rem);}
   .next__title .em{margin-left:0;}
   .next__lead{max-width:none;}
