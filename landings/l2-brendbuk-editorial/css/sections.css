@@ -322,6 +322,8 @@
 .define__media img{display:block;width:100%;height:100%;object-fit:cover;}
 
 @media (max-width:991px){
+  /* фото притиснуте до низу секції, без поля під ним */
+  .define{padding-bottom:0;}
   .define__head,.define .bigrows{max-width:none;}
   .define__media{
     position:static;width:100%;
