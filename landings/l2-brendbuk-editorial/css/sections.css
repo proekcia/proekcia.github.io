@@ -527,11 +527,15 @@
      наступна напливає на неї згори */
   gap:38svh;
   margin-top:clamp(2rem,3.57vw,60px);
-  padding-bottom:22svh;
 }
+/* порожній хвіст у самому стеку: дає останній картці доїхати до своєї
+   позиції (padding контейнера для sticky не рахується) */
+.layers__stack::after{content:"";display:block;height:4svh;}
 .lyr{
   position:sticky;
-  top:calc(var(--header-h) + clamp(10px,1.19vw,20px) + var(--i) * clamp(42px,3.81vw,64px));
+  /* крок менший за верхнє поле картки (41.6) — з-під наступної картки
+     видно лише смужку кольору, текст попередньої перекрито */
+  top:calc(var(--header-h) + clamp(10px,1.19vw,20px) + var(--i) * clamp(18px,1.786vw,30px));
   display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);
   gap:clamp(1.25rem,2.4vw,40px);align-items:start;
   padding:clamp(1.4rem,2.476vw,41.6px);
@@ -578,6 +582,7 @@
 @media (max-width:991px){
   .layers__head,.layers__lead{max-width:none;}
   .layers__stack{gap:clamp(1rem,4vw,1.5rem);padding-bottom:0;}
+  .layers__stack::after{display:none;}
   .lyr__media{align-self:auto;}
   .lyr__media img{height:auto;}
   .lyr{
