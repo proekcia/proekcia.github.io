@@ -628,7 +628,7 @@
   margin:clamp(2rem,5.417vw,91px) 0 0;
   max-width:40.9%;                       /* 628 від 1536 */
   min-height:clamp(88px,8.333vw,140px);
-  display:flex;align-items:center;
+  display:flex;align-items:center;justify-content:center;
   padding-inline:clamp(1.6rem,3.4vw,57px);
 }
 /* дужки — справжні гліфи шрифта, як у макеті (52×140 при 1920) */
@@ -653,7 +653,7 @@
 .manifesto__quote-text{
   font-weight:300;                       /* Light — тонше накреслення */
   font-size:clamp(1rem,1.4286vw,24px);   /* 20 -> 24, перенос після «звучить» */
-  line-height:1.38;letter-spacing:-.01em;color:var(--white);
+  line-height:1.38;letter-spacing:-.01em;text-align:center;color:var(--white);
 }
 
 /* ---- помаранчева кнопка ---- */
