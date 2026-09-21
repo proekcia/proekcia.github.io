@@ -470,68 +470,120 @@
   .levels__cta .btn{display:flex;width:100%;justify-content:center;}
 }
 
-/* ===================== s08 · ТРИ ШАРИ ==================================== */
-.layers__intro{grid-column:1 / span 12;margin-bottom:clamp(2rem,5vw,4rem);}
-.layers__intro .h2{max-width:18ch;}
-.layers__stack{
-  display:flex;flex-direction:column;
-  font-size:clamp(2.2rem,8.2vw,7rem);
-  font-weight:500;line-height:.98;letter-spacing:var(--ls-display);
-  text-transform:uppercase;
-  margin-top:clamp(1.5rem,3vw,2.5rem);
+/* ===================== s08 · ТРИ ШАРИ ====================================
+   Три шари — розкривні рядки: номер, назва, підпис і коло з плюсом.
+   Відкритий рядок показує текст, список і картинку. Лінійки, кола й
+   типографіка ті самі, що в блоках 06 і 08. */
+.layers__title{
+  margin-top:clamp(1rem,1.445vw,24.3px);
+  max-width:60%;
+  font-size:clamp(2.1rem,4.524vw,76px);
+  font-weight:500;line-height:1.039;letter-spacing:-.025em;
 }
-.layers__stack span{color:var(--ink-38);transition:color var(--dur) var(--ease);}
-.layers__stack span:nth-child(1){padding-left:0;}
-.layers__stack span:nth-child(2){padding-left:clamp(1rem,7vw,7rem);}
-.layers__stack span:nth-child(3){padding-left:clamp(2rem,14vw,14rem);color:var(--ink);}
-
-/* на вужчих екранах найдовше слово («ПРИКЛАДНИЙ») мусить лишатися в межах
-   контейнера разом зі своїм відступом — тому й кегль, і відступи менші */
-@media (max-width:900px){
-  .layers__stack{font-size:clamp(1.5rem,6.8vw,3.4rem);}
-  .layers__stack span:nth-child(2){padding-left:clamp(.75rem,5vw,3rem);}
-  .layers__stack span:nth-child(3){padding-left:clamp(1.5rem,10vw,6rem);}
+.layers__lead{
+  margin-top:clamp(1rem,1.369vw,23px);
+  max-width:40%;
+  font-size:clamp(1rem,1.048vw,17.6px);
+  line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
 }
 
-.layers__rail{grid-column:1 / span 3;align-self:start;}
-.layers__body{grid-column:5 / span 8;}
-@media (min-width:1024px){
-  .layers__rail{position:sticky;top:calc(var(--header-h) + 3rem);}
-}
-.rail{display:flex;flex-direction:column;border-top:1px solid var(--rule);}
-.rail button{
-  display:flex;gap:.9rem;align-items:baseline;
-  padding-block:clamp(.75rem,1.3vw,1.05rem);
-  border-bottom:1px solid var(--rule);
-  text-align:left;color:var(--ink-38);
-  font-size:var(--fs-h4);
+.acc{margin-top:clamp(2rem,4.5vw,76px);}
+.acc__item{border-top:1px solid var(--rule);}
+.acc__item:last-child{border-bottom:1px solid var(--rule);}
+.acc__head{margin:0;}
+.acc__btn{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto auto;
+  align-items:center;
+  gap:clamp(1rem,2.4vw,40px);
+  width:100%;
+  padding-block:clamp(1.1rem,2.2vw,37px);
+  text-align:left;color:var(--ink);
   transition:color var(--dur-fast) var(--ease);
 }
-.rail button:hover{color:var(--ink-70);}
-.rail button[aria-current="true"]{color:var(--ink);}
-.rail button[aria-current="true"] .num{color:var(--accent);}
+.acc__num{
+  font-size:clamp(11px,.78vw,13.1px);line-height:1;
+  letter-spacing:.06em;color:var(--ink-38);
+}
+.acc__name{
+  font-size:clamp(1.4rem,2.286vw,38.4px);
+  font-weight:500;line-height:1.042;letter-spacing:-.025em;
+  text-transform:uppercase;
+}
+.acc__note{
+  justify-self:end;
+  font-size:clamp(.9rem,.905vw,15.2px);
+  line-height:1.579;letter-spacing:-.0116em;color:var(--ink-55);
+}
+.acc__icon{
+  display:flex;align-items:center;justify-content:center;
+  width:clamp(40px,3.43vw,57.6px);aspect-ratio:1;
+  border:1px solid var(--ink);border-radius:50%;
+  transition:transform var(--dur) var(--ease),background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
+}
+.acc__icon svg{width:42%;height:auto;}
+.acc__btn:hover .acc__icon{background:var(--ink);color:var(--white);}
+.acc__item.is-open .acc__icon{transform:rotate(45deg);background:var(--ink);color:var(--white);}
 
-.layer{padding-block:clamp(2.5rem,6vw,5rem);border-top:1px solid var(--rule);}
-.layer:first-child{border-top:0;padding-top:0;}
-.layer__kicker{display:flex;align-items:baseline;gap:.9rem;margin-bottom:var(--sp-3);}
-.layer__title{font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.02;}
-.layer__text{margin-top:var(--sp-3);}
-.layer__grid{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:clamp(1.25rem,2.6vw,2.5rem);
-  margin-top:clamp(1.5rem,3vw,2.5rem);
+/* ---- панель ---- */
+.acc__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-slow) var(--ease);}
+.acc__item.is-open .acc__panel{grid-template-rows:1fr;}
+.acc__inner{
+  overflow:hidden;
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);
+  gap:clamp(1.25rem,2.4vw,40px);
   align-items:start;
 }
-.layer__media .media{--ratio:5/4;}
-.qwords{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:var(--sp-3);}
-.qwords .em{font-size:clamp(1.1rem,1.8vw,1.6rem);}
-
-@media (max-width:1023.98px){
-  .layers__rail{display:none;}
-  .layers__body{grid-column:1 / span 12;}
+.acc__item.is-open .acc__inner{padding-bottom:clamp(1.5rem,2.4vw,40px);}
+.acc__lead{
+  font-size:clamp(1rem,1.19vw,20px);
+  line-height:1.5;letter-spacing:-.01em;color:var(--ink);
 }
-@media (max-width:720px){
-  .layer__grid{grid-template-columns:minmax(0,1fr);}
+.acc__note-text{
+  margin-top:clamp(.75rem,1.2vw,20px);
+  font-size:clamp(.95rem,1.048vw,17.6px);
+  line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
+}
+.acc__tags{
+  display:flex;flex-wrap:wrap;gap:8px;
+  margin-top:clamp(1rem,1.6vw,26px);
+}
+.acc__tags span{
+  display:inline-flex;align-items:center;
+  min-height:clamp(32px,2.4vw,40px);
+  padding:0 clamp(.7rem,1.1vw,18px);
+  border:1px solid var(--rule);border-radius:999px;
+  font-family:var(--ff-accent);font-style:italic;
+  font-size:clamp(.9rem,1.048vw,17.6px);color:var(--ink-70);
+}
+.acc__col--list .label{display:block;margin-bottom:clamp(.75rem,1.2vw,20px);}
+.acc__list{display:flex;flex-direction:column;}
+.acc__list li{
+  display:grid;grid-template-columns:auto minmax(0,1fr);
+  gap:clamp(.7rem,1.1vw,18px);
+  padding-block:clamp(.5rem,.85vw,14px);
+  border-top:1px solid var(--rule-soft);
+  font-size:clamp(.95rem,1.048vw,17.6px);
+  line-height:1.4;letter-spacing:-.01em;color:var(--ink-70);
+}
+.acc__list li:first-child{border-top:0;padding-top:0;}
+.acc__i{
+  font-size:clamp(11px,.78vw,13.1px);line-height:1.6;
+  letter-spacing:.06em;color:var(--ink-38);
+}
+.acc__media{margin:0;border-radius:clamp(12px,1.548vw,26px);overflow:hidden;}
+.acc__media img{display:block;width:100%;height:auto;}
+
+@media (max-width:991px){
+  .layers__title,.layers__lead{max-width:none;}
+  .acc__btn{
+    grid-template-columns:auto minmax(0,1fr) auto;
+    gap:.9rem;
+    padding-block:1.1rem;
+  }
+  .acc__num{align-self:center;}
+  .acc__note{display:none;}
+  .acc__inner{grid-template-columns:minmax(0,1fr);gap:1.25rem;}
 }
 
 /* ===================== s09 · МАНІФЕСТ ====================================

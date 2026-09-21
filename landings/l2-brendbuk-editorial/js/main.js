@@ -172,39 +172,33 @@
 
   /* ---------- 5. Секція «3 шари»: липкий індекс -------------------------- */
   function initLayers() {
-    var rail = document.getElementById('layersRail');
-    if (!rail) return;
+    var acc = document.getElementById('layersAcc');
+    if (!acc) return;
+    var items = Array.prototype.slice.call(acc.querySelectorAll('.acc__item'));
+    if (!items.length) return;
 
-    var buttons = Array.prototype.slice.call(rail.querySelectorAll('button'));
-    var layers = buttons
-      .map(function (b) { return document.getElementById(b.dataset.target); })
-      .filter(Boolean);
-    if (!layers.length) return;
+    var open = function (item) {
+      items.forEach(function (other) {
+        var isTarget = other === item;
+        other.classList.toggle('is-open', isTarget);
+        var btn = other.querySelector('.acc__btn');
+        if (btn) btn.setAttribute('aria-expanded', String(isTarget));
+      });
+    };
 
-    buttons.forEach(function (btn) {
+    items.forEach(function (item) {
+      var btn = item.querySelector('.acc__btn');
+      if (!btn) return;
       btn.addEventListener('click', function () {
-        var target = document.getElementById(btn.dataset.target);
-        if (target) {
-          target.scrollIntoView({
-            behavior: reduced.matches ? 'auto' : 'smooth',
-            block: 'start'
-          });
+        /* повторний клік по відкритому рядку його згортає */
+        if (item.classList.contains('is-open')) {
+          item.classList.remove('is-open');
+          btn.setAttribute('aria-expanded', 'false');
+        } else {
+          open(item);
         }
       });
     });
-
-    if (!('IntersectionObserver' in window)) return;
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        buttons.forEach(function (b) {
-          b.setAttribute('aria-current', String(b.dataset.target === entry.target.id));
-        });
-      });
-    }, { rootMargin: '-30% 0px -55% 0px' });
-
-    layers.forEach(function (l) { io.observe(l); });
   }
 
   /* ---------- 6. Відео в кейсах: вмикаємо лише при наведенні ------------

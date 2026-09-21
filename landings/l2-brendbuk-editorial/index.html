@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=128">
-<link rel="stylesheet" href="css/base.css?v=128">
-<link rel="stylesheet" href="css/components.css?v=128">
-<link rel="stylesheet" href="css/sections.css?v=128">
+<link rel="stylesheet" href="css/tokens.css?v=130">
+<link rel="stylesheet" href="css/base.css?v=130">
+<link rel="stylesheet" href="css/components.css?v=130">
+<link rel="stylesheet" href="css/sections.css?v=130">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -417,102 +417,108 @@
 <!-- ============================================================== s08 · 07 ТРИ ШАРИ
      Слайди 17–24. Ліворуч — липкий індекс (JS підсвічує активний шар).
      WP: layers[] {num, name, title, text, items[], image}. -->
-<section class="section section--white" id="layers" aria-labelledby="layers-title">
-  <div class="wrap grid">
-    <div class="layers__intro reveal">
-      <span class="label label--accent">07 — Структура</span>
-      <h2 class="h2 mt-s" id="layers-title">Структура повного брендбуку складається з трьох шарів</h2>
-      <div class="layers__stack" aria-hidden="true">
-        <span>Сенсовий</span>
-        <span>Візуальний</span>
-        <span>Прикладний</span>
-      </div>
-    </div>
+<section class="section layers" id="layers" aria-labelledby="layers-title">
+  <div class="wrap">
+    <span class="label label--accent reveal">07 — Структура</span>
+    <h2 class="layers__title reveal" id="layers-title">Структура повного брендбуку складається з трьох шарів</h2>
+    <p class="layers__lead reveal">Кожен шар відповідає за своє: перший — за сенси, другий — за вигляд, третій — за те, щоб цим можна було користуватись щодня.</p>
 
-    <div class="layers__rail">
-      <nav class="rail" id="layersRail" aria-label="Шари брендбуку">
-        <button type="button" data-target="layer-1" aria-current="true"><span class="num">01</span> Сенсовий</button>
-        <button type="button" data-target="layer-2"><span class="num">02</span> Візуальний</button>
-        <button type="button" data-target="layer-3"><span class="num">03</span> Прикладний</button>
-      </nav>
-    </div>
+    <div class="acc" id="layersAcc">
 
-    <div class="layers__body">
-
-      <article class="layer" id="layer-1">
-        <div class="layer__kicker">
-          <span class="num">Шар 01</span><span class="label">Сенси бренду</span>
-        </div>
-        <h3 class="layer__title reveal">Цей розділ формує <span class="em">сенсовий каркас</span> бренду</h3>
-        <p class="text layer__text reveal">Те, що лежить в його основі ще до візуалу чи стилю. Це не про те, як бренд виглядає, а про те, що він думає, чим дихає, чому існує і що обіцяє.</p>
-
-        <div class="qwords reveal" aria-hidden="true">
-          <span class="em">Навіщо?</span><span class="em">Хто ми?</span><span class="em">Для кого?</span>
-          <span class="em">Як?</span><span class="em">Чому?</span><span class="em">Що?</span>
-        </div>
-
-        <div class="layer__grid">
-          <div class="reveal">
-            <span class="label block mb-s">У цьому шарі визначається</span>
-            <ul class="speclist">
-              <li><span class="num">01</span><span>Чому бренд має саме таку назву</span></li>
-              <li><span class="num">02</span><span>У чому його суть і роль на ринку</span></li>
-              <li><span class="num">03</span><span>Які проблеми клієнтів він вирішує</span></li>
-              <li><span class="num">04</span><span>У чому його позиціонування й відмінність</span></li>
-              <li><span class="num">05</span><span>Про що, з ким і як він говорить</span></li>
-            </ul>
-          </div>
-          <figure class="layer__media reveal" style="--reveal-delay:120ms">
-            <div class="media media--ratio media--plain" style="--ratio:940/752">
+      <article class="acc__item is-open">
+        <h3 class="acc__head">
+          <button class="acc__btn" type="button" aria-expanded="true" aria-controls="layer-1">
+            <span class="acc__num">01</span>
+            <span class="acc__name">Сенсовий</span>
+            <span class="acc__note">сенси бренду</span>
+            <span class="acc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="acc__panel" id="layer-1" role="region">
+          <div class="acc__inner">
+            <div class="acc__col acc__col--text">
+              <p class="acc__lead">Цей розділ формує сенсовий каркас бренду — те, що лежить в його основі ще до візуалу чи стилю. Не про те, як бренд виглядає, а про те, що він думає, чому існує і що обіцяє.</p>
+              <p class="acc__note-text">Це простір, де все, що було «десь у голові», оформлюється в конкретні формулювання, меседжі й обіцянки.</p>
+              <div class="acc__tags" aria-hidden="true">
+                <span>Навіщо?</span><span>Хто ми?</span><span>Для кого?</span><span>Як?</span><span>Чому?</span><span>Що?</span>
+              </div>
+            </div>
+            <div class="acc__col acc__col--list">
+              <span class="label">У цьому шарі визначається</span>
+              <ul class="acc__list">
+                <li><span class="acc__i">01</span><span>Чому бренд має саме таку назву</span></li>
+                <li><span class="acc__i">02</span><span>У чому його суть і роль на ринку</span></li>
+                <li><span class="acc__i">03</span><span>Які проблеми клієнтів він вирішує</span></li>
+                <li><span class="acc__i">04</span><span>У чому його позиціонування й відмінність</span></li>
+                <li><span class="acc__i">05</span><span>Про що, з ким і як він говорить</span></li>
+              </ul>
+            </div>
+            <figure class="acc__media">
               <img src="images/presentation/thinking_man.webp" alt="Фігура, що сидить у задумі, з питанням «Навіщо?»" width="940" height="752" loading="lazy" decoding="async">
-            </div>
-          </figure>
-        </div>
-
-        <p class="text reveal mt-m">Це простір, де все, що було «десь у голові», оформлюється в конкретні формулювання, меседжі, фрази й обіцянки. А все, що було інтуїтивним — розкладено по полицях.</p>
-      </article>
-
-      <article class="layer" id="layer-2">
-        <div class="layer__kicker">
-          <span class="num">Шар 02</span><span class="label">Візуальна система</span>
-        </div>
-        <h3 class="layer__title reveal">Дизайн — це <span class="em">не прикраса</span></h3>
-        <p class="text layer__text reveal">Це про структуру і логіку, пріоритети і маршрут для ока, довіру, яка зчитується без слів, та емоцію, яка веде до дії.</p>
-
-        <div class="layer__grid">
-          <div class="reveal">
-            <span class="label block mb-s">Що може включати</span>
-            <ul class="speclist">
-              <li><span class="num">01</span><span>Логотип: основна версія, варіації</span></li>
-              <li><span class="num">02</span><span>Кольорова палітра</span></li>
-              <li><span class="num">03</span><span>Шрифти: основні та додаткові</span></li>
-              <li><span class="num">04</span><span>Стиль ілюстрацій (якщо є)</span></li>
-              <li><span class="num">05</span><span>Фотостиль (якщо є)</span></li>
-              <li><span class="num">06</span><span>Патерни, кнопки, іконки тощо</span></li>
-              <li><span class="num">07</span><span>Умовні / уявні носії стилю</span></li>
-            </ul>
+            </figure>
           </div>
-          <figure class="layer__media reveal" style="--reveal-delay:120ms">
-            <div class="media media--ratio media--plain" style="--ratio:940/900">
-              <img src="images/presentation/green_cube.webp" alt="Об'ємна геометрична форма на помаранчевому тлі" width="940" height="900" loading="lazy" decoding="async">
-            </div>
-          </figure>
         </div>
       </article>
 
-      <article class="layer" id="layer-3">
-        <div class="layer__kicker">
-          <span class="num">Шар 03</span><span class="label">Прикладний</span>
+      <article class="acc__item">
+        <h3 class="acc__head">
+          <button class="acc__btn" type="button" aria-expanded="false" aria-controls="layer-2">
+            <span class="acc__num">02</span>
+            <span class="acc__name">Візуальний</span>
+            <span class="acc__note">візуальна система</span>
+            <span class="acc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="acc__panel" id="layer-2" role="region">
+          <div class="acc__inner">
+            <div class="acc__col acc__col--text">
+              <p class="acc__lead">Дизайн — це не прикраса. Це структура і логіка, пріоритети і маршрут для ока, довіра, яка зчитується без слів, та емоція, яка веде до дії.</p>
+            </div>
+            <div class="acc__col acc__col--list">
+              <span class="label">Що може включати</span>
+              <ul class="acc__list">
+                <li><span class="acc__i">01</span><span>Логотип: основна версія, варіації</span></li>
+                <li><span class="acc__i">02</span><span>Кольорова палітра</span></li>
+                <li><span class="acc__i">03</span><span>Шрифти: основні та додаткові</span></li>
+                <li><span class="acc__i">04</span><span>Стиль ілюстрацій (якщо є)</span></li>
+                <li><span class="acc__i">05</span><span>Фотостиль (якщо є)</span></li>
+                <li><span class="acc__i">06</span><span>Патерни, кнопки, іконки тощо</span></li>
+                <li><span class="acc__i">07</span><span>Умовні / уявні носії стилю</span></li>
+              </ul>
+            </div>
+            <figure class="acc__media">
+              <img src="images/presentation/green_cube.webp" alt="Об'ємна геометрична форма на помаранчевому тлі" width="940" height="900" loading="lazy" decoding="async">
+            </figure>
+          </div>
         </div>
-        <h3 class="layer__title reveal">Найпрактичніша частина брендбуку</h3>
-        <p class="text layer__text reveal">Вона перекладає стиль і сенси у візуальні приклади, шаблони і сценарії дій, щоб команда або підрядники могли одразу працювати без здогадок.</p>
+      </article>
 
-        <div class="reveal mt-l">
-          <ul class="speclist">
-            <li><span class="num">→</span><span>Конкретні приклади замість абстрактних правил</span></li>
-            <li><span class="num">→</span><span>Шаблони, які беруть у роботу без переузгоджень</span></li>
-            <li><span class="num">→</span><span>Сценарії дій для типових задач</span></li>
-          </ul>
+      <article class="acc__item">
+        <h3 class="acc__head">
+          <button class="acc__btn" type="button" aria-expanded="false" aria-controls="layer-3">
+            <span class="acc__num">03</span>
+            <span class="acc__name">Прикладний</span>
+            <span class="acc__note">приклади й шаблони</span>
+            <span class="acc__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg></span>
+          </button>
+        </h3>
+        <div class="acc__panel" id="layer-3" role="region">
+          <div class="acc__inner">
+            <div class="acc__col acc__col--text">
+              <p class="acc__lead">Найпрактичніша частина брендбуку. Вона перекладає стиль і сенси у візуальні приклади, шаблони і сценарії дій, щоб команда або підрядники могли одразу працювати без здогадок.</p>
+            </div>
+            <div class="acc__col acc__col--list">
+              <span class="label">Що дає на практиці</span>
+              <ul class="acc__list">
+                <li><span class="acc__i">01</span><span>Конкретні приклади замість абстрактних правил</span></li>
+                <li><span class="acc__i">02</span><span>Шаблони, які беруть у роботу без переузгоджень</span></li>
+                <li><span class="acc__i">03</span><span>Сценарії дій для типових задач</span></li>
+              </ul>
+            </div>
+            <figure class="acc__media">
+              <img src="images/presentation/f1_pitstop.webp" alt="Команда механіків обслуговує болід на піт-стопі" width="1400" height="418" loading="lazy" decoding="async">
+            </figure>
+          </div>
         </div>
       </article>
 
@@ -1081,6 +1087,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=128" defer></script>
+<script src="js/main.js?v=130" defer></script>
 </body>
 </html>
