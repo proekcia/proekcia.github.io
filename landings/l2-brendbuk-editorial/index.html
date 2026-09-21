@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=166">
-<link rel="stylesheet" href="css/base.css?v=166">
-<link rel="stylesheet" href="css/components.css?v=166">
-<link rel="stylesheet" href="css/sections.css?v=166">
+<link rel="stylesheet" href="css/tokens.css?v=168">
+<link rel="stylesheet" href="css/base.css?v=168">
+<link rel="stylesheet" href="css/components.css?v=168">
+<link rel="stylesheet" href="css/sections.css?v=168">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -196,40 +196,41 @@
 
 <!-- ============================================================== s03 · 02 ЩО ТАКЕ БРЕНДБУК
      Слайди 6–7: «це документ, що фіксує». WP: title, rows[] {num, title, desc}. -->
-<section class="section section--white" id="define" aria-labelledby="define-title">
-  <div class="wrap grid">
+<section class="section section--white define" id="define" aria-labelledby="define-title">
+  <div class="wrap define__inner">
     <div class="define__head reveal">
       <span class="label label--accent">02 — Що таке брендбук?</span>
-      <h2 class="h2 mt-s" id="define-title">Це документ,<br> що фіксує</h2>
-      <p class="text text--narrow mt-s">Не «логотип, кольори і шрифти». Система, у якій кожен елемент пояснений і має своє місце.</p>
+      <h2 class="define__title" id="define-title">Це документ,<br> що фіксує</h2>
     </div>
 
-    <div class="define__body reveal" style="--reveal-delay:120ms">
-      <ol class="bigrows">
-        <li class="bigrows__item">
-          <span class="num">01</span>
-          <span>
-            <span class="bigrows__title">Сенси бренду</span>
-            <span class="bigrows__desc">Те, що лежить в основі ще до візуалу чи стилю: чому бренд існує, що він думає і що обіцяє.</span>
-          </span>
-        </li>
-        <li class="bigrows__item">
-          <span class="num">02</span>
-          <span>
-            <span class="bigrows__title">Візуальний стиль</span>
-            <span class="bigrows__desc">Логотип і його варіації, палітра, шрифти, носії — як цілісна система, а не набір файлів.</span>
-          </span>
-        </li>
-        <li class="bigrows__item">
-          <span class="num">03</span>
-          <span>
-            <span class="bigrows__title">Практичні приклади<br> та шаблони</span>
-            <span class="bigrows__desc">Зразки і сценарії дій, щоб команда або підрядники одразу працювали без здогадок.</span>
-          </span>
-        </li>
-      </ol>
-    </div>
+    <ol class="bigrows reveal" style="--reveal-delay:120ms">
+      <li class="bigrows__item">
+        <span class="num">01</span>
+        <span>
+          <span class="bigrows__title">Сенси бренду</span>
+          <span class="bigrows__desc">Те, що лежить в основі ще до візуалу чи стилю: чому бренд існує, що він думає і що обіцяє.</span>
+        </span>
+      </li>
+      <li class="bigrows__item">
+        <span class="num">02</span>
+        <span>
+          <span class="bigrows__title">Візуальний стиль</span>
+          <span class="bigrows__desc">Логотип і його варіації, палітра, шрифти, носії — як цілісна система, а не набір файлів.</span>
+        </span>
+      </li>
+      <li class="bigrows__item">
+        <span class="num">03</span>
+        <span>
+          <span class="bigrows__title">Практичні приклади<br> та шаблони</span>
+          <span class="bigrows__desc">Зразки і сценарії дій, щоб команда або підрядники одразу працювали без здогадок.</span>
+        </span>
+      </li>
+    </ol>
   </div>
+
+  <figure class="define__media reveal" style="--reveal-delay:180ms">
+    <img src="images/define/books.webp" alt="Стос надрукованих брендбуків Proekcia в помаранчевих обкладинках" width="1420" height="1826" loading="lazy" decoding="async">
+  </figure>
 </section>
 
 <!-- ============================================================== s04 · 03 ЩО ВІН ДАЄ БІЗНЕСУ
@@ -1052,6 +1053,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=166" defer></script>
+<script src="js/main.js?v=168" defer></script>
 </body>
 </html>
