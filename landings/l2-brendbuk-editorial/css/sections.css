@@ -559,14 +559,17 @@
    Макет Figma 1920 (контент 1536): заголовок 76/79 у два рядки, другий —
    курсивом з відступом; підзаголовок 30.55/34; пігулки 22.14 капітеллю
    з рамкою 2px і радіусом 2000; знизу помаранчева картка 1536×441. */
-.next{padding-block:clamp(2.5rem,5.98vw,100px) clamp(3rem,14.29vw,240px);}
+.next{position:relative;overflow:hidden;
+  padding-block:clamp(2.5rem,5.98vw,100px) clamp(3rem,14.29vw,240px);}
+.next .wrap{position:relative;}
 .next__block{max-width:52%;}            /* блок під заголовок і текст */
+.next__title{max-width:85%;}             /* ~44% контенту — переноси як у макеті */
 .next__title{
   margin-top:clamp(1rem,1.445vw,24.3px);
   font-size:clamp(2.1rem,4.524vw,76px);
   font-weight:500;line-height:1.039;letter-spacing:-.025em;color:var(--ink);
 }
-.next__title .em{display:inline-block;margin-left:4.55em;letter-spacing:-.01em;}
+.next__title .em{letter-spacing:-.01em;}
 .next__lead{
   margin-top:clamp(1rem,1.369vw,23px);
   max-width:68.4%;                      /* 511.77 від 748 */
@@ -601,12 +604,27 @@
   border-radius:50%;background:var(--ink);color:var(--white);
 }
 .pillset__arrow svg{width:58.7%;height:auto;}   /* 61.46 від 104.68, як у макеті */
+/* друге коло — контур, зігнута стрілка (як у макеті) */
+.pillset__arrow--ghost{
+  background:transparent;color:var(--ink);
+  border:1px solid var(--ink);
+}
 .pillset--one{max-width:65%;}            /* 519.35 від 1536 */
 .pillset--one li:last-child{flex:1 0 100%;}
 .pillset--one li:last-child .pill{width:100%;}
 
 /* ---- другий блок: праворуч, із відступом зверху ---- */
+/* ---- ілюстрації з макета (виходять за поле сторінки) ----
+   .next__arts збігається з колонкою контенту, тож відсотки всередині —
+   це відсотки від 1536, як у макеті. */
+.next__arts{position:absolute;inset:0 var(--gutter);pointer-events:none;}
+.next__art{position:absolute;margin:0;}
+.next__art img{display:block;width:100%;height:auto;}
+.next__art--cursor{left:47.46%;width:65.04%;top:clamp(170px,21.43vw,360px);}
+.next__art--socials{left:-7.11%;width:53.93%;top:clamp(500px,61.49vw,1033px);}
+
 .next__block--two{
+  position:relative;                     /* над ілюстрацією */
   margin-left:48%;                       /* другий блок — праворуч */
   margin-top:clamp(3rem,12.386vw,208px);
 }
@@ -656,7 +674,9 @@
 
 @media (max-width:991px){
   .next{padding-block:var(--section-y);}
-  .next__block,.pillset--one,.pillset--two{max-width:none;}
+  .next__block,.next__title,.pillset--one,.pillset--two{max-width:none;}
+  .next__arts{position:static;inset:auto;}
+  .next__art{position:static;left:auto;top:auto;width:100%;margin:clamp(1.5rem,5vw,2.5rem) 0 0;}
   .next__block--two{margin-left:0;margin-top:clamp(2.5rem,7vw,4rem);}
   .next__title .em{margin-left:0;}
   .next__lead{max-width:none;}

@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=104">
-<link rel="stylesheet" href="css/base.css?v=104">
-<link rel="stylesheet" href="css/components.css?v=104">
-<link rel="stylesheet" href="css/sections.css?v=104">
+<link rel="stylesheet" href="css/tokens.css?v=107">
+<link rel="stylesheet" href="css/base.css?v=107">
+<link rel="stylesheet" href="css/components.css?v=107">
+<link rel="stylesheet" href="css/sections.css?v=107">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -547,7 +547,7 @@
   <div class="wrap">
     <div class="next__block reveal">
       <span class="label label--accent">08 — Що далі</span>
-      <h2 class="next__title" id="next-title">Брендбук готовий.<br><span class="em">Що далі?</span></h2>
+      <h2 class="next__title" id="next-title">Брендбук готовий. <span class="em">Що далі?</span></h2>
       <p class="next__lead">Брендбук — не фінальна точка, а точка, з якої все інше нарешті можна робити швидко.</p>
       <h3 class="next__sub">Що ми можемо зробити після брендбуку</h3>
       <ul class="pillset pillset--one">
@@ -559,14 +559,23 @@
       </ul>
     </div>
 
+    <div class="next__arts" aria-hidden="true">
+      <figure class="next__art next__art--cursor">
+        <img src="images/next/cursor.webp" alt="" width="999" height="519" loading="lazy" decoding="async">
+      </figure>
+      <figure class="next__art next__art--socials">
+        <img src="images/next/socials.webp" alt="" width="829" height="719" loading="lazy" decoding="async">
+      </figure>
+    </div>
+
     <div class="next__block next__block--two reveal">
-      <h2 class="next__title">А що після запуску<br><span class="em">трафіку?</span></h2>
+      <h2 class="next__title">А що після запуску <span class="em">трафіку?</span></h2>
       <p class="next__lead next__lead--two">Ми можемо не лише запустити рекламу, а й протестувати:</p>
       <ul class="pillset pillset--two">
         <li><span class="pill">які меседжі працюють</span></li>
         <li><span class="pill">які візуали клікають</span></li>
         <li><span class="pill">яка аудиторія приносить заявки / продажі</span></li>
-        <li><span class="pillset__arrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 7 7 17M16 17H7V8" stroke="currentColor" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li><span class="pillset__arrow pillset__arrow--ghost"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 6v10h10M13.5 12.5 17 16l-3.5 3.5" stroke="currentColor" stroke-width=".9" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
         <li><span class="pill pill--solid">і оптимізувати все під реальні задачі</span></li>
       </ul>
     </div>
@@ -1064,6 +1073,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=104" defer></script>
+<script src="js/main.js?v=107" defer></script>
 </body>
 </html>
