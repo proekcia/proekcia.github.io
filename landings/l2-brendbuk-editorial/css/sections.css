@@ -639,8 +639,16 @@
 }
 .next__lead--two{margin-top:clamp(1.25rem,3.1vw,52px);max-width:none;}
 .pillset--two{max-width:97%;margin-top:clamp(1rem,2.417vw,40.6px);}
-.pillset--two li:nth-child(3){flex:1 0 100%;}
-.pillset--two li:nth-child(3) .pill{width:100%;}
+/* пропорції з макета: 410 / 364 у першому рядку, 774 у другому,
+   у третьому — коло 103 і чорна пігулка на решту ширини */
+.pillset--two li:nth-child(1){flex:0 0 52.97%;}
+.pillset--two li:nth-child(2){flex:0 0 47.03%;}
+.pillset--two li:nth-child(4){flex:1 0 100%;}
+.pillset--two li:last-child{flex:1 1 auto;}
+.pillset--two li:nth-child(1) .pill,
+.pillset--two li:nth-child(2) .pill,
+.pillset--two li:nth-child(4) .pill,
+.pillset--two li:last-child .pill{width:100%;}
 
 /* ---- помаранчева картка ---- */
 .garage{
@@ -691,7 +699,10 @@
      на товщину лінії, тому між ними одна лінія, а не дві */
   .pillset li{flex:1 0 100%;margin:0 0 -1px;}
   .pillset--one li:nth-child(4),
-  .pillset--one li:nth-child(5){flex:1 0 100%;}   /* на мобільному теж на всю ширину */
+  .pillset--one li:nth-child(5),
+  .pillset--two li:nth-child(1),
+  .pillset--two li:nth-child(2),
+  .pillset--two li:last-child{flex:1 0 100%;}     /* на мобільному всі на всю ширину */
   .next .pill{width:100%;}
   .pillset li:has(.pillset__arrow){display:none;}
   /* картинка з руками — на всю ширину екрана */
