@@ -600,7 +600,7 @@
   transition:background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
 }
 .manifesto__btn svg{width:clamp(14px,1.254vw,21px);height:auto;flex:none;}
-.manifesto__btn:hover{background:var(--ink);color:var(--white);}
+.manifesto__btn:hover{background:var(--paper);color:var(--ink);}   /* фірмовий синьо-сірий */
 
 /* ---- мобільний макет Figma 390×693: текст угорі, танцюристи знизу ---- */
 @media (max-width:991px){
