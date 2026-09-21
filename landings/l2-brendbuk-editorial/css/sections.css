@@ -598,10 +598,38 @@
 .manifesto__btn svg{width:clamp(14px,1.254vw,21px);height:auto;flex:none;}
 .manifesto__btn:hover{background:var(--ink);color:var(--white);}
 
+/* ---- мобільний макет Figma 390×693: текст угорі, танцюристи знизу ---- */
 @media (max-width:991px){
+  .manifesto{
+    padding-block:14.75vw 75.6vw;       /* 57.5 зверху, 295 під кнопкою */
+    background-image:url(../images/manifesto/bg-mobile.webp);
+    background-position:center bottom;
+  }
+  .manifesto .label{display:none;}      /* у мобільному макеті підпису немає */
   .manifesto__title,.manifesto__text,.manifesto__quote{max-width:none;}
-  .manifesto__quote{padding-inline:clamp(1.1rem,6vw,2rem);}
-  .manifesto__btn{width:100%;}
+  .manifesto__title{
+    margin-top:0;
+    font-size:min(3.718vw,17px);line-height:1.241;   /* 14.5/18 при 390 */
+  }
+  .manifesto__text{
+    margin-top:5.836vw;
+    font-size:min(2.949vw,13.5px);line-height:1.13;  /* 11.5/13 при 390 */
+  }
+  .manifesto__quote{
+    margin-top:8.385vw;
+    min-height:18.95vw;
+    padding-inline:9.5vw;
+  }
+  .manifesto__brace{width:7.18vw;}
+  .manifesto__quote-text{
+    font-size:min(3.205vw,15px);line-height:1.28;    /* 12.5/16 при 390 */
+  }
+  .manifesto__btn{
+    margin-top:10.03vw;width:100%;
+    min-height:10.2vw;
+    font-size:min(2.949vw,13.5px);
+  }
+  .manifesto__btn svg{width:2.98vw;}
 }
 
 /* ===================== s10 · ЩО ДАЛІ =====================================
