@@ -171,43 +171,6 @@
   }
 
   /* ---------- 5. Секція «3 шари»: липкий індекс -------------------------- */
-  function initLayers() {
-    var scroll = document.getElementById('layersScroll');
-    if (!scroll) return;
-    var lyrs = Array.prototype.slice.call(scroll.querySelectorAll('.lyr'));
-    var navs = Array.prototype.slice.call(scroll.querySelectorAll('.layers__nav li'));
-    if (lyrs.length < 2) return;
-
-    /* на вузьких екранах і при вимкненому русі шари просто йдуть підряд */
-    var mq = window.matchMedia('(min-width:992px)');
-    var cur = -1, ticking = false;
-
-    var setActive = function (i) {
-      if (i === cur) return;
-      cur = i;
-      lyrs.forEach(function (l, k) { l.classList.toggle('is-active', k === i); });
-      navs.forEach(function (n, k) { n.classList.toggle('is-active', k === i); });
-    };
-
-    var update = function () {
-      ticking = false;
-      if (!mq.matches || reduced.matches) { setActive(-1); return; }
-      var rect = scroll.getBoundingClientRect();
-      var span = scroll.offsetHeight - window.innerHeight;
-      if (span <= 0) return;
-      var p = Math.min(0.999, Math.max(0, -rect.top / span));
-      setActive(Math.floor(p * lyrs.length));
-    };
-
-    window.addEventListener('scroll', function () {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    }, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();
-  }
-
   /* ---------- 6. Відео в кейсах: вмикаємо лише при наведенні ------------
      Коли курсор іде — відео не ховається, а ставиться на паузу: у картці
      лишається стоп-кадр. Постер показуємо тільки доти, доки відео жодного
@@ -475,7 +438,6 @@
     initMenu();
     initReveal();
     initNavSpy();
-    initLayers();
     initCaseVideos();
     initReviews();
     initReviewDialog();

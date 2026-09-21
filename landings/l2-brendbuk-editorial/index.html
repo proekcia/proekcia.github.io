@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=131">
-<link rel="stylesheet" href="css/base.css?v=131">
-<link rel="stylesheet" href="css/components.css?v=131">
-<link rel="stylesheet" href="css/sections.css?v=131">
+<link rel="stylesheet" href="css/tokens.css?v=134">
+<link rel="stylesheet" href="css/base.css?v=134">
+<link rel="stylesheet" href="css/components.css?v=134">
+<link rel="stylesheet" href="css/sections.css?v=134">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -418,83 +418,77 @@
      Слайди 17–24. Ліворуч — липкий індекс (JS підсвічує активний шар).
      WP: layers[] {num, name, title, text, items[], image}. -->
 <section class="section layers" id="layers" aria-labelledby="layers-title">
-  <div class="layers__scroll" id="layersScroll">
-    <div class="layers__sticky">
-      <div class="wrap">
-        <div class="layers__head">
-          <span class="label label--accent">07 — Структура</span>
-          <h2 class="layers__title" id="layers-title">Структура повного брендбуку складається з трьох шарів</h2>
-        </div>
+  <div class="wrap">
+    <div class="layers__head reveal">
+      <span class="label label--accent">07 — Структура</span>
+      <h2 class="layers__title" id="layers-title">Структура повного брендбуку складається з трьох шарів</h2>
+      <p class="layers__lead">Кожен шар лягає на попередній: перший — за сенси, другий — за вигляд, третій — за те, щоб цим можна було користуватись щодня.</p>
+    </div>
 
-        <ol class="layers__nav">
-          <li data-i="0" class="is-active"><span class="layers__num">01</span><span class="layers__name">Сенсовий</span></li>
-          <li data-i="1"><span class="layers__num">02</span><span class="layers__name">Візуальний</span></li>
-          <li data-i="2"><span class="layers__num">03</span><span class="layers__name">Прикладний</span></li>
-        </ol>
-
-        <div class="layers__stage">
-        <article class="lyr is-active" data-i="0">
-          <div class="lyr__text">
-            <span class="lyr__kicker"><span class="lyr__kicker-num">Шар 01</span><span class="label">сенси бренду</span></span>
-            <p class="lyr__lead">Цей розділ формує сенсовий каркас бренду — те, що лежить в його основі ще до візуалу чи стилю. Не про те, як бренд виглядає, а про те, що він думає, чому існує і що обіцяє.</p>
-            <div class="lyr__tags" aria-hidden="true">
-              <span>Навіщо?</span><span>Хто ми?</span><span>Для кого?</span><span>Як?</span><span>Чому?</span><span>Що?</span>
-            </div>
+    <div class="layers__stack">
+      <article class="lyr lyr--one" style="--i:0">
+        <div class="lyr__text">
+          <span class="lyr__kicker"><span class="lyr__kicker-num">Шар 01</span><span class="label">сенси бренду</span></span>
+          <h3 class="lyr__name">Сенсовий</h3>
+          <p class="lyr__lead">Цей розділ формує сенсовий каркас бренду — те, що лежить в його основі ще до візуалу чи стилю. Не про те, як бренд виглядає, а про те, що він думає, чому існує і що обіцяє.</p>
+          <div class="lyr__tags" aria-hidden="true">
+            <span>Навіщо?</span><span>Хто ми?</span><span>Для кого?</span><span>Як?</span><span>Чому?</span><span>Що?</span>
           </div>
-          <div class="lyr__list-col">
-            <span class="label">У цьому шарі визначається</span>
-            <ul class="lyr__list">
-                <li><span class="lyr__i">01</span><span>Чому бренд має саме таку назву</span></li>
-                <li><span class="lyr__i">02</span><span>У чому його суть і роль на ринку</span></li>
-                <li><span class="lyr__i">03</span><span>Які проблеми клієнтів він вирішує</span></li>
-                <li><span class="lyr__i">04</span><span>У чому його позиціонування й відмінність</span></li>
-                <li><span class="lyr__i">05</span><span>Про що, з ким і як він говорить</span></li>
-            </ul>
-          </div>
-          <figure class="lyr__media">
-            <img src="images/presentation/thinking_man.webp" alt="Фігура, що сидить у задумі, з питанням «Навіщо?»" width="940" height="752" loading="lazy" decoding="async">
-          </figure>
-        </article>
-        <article class="lyr" data-i="1">
-          <div class="lyr__text">
-            <span class="lyr__kicker"><span class="lyr__kicker-num">Шар 02</span><span class="label">візуальна система</span></span>
-            <p class="lyr__lead">Дизайн — це не прикраса. Це структура і логіка, пріоритети і маршрут для ока, довіра, яка зчитується без слів, та емоція, яка веде до дії.</p>
-          </div>
-          <div class="lyr__list-col">
-            <span class="label">Що може включати</span>
-            <ul class="lyr__list">
-                <li><span class="lyr__i">01</span><span>Логотип: основна версія, варіації</span></li>
-                <li><span class="lyr__i">02</span><span>Кольорова палітра</span></li>
-                <li><span class="lyr__i">03</span><span>Шрифти: основні та додаткові</span></li>
-                <li><span class="lyr__i">04</span><span>Стиль ілюстрацій (якщо є)</span></li>
-                <li><span class="lyr__i">05</span><span>Фотостиль (якщо є)</span></li>
-                <li><span class="lyr__i">06</span><span>Патерни, кнопки, іконки тощо</span></li>
-                <li><span class="lyr__i">07</span><span>Умовні / уявні носії стилю</span></li>
-            </ul>
-          </div>
-          <figure class="lyr__media">
-            <img src="images/presentation/green_cube.webp" alt="Об'ємна геометрична форма на помаранчевому тлі" width="940" height="900" loading="lazy" decoding="async">
-          </figure>
-        </article>
-        <article class="lyr" data-i="2">
-          <div class="lyr__text">
-            <span class="lyr__kicker"><span class="lyr__kicker-num">Шар 03</span><span class="label">приклади й шаблони</span></span>
-            <p class="lyr__lead">Найпрактичніша частина брендбуку. Вона перекладає стиль і сенси у візуальні приклади, шаблони і сценарії дій, щоб команда або підрядники могли одразу працювати без здогадок.</p>
-          </div>
-          <div class="lyr__list-col">
-            <span class="label">Що дає на практиці</span>
-            <ul class="lyr__list">
-                <li><span class="lyr__i">01</span><span>Конкретні приклади замість абстрактних правил</span></li>
-                <li><span class="lyr__i">02</span><span>Шаблони, які беруть у роботу без переузгоджень</span></li>
-                <li><span class="lyr__i">03</span><span>Сценарії дій для типових задач</span></li>
-            </ul>
-          </div>
-          <figure class="lyr__media">
-            <img src="images/presentation/f1_pitstop.webp" alt="Команда механіків обслуговує болід на піт-стопі" width="1400" height="418" loading="lazy" decoding="async">
-          </figure>
-        </article>
         </div>
-      </div>
+        <div class="lyr__list-col">
+          <span class="label">У цьому шарі визначається</span>
+          <ul class="lyr__list">
+              <li><span class="lyr__i">01</span><span>Чому бренд має саме таку назву</span></li>
+              <li><span class="lyr__i">02</span><span>У чому його суть і роль на ринку</span></li>
+              <li><span class="lyr__i">03</span><span>Які проблеми клієнтів він вирішує</span></li>
+              <li><span class="lyr__i">04</span><span>У чому його позиціонування й відмінність</span></li>
+              <li><span class="lyr__i">05</span><span>Про що, з ким і як він говорить</span></li>
+          </ul>
+        </div>
+        <figure class="lyr__media">
+          <img src="images/presentation/thinking_man.webp" alt="Фігура, що сидить у задумі, з питанням «Навіщо?»" width="940" height="752" loading="lazy" decoding="async">
+        </figure>
+      </article>
+      <article class="lyr lyr--two" style="--i:1">
+        <div class="lyr__text">
+          <span class="lyr__kicker"><span class="lyr__kicker-num">Шар 02</span><span class="label">візуальна система</span></span>
+          <h3 class="lyr__name">Візуальний</h3>
+          <p class="lyr__lead">Дизайн — це не прикраса. Це структура і логіка, пріоритети і маршрут для ока, довіра, яка зчитується без слів, та емоція, яка веде до дії.</p>
+        </div>
+        <div class="lyr__list-col">
+          <span class="label">Що може включати</span>
+          <ul class="lyr__list">
+              <li><span class="lyr__i">01</span><span>Логотип: основна версія, варіації</span></li>
+              <li><span class="lyr__i">02</span><span>Кольорова палітра</span></li>
+              <li><span class="lyr__i">03</span><span>Шрифти: основні та додаткові</span></li>
+              <li><span class="lyr__i">04</span><span>Стиль ілюстрацій (якщо є)</span></li>
+              <li><span class="lyr__i">05</span><span>Фотостиль (якщо є)</span></li>
+              <li><span class="lyr__i">06</span><span>Патерни, кнопки, іконки тощо</span></li>
+              <li><span class="lyr__i">07</span><span>Умовні / уявні носії стилю</span></li>
+          </ul>
+        </div>
+        <figure class="lyr__media">
+          <img src="images/presentation/green_cube.webp" alt="Об'ємна геометрична форма на помаранчевому тлі" width="940" height="900" loading="lazy" decoding="async">
+        </figure>
+      </article>
+      <article class="lyr lyr--three" style="--i:2">
+        <div class="lyr__text">
+          <span class="lyr__kicker"><span class="lyr__kicker-num">Шар 03</span><span class="label">приклади й шаблони</span></span>
+          <h3 class="lyr__name">Прикладний</h3>
+          <p class="lyr__lead">Найпрактичніша частина брендбуку. Вона перекладає стиль і сенси у візуальні приклади, шаблони і сценарії дій, щоб команда або підрядники могли одразу працювати без здогадок.</p>
+        </div>
+        <div class="lyr__list-col">
+          <span class="label">Що дає на практиці</span>
+          <ul class="lyr__list">
+              <li><span class="lyr__i">01</span><span>Конкретні приклади замість абстрактних правил</span></li>
+              <li><span class="lyr__i">02</span><span>Шаблони, які беруть у роботу без переузгоджень</span></li>
+              <li><span class="lyr__i">03</span><span>Сценарії дій для типових задач</span></li>
+          </ul>
+        </div>
+        <figure class="lyr__media">
+          <img src="images/presentation/f1_pitstop.webp" alt="Команда механіків обслуговує болід на піт-стопі" width="1400" height="418" loading="lazy" decoding="async">
+        </figure>
+      </article>
     </div>
   </div>
 </section>
@@ -1060,6 +1054,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=131" defer></script>
+<script src="js/main.js?v=134" defer></script>
 </body>
 </html>
