@@ -264,12 +264,12 @@
   .brand__wrap{min-height:0;}
   /* пакет звисає трохи нижче межі секції, поверх білого блока 02 */
   .brand{z-index:1;}
-  .brand__media{position:relative;z-index:2;margin-bottom:calc(-1 * clamp(64px,26vw,120px));}
+  .brand__media{position:relative;z-index:2;margin-bottom:calc(-1 * clamp(44px,16vw,80px));}
   .brand__head{
     max-width:none;
     padding-top:clamp(2.5rem,12vw,64px);padding-bottom:0;
   }
-  .brand__media{position:static;width:100%;margin-top:clamp(1.5rem,6vw,32px);}
+  .brand__media{position:static;width:100%;margin-top:clamp(.5rem,3vw,18px);}
 }
 
 /* ===================== s03 · ЩО ТАКЕ БРЕНДБУК ============================
@@ -334,7 +334,7 @@
 
 @media (max-width:991px){
   /* фото притиснуте до низу секції; зверху — запас під пакет із блока 01 */
-  .define{padding-top:calc(clamp(1.25rem,2.619vw,44px) + clamp(64px,26vw,120px));padding-bottom:0;}
+  .define{padding-top:calc(clamp(1.25rem,2.619vw,44px) + clamp(44px,16vw,80px));padding-bottom:0;}
   .define__head,.define .bigrows{max-width:none;}
   .define__media{
     position:static;width:100%;
