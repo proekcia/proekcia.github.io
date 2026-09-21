@@ -734,7 +734,8 @@
    курсивом з відступом; підзаголовок 30.55/34; пігулки 22.14 капітеллю
    з рамкою 2px і радіусом 2000; знизу помаранчева картка 1536×441. */
 .next{position:relative;overflow:hidden;
-  padding-block:clamp(2.5rem,5.98vw,100px) clamp(3rem,14.29vw,240px);}
+  /* щільніше до сусідніх блоків 08 і 10 */
+  padding-block:clamp(2rem,3.57vw,60px) clamp(2.5rem,5.36vw,90px);}
 .next .wrap{position:relative;}
 .next__block{max-width:52%;}            /* блок під заголовок і текст */
 .next__title{max-width:85%;}             /* ~44% контенту — переноси як у макеті */
@@ -866,7 +867,7 @@
 .garage__media img{display:block;width:100%;height:auto;}
 
 @media (max-width:991px){
-  .next{padding-block:var(--section-y);}
+  .next{padding-block:clamp(2rem,6vw,48px) clamp(2.5rem,7vw,56px);}
   .next__block,.next__title,.pillset--one,.pillset--two{max-width:none;}
   .next__arts{position:static;inset:auto;}
   .next__art{position:static;left:auto;top:auto;width:100%;margin:clamp(1.5rem,5vw,2.5rem) 0 0;}
@@ -914,6 +915,8 @@
    Брейкпоінти сайтові (480 / 768 / 992). Карусель — нативний scroll-snap. */
 
 .section-blog-posts{overflow:hidden;}
+/* 08 -> 09: менший проміжок між портфоліо і «Що далі» */
+#work{padding-bottom:clamp(2.5rem,4.76vw,80px);}
 
 /* спільний лейбл-нумерація для секцій із заголовком .section-title */
 .section-eyebrow{display:block;margin-bottom:var(--sp-3);}
@@ -1021,6 +1024,8 @@
    слайдів (74vw / 300px / 18.75vw) і ті самі проміжки (20 / 32 / 48px). */
 
 .section-reviews{overflow:hidden;}
+/* 09 -> 10: менший проміжок між «Що далі» і відгуками */
+#reviews{padding-top:clamp(2.5rem,4.76vw,80px);}
 
 /* ---- шапка блоку: заголовок + перемикач, як на сайті ----
    <992: заголовок зверху, стрілки — під каруселлю, по центру, 88px.
