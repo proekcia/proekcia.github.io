@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=101">
-<link rel="stylesheet" href="css/base.css?v=101">
-<link rel="stylesheet" href="css/components.css?v=101">
-<link rel="stylesheet" href="css/sections.css?v=101">
+<link rel="stylesheet" href="css/tokens.css?v=103">
+<link rel="stylesheet" href="css/base.css?v=103">
+<link rel="stylesheet" href="css/components.css?v=103">
+<link rel="stylesheet" href="css/sections.css?v=103">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -543,47 +543,46 @@
 
 <!-- ============================================================== s10 · 08 ЩО ДАЛІ
      Слайди 26–29. WP: after_brandbook[], after_traffic[], garage{title, note, image}. -->
-<section class="section" id="next" aria-labelledby="next-title">
-  <div class="wrap grid">
-    <div class="next__head reveal">
+<section class="section next" id="next" aria-labelledby="next-title">
+  <div class="wrap">
+    <div class="next__block reveal">
       <span class="label label--accent">08 — Що далі</span>
-      <h2 class="h2 mt-s" id="next-title">Брендбук готовий. <span class="em">Що далі?</span></h2>
-      <p class="text text--narrow mt-s">Брендбук — не фінальна точка, а точка, з якої все інше нарешті можна робити швидко.</p>
+      <h2 class="next__title" id="next-title">Брендбук готовий.<br><span class="em">Що далі?</span></h2>
+      <p class="next__lead">Брендбук — не фінальна точка, а точка, з якої все інше нарешті можна робити швидко.</p>
+      <h3 class="next__sub">Що ми можемо зробити після брендбуку</h3>
+      <ul class="pillset pillset--one">
+        <li><span class="pill">перші робочі носії бренду</span></li>
+        <li><span class="pillset__arrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 7 7 17M7 17V8M7 17h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li><span class="pill">рекламні креативи</span></li>
+        <li><span class="pill">сайт / лендінг</span></li>
+        <li><span class="pill">трафік з Google Ads, Meta Ads тощо.</span></li>
+      </ul>
     </div>
 
-    <div class="next__cols">
-      <div class="next__col reveal">
-        <h3 class="h4">Що ми можемо зробити після брендбуку</h3>
-        <ul class="pillset">
-          <li><span class="pill">Перші робочі носії бренду</span></li>
-          <li><span class="pill">Рекламні креативи</span></li>
-          <li><span class="pill">Сайт / лендінг</span></li>
-          <li><span class="pill">Трафік з Google Ads, Meta Ads тощо</span></li>
-        </ul>
-      </div>
-
-      <div class="next__col reveal" style="--reveal-delay:120ms">
-        <h3 class="h4">А що після запуску трафіку?</h3>
-        <p class="text mb-s">Ми можемо не лише запустити рекламу, а й протестувати:</p>
-        <ul class="pillset">
-          <li><span class="pill">Які меседжі працюють</span></li>
-          <li><span class="pill">Які візуали клікають</span></li>
-          <li><span class="pill">Яка аудиторія приносить заявки / продажі</span></li>
-          <li><span class="pill pill--solid">І оптимізувати все під реальні задачі</span></li>
-        </ul>
-      </div>
+    <div class="next__block next__block--two reveal">
+      <h2 class="next__title">А що після запуску<br><span class="em">трафіку?</span></h2>
+      <p class="next__lead next__lead--two">Ми можемо не лише запустити рекламу, а й протестувати:</p>
+      <ul class="pillset pillset--two">
+        <li><span class="pill">які меседжі працюють</span></li>
+        <li><span class="pill">які візуали клікають</span></li>
+        <li><span class="pill">яка аудиторія приносить заявки / продажі</span></li>
+        <li><span class="pillset__arrow"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 7 7 17M7 17V8M7 17h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+        <li><span class="pill pill--solid">і оптимізувати все під реальні задачі</span></li>
+      </ul>
     </div>
 
     <div class="garage reveal">
-      <div class="garage__inner">
-        <div>
-          <h3 class="garage__title">Ми упаковуємо та просуваємо ваш бізнес</h3>
-          <p class="garage__note">Proekcia — як творчий гараж, куди власник може пригнати свій бізнес на прокачку.</p>
-        </div>
-        <div class="garage__media">
-          <img src="images/presentation/f1_pitstop.webp" alt="Команда механіків обслуговує болід на піт-стопі" width="1400" height="418" loading="lazy" decoding="async">
-        </div>
+      <div class="garage__text">
+        <h3 class="garage__title">Ми упаковуємо та<br>просуваємо ваш бізнес</h3>
+        <p class="garage__note">Proekcia — як творчий гараж, куди власник може пригнати свій бізнес на прокачку.</p>
+        <a class="garage__btn" href="#final" data-cta>
+          Замовити брендбук
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" stroke="currentColor" stroke-width="1.4"/></svg>
+        </a>
       </div>
+      <figure class="garage__media">
+        <img src="images/next/pitstop.webp" alt="Команда механіків обслуговує болід на піт-стопі" width="1812" height="742" loading="lazy" decoding="async">
+      </figure>
     </div>
   </div>
 </section>
@@ -1065,6 +1064,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=101" defer></script>
+<script src="js/main.js?v=103" defer></script>
 </body>
 </html>
