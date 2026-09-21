@@ -500,6 +500,7 @@
   display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);
   gap:clamp(1.25rem,2.4vw,40px);align-items:start;
   padding:clamp(1.4rem,2.476vw,41.6px);
+  min-height:clamp(345px,26.5vw,445px);   /* усі картки однакової висоти */
   border-radius:clamp(16px,1.548vw,26px);
   box-shadow:0 -10px 30px rgba(13,13,13,.10);
 }
@@ -539,7 +540,7 @@
   .layers__head,.layers__lead{max-width:none;}
   .layers__stack{gap:clamp(1rem,4vw,1.5rem);padding-bottom:0;}
   .lyr{
-    position:static;
+    position:static;min-height:0;
     grid-template-columns:minmax(0,1fr);
     gap:clamp(1rem,4vw,1.5rem);
   }
