@@ -179,6 +179,8 @@
     var cases = document.querySelectorAll('.loop-item');
     if (!cases.length || reduced.matches) return;
 
+    var canHover = window.matchMedia('(hover: hover)').matches;
+
     cases.forEach(function (card) {
       var video = card.querySelector('video');
       if (!video) return;
@@ -195,6 +197,15 @@
       card.addEventListener('mouseleave', pause);
       card.addEventListener('focusin', play);
       card.addEventListener('focusout', pause);
+
+      // на тачі наведення немає — вмикаємо відео, коли картка в кадрі
+      if (!canHover && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) play(); else pause();
+          });
+        }, { threshold: 0.6 }).observe(card);
+      }
     });
   }
 
