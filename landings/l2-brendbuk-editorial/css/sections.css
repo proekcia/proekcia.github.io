@@ -643,6 +643,7 @@
   aspect-ratio:1536 / 441;
 }
 .garage__text{position:absolute;left:3.125%;top:0;right:45%;height:100%;}
+.br-mob{display:none;}
 .garage__title{
   position:absolute;top:13.17%;
   font-size:clamp(1.4rem,2.857vw,48px);
@@ -694,6 +695,10 @@
   .garage{aspect-ratio:auto;padding:clamp(1.5rem,5vw,2.5rem);}
   .garage__text{position:static;height:auto;}
   .garage__title,.garage__note,.garage__btn{position:static;}
+  /* на мобільному заголовок у три рядки і дрібніший */
+  .garage__title{font-size:clamp(17px,5vw,26px);}
+  .br-desk{display:none;}
+  .br-mob{display:inline;}
   .garage__note{margin-top:var(--sp-3);max-width:none;}
   .garage__btn{
     margin-top:var(--sp-4);
