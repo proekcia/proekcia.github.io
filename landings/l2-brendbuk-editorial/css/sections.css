@@ -471,119 +471,105 @@
 }
 
 /* ===================== s08 · ТРИ ШАРИ ====================================
-   Три шари — розкривні рядки: номер, назва, підпис і коло з плюсом.
-   Відкритий рядок показує текст, список і картинку. Лінійки, кола й
-   типографіка ті самі, що в блоках 06 і 08. */
+   Блок «липне» до екрана на три прокрутки: номер і назва шару
+   підсвічуються, а вміст змінюється сам, без кліків. */
+.layers{padding-block:0;}
+.layers__scroll{height:300svh;}
+.layers__sticky{
+  position:sticky;top:0;
+  min-height:100svh;
+  display:flex;align-items:center;
+  padding-block:calc(var(--header-h) + clamp(1rem,2vw,2rem)) clamp(2rem,4vw,4rem);
+}
+.layers__head{max-width:60%;}
 .layers__title{
   margin-top:clamp(1rem,1.445vw,24.3px);
-  max-width:60%;
-  font-size:clamp(2.1rem,4.524vw,76px);
-  font-weight:500;line-height:1.039;letter-spacing:-.025em;
-}
-.layers__lead{
-  margin-top:clamp(1rem,1.369vw,23px);
-  max-width:40%;
-  font-size:clamp(1rem,1.048vw,17.6px);
-  line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
+  font-size:clamp(1.8rem,3.4vw,57px);
+  font-weight:500;line-height:1.06;letter-spacing:-.025em;
 }
 
-.acc{margin-top:clamp(2rem,4.5vw,76px);}
-.acc__item{border-top:1px solid var(--rule);}
-.acc__item:last-child{border-bottom:1px solid var(--rule);}
-.acc__head{margin:0;}
-.acc__btn{
-  display:grid;
-  grid-template-columns:auto minmax(0,1fr) auto auto;
-  align-items:center;
-  gap:clamp(1rem,2.4vw,40px);
-  width:100%;
-  padding-block:clamp(1.1rem,2.2vw,37px);
-  text-align:left;color:var(--ink);
-  transition:color var(--dur-fast) var(--ease);
+/* ---- смуга з номерами шарів ---- */
+.layers__nav{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;margin-top:clamp(1.5rem,3vw,48px);
+  border-top:1px solid var(--rule);
 }
-.acc__num{
-  font-size:clamp(11px,.78vw,13.1px);line-height:1;
-  letter-spacing:.06em;color:var(--ink-38);
+.layers__nav li{
+  display:flex;align-items:baseline;gap:clamp(.6rem,1vw,16px);
+  padding:clamp(.8rem,1.4vw,22px) clamp(.6rem,1.2vw,20px) clamp(.8rem,1.4vw,22px) 0;
+  border-top:2px solid transparent;margin-top:-1px;
+  color:var(--ink-38);
+  transition:color var(--dur) var(--ease),border-color var(--dur) var(--ease);
 }
-.acc__name{
-  font-size:clamp(1.4rem,2.286vw,38.4px);
-  font-weight:500;line-height:1.042;letter-spacing:-.025em;
+.layers__nav li.is-active{color:var(--ink);border-top-color:var(--accent);}
+.layers__num{font-size:clamp(11px,.78vw,13.1px);letter-spacing:.06em;}
+.layers__name{
+  font-size:clamp(1.1rem,1.786vw,30px);
+  font-weight:500;line-height:1.1;letter-spacing:-.025em;
   text-transform:uppercase;
 }
-.acc__note{
-  justify-self:end;
-  font-size:clamp(.9rem,.905vw,15.2px);
-  line-height:1.579;letter-spacing:-.0116em;color:var(--ink-55);
-}
-.acc__icon{
-  display:flex;align-items:center;justify-content:center;
-  width:clamp(40px,3.43vw,57.6px);aspect-ratio:1;
-  border:1px solid var(--ink);border-radius:50%;
-  transition:transform var(--dur) var(--ease),background var(--dur-fast) var(--ease),color var(--dur-fast) var(--ease);
-}
-.acc__icon svg{width:42%;height:auto;}
-.acc__btn:hover .acc__icon{background:var(--ink);color:var(--white);}
-.acc__item.is-open .acc__icon{transform:rotate(45deg);background:var(--ink);color:var(--white);}
 
-/* ---- панель ---- */
-.acc__panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows var(--dur-slow) var(--ease);}
-.acc__item.is-open .acc__panel{grid-template-rows:1fr;}
-.acc__inner{
-  overflow:hidden;
+/* ---- сцена: усі шари в одній комірці, видимий — активний ---- */
+.layers__stage{display:grid;margin-top:clamp(1.5rem,2.4vw,40px);}
+.lyr{
+  grid-area:1 / 1;
   display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) minmax(0,3fr);
-  gap:clamp(1.25rem,2.4vw,40px);
-  align-items:start;
+  gap:clamp(1.25rem,2.4vw,40px);align-items:start;
+  opacity:0;visibility:hidden;transform:translateY(18px);
+  transition:opacity var(--dur-slow) var(--ease),transform var(--dur-slow) var(--ease),visibility 0s linear var(--dur-slow);
 }
-.acc__item.is-open .acc__inner{padding-bottom:clamp(1.5rem,2.4vw,40px);}
-.acc__lead{
+.lyr.is-active{opacity:1;visibility:visible;transform:none;transition-delay:0s;}
+.lyr__kicker{display:flex;align-items:baseline;gap:.8rem;margin-bottom:clamp(.6rem,1vw,16px);}
+.lyr__kicker-num{font-size:clamp(11px,.78vw,13.1px);letter-spacing:.06em;color:var(--ink-38);}
+.lyr__lead{
   font-size:clamp(1rem,1.19vw,20px);
   line-height:1.5;letter-spacing:-.01em;color:var(--ink);
 }
-.acc__note-text{
-  margin-top:clamp(.75rem,1.2vw,20px);
-  font-size:clamp(.95rem,1.048vw,17.6px);
-  line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
-}
-.acc__tags{
-  display:flex;flex-wrap:wrap;gap:8px;
-  margin-top:clamp(1rem,1.6vw,26px);
-}
-.acc__tags span{
+.lyr__tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(1rem,1.6vw,26px);}
+.lyr__tags span{
   display:inline-flex;align-items:center;
-  min-height:clamp(32px,2.4vw,40px);
-  padding:0 clamp(.7rem,1.1vw,18px);
+  min-height:clamp(30px,2.2vw,38px);
+  padding:0 clamp(.6rem,1vw,16px);
   border:1px solid var(--rule);border-radius:999px;
   font-family:var(--ff-accent);font-style:italic;
-  font-size:clamp(.9rem,1.048vw,17.6px);color:var(--ink-70);
+  font-size:clamp(.85rem,1vw,16.5px);color:var(--ink-70);
 }
-.acc__col--list .label{display:block;margin-bottom:clamp(.75rem,1.2vw,20px);}
-.acc__list{display:flex;flex-direction:column;}
-.acc__list li{
+.lyr__list-col .label{display:block;margin-bottom:clamp(.6rem,1vw,16px);}
+.lyr__list{display:flex;flex-direction:column;}
+.lyr__list li{
   display:grid;grid-template-columns:auto minmax(0,1fr);
-  gap:clamp(.7rem,1.1vw,18px);
-  padding-block:clamp(.5rem,.85vw,14px);
+  gap:clamp(.6rem,1vw,16px);
+  padding-block:clamp(.4rem,.7vw,11px);
   border-top:1px solid var(--rule-soft);
-  font-size:clamp(.95rem,1.048vw,17.6px);
+  font-size:clamp(.9rem,1vw,16.5px);
   line-height:1.4;letter-spacing:-.01em;color:var(--ink-70);
 }
-.acc__list li:first-child{border-top:0;padding-top:0;}
-.acc__i{
-  font-size:clamp(11px,.78vw,13.1px);line-height:1.6;
-  letter-spacing:.06em;color:var(--ink-38);
-}
-.acc__media{margin:0;border-radius:clamp(12px,1.548vw,26px);overflow:hidden;}
-.acc__media img{display:block;width:100%;height:auto;}
+.lyr__list li:first-child{border-top:0;padding-top:0;}
+.lyr__i{font-size:clamp(11px,.78vw,13.1px);line-height:1.5;letter-spacing:.06em;color:var(--ink-38);}
+.lyr__media{margin:0;border-radius:clamp(12px,1.548vw,26px);overflow:hidden;}
+.lyr__media img{display:block;width:100%;height:auto;}
 
+/* без липкості: вузькі екрани і коли рух вимкнено — усі шари підряд */
 @media (max-width:991px){
-  .layers__title,.layers__lead{max-width:none;}
-  .acc__btn{
-    grid-template-columns:auto minmax(0,1fr) auto;
-    gap:.9rem;
-    padding-block:1.1rem;
+  .layers{padding-block:var(--section-y);}
+  .layers__scroll{height:auto;}
+  .layers__sticky{position:static;min-height:0;display:block;padding:0;}
+  .layers__head{max-width:none;}
+  .layers__nav{display:none;}
+  .layers__stage{display:block;margin-top:clamp(1.5rem,5vw,2.5rem);}
+  .lyr{
+    display:block;opacity:1;visibility:visible;transform:none;
+    padding-block:clamp(1.5rem,5vw,2.5rem);
+    border-top:1px solid var(--rule);
   }
-  .acc__num{align-self:center;}
-  .acc__note{display:none;}
-  .acc__inner{grid-template-columns:minmax(0,1fr);gap:1.25rem;}
+  .lyr__list-col,.lyr__media{margin-top:clamp(1rem,4vw,1.5rem);}
+}
+@media (prefers-reduced-motion:reduce){
+  .layers__scroll{height:auto;}
+  .layers__sticky{position:static;min-height:0;display:block;padding:0;}
+  .layers__nav{display:none;}
+  .layers__stage{display:block;}
+  .lyr{opacity:1;visibility:visible;transform:none;padding-block:2rem;border-top:1px solid var(--rule);}
 }
 
 /* ===================== s09 · МАНІФЕСТ ====================================

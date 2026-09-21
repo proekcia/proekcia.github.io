@@ -172,33 +172,40 @@
 
   /* ---------- 5. Секція «3 шари»: липкий індекс -------------------------- */
   function initLayers() {
-    var acc = document.getElementById('layersAcc');
-    if (!acc) return;
-    var items = Array.prototype.slice.call(acc.querySelectorAll('.acc__item'));
-    if (!items.length) return;
+    var scroll = document.getElementById('layersScroll');
+    if (!scroll) return;
+    var lyrs = Array.prototype.slice.call(scroll.querySelectorAll('.lyr'));
+    var navs = Array.prototype.slice.call(scroll.querySelectorAll('.layers__nav li'));
+    if (lyrs.length < 2) return;
 
-    var open = function (item) {
-      items.forEach(function (other) {
-        var isTarget = other === item;
-        other.classList.toggle('is-open', isTarget);
-        var btn = other.querySelector('.acc__btn');
-        if (btn) btn.setAttribute('aria-expanded', String(isTarget));
-      });
+    /* на вузьких екранах і при вимкненому русі шари просто йдуть підряд */
+    var mq = window.matchMedia('(min-width:992px)');
+    var cur = -1, ticking = false;
+
+    var setActive = function (i) {
+      if (i === cur) return;
+      cur = i;
+      lyrs.forEach(function (l, k) { l.classList.toggle('is-active', k === i); });
+      navs.forEach(function (n, k) { n.classList.toggle('is-active', k === i); });
     };
 
-    items.forEach(function (item) {
-      var btn = item.querySelector('.acc__btn');
-      if (!btn) return;
-      btn.addEventListener('click', function () {
-        /* повторний клік по відкритому рядку його згортає */
-        if (item.classList.contains('is-open')) {
-          item.classList.remove('is-open');
-          btn.setAttribute('aria-expanded', 'false');
-        } else {
-          open(item);
-        }
-      });
-    });
+    var update = function () {
+      ticking = false;
+      if (!mq.matches || reduced.matches) { setActive(-1); return; }
+      var rect = scroll.getBoundingClientRect();
+      var span = scroll.offsetHeight - window.innerHeight;
+      if (span <= 0) return;
+      var p = Math.min(0.999, Math.max(0, -rect.top / span));
+      setActive(Math.floor(p * lyrs.length));
+    };
+
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
   }
 
   /* ---------- 6. Відео в кейсах: вмикаємо лише при наведенні ------------
