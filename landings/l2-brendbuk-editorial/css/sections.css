@@ -590,6 +590,7 @@
 .pillset li{display:flex;margin:-1px;}   /* рамки сусідів зливаються, як у макеті */
 .next .pill{
   display:inline-flex;align-items:center;justify-content:center;
+  text-align:center;
   min-height:clamp(58px,6.222vw,104.52px);
   padding:0 clamp(1.1rem,2.396vw,40.26px);
   border:1px solid var(--ink);border-radius:2000px;
@@ -677,10 +678,16 @@
   .next__block,.next__title,.pillset--one,.pillset--two{max-width:none;}
   .next__arts{position:static;inset:auto;}
   .next__art{position:static;left:auto;top:auto;width:100%;margin:clamp(1.5rem,5vw,2.5rem) 0 0;}
-  /* пігулки на всю ширину, однакові, впритул одна до одної; кола зі стрілками прибрано */
-  .pillset li{flex:1 0 100%;margin:0;}
+  /* пігулки на всю ширину, однакові; рамки сусідів накладаються рівно
+     на товщину лінії, тому між ними одна лінія, а не дві */
+  .pillset li{flex:1 0 100%;margin:0 0 -1px;}
   .next .pill{width:100%;}
   .pillset li:has(.pillset__arrow){display:none;}
+  /* картинка з руками — на всю ширину екрана */
+  .next__art--cursor{
+    width:calc(100% + var(--gutter) * 2);
+    margin-inline:calc(var(--gutter) * -1);
+  }
   .next__block--two{margin-left:0;margin-top:clamp(2.5rem,7vw,4rem);}
   .next__title .em{margin-left:0;}
   .next__lead{max-width:none;}
