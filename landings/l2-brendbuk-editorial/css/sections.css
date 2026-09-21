@@ -327,6 +327,7 @@
     position:static;width:100%;
     margin-top:clamp(1.5rem,6vw,2.5rem);
   }
+  .define__media picture{display:block;}
   .define__media img{height:auto;}
   .bigrows__item{grid-template-columns:clamp(28px,9vw,40px) minmax(0,1fr);}
   .bigrows__title{font-size:clamp(20px,6.15vw,28px);}

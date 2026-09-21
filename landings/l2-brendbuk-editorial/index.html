@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=168">
-<link rel="stylesheet" href="css/base.css?v=168">
-<link rel="stylesheet" href="css/components.css?v=168">
-<link rel="stylesheet" href="css/sections.css?v=168">
+<link rel="stylesheet" href="css/tokens.css?v=169">
+<link rel="stylesheet" href="css/base.css?v=169">
+<link rel="stylesheet" href="css/components.css?v=169">
+<link rel="stylesheet" href="css/sections.css?v=169">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -229,7 +229,10 @@
   </div>
 
   <figure class="define__media reveal" style="--reveal-delay:180ms">
-    <img src="images/define/books.webp" alt="Стос надрукованих брендбуків Proekcia в помаранчевих обкладинках" width="1420" height="1826" loading="lazy" decoding="async">
+    <picture>
+      <source media="(max-width:991px)" srcset="images/define/books-mob.webp" width="1420" height="1104">
+      <img src="images/define/books.webp" alt="Стос надрукованих брендбуків Proekcia в помаранчевих обкладинках" width="1420" height="1826" loading="lazy" decoding="async">
+    </picture>
   </figure>
 </section>
 
@@ -1053,6 +1056,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=168" defer></script>
+<script src="js/main.js?v=169" defer></script>
 </body>
 </html>
