@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=145">
-<link rel="stylesheet" href="css/base.css?v=145">
-<link rel="stylesheet" href="css/components.css?v=145">
-<link rel="stylesheet" href="css/sections.css?v=145">
+<link rel="stylesheet" href="css/tokens.css?v=146">
+<link rel="stylesheet" href="css/base.css?v=146">
+<link rel="stylesheet" href="css/components.css?v=146">
+<link rel="stylesheet" href="css/sections.css?v=146">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -180,18 +180,17 @@
 <!-- ============================================================== s02 · 01 ЩО ТАКЕ БРЕНД
      Слайди 3–5 презентації. WP: title, text, image, closing_statement. -->
 <section class="section brand" id="brand" aria-labelledby="brand-title">
-  <div class="wrap brand__inner">
-    <span class="label label--accent reveal">01 — Що таке бренд?</span>
+  <div class="wrap grid">
+    <div class="brand__head reveal">
+      <span class="label label--accent">01 — Що таке бренд?</span>
+      <h2 class="brand__title" id="brand-title">Це не про продавати<br class="br-desk"> сміття під виглядом<br class="br-desk"> чогось цінного</h2>
+      <p class="brand__lead">А про те, як зробити правду цікавою. Це будь-яка етикетка, обгортка або людина, яка асоціюється з якістю і викликає довіру.</p>
+      <p class="brand__eq"><span>Бренд</span><span class="brand__eq-sign">=</span><span>асоціації</span></p>
+    </div>
 
-    <h2 class="brand__title reveal" id="brand-title">Це не про продавати<br class="br-desk"> сміття під виглядом<br class="br-desk"> чогось цінного</h2>
-
-    <figure class="brand__media reveal">
+    <figure class="brand__media reveal" style="--reveal-delay:120ms">
       <img src="images/presentation/trash_bag.webp" alt="Чорний пакет для сміття, обклеєний логотипами люксових брендів" width="660" height="440" loading="lazy" decoding="async">
     </figure>
-
-    <p class="brand__lead reveal">А про те, як зробити правду цікавою. Це будь-яка етикетка, обгортка або людина, яка асоціюється з якістю і викликає довіру.</p>
-
-    <p class="brand__eq reveal"><span>Бренд</span><span class="brand__eq-sign">=</span><span>асоціації</span></p>
 
     <p class="brand__statement reveal">Сильний бренд — <span class="em">чесний</span> бренд</p>
   </div>
@@ -203,7 +202,7 @@
   <div class="wrap grid">
     <div class="define__head reveal">
       <span class="label label--accent">02 — Що таке брендбук?</span>
-      <h2 class="h2 mt-s" id="define-title">Це документ, що фіксує</h2>
+      <h2 class="h2 mt-s" id="define-title">Це документ,<br> що фіксує</h2>
       <p class="text text--narrow mt-s">Не «логотип, кольори і шрифти». Система, у якій кожен елемент пояснений і має своє місце.</p>
     </div>
 
@@ -1046,6 +1045,6 @@
   </div>
 </footer>
 
-<script src="js/main.js?v=145" defer></script>
+<script src="js/main.js?v=146" defer></script>
 </body>
 </html>

@@ -224,31 +224,29 @@
 }
 
 /* ===================== s02 · ЩО ТАКЕ БРЕНД ==============================
-   Композиція по центру на фірмовому синьо-сірому: підпис, заголовок
-   у три рядки, фото, абзац, формула «Бренд = асоціації» і висновок. */
-.brand__inner{display:flex;flex-direction:column;align-items:center;text-align:center;}
+   Композиція по лівому краю на фірмовому синьо-сірому: текст ліворуч
+   (підпис, заголовок у три рядки, абзац, формула «Бренд = асоціації»),
+   фото праворуч, висновок під лінією на всю ширину. */
+.brand__head{grid-column:1 / span 6;}
 .brand__title{
   margin-top:clamp(1rem,1.445vw,24.3px);
-  max-width:20ch;
   font-size:clamp(1.6rem,2.857vw,48px);
   font-weight:500;line-height:1.08;letter-spacing:-.025em;
 }
 .brand__media{
-  margin:clamp(1.5rem,2.976vw,50px) 0 0;
-  width:min(100%,clamp(280px,32.7vw,550px));
-  border-radius:clamp(14px,1.548vw,26px);
-  overflow:hidden;
+  grid-column:8 / span 5;align-self:start;margin:0;
+  border-radius:clamp(14px,1.548vw,26px);overflow:hidden;
 }
 .brand__media img{display:block;width:100%;height:auto;}
 .brand__lead{
   margin-top:clamp(1.25rem,2.38vw,40px);
-  max-width:52ch;
+  max-width:46ch;
   font-size:clamp(1rem,1.048vw,17.6px);
   line-height:1.534;letter-spacing:-.01em;color:var(--ink-70);
 }
 /* «Бренд = асоціації» — формула з двох пігулок */
 .brand__eq{
-  display:flex;align-items:center;flex-wrap:wrap;justify-content:center;
+  display:flex;align-items:center;flex-wrap:wrap;
   gap:clamp(.5rem,.833vw,14px);
   margin-top:clamp(1.25rem,2.38vw,40px);
 }
@@ -265,7 +263,7 @@
   font-size:clamp(1.2rem,1.667vw,28px);color:var(--accent);
 }
 .brand__statement{
-  width:100%;
+  grid-column:1 / span 12;
   margin-top:clamp(2.5rem,5.36vw,90px);
   padding-top:clamp(1.5rem,2.4vw,40px);
   border-top:1px solid var(--rule);
@@ -273,12 +271,16 @@
   font-weight:500;line-height:1.04;letter-spacing:-.025em;color:var(--ink);
 }
 
-@media (max-width:991px){
-  .brand__title{max-width:none;}
+@media (max-width:1280px){
+  .brand__head{grid-column:1 / span 5;}
+  .brand__media{grid-column:7 / span 6;}
 }
 
 /* ===================== s03 · ЩО ТАКЕ БРЕНДБУК ============================ */
-.define__head{grid-column:1 / span 5;}
+.define__head{grid-column:1 / span 6;}
+/* «Це документ, що фіксує» тримаємо рівно у два рядки: на середніх
+   екранах 5.6vw не влазить у колонку заголовка, тому коефіцієнт менший. */
+#define-title{font-size:clamp(2.1rem,5.1vw,4.75rem);}
 .define__body{grid-column:7 / span 6;}
 
 .bigrows{border-top:1px solid var(--rule);}
@@ -300,7 +302,7 @@
   font-size:var(--fs-small);max-width:44ch;
 }
 @media (max-width:1280px){
-  .define__head{grid-column:1 / span 4;}
+  .define__head{grid-column:1 / span 5;}
   .define__body{grid-column:6 / span 7;}
 }
 
