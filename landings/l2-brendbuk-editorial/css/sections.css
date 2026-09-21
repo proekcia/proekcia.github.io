@@ -235,7 +235,6 @@
 }
 .brand__media{
   grid-column:8 / span 5;align-self:start;margin:0;
-  border-radius:clamp(14px,1.548vw,26px);overflow:hidden;
 }
 .brand__media img{display:block;width:100%;height:auto;}
 .brand__lead{
