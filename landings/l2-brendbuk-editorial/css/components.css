@@ -105,6 +105,14 @@
   gap:clamp(1rem,1.9vw,2.1rem);
 }
 @media only screen and (min-width:992px){ .site-header__nav{display:flex;} }
+/* сім пунктів меню на вузьких десктопах ледь не впираються у кнопку —
+   там проміжок менший */
+@media (min-width:992px) and (max-width:1200px){
+  .site-header__nav{gap:1.25vw;}
+}
+@media (min-width:992px) and (max-width:1100px){
+  .site-header__nav{gap:.55rem;}
+}
 .site-header__nav a{
   position:relative;
   font-size:max(.94vw,14px);
