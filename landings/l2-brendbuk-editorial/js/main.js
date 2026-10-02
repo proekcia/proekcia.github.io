@@ -125,6 +125,60 @@
     });
   }
 
+
+  /* ---------- 2b. Кіт у герої стежить за курсором ----------------------- */
+  /* Дев'ять кадрів з відео: центр і вісім напрямків. За позицією курсора
+     відносно голови вибираємо сектор і міняємо кадр. Тільки для мишей:
+     на тачі наведення немає, там лишається статичний центральний кадр. */
+  function initHeroCat() {
+    var cat = document.getElementById('heroCat');
+    if (!cat || reduced.matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    var DIRS = ['right', 'down-right', 'down', 'down-left', 'left', 'up-left', 'up', 'up-right'];
+    var base = 'images/hero/cat/';
+    var current = 'center';
+    var pending = null;
+    var frame = 0;
+
+    // решту кадрів тягнемо у простої, щоб не конкурувати з першим екраном
+    var preload = function () {
+      DIRS.forEach(function (d) { new Image().src = base + d + '.webp'; });
+    };
+    if (window.requestIdleCallback) window.requestIdleCallback(preload, { timeout: 2500 });
+    else window.setTimeout(preload, 1500);
+
+    var set = function (name) {
+      if (name === current) return;
+      current = name;
+      cat.src = base + name + '.webp';
+    };
+
+    var apply = function () {
+      frame = 0;
+      if (!pending) return;
+      var r = cat.getBoundingClientRect();
+      // голова — приблизно 23% від верху картинки, по центру
+      var hx = r.left + r.width * 0.51;
+      var hy = r.top + r.height * 0.23;
+      var dx = pending.x - hx;
+      var dy = pending.y - hy;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < r.width * 0.18) { set('center'); return; }   // курсор майже на морді
+      var ang = Math.atan2(dy, dx) * 180 / Math.PI;           // 0 = праворуч
+      var idx = Math.round(((ang + 360) % 360) / 45) % 8;
+      set(DIRS[idx]);
+    };
+
+    window.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;
+      pending = { x: e.clientX, y: e.clientY };
+      if (!frame) frame = window.requestAnimationFrame(apply);
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', function () { set('center'); });
+  }
+
   /* ---------- 3. Поява блоків при скролі -------------------------------- */
   function initReveal() {
     var items = document.querySelectorAll('.reveal, .flowrow');
@@ -447,6 +501,7 @@
     initHeader();
     initHeaderTheme();
     initMenu();
+    initHeroCat();
     initReveal();
     initNavSpy();
     initCaseVideos();
