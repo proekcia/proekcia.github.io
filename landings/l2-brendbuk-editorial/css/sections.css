@@ -89,6 +89,14 @@
   }
 }
 
+/* кіт із двох шарів: нижній — поточна поза, верхній проявляється,
+   коли кіт повертає голову за курсором */
+.hero__cat{line-height:0;}
+/* до 768 кіт у потоці — там шару потрібна своя система координат */
+@media only screen and (max-width:767px){ .hero__cat{position:relative;} }
+.hero__cat-img{display:block;width:100%;height:auto;}
+.hero__cat-img--next{position:absolute;left:0;top:0;width:100%;opacity:0;}
+
 /* ---- лід ---- */
 .hero__lead{
   margin-top:6vw;

@@ -127,56 +127,90 @@
 
 
   /* ---------- 2b. Кіт у герої стежить за курсором ----------------------- */
-  /* Дев'ять кадрів з відео: центр і вісім напрямків. За позицією курсора
-     відносно голови вибираємо сектор і міняємо кадр. Тільки для мишей:
-     на тачі наведення немає, там лишається статичний центральний кадр. */
+  /* 16 поз із відео по колу + центральна. Кут до курсора згладжуємо, щоб
+     голова не смикалась, а поза змінюється через проявлення другого шару. */
   function initHeroCat() {
-    var cat = document.getElementById('heroCat');
-    if (!cat || reduced.matches) return;
+    var wrap = document.getElementById('heroCat');
+    if (!wrap || reduced.matches) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    var DIRS = ['right', 'down-right', 'down', 'down-left', 'left', 'up-left', 'up', 'up-right'];
-    var base = 'images/hero/cat/';
-    var current = 'center';
-    var pending = null;
-    var frame = 0;
+    var base = wrap.querySelector('.hero__cat-img');
+    var next = wrap.querySelector('.hero__cat-img--next');
+    if (!base || !next) return;
 
-    // решту кадрів тягнемо у простої, щоб не конкурувати з першим екраном
+    var BASE_URL = 'images/hero/cat/';
+    var FADE = 170;
+    // d04 і d06 — ті самі кадри, що d03 і d05 (кіт у відео не дивиться точно вниз)
+    var SECTORS = ['d00','d01','d02','d03','d03','d05','d05','d07',
+                   'd08','d09','d10','d11','d12','d13','d14','d15'];
+
+    var shown = 'center';
+    var fading = false;
+    var target = null;      // {x, y} курсора
+    var ang = null;         // згладжений кут, градуси
+    var raf = 0;
+
     var preload = function () {
-      DIRS.forEach(function (d) { new Image().src = base + d + '.webp'; });
+      var seen = {};
+      SECTORS.forEach(function (n) {
+        if (seen[n]) return; seen[n] = 1;
+        new Image().src = BASE_URL + n + '.webp';
+      });
     };
     if (window.requestIdleCallback) window.requestIdleCallback(preload, { timeout: 2500 });
     else window.setTimeout(preload, 1500);
 
-    var set = function (name) {
-      if (name === current) return;
-      current = name;
-      cat.src = base + name + '.webp';
+    var queued = null;
+    var show = function (name) {
+      if (name === shown) { queued = null; return; }
+      if (fading) { queued = name; return; }   // домалюємо після поточного проявлення
+      fading = true;
+      next.src = BASE_URL + name + '.webp';
+      var run = function () {
+        next.style.transition = 'opacity ' + FADE + 'ms linear';
+        next.style.opacity = '1';
+        window.setTimeout(function () {
+          base.src = BASE_URL + name + '.webp';
+          next.style.transition = 'none';
+          next.style.opacity = '0';
+          shown = name;
+          fading = false;
+          if (queued && queued !== shown) { var q = queued; queued = null; show(q); }
+        }, FADE + 20);
+      };
+      if (next.decode) next.decode().then(run).catch(run);
+      else window.setTimeout(run, 30);
     };
 
-    var apply = function () {
-      frame = 0;
-      if (!pending) return;
-      var r = cat.getBoundingClientRect();
-      // голова — приблизно 23% від верху картинки, по центру
-      var hx = r.left + r.width * 0.51;
-      var hy = r.top + r.height * 0.23;
-      var dx = pending.x - hx;
-      var dy = pending.y - hy;
+    var tick = function () {
+      raf = 0;
+      if (!target) return;
+      var r = wrap.getBoundingClientRect();
+      var hx = r.left + r.width * 0.51;      // голова: 51% ширини
+      var hy = r.top + r.height * 0.23;      // і 23% від верху
+      var dx = target.x - hx, dy = target.y - hy;
       var dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < r.width * 0.18) { set('center'); return; }   // курсор майже на морді
-      var ang = Math.atan2(dy, dx) * 180 / Math.PI;           // 0 = праворуч
-      var idx = Math.round(((ang + 360) % 360) / 45) % 8;
-      set(DIRS[idx]);
+
+      if (dist < r.width * 0.16) { show('center'); return; }
+
+      var want = Math.atan2(dy, dx) * 180 / Math.PI;
+      if (ang === null) ang = want;
+      var diff = ((want - ang + 540) % 360) - 180;   // найкоротший шлях
+      ang += diff * 0.2;                             // «наздоганяння»
+      show(SECTORS[Math.round(((ang % 360) + 360) % 360 / 22.5) % 16]);
+
+      if (Math.abs(diff) > 1.5) raf = window.requestAnimationFrame(tick);
     };
 
     window.addEventListener('pointermove', function (e) {
       if (e.pointerType === 'touch') return;
-      pending = { x: e.clientX, y: e.clientY };
-      if (!frame) frame = window.requestAnimationFrame(apply);
+      target = { x: e.clientX, y: e.clientY };
+      if (!raf) raf = window.requestAnimationFrame(tick);
     }, { passive: true });
 
-    document.addEventListener('mouseleave', function () { set('center'); });
+    document.addEventListener('mouseleave', function () {
+      target = null; ang = null; show('center');
+    });
   }
 
   /* ---------- 3. Поява блоків при скролі -------------------------------- */
