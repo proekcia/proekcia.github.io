@@ -141,7 +141,7 @@
     var gl = canvas.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return;                      // без WebGL лишається статичний кадр
 
-    var SRC = 'images/hero/cat/cat-scrub-alpha.mp4';
+    var SRC = 'images/hero/cat/cat-turn.mp4';
     var EASE = 0.18;
     var MIN_STEP = 1 / 60;
 
@@ -178,7 +178,9 @@
     };
 
     /* --- перемотка за курсором --- */
-    var ready = false, targetX = window.innerWidth / 2, want = 0, shown = 0, raf = 0;
+    /* У кліпі 72 кадри по колу: час = кут від голови кота до курсора.
+       0 c — кіт дивиться праворуч, далі за годинниковою стрілкою. */
+    var ready = false, targetX = null, targetY = null, want = null, shown = null, raf = 0;
 
     var load = function () {
       if (video.src) return;
@@ -189,7 +191,7 @@
 
     video.addEventListener('loadeddata', function () {
       ready = true;
-      want = shown = video.duration / 2;
+      if (want === null) want = shown = 0;
       try { video.currentTime = shown; } catch (e) {}
     });
     video.addEventListener('seeked', function () {
@@ -202,34 +204,32 @@
 
     function tick() {
       raf = 0;
-      if (!ready || !video.duration) return;
+      if (!ready || !video.duration || targetX === null) return;
 
-      var w = window.innerWidth || 1;
-      var center = w / 2;
-      var dead = Math.max(30, w * 0.05);
-      var dist = targetX - center;
+      var r = canvas.getBoundingClientRect();
+      var hx = r.left + r.width * 0.51;     // голова: 51% ширини кадру
+      var hy = r.top + r.height * 0.23;     // і 23% від верху
+      var deg = Math.atan2(targetY - hy, targetX - hx) * 180 / Math.PI;   // 0 = праворуч, 90 = вниз
+      if (deg < 0) deg += 360;
 
-      if (Math.abs(dist) <= dead) {
-        want = video.duration / 2;                   // курсор по центру — кіт прямо
-      } else {
-        var side = dist > 0 ? 1 : -1;
-        var reach = side > 0 ? (w - center - dead) : (center - dead);
-        var p = Math.min(1, (Math.abs(dist) - dead) / Math.max(1, reach));
-        want = video.duration * (0.5 - side * 0.5 * p);   // початок кліпу — голова праворуч
+      if (want === null) { want = shown = deg; }
+      var diff = ((deg - want + 540) % 360) - 180;     // найкоротший шлях
+      want = (want + diff + 360) % 360;
+
+      var d2 = ((want - shown + 540) % 360) - 180;
+      shown = (shown + d2 * EASE + 360) % 360;
+
+      var t = video.duration * (shown / 360);
+      if (!video.seeking && Math.abs(video.currentTime - t) > MIN_STEP) {
+        try { video.currentTime = Math.max(0, Math.min(video.duration - 0.001, t)); } catch (e) {}
       }
 
-      shown += (want - shown) * EASE;
-
-      if (!video.seeking && Math.abs(video.currentTime - shown) > MIN_STEP) {
-        try { video.currentTime = Math.max(0, Math.min(video.duration - 0.001, shown)); } catch (e) {}
-      }
-
-      if (Math.abs(want - shown) > MIN_STEP) raf = window.requestAnimationFrame(tick);
+      if (Math.abs(d2) > 0.8) raf = window.requestAnimationFrame(tick);
     }
 
     window.addEventListener('pointermove', function (e) {
       if (e.pointerType === 'touch') return;
-      targetX = e.clientX;
+      targetX = e.clientX; targetY = e.clientY;
       load();
       if (ready && !raf) raf = window.requestAnimationFrame(tick);
     }, { passive: true });
