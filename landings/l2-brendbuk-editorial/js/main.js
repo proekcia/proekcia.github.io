@@ -127,30 +127,62 @@
 
 
   /* ---------- 2b. Кіт у герої стежить за курсором ----------------------- */
-  /* Відрізок відео, де кіт веде головою справа наліво, прокручується
-     позицією курсора по горизонталі. Ключове: нову позицію ставимо лише
-     коли браузер домалював попередню (video.seeking), інакше смикається. */
+  /* Відрізок відео, де кіт веде головою справа наліво, перемотується
+     позицією курсора. Кадр має подвійну висоту: згори кольори, знизу
+     маска — у WebGL склеюємо їх у прозорий кадр, щоб текст героя
+     лишався видимим за котом. Нову позицію ставимо лише коли браузер
+     домалював попередню (video.seeking), інакше картинка смикається. */
   function initHeroCat() {
-    var wrap = document.getElementById('heroCat');
     var video = document.getElementById('heroCatVideo');
-    if (!wrap || !video || reduced.matches) return;
+    var canvas = document.getElementById('heroCatCanvas');
+    if (!video || !canvas || reduced.matches) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    var SRC = 'images/hero/cat/cat-scrub.mp4';
-    var EASE = 0.18;          // наздоганяння цілі
-    var MIN_STEP = 1 / 60;    // дрібніші зсуви не перемотуємо
+    var gl = canvas.getContext('webgl', { premultipliedAlpha: false, alpha: true });
+    if (!gl) return;                      // без WebGL лишається статичний кадр
 
-    var ready = false;
-    var targetX = window.innerWidth / 2;
-    var want = 0;             // куди хочемо
-    var shown = 0;            // де зараз
-    var raf = 0;
+    var SRC = 'images/hero/cat/cat-scrub-alpha.mp4';
+    var EASE = 0.18;
+    var MIN_STEP = 1 / 60;
+
+    /* --- мінімальна WebGL-програма: колір згори, альфа знизу --- */
+    var vs = 'attribute vec2 p;varying vec2 v;void main(){v=vec2((p.x+1.0)*0.5,(1.0-p.y)*0.5);gl_Position=vec4(p,0.0,1.0);}';
+    var fs = 'precision mediump float;varying vec2 v;uniform sampler2D t;' +
+             'void main(){vec3 c=texture2D(t,vec2(v.x,v.y*0.5)).rgb;' +
+             'float a=texture2D(t,vec2(v.x,v.y*0.5+0.5)).r;gl_FragColor=vec4(c,a);}';
+    var compile = function (type, src) {
+      var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s;
+    };
+    var prog = gl.createProgram();
+    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog); gl.useProgram(prog);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    var tex = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, tex);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.clearColor(0, 0, 0, 0);
+
+    var paint = function () {
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    };
+
+    /* --- перемотка за курсором --- */
+    var ready = false, targetX = window.innerWidth / 2, want = 0, shown = 0, raf = 0;
 
     var load = function () {
       if (video.src) return;
-      video.preload = 'auto';
-      video.src = SRC;
-      video.load();
+      video.preload = 'auto'; video.src = SRC; video.load();
     };
     if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 2000 });
     else window.setTimeout(load, 1200);
@@ -159,8 +191,13 @@
       ready = true;
       want = shown = video.duration / 2;
       try { video.currentTime = shown; } catch (e) {}
-      video.classList.add('is-ready');
-      if (!raf) raf = window.requestAnimationFrame(tick);
+    });
+    video.addEventListener('seeked', function () {
+      paint();
+      if (!canvas.classList.contains('is-ready')) {
+        canvas.classList.add('is-ready');
+        canvas.parentNode.classList.add('is-live');   // ховаємо статичний кадр під низом
+      }
     });
 
     function tick() {
@@ -173,13 +210,12 @@
       var dist = targetX - center;
 
       if (Math.abs(dist) <= dead) {
-        want = video.duration / 2;                  // курсор по центру — кіт дивиться прямо
+        want = video.duration / 2;                   // курсор по центру — кіт прямо
       } else {
         var side = dist > 0 ? 1 : -1;
         var reach = side > 0 ? (w - center - dead) : (center - dead);
         var p = Math.min(1, (Math.abs(dist) - dead) / Math.max(1, reach));
-        // початок кліпу — голова праворуч, кінець — ліворуч
-        want = video.duration * (0.5 - side * 0.5 * p);
+        want = video.duration * (0.5 - side * 0.5 * p);   // початок кліпу — голова праворуч
       }
 
       shown += (want - shown) * EASE;

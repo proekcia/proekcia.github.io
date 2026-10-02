@@ -95,11 +95,14 @@
 /* до 768 кіт у потоці — там шару потрібна своя система координат */
 @media only screen and (max-width:767px){ .hero__cat{position:relative;} }
 .hero__cat-img{display:block;width:100%;height:auto;}
-.hero__cat-video{
+/* відео — лише джерело кадрів, на екран іде канвас із накладеною маскою */
+.hero__cat-video{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
+.hero__cat-canvas{
   position:absolute;left:0;top:0;width:100%;height:100%;
   opacity:0;transition:opacity .3s ease;pointer-events:none;
 }
-.hero__cat-video.is-ready{opacity:1;}
+.hero__cat-canvas.is-ready{opacity:1;}
+.hero__cat.is-live .hero__cat-img{opacity:0;transition:opacity .3s ease;}
 
 /* ---- лід ---- */
 .hero__lead{
