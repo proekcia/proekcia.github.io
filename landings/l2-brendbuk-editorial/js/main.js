@@ -126,117 +126,6 @@
   }
 
 
-  /* ---------- 2b. Кіт у герої стежить за курсором ----------------------- */
-  /* Відрізок відео, де кіт веде головою справа наліво, перемотується
-     позицією курсора. Кадр має подвійну висоту: згори кольори, знизу
-     маска — у WebGL склеюємо їх у прозорий кадр, щоб текст героя
-     лишався видимим за котом. Нову позицію ставимо лише коли браузер
-     домалював попередню (video.seeking), інакше картинка смикається. */
-  function initHeroCat() {
-    var video = document.getElementById('heroCatVideo');
-    var canvas = document.getElementById('heroCatCanvas');
-    if (!video || !canvas || reduced.matches) return;
-    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-
-    var gl = canvas.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
-    if (!gl) return;                      // без WebGL лишається статичний кадр
-
-    var SRC = 'images/hero/cat/cat-turn2.mp4';
-    var EASE = 0.18;
-    var MIN_STEP = 1 / 60;
-
-    /* --- мінімальна WebGL-програма: колір згори, альфа знизу --- */
-    var vs = 'attribute vec2 p;varying vec2 v;void main(){v=vec2((p.x+1.0)*0.5,(1.0-p.y)*0.5);gl_Position=vec4(p,0.0,1.0);}';
-    var fs = 'precision mediump float;varying vec2 v;uniform sampler2D t;' +
-             'void main(){vec3 c=texture2D(t,vec2(v.x,v.y*0.5)).rgb;' +
-             'float m=texture2D(t,vec2(v.x,v.y*0.5+0.5)).r;' +
-             /* поріг прибирає сіре «сміття», яке лишає стиснення в масці */
-             'float a=smoothstep(0.30,0.62,m);gl_FragColor=vec4(c*a,a);}';
-    var compile = function (type, src) {
-      var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s;
-    };
-    var prog = gl.createProgram();
-    gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
-    gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
-    gl.linkProgram(prog); gl.useProgram(prog);
-    var buf = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
-    var loc = gl.getAttribLocation(prog, 'p');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    var tex = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, tex);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.clearColor(0, 0, 0, 0);
-
-    var paint = function () {
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, video);
-      gl.clear(gl.COLOR_BUFFER_BIT);
-      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    };
-
-    /* --- перемотка за курсором --- */
-    /* У кліпі 72 кадри по колу: час = кут від голови кота до курсора.
-       0 c — кіт дивиться праворуч, далі за годинниковою стрілкою. */
-    var ready = false, targetX = null, targetY = null, want = null, shown = null, raf = 0;
-
-    var load = function () {
-      if (video.src) return;
-      video.preload = 'auto'; video.src = SRC; video.load();
-    };
-    if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 2000 });
-    else window.setTimeout(load, 1200);
-
-    video.addEventListener('loadeddata', function () {
-      ready = true;
-      if (want === null) want = shown = 0;
-      try { video.currentTime = shown; } catch (e) {}
-    });
-    video.addEventListener('seeked', function () {
-      paint();
-      if (!canvas.classList.contains('is-ready')) {
-        canvas.classList.add('is-ready');
-        canvas.parentNode.classList.add('is-live');   // ховаємо статичний кадр під низом
-      }
-    });
-
-    function tick() {
-      raf = 0;
-      if (!ready || !video.duration || targetX === null) return;
-
-      var r = canvas.getBoundingClientRect();
-      var hx = r.left + r.width * 0.51;     // голова: 51% ширини кадру
-      var hy = r.top + r.height * 0.23;     // і 23% від верху
-      var deg = Math.atan2(targetY - hy, targetX - hx) * 180 / Math.PI;   // 0 = праворуч, 90 = вниз
-      if (deg < 0) deg += 360;
-
-      if (want === null) { want = shown = deg; }
-      var diff = ((deg - want + 540) % 360) - 180;     // найкоротший шлях
-      want = (want + diff + 360) % 360;
-
-      var d2 = ((want - shown + 540) % 360) - 180;
-      shown = (shown + d2 * EASE + 360) % 360;
-
-      var t = video.duration * (shown / 360);
-      if (!video.seeking && Math.abs(video.currentTime - t) > MIN_STEP) {
-        try { video.currentTime = Math.max(0, Math.min(video.duration - 0.001, t)); } catch (e) {}
-      }
-
-      if (Math.abs(d2) > 0.8) raf = window.requestAnimationFrame(tick);
-    }
-
-    window.addEventListener('pointermove', function (e) {
-      if (e.pointerType === 'touch') return;
-      targetX = e.clientX; targetY = e.clientY;
-      load();
-      if (ready && !raf) raf = window.requestAnimationFrame(tick);
-    }, { passive: true });
-  }
-
   /* ---------- 3. Поява блоків при скролі -------------------------------- */
   function initReveal() {
     var items = document.querySelectorAll('.reveal, .flowrow');
@@ -559,7 +448,6 @@
     initHeader();
     initHeaderTheme();
     initMenu();
-    initHeroCat();
     initReveal();
     initNavSpy();
     initCaseVideos();

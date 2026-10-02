@@ -89,24 +89,6 @@
   }
 }
 
-/* кіт із двох шарів: нижній — поточна поза, верхній проявляється,
-   коли кіт повертає голову за курсором */
-.hero__cat{line-height:0;}
-/* до 768 кіт у потоці — там шару потрібна своя система координат */
-@media only screen and (max-width:767px){ .hero__cat{position:relative;} }
-.hero__cat-img{display:block;width:100%;height:auto;}
-/* відео — лише джерело кадрів, на екран іде канвас із накладеною маскою */
-.hero__cat-video{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;}
-/* підміна миттєва: перший намальований кадр збігається зі статичним,
-   а плавність давала мить, коли обидва шари напівпрозорі й крізь кота
-   просвічував текст */
-.hero__cat-canvas{
-  position:absolute;left:0;top:0;width:100%;height:100%;
-  opacity:0;pointer-events:none;
-}
-.hero__cat-canvas.is-ready{opacity:1;}
-.hero__cat.is-live .hero__cat-img{visibility:hidden;}
-
 /* ---- лід ---- */
 .hero__lead{
   margin-top:6vw;
