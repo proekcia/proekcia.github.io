@@ -141,7 +141,7 @@
     var gl = canvas.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return;                      // без WebGL лишається статичний кадр
 
-    var SRC = 'images/hero/cat/cat-turn.mp4';
+    var SRC = 'images/hero/cat/cat-turn2.mp4';
     var EASE = 0.18;
     var MIN_STEP = 1 / 60;
 
@@ -149,7 +149,9 @@
     var vs = 'attribute vec2 p;varying vec2 v;void main(){v=vec2((p.x+1.0)*0.5,(1.0-p.y)*0.5);gl_Position=vec4(p,0.0,1.0);}';
     var fs = 'precision mediump float;varying vec2 v;uniform sampler2D t;' +
              'void main(){vec3 c=texture2D(t,vec2(v.x,v.y*0.5)).rgb;' +
-             'float a=texture2D(t,vec2(v.x,v.y*0.5+0.5)).r;gl_FragColor=vec4(c*a,a);}';   // premultiplied
+             'float m=texture2D(t,vec2(v.x,v.y*0.5+0.5)).r;' +
+             /* поріг прибирає сіре «сміття», яке лишає стиснення в масці */
+             'float a=smoothstep(0.30,0.62,m);gl_FragColor=vec4(c*a,a);}';
     var compile = function (type, src) {
       var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s;
     };
