@@ -19,10 +19,10 @@
 <!-- Шрифти: локальні woff2 (≈23 КБ кожен), font-display:swap — див. css/tokens.css.
      Preload навмисно не використовуємо: CSS блокує рендер і так, а подвійне
      завантаження файлу коштувало б дорожче за виграш. -->
-<link rel="stylesheet" href="css/tokens.css?v=198">
-<link rel="stylesheet" href="css/base.css?v=198">
-<link rel="stylesheet" href="css/components.css?v=198">
-<link rel="stylesheet" href="css/sections.css?v=198">
+<link rel="stylesheet" href="css/tokens.css?v=201">
+<link rel="stylesheet" href="css/base.css?v=201">
+<link rel="stylesheet" href="css/components.css?v=201">
+<link rel="stylesheet" href="css/sections.css?v=201">
 <script>document.documentElement.classList.remove('no-js');</script>
 
 <script type="application/ld+json">
@@ -164,6 +164,9 @@
 
     <span class="hero__letter hero__letter--r" aria-hidden="true"></span>
     <span class="hero__letter hero__letter--k" aria-hidden="true"></span>
+
+    <video class="hero__video" id="heroVideo" poster="images/hero/hero-poster.webp"
+           width="1600" height="1160" muted playsinline preload="auto" aria-hidden="true"></video>
 
     <img class="hero__cutout" src="images/hero/cutout.webp" alt="" width="1200" height="1200" fetchpriority="high" decoding="async">
 
@@ -1021,6 +1024,6 @@
 
 
 
-<script src="js/main.js?v=198" defer></script>
+<script src="js/main.js?v=201" defer></script>
 </body>
 </html>

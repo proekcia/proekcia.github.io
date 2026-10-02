@@ -126,6 +126,39 @@
   }
 
 
+  /* ---------- 2b. Відео героя: кіт оживає при наведенні на кнопку ------- */
+  function initHeroVideo() {
+    var video = document.getElementById('heroVideo');
+    var hero = document.getElementById('hero');
+    if (!video || !hero || reduced.matches) return;
+    if (!window.matchMedia('(min-width:992px) and (hover: hover)').matches) return;
+
+    video.src = 'images/hero/hero-cat.mp4';
+    video.load();
+
+    video.addEventListener('loadeddata', function () {
+      video.currentTime = 0;
+      hero.classList.add('hero--video');     // ховаємо власний заголовок і кота
+    });
+
+    var play = function () {
+      if (video.readyState < 2) return;
+      var p = video.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    var stop = function () { video.pause(); };
+
+    hero.querySelectorAll('.hero__btn').forEach(function (btn) {
+      btn.addEventListener('mouseenter', play);
+      btn.addEventListener('focus', play);
+      btn.addEventListener('mouseleave', stop);
+      btn.addEventListener('blur', stop);
+    });
+
+    // дійшло до кінця — лишаємо останній кадр і готуємось програти знову
+    video.addEventListener('ended', function () { video.currentTime = 0; });
+  }
+
   /* ---------- 3. Поява блоків при скролі -------------------------------- */
   function initReveal() {
     var items = document.querySelectorAll('.reveal, .flowrow');
@@ -448,6 +481,7 @@
     initHeader();
     initHeaderTheme();
     initMenu();
+    initHeroVideo();
     initReveal();
     initNavSpy();
     initCaseVideos();

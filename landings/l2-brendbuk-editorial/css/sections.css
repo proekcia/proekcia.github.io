@@ -89,6 +89,24 @@
   }
 }
 
+/* ---- відео героя (тільки десктоп) ----------------------------------
+   Кадр із готовим написом «Бренд бук» і котом. Коли воно готове, JS
+   вішає .hero--video: власні заголовок, літери й статичний кіт ховаються,
+   а лід і кнопки лишаються живим HTML поверх відео. */
+.hero__video{display:none;}
+@media only screen and (min-width:992px){
+  .hero__video{
+    display:block;position:absolute;inset:0;z-index:0;
+    width:100%;height:100%;object-fit:cover;object-position:center bottom;
+    pointer-events:none;
+  }
+  .hero--video .hero__word,
+  .hero--video .hero__letter,
+  .hero--video .hero__cutout{opacity:0;visibility:hidden;}
+  .hero--video .hero__lead,
+  .hero--video .hero__actions{position:absolute;z-index:3;}
+}
+
 /* ---- лід ---- */
 .hero__lead{
   margin-top:6vw;
