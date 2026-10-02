@@ -138,7 +138,7 @@
     if (!video || !canvas || reduced.matches) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    var gl = canvas.getContext('webgl', { premultipliedAlpha: false, alpha: true });
+    var gl = canvas.getContext('webgl', { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return;                      // без WebGL лишається статичний кадр
 
     var SRC = 'images/hero/cat/cat-scrub-alpha.mp4';
@@ -149,7 +149,7 @@
     var vs = 'attribute vec2 p;varying vec2 v;void main(){v=vec2((p.x+1.0)*0.5,(1.0-p.y)*0.5);gl_Position=vec4(p,0.0,1.0);}';
     var fs = 'precision mediump float;varying vec2 v;uniform sampler2D t;' +
              'void main(){vec3 c=texture2D(t,vec2(v.x,v.y*0.5)).rgb;' +
-             'float a=texture2D(t,vec2(v.x,v.y*0.5+0.5)).r;gl_FragColor=vec4(c,a);}';
+             'float a=texture2D(t,vec2(v.x,v.y*0.5+0.5)).r;gl_FragColor=vec4(c*a,a);}';   // premultiplied
     var compile = function (type, src) {
       var s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s;
     };
