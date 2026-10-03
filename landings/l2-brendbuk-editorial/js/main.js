@@ -126,68 +126,37 @@
   }
 
 
-  /* ---------- 2b. Відео героя: кадр прив'язаний до відстані до кнопки --- */
-  /* Час у кліпі = наскільки курсор близько до «Замовити брендбук»:
-     далеко — перший кадр, на кнопці — останній. Тому кіт реагує
-     одночасно з курсором, без відставання. Нову позицію ставимо лише
-     коли браузер домалював попередню (video.seeking), інакше смикається. */
+  /* ---------- 2b. Відео героя: один прогін від першого руху миші -------- */
+  /* Кліп стоїть на першому кадрі. Щойно курсор зрушив — програється
+     один раз і лишається на останньому кадрі. */
   function initHeroVideo() {
     var video = document.getElementById('heroVideo');
     var hero = document.getElementById('hero');
-    var btn = hero && hero.querySelector('.hero__btn--primary');
-    if (!video || !hero || !btn || reduced.matches) return;
+    if (!video || !hero || reduced.matches) return;
     if (!window.matchMedia('(min-width:992px) and (hover: hover)').matches) return;
 
-    var MIN_STEP = 1 / 50;    // дрібніші зсуви не перемотуємо
-    var want = 0, raf = 0, ready = false;
+    var started = false;
 
-    var load = function () {
-      if (video.src) return;
-      video.src = 'images/hero/hero-cat.mp4';
-      video.load();
-    };
-    if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1500 });
-    else window.setTimeout(load, 900);
-
+    video.src = 'images/hero/hero-cat.mp4';
+    video.load();
     video.addEventListener('loadeddata', function () {
-      ready = true;
-      video.pause();
-      try { video.currentTime = 0; } catch (e) {}
+      video.playbackRate = 1.8;
       hero.classList.add('hero--video');
     });
 
-    var apply = function () {
-      raf = 0;
-      if (!ready || !video.duration) return;
-      if (!video.paused) video.pause();
-      if (!video.seeking && Math.abs(video.currentTime - want) > MIN_STEP) {
-        try { video.currentTime = Math.max(0, Math.min(video.duration - 0.001, want)); } catch (e) {}
-      }
+    var start = function (e) {
+      if (started || video.readyState < 2) return;
+      if (e && e.pointerType === 'touch') return;
+      started = true;
+      document.removeEventListener('pointermove', start);
+      var p = video.play();
+      if (p && p.catch) p.catch(function () { started = false; });
     };
 
-    hero.addEventListener('pointermove', function (e) {
-      if (e.pointerType === 'touch') return;
-      load();
-      if (!ready) return;
-      var r = btn.getBoundingClientRect();
-      var dx = e.clientX - (r.left + r.width / 2);
-      var dy = e.clientY - (r.top + r.height / 2);
-      var dist = Math.sqrt(dx * dx + dy * dy);
+    document.addEventListener('pointermove', start, { passive: true });
 
-      // біля кнопки — кінець кліпу, далі за FAR — початок
-      var near = Math.max(r.width, r.height) * 0.6;
-      var far = Math.max(hero.clientWidth, hero.clientHeight) * 0.55;
-      var p = (far - dist) / Math.max(1, far - near);
-      p = p < 0 ? 0 : (p > 1 ? 1 : p);
-
-      want = video.duration * p;
-      if (!raf) raf = window.requestAnimationFrame(apply);
-    }, { passive: true });
-
-    hero.addEventListener('pointerleave', function () {
-      want = 0;
-      if (!raf) raf = window.requestAnimationFrame(apply);
-    });
+    // дограло — лишаємо останній кадр
+    video.addEventListener('ended', function () { video.pause(); });
   }
 
   /* ---------- 3. Поява блоків при скролі -------------------------------- */
