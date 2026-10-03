@@ -126,11 +126,11 @@
   }
 
 
-  /* ---------- 2b. Відео героя: реакція на рух до кнопки ----------------- */
-  /* Курсор наближається до кнопки — відео грає вперед; віддаляється —
-     відмотуємо назад до першого кадру. Назад браузер програвати не вміє,
-     тому крутимо currentTime вручну і тільки коли попередній кадр
-     домальовано (video.seeking), інакше смикається. */
+  /* ---------- 2b. Відео героя: кадр прив'язаний до відстані до кнопки --- */
+  /* Час у кліпі = наскільки курсор близько до «Замовити брендбук»:
+     далеко — перший кадр, на кнопці — останній. Тому кіт реагує
+     одночасно з курсором, без відставання. Нову позицію ставимо лише
+     коли браузер домалював попередню (video.seeking), інакше смикається. */
   function initHeroVideo() {
     var video = document.getElementById('heroVideo');
     var hero = document.getElementById('hero');
@@ -138,82 +138,56 @@
     if (!video || !hero || !btn || reduced.matches) return;
     if (!window.matchMedia('(min-width:992px) and (hover: hover)').matches) return;
 
-    var RATE = 1.8;          // вперед швидше за оригінал
-    var BACK = 2.4;          // у скільки разів швидше відмотувати назад
-    var DEAD = 3;            // дрібні тремтіння курсора ігноруємо
-    var prevDist = null;
-    var mode = 'hold';       // hold | fwd | back
+    var MIN_STEP = 1 / 50;    // дрібніші зсуви не перемотуємо
+    var want = 0, raf = 0, ready = false;
 
-    video.src = 'images/hero/hero-cat.mp4';
-    video.load();
+    var load = function () {
+      if (video.src) return;
+      video.src = 'images/hero/hero-cat.mp4';
+      video.load();
+    };
+    if (window.requestIdleCallback) window.requestIdleCallback(load, { timeout: 1500 });
+    else window.setTimeout(load, 900);
+
     video.addEventListener('loadeddata', function () {
-      video.playbackRate = RATE;
+      ready = true;
+      video.pause();
+      try { video.currentTime = 0; } catch (e) {}
       hero.classList.add('hero--video');
     });
 
-    var forward = function () {
-      mode = 'fwd';
-      stopBack();
-      if (video.readyState < 2) return;
-      if (video.paused) {
-        var p = video.play();
-        if (p && p.catch) p.catch(function () {});
-      }
-    };
-
-    var backTime = 0, backTimer = 0, seekStart = 0;
-    var rewind = function () {
-      if (mode !== 'back') backTime = performance.now();
-      mode = 'back';
+    var apply = function () {
+      raf = 0;
+      if (!ready || !video.duration) return;
       if (!video.paused) video.pause();
-      seekStart = backTime;
-      if (!backTimer) backTimer = window.setInterval(stepBack, 33);
-    };
-
-    /* рахуємо від реального часу, а не від кадрів: швидкість відмотування
-       однакова й на 120 Гц, і коли вкладка пригальмована */
-    function stepBack() {
-      if (mode !== 'back') { stopBack(); return; }
-      var now = performance.now();
-      var dt = Math.min(0.25, (now - backTime) / 1000);
-      backTime = now;
-      if (video.readyState < 1) return;            // просто пропускаємо тік
-      if (video.currentTime <= 0.001) { video.currentTime = 0; stopBack(); return; }
-      // якщо перемотка зависла довше за 250 мс — все одно рухаємось далі
-      if (!video.seeking || now - seekStart > 250) {
-        seekStart = now;
-        try { video.currentTime = Math.max(0, video.currentTime - dt * BACK); } catch (e) {}
+      if (!video.seeking && Math.abs(video.currentTime - want) > MIN_STEP) {
+        try { video.currentTime = Math.max(0, Math.min(video.duration - 0.001, want)); } catch (e) {}
       }
-    }
-    function stopBack() {
-      if (backTimer) { window.clearInterval(backTimer); backTimer = 0; }
-    }
+    };
 
     hero.addEventListener('pointermove', function (e) {
-      if (e.pointerType === 'touch' || video.readyState < 2) return;
+      if (e.pointerType === 'touch') return;
+      load();
+      if (!ready) return;
       var r = btn.getBoundingClientRect();
       var dx = e.clientX - (r.left + r.width / 2);
       var dy = e.clientY - (r.top + r.height / 2);
       var dist = Math.sqrt(dx * dx + dy * dy);
 
-      if (prevDist !== null) {
-        var delta = dist - prevDist;
-        if (delta < -DEAD) forward();            // наближається до кнопки
-        else if (delta > DEAD) rewind();         // віддаляється
-      }
-      prevDist = dist;
+      // біля кнопки — кінець кліпу, далі за FAR — початок
+      var near = Math.max(r.width, r.height) * 0.6;
+      var far = Math.max(hero.clientWidth, hero.clientHeight) * 0.55;
+      var p = (far - dist) / Math.max(1, far - near);
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+
+      want = video.duration * p;
+      if (!raf) raf = window.requestAnimationFrame(apply);
     }, { passive: true });
 
-    // курсор на кнопці — догравати до кінця
-    btn.addEventListener('mouseenter', forward);
-    btn.addEventListener('focus', forward);
-
     hero.addEventListener('pointerleave', function () {
-      prevDist = null;
-      rewind();
+      want = 0;
+      if (!raf) raf = window.requestAnimationFrame(apply);
     });
-
-    video.addEventListener('ended', function () { mode = 'hold'; });
   }
 
   /* ---------- 3. Поява блоків при скролі -------------------------------- */
