@@ -126,37 +126,60 @@
   }
 
 
-  /* ---------- 2b. Відео героя: кіт оживає при наведенні на кнопку ------- */
+  /* ---------- 2b. Відео героя: оживає від руху курсора ------------------ */
+  /* Кліп — анімація настрою кота (кіт у ньому головою не крутить, тож
+     стежити за курсором нічим). Рухається курсор у герої — відео грає
+     прискорено; курсор зупинився або пішов — ставимо на паузу. */
   function initHeroVideo() {
     var video = document.getElementById('heroVideo');
     var hero = document.getElementById('hero');
     if (!video || !hero || reduced.matches) return;
     if (!window.matchMedia('(min-width:992px) and (hover: hover)').matches) return;
 
+    var RATE = 1.8;          // швидше, ніж в оригіналі
+    var IDLE = 320;          // скільки чекати після зупинки курсора
+    var idleTimer = 0;
+
     video.src = 'images/hero/hero-cat.mp4';
     video.load();
-
     video.addEventListener('loadeddata', function () {
-      video.currentTime = 0;
-      hero.classList.add('hero--video');     // ховаємо власний заголовок і кота
+      video.playbackRate = RATE;
+      hero.classList.add('hero--video');
     });
 
     var play = function () {
       if (video.readyState < 2) return;
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
+      if (video.ended || video.currentTime >= video.duration - 0.05) video.currentTime = 0;
+      if (video.paused) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+      }
     };
-    var stop = function () { video.pause(); };
 
-    hero.querySelectorAll('.hero__btn').forEach(function (btn) {
-      btn.addEventListener('mouseenter', play);
-      btn.addEventListener('focus', play);
-      btn.addEventListener('mouseleave', stop);
-      btn.addEventListener('blur', stop);
+    var hold = function () {
+      play();
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(function () { video.pause(); }, IDLE);
+    };
+
+    hero.addEventListener('pointermove', function (e) {
+      if (e.pointerType === 'touch') return;
+      hold();
+    }, { passive: true });
+
+    hero.addEventListener('pointerleave', function () {
+      window.clearTimeout(idleTimer);
+      video.pause();
     });
 
-    // дійшло до кінця — лишаємо останній кадр і готуємось програти знову
-    video.addEventListener('ended', function () { video.currentTime = 0; });
+    // кнопки — завжди догравати до кінця
+    hero.querySelectorAll('.hero__btn').forEach(function (btn) {
+      btn.addEventListener('mouseenter', function () {
+        window.clearTimeout(idleTimer);
+        play();
+      });
+      btn.addEventListener('focus', play);
+    });
   }
 
   /* ---------- 3. Поява блоків при скролі -------------------------------- */

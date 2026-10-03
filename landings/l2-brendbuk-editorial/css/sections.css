@@ -95,10 +95,11 @@
    а лід і кнопки лишаються живим HTML поверх відео. */
 .hero__video{display:none;}
 @media only screen and (min-width:992px){
+  /* на всю ширину героя і притиснуте донизу: по горизонталі ніколи
+     не ріже, зайве йде вгору за межу екрана */
   .hero__video{
-    display:block;position:absolute;inset:0;z-index:0;
-    width:100%;height:100%;object-fit:cover;object-position:center bottom;
-    pointer-events:none;
+    display:block;position:absolute;left:0;bottom:0;z-index:0;
+    width:100%;height:auto;pointer-events:none;
   }
   .hero--video .hero__word,
   .hero--video .hero__letter,
