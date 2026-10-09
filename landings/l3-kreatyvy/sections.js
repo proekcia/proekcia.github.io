@@ -211,6 +211,10 @@
     scale: 0, rotation: -20, duration: 0.9, ease: 'back.out(1.7)', stagger: 0.18,
     scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
   });
+  // на телефоні мем у колі вмикається дотиком
+  $$('.cheaper__item').forEach(function (it) {
+    it.addEventListener('click', function () { if (!window.matchMedia('(hover: hover)').matches) it.classList.toggle('is-gif'); });
+  });
   gsap.from('.cheaper__txt', {
     autoAlpha: 0, y: 20, duration: 0.7, ease: 'power2.out', stagger: 0.18, delay: 0.25,
     scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }

@@ -679,9 +679,17 @@
   display:flex;align-items:center;justify-content:center;
   width:100%;aspect-ratio:1;border-radius:50%;
   background:var(--c-white);font-size:calc(var(--d) * .42);line-height:1;
-  overflow:hidden;
+  position:relative;overflow:hidden;
 }
-.cheaper__em img{width:100%;height:100%;object-fit:cover;display:block;}   /* мем у колі */
+/* спершу — емодзі; при наведенні (на телефоні — дотиком) проявляється мем */
+.cheaper__emo{transition:transform .45s cubic-bezier(.22,1,.36,1), opacity .3s;}
+.cheaper__gif{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.12);transition:opacity .35s, transform .6s cubic-bezier(.22,1,.36,1);}
+.cheaper__item.is-gif .cheaper__gif{opacity:1;transform:none;}
+.cheaper__item.is-gif .cheaper__emo{opacity:0;transform:scale(.6);}
+@media (hover:hover){
+  .cheaper__item:hover .cheaper__gif{opacity:1;transform:none;}
+  .cheaper__item:hover .cheaper__emo{opacity:0;transform:scale(.6);}
+}
 .cheaper__item:nth-child(2) .cheaper__em{background:var(--c-black);}
 .cheaper__item:nth-child(3) .cheaper__em{background:var(--c-orange);}
 .cheaper__txt{margin-top:calc(18px + 14 * var(--k));font-size:calc(20px + 12 * var(--k));letter-spacing:-.035em;}
