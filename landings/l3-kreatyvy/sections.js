@@ -274,18 +274,92 @@
 
   /* ---------- 04b · 5 креативів одного бренду: спершу фото, потім на всі «лягає» фірмова система,
      і лише на двох з’являються ціна й «Купити». Разова коротка послідовність. ---------- */
-  var adTiles = $$('.ad-tile');
-  if (adTiles.length) {
-    // 1) креативи з'являються із закритими логотипами + питання «Впізнаєте бренд?»;
-    // 2) пауза — є час упізнати; 3) «скло» тане по черзі → відповідь «Це Loivi»
-    gsap.timeline({ scrollTrigger: { trigger: '.memory__grid', start: 'top 75%', once: true } })
-      .fromTo(adTiles, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out', stagger: 0.07 })
-      .to('.ad-tile__hide', { autoAlpha: 0, scale: 0.6, duration: 0.5, ease: 'power2.inOut', stagger: 0.08 }, 2.4)
-      .to('.memory__q', { autoAlpha: 0, y: -10, duration: 0.35, ease: 'power2.in' }, 2.4)
-      .fromTo('.memory__a', { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 2.8);
-    // «Але не всі креативи мають продавати прямо зараз» → мітки: більшість — настрій, лише деякі — продаж
-    gsap.to('.ad-tile__tag', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'back.out(2)', stagger: 0.1,
-      scrollTrigger: { trigger: '.memory__end', start: 'top 90%', once: true } });
+  /* ---------- 03d · бренд-пам'ять: відбитки креативів складаються в знак ----------
+     Знак (зірка PROEKCIA) заповнюємо сіткою клітинок. На скролі «креативи» (білі картки)
+     по одному прилітають з-за меж кадру, зменшуються і лягають у свою клітинку
+     напівпрозорим відбитком; відбитки накладаються — знак проступає все чіткіше.
+     Кожен восьмий — оранжевий («продаж»), решта — темні («пам'ять»). */
+  var memBox = $('.memory__canvas');
+  if (memBox) {
+    var cv = $('canvas', memBox), ctx = cv.getContext('2d');
+    var MEM_STAR = new Path2D('M259.998 437.084C259.998 300.197 219.801 260 82.9141 260C219.801 260 259.998 219.803 259.998 82.916C259.998 219.803 300.195 260 437.082 260C300.195 260 259.998 300.197 259.998 437.084Z');
+    var memN = $('.memory__n'), memEnd = $('.memory__end');
+    var cells = [], size = 0, dpr = 1, cell = 0, last = -1;
+    // детермінований «випадок» — однакова картина при кожному перерахунку
+    var rnd = function (i, k) { var x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); };
+    var build = function () {
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      size = memBox.clientWidth;
+      cv.width = size * dpr; cv.height = size * dpr;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);     // isPointInPath рахує з урахуванням поточної трансформації
+      // сітка в координатах знака (520×520), лишаємо клітинки, центр яких усередині зірки
+      var step = 8, list = [];
+      for (var y = 70; y <= 450; y += step) for (var x = 70; x <= 450; x += step) {
+        if (ctx.isPointInPath(MEM_STAR, x + step / 2, y + step / 2)) list.push({ x: x, y: y });
+      }
+      // порядок появи: від центру назовні з легким розкидом — знак «наростає»
+      list.forEach(function (c, i) { var dx = c.x - 253, dy = c.y - 253; c.o = Math.sqrt(dx * dx + dy * dy) + rnd(i, 1) * 90; });
+      list.sort(function (a, b) { return a.o - b.o; });
+      cell = step;
+      cells = list.map(function (c, i) {
+        var ang = rnd(i, 2) * Math.PI * 2;
+        return { x: c.x, y: c.y, sell: i % 8 === 5,
+          fx: 260 + Math.cos(ang) * 520, fy: 260 + Math.sin(ang) * 520,   // звідки прилітає (за межами кадру)
+          rot: (rnd(i, 3) - 0.5) * 0.9 };
+      });
+      last = -1;
+    };
+    var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+    var draw = function (p) {
+      if (!cells.length) return;
+      var k = size / 380 * dpr, n = cells.length;   // кадр — рамка знака 70…450 з 520
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.setTransform(k, 0, 0, k, -70 * k, -70 * k);
+      var FLY = 0.07, SPAN = 0.8 - FLY;        // кожен креатив летить 7% скролу; усі долітають до 80%
+      var shown = 0, flying = [];
+      for (var i = 0; i < n; i++) {
+        var c = cells[i], t0 = i / n * SPAN, e = (p - t0) / FLY;
+        if (e <= 0) continue;
+        if (e >= 1) {
+          shown++;
+          // відбиток: темний напівпрозорий (накладаються — густішає) або оранжевий
+          ctx.fillStyle = c.sell ? '#FF4613' : 'rgba(13,13,13,.62)';
+          ctx.beginPath(); ctx.roundRect(c.x + 0.75, c.y + 0.75, cell - 1.5, cell - 1.5, 1.5); ctx.fill();
+        } else flying.push([c, ease(e)]);
+      }
+      // креативи в польоті — поверх відбитків: біла картка 4:5, що зменшується до клітинки
+      flying.forEach(function (f) {
+        var c = f[0], e = f[1];
+        var w = 46 + (cell - 1.5 - 46) * e, h = w * 1.25 + (cell - 1.5 - (cell - 1.5) * 1.25) * e;
+        var x = c.fx + (c.x + cell / 2 - c.fx) * e, y = c.fy + (c.y + cell / 2 - c.fy) * e;
+        ctx.save(); ctx.translate(x, y); ctx.rotate(c.rot * (1 - e));
+        ctx.globalAlpha = 0.35 + 0.65 * (1 - e);
+        ctx.fillStyle = '#fff'; ctx.strokeStyle = 'rgba(13,13,13,.35)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.roundRect(-w / 2, -h / 2, w, h, 3); ctx.fill(); ctx.stroke();
+        if (e < 0.6) {                          // «вміст» креативу: фото-плашка й рядки тексту
+          ctx.fillStyle = c.sell ? '#FF4613' : '#D7E3F5';
+          ctx.fillRect(-w / 2 + w * 0.1, -h / 2 + h * 0.1, w * 0.8, h * 0.5);
+          ctx.fillStyle = 'rgba(13,13,13,.5)';
+          ctx.fillRect(-w / 2 + w * 0.1, -h / 2 + h * 0.68, w * 0.6, h * 0.05);
+          ctx.fillRect(-w / 2 + w * 0.1, -h / 2 + h * 0.78, w * 0.4, h * 0.05);
+        }
+        ctx.restore();
+      });
+      if (shown !== last) { last = shown; if (memN) memN.textContent = shown; }
+    };
+    build();
+    var memState = { p: 0 };
+    gsap.to(memState, {
+      p: 1, ease: 'none', onUpdate: function () { draw(memState.p); },
+      scrollTrigger: { trigger: '.memory', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true }
+    });
+    // висновок з'являється, коли знак складено
+    if (memEnd) gsap.to(memEnd, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out',
+      scrollTrigger: { trigger: '.memory', start: function () { var st = $('.memory'); return 'top+=' + (st.offsetHeight - window.innerHeight) * 0.82 + ' top'; },
+        toggleActions: 'play none none reverse', invalidateOnRefresh: true } });
+    var rT;
+    window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { build(); draw(memState.p); }, 150); });
   }
 
   /* ---------- 04 · шари креативу: панель «як у Figma» (липка сцена) ----------
