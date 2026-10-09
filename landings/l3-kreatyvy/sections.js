@@ -637,12 +637,13 @@
     }
   });
 
-  /* ---------- бриф: мем біля курсора при наведенні на «Надіслати бриф» (лише миша) ---------- */
-  var sendBtn = $('.brief__send');
-  if (sendBtn && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  /* ---------- мем біля курсора при наведенні на кнопку (лише миша) ----------
+     «Стартуєм» у брифі та «Замовити креативи» в блоці бренд-пам'яті — кожна зі своїм мемом */
+  var memeHover = function (btn, src) {
+    if (!btn) return;
     var meme = document.createElement('img');
     meme.className = 'brief__meme';
-    meme.src = 'images/brief/meme.webp';
+    meme.src = src;
     meme.alt = '';
     meme.setAttribute('aria-hidden', 'true');
     document.body.appendChild(meme);
@@ -650,15 +651,18 @@
     gsap.set(meme, { xPercent: -50, yPercent: -100, x: -400, y: -400, scale: 0, rotation: 14, autoAlpha: 0 });
     var mx = gsap.quickTo(meme, 'x', { duration: 0.35, ease: 'power3.out' });
     var my = gsap.quickTo(meme, 'y', { duration: 0.35, ease: 'power3.out' });
-    var follow = function (e) { mx(e.clientX); my(e.clientY - 46); };
-    sendBtn.addEventListener('mouseenter', function (e) {
+    btn.addEventListener('mouseenter', function (e) {
       gsap.set(meme, { x: e.clientX, y: e.clientY - 46 });
       gsap.to(meme, { scale: 1, autoAlpha: 1, rotation: 14, duration: 0.45, ease: 'back.out(2)', overwrite: 'auto' });
     });
-    sendBtn.addEventListener('mousemove', follow);
-    sendBtn.addEventListener('mouseleave', function () {
+    btn.addEventListener('mousemove', function (e) { mx(e.clientX); my(e.clientY - 46); });
+    btn.addEventListener('mouseleave', function () {
       gsap.to(meme, { scale: 0, autoAlpha: 0, rotation: 35, duration: 0.25, ease: 'power2.in', overwrite: 'auto' });
     });
+  };
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    memeHover($('.brief__send'), 'images/brief/meme.webp');
+    memeHover($('.memory__end .pill-btn'), 'images/brief/hamster.webp');
   }
 
   // шрифти змінюють висоти — перерахувати тригери
