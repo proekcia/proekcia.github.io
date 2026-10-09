@@ -76,7 +76,10 @@
 .feed{will-change:transform;}
 /* бічні колонки розмиті цілком — разом із написами на «креативах»:
    видно, що там текст, але не прочитати (рекламний шум) */
-.feed--side{filter:blur(calc(18 * 100vw / 1920));opacity:.6;}
+.feed--side{opacity:.6;}
+/* розмиття «запечене» у файлах (images/feed/blur) — без живого filter:blur, який гальмував скрол;
+   сірі «рядки тексту» на розмитих постах — м'які, без чітких країв */
+.feed--side .post b,.feed--side .post__head i,.feed--c .post:not(.post--stop) b,.feed--c .post:not(.post--stop) .post__head i{opacity:.55;box-shadow:0 0 6px 2px rgba(13,13,13,.06);}
 .feed__track{display:flex;flex-direction:column;gap:5.4cqw;will-change:transform;}
 .post{
   position:relative;display:flex;flex-direction:column;gap:3.2cqw;

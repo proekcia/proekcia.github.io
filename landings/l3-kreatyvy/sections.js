@@ -114,7 +114,7 @@
   var isPhone = function () { return window.matchMedia('(max-width: 767.98px)').matches; };
   var centerOn = function (post) { return stage.offsetHeight * 0.5 - (post.offsetTop + post.offsetHeight / 2); };
   var step = function (track) { var p = track.children; return p.length > 1 ? p[1].offsetTop - p[0].offsetTop : 0; };
-  gsap.set(cPosts, { filter: 'blur(14px)' });
+  gsap.set(stopPost, { filter: 'blur(14px)' });   // інші пости вже розмиті у файлах — живий blur лише на одній картці
 
   // пости, які на старті опинилися б над сценою, ховаємо до моменту «прилипання»
   var startY = function (track) {
@@ -152,8 +152,8 @@
       { y: function () { var a = centerOn(cPosts[1]), b = centerOn(stopPost); return a + (b - a) * 0.88; }, duration: 1, ease: 'none' }, 0)
     // …і різке гальмування на пості з фразою
     .to(cTrack, { y: function () { return centerOn(stopPost); }, duration: 0.4, ease: 'expo.out' }, 1)
-    .to(stopPost, { filter: 'blur(0px)', duration: 0.35, ease: 'expo.out' }, 1)
-    .to(otherPosts, { opacity: 0.28, filter: 'blur(8px)', duration: 0.4, ease: 'power2.out' }, 1.05)
+    .to(stopPost, { filter: 'blur(0px)', duration: 0.35, ease: 'expo.out', clearProps: 'filter' }, 1)
+    .to(otherPosts, { opacity: 0.28, duration: 0.4, ease: 'power2.out' }, 1.05)
     .to('.post__card > *', { autoAlpha: 1, y: 0, duration: 0.4, stagger: 0.12, ease: 'power3.out' }, 1.2)
     // бічні: увесь час летять униз (назустріч центральній, що йде вгору), з різною швидкістю
     .fromTo(lTrack, { y: function () { return -step(lTrack) * 3.3; } }, { y: function () { return 0; }, duration: 1.9, ease: 'none' }, 0)
@@ -211,9 +211,12 @@
     scale: 0, rotation: -20, duration: 0.9, ease: 'back.out(1.7)', stagger: 0.18,
     scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
   });
-  // на телефоні мем у колі вмикається дотиком
+  // мем у колі: файл вантажиться лише при першому наведенні / дотику (анімовані GIF важкі)
   $$('.cheaper__item').forEach(function (it) {
-    it.addEventListener('click', function () { if (!window.matchMedia('(hover: hover)').matches) it.classList.toggle('is-gif'); });
+    var g = $('.cheaper__gif', it);
+    var load = function () { if (g && !g.src && g.dataset.src) g.src = g.dataset.src; };
+    it.addEventListener('mouseenter', load);
+    it.addEventListener('click', function () { load(); if (!window.matchMedia('(hover: hover)').matches) it.classList.toggle('is-gif'); });
   });
   gsap.from('.cheaper__txt', {
     autoAlpha: 0, y: 20, duration: 0.7, ease: 'power2.out', stagger: 0.18, delay: 0.25,
@@ -717,7 +720,11 @@
     if (!btn) return;
     var meme = document.createElement('img');
     meme.className = 'brief__meme' + (cls ? ' ' + cls : '');
-    meme.src = src;
+    // мем вантажиться, лише коли кнопка підходить до екрана — а не одразу з усією сторінкою
+    if ('IntersectionObserver' in window) {
+      var mIO = new IntersectionObserver(function (es) { if (es[0].isIntersecting) { meme.src = src; mIO.disconnect(); } }, { rootMargin: '600px 0px' });
+      mIO.observe(btn);
+    } else meme.src = src;
     meme.alt = '';
     meme.setAttribute('aria-hidden', 'true');
     document.body.appendChild(meme);
