@@ -207,10 +207,6 @@
   }
 
   /* ---------- 02d · три кола «вискакують» по черзі ---------- */
-  gsap.from('.cheaper__em', {
-    scale: 0, rotation: -20, duration: 0.9, ease: 'back.out(1.7)', stagger: 0.18,
-    scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
-  });
   // мем у колі: файл вантажиться лише при першому наведенні / дотику (анімовані GIF важкі)
   $$('.cheaper__item').forEach(function (it) {
     var g = $('.cheaper__gif', it);
@@ -218,9 +214,23 @@
     it.addEventListener('mouseenter', load);
     it.addEventListener('click', function () { load(); if (!window.matchMedia('(hover: hover)').matches) it.classList.toggle('is-gif'); });
   });
-  gsap.from('.cheaper__txt', {
-    autoAlpha: 0, y: 20, duration: 0.7, ease: 'power2.out', stagger: 0.18, delay: 0.25,
-    scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
+  // ПК: три кола «вистрибують» разом по черзі; телефон: кожне — коли саме воно доходить до екрана
+  mm.add('(min-width: 768px)', function () {
+    gsap.from('.cheaper__em', {
+      scale: 0, rotation: -20, duration: 0.9, ease: 'back.out(1.7)', stagger: 0.18,
+      scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
+    });
+    gsap.from('.cheaper__txt', {
+      autoAlpha: 0, y: 20, duration: 0.7, ease: 'power2.out', stagger: 0.18, delay: 0.25,
+      scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
+    });
+  });
+  mm.add('(max-width: 767.98px)', function () {
+    $$('.cheaper__item').forEach(function (it, i) {
+      gsap.timeline({ scrollTrigger: { trigger: it, start: 'top 82%', once: true } })
+        .from($('.cheaper__em', it), { scale: 0.2, rotation: i % 2 ? 25 : -25, xPercent: i % 2 ? 40 : -40, autoAlpha: 0, duration: 0.9, ease: 'back.out(1.6)' })
+        .from($('.cheaper__txt', it), { autoAlpha: 0, y: 16, duration: 0.6, ease: 'power2.out' }, 0.35);
+    });
   });
 
   /* ---------- 03 · «знижка»: фраза дочитується скролом, слово за словом ---------- */
