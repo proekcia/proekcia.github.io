@@ -872,3 +872,7 @@
   .feed--side,.feed--c .post:not(.post--stop){display:none;}
   .feeds{position:static;display:block;max-width:520px;margin:0 auto;padding-inline:var(--pad);}
 }
+
+/* перенос рядка лише на телефоні */
+.br-m{display:none;}
+@media (max-width:767.98px){.br-m{display:inline;}}

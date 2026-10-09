@@ -164,7 +164,10 @@
   gsap.fromTo('.breath__frame',
     { clipPath: 'inset(0% 50% 0% 50%)' },
     { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none',
-      scrollTrigger: { trigger: '.breath', start: 'top 100%', end: 'top 50%', scrub: true } });
+      scrollTrigger: { trigger: '.breath', start: 'top 100%',
+        // на телефоні розкривається повністю раніше — поки пігулка ще внизу екрана
+        end: function () { return window.innerWidth < 768 ? 'top 78%' : 'top 50%'; },
+        scrub: true, invalidateOnRefresh: true } });
 
   /* ---------- 02c · термочек виповзає з принтера ----------
      Блок закріплюється, з щілини знизу ривками (як справжній принтер) росте чек:
