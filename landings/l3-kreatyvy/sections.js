@@ -364,60 +364,33 @@
     window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { build(); draw(memState.p); }, 150); });
   }
 
-  /* ---------- 04 · шари креативу: панель «як у Figma» (липка сцена) ----------
-     Сцена 1 (0–.46): на продажний креатив по черзі вмикаються шари бренду — фото, шрифт,
-       палітра, знак; ціна й кнопка лишаються на місці → «Конверсія на місці», речення 1.
-     .5–.58: перехід на бренд-креатив.
-     Сцена 2 (.6–.86): вмикаються «продажні» шари — плашка, стікер, «КУПИ ЗАРАЗ»;
-       креатив смикається → «Атмосфера зламана», речення 2. Далі пауза. */
-  var lp = $('.lp');
-  if (lp) {
-    var SW = 0.52;                                   // момент перемикання сцен
-    var rows1 = $$('.lp__rows--1 .lp__row'), rows2 = $$('.lp__rows--2 .lp__row');
-    var setRows = function (p) {
-      var scene2 = p >= SW;
-      $('.lp__rows--1').style.visibility = scene2 ? 'hidden' : 'visible';
-      $('.lp__rows--2').style.visibility = scene2 ? 'visible' : 'hidden';
-      (scene2 ? rows2 : rows1).forEach(function (r) {
-        var at = parseFloat(r.dataset.on) || 0;
-        r.classList.toggle('is-on', p >= at);
-        r.classList.toggle('is-new', at > 0 && p >= at && p < at + 0.06);   // щойно ввімкнений шар підсвічується
-      });
-    };
-    var c = function (sel) { return $(sel, lp); };
+  /* ---------- 04 · «скло і фарба» (липка сцена) ----------
+     0–.08   шари лежать окремо (верхній — зсунутий угору-вбік);
+     .08–.32 ліворуч скло лягає на фарбу → фарба світиться крізь скло ✓, речення 1;
+     .46–.70 праворуч фарба лягає на скло з атмосферою → повністю закриває ✕, речення 2;
+     далі — пауза. */
+  var glOk = $('.gl__pair--ok'), glNo = $('.gl__pair--no');
+  if (glOk && glNo) {
     var s1 = $('.rule-note__s--1'), s2 = $('.rule-note__s--2');
+    var topOk = $('.gl__top', glOk), topNo = $('.gl__top', glNo);
+    var apart = { xPercent: 34, yPercent: -30, rotation: 7 };
+    var apartNo = { xPercent: -30, yPercent: -30, rotation: -7 };   // правий — прилітає зліва, щоб не виходив за край екрана
     gsap.timeline({
-      defaults: { ease: 'power2.out', duration: 0.05 },
-      scrollTrigger: {
-        trigger: '.layers', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true,
-        onUpdate: function (self) { setRows(self.progress); },
-        onRefresh: function (self) { setRows(self.progress); }
-      }
+      defaults: { ease: 'power2.inOut' },
+      scrollTrigger: { trigger: '.layers', start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true }
     })
-      // сцена 1: шари бренду
-      .to(c('.cv__photo'), { opacity: 1 }, 0.1)
-      .to(c('.cv__white'), { opacity: 0 }, 0.1)
-      .to(lp.querySelectorAll('.f-plain'), { opacity: 0 }, 0.18)
-      .to(lp.querySelectorAll('.f-brand'), { opacity: 1 }, 0.18)
-      .to(c('.cv__btn'), { backgroundColor: '#FF4613', borderRadius: 999 }, 0.26)
-      .to(c('.cv__frame'), { opacity: 1 }, 0.34)
-      .to(c('.cv__mark'), { opacity: 1 }, 0.34)
-      .to(c('.lp__verdict--ok'), { opacity: 1, scale: 1, duration: 0.04, ease: 'back.out(2.5)' }, 0.4)
-      .to(s1, { opacity: 1 }, 0.4)
-      // перехід на бренд-креатив
-      .to(c('.lp__verdict--ok'), { opacity: 0, scale: 0.6, duration: 0.03, ease: 'power2.in' }, 0.5)
-      .to([c('.cv__kicker'), c('.cv__pct'), c('.cv__btn')], { opacity: 0, duration: 0.04 }, SW - 0.02)
-      .to(c('.cv__slogan'), { opacity: 1, duration: 0.05 }, SW + 0.02)
-      .to(c('.lp__f1'), { opacity: 0, duration: 0.02 }, SW)
-      .to(c('.lp__f2'), { opacity: 1, duration: 0.02 }, SW)
-      // сцена 2: «продажні» шари влітають і ламають атмосферу
-      .to(c('.cv__burst'), { scale: 1, duration: 0.04, ease: 'back.out(3)' }, 0.64)
-      .to(c('.cv__hit'), { scale: 1, duration: 0.04, ease: 'back.out(3)' }, 0.71)
-      .to(c('.cv__buy'), { y: 0, duration: 0.04, ease: 'back.out(2)' }, 0.78)
-      .fromTo(c('.lp__canvas'), { x: 0 }, { keyframes: { x: [0, -8, 7, -5, 3, 0] }, duration: 0.05, ease: 'none' }, 0.8)
-      .to(c('.lp__verdict--no'), { opacity: 1, scale: 1, duration: 0.04, ease: 'back.out(2.5)' }, 0.84)
-      .to(s2, { opacity: 1 }, 0.84)
-      .to({}, { duration: 0.28 }, 0.88);   // пауза в кінці: «Атмосфера зламана» тримається
+      .fromTo(topOk, apart, Object.assign({ duration: 0.08 }, apart), 0)
+      .fromTo(topNo, apartNo, Object.assign({ duration: 0.08 }, apartNo), 0)
+      // ✓ скло лягає на фарбу
+      .to(topOk, { xPercent: 0, yPercent: 0, rotation: 0, duration: 0.22 }, 0.08)
+      .to($('.gl__mark', glOk), { opacity: 1, scale: 1, duration: 0.05, ease: 'back.out(2.5)' }, 0.32)
+      .to(s1, { opacity: 1, duration: 0.06 }, 0.3)
+      // ✕ фарба лягає на скло — з «ударом»
+      .to(topNo, { xPercent: 0, yPercent: 0, rotation: 0, duration: 0.2, ease: 'power3.in' }, 0.46)
+      .fromTo($('.gl__stack', glNo), { x: 0 }, { keyframes: { x: [0, -7, 6, -4, 2, 0] }, duration: 0.05, ease: 'none' }, 0.66)
+      .to($('.gl__mark', glNo), { opacity: 1, scale: 1, duration: 0.05, ease: 'back.out(2.5)' }, 0.7)
+      .to(s2, { opacity: 1, duration: 0.06 }, 0.68)
+      .to({}, { duration: 0.24 }, 0.76);
   }
 
   /* ---------- 05 · ПРИНЦИПИ: горизонтальний скрол на десктопі ---------- */

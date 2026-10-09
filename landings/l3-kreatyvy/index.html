@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=52">
-<link rel="stylesheet" href="sections.css?v=168">
+<link rel="stylesheet" href="sections.css?v=169">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -311,59 +311,25 @@
         </blockquote>
       </div>
 
-      <!-- вікно «як у Figma»: панель шарів + креатив.
-           Сцена 1 — на продажний креатив по черзі вмикаються шари бренду, ціна й кнопка на місці → ✓.
-           Сцена 2 — на бренд-креатив вмикаються «продажні» шари, атмосфера ламається → ✕. -->
-      <figure class="lp" aria-hidden="true">
-        <div class="lp__win">
-          <div class="lp__bar"><i></i><i></i><i></i><span class="lp__file"><span class="lp__f1">sale_ad.fig</span><span class="lp__f2">brand_ad.fig</span></span></div>
-          <div class="lp__body">
-            <div class="lp__panel">
-              <p class="lp__ph">Шари</p>
-              <!-- сцена 1 -->
-              <ul class="lp__rows lp__rows--1">
-                <li class="lp__g lp__g--a">Шар дії</li>
-                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Ціна −20%</li>
-                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Кнопка «Замовити»</li>
-                <li class="lp__g lp__g--b">Шар бренду</li>
-                <li class="lp__row" data-on=".1"><b class="lp__eye"></b>Фото</li>
-                <li class="lp__row" data-on=".18"><b class="lp__eye"></b>Шрифт</li>
-                <li class="lp__row" data-on=".26"><b class="lp__eye"></b>Палітра</li>
-                <li class="lp__row" data-on=".34"><b class="lp__eye"></b>Знак NOÉ</li>
-              </ul>
-              <!-- сцена 2 -->
-              <ul class="lp__rows lp__rows--2">
-                <li class="lp__g lp__g--b">Шар бренду</li>
-                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Фото</li>
-                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Шрифт і&nbsp;палітра</li>
-                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Знак NOÉ</li>
-                <li class="lp__g lp__g--a">Шар продажів</li>
-                <li class="lp__row" data-on=".64"><b class="lp__eye"></b>Плашка −50%</li>
-                <li class="lp__row" data-on=".71"><b class="lp__eye"></b>Стікер «ХІТ»</li>
-                <li class="lp__row" data-on=".78"><b class="lp__eye"></b>КУПИ ЗАРАЗ!!!</li>
-              </ul>
-            </div>
-            <div class="lp__stage">
-              <div class="lp__canvas">
-                <span class="cv__white"></span>
-                <img class="cv__photo" src="images/layers/brand-photo.webp" alt="" width="688" height="854" decoding="async">
-                <span class="cv__frame"></span>
-                <span class="cv__mark">NOÉ</span>
-                <!-- продажний текст: дві версії шрифту, перемикаються шаром «Шрифт» -->
-                <span class="cv__kicker"><span class="f-plain">Новий аромат</span><span class="f-brand">Новий аромат · №&nbsp;03</span></span>
-                <span class="cv__pct"><span class="f-plain">−20%</span><span class="f-brand">−20%</span></span>
-                <span class="cv__btn"><span class="f-plain">Замовити</span><span class="f-brand">Замовити →</span></span>
-                <!-- бренд-креатив (сцена 2) -->
-                <span class="cv__slogan">Тиша,<br>що пахне<br>травою</span>
-                <!-- «продажні» шари, що ламають атмосферу -->
-                <span class="cv__burst">−50%</span>
-                <span class="cv__hit">ХІТ!</span>
-                <span class="cv__buy">КУПИ ЗАРАЗ!!!</span>
-              </div>
-              <span class="lp__verdict lp__verdict--ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg>Конверсія на&nbsp;місці</span>
-              <span class="lp__verdict lp__verdict--no"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg>Атмосфера зламана</span>
-            </div>
+      <!-- «скло і фарба»: бренд — прозоре матове скло, дія — непрозора оранжева фарба.
+           Ліворуч скло лягає на фарбу — фарба світиться крізь нього ✓.
+           Праворуч фарба лягає на скло з атмосферою — і повністю його закриває ✕. -->
+      <figure class="gl" aria-hidden="true">
+        <div class="gl__pair gl__pair--ok">
+          <div class="gl__stack">
+            <span class="gl__plate gl__plate--paint"></span>
+            <span class="gl__plate gl__plate--glass gl__top"></span>
           </div>
+          <span class="gl__mark gl__mark--ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg></span>
+          <span class="gl__cap">Дія <b>+ бренд</b></span>
+        </div>
+        <div class="gl__pair gl__pair--no">
+          <div class="gl__stack">
+            <span class="gl__plate gl__plate--glass gl__plate--aura"><i></i></span>
+            <span class="gl__plate gl__plate--paint gl__top"></span>
+          </div>
+          <span class="gl__mark gl__mark--no"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg></span>
+          <span class="gl__cap">Бренд <b>+ дія</b></span>
         </div>
       </figure>
     </div>
@@ -659,7 +625,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=110" defer></script>
+<script src="sections.js?v=111" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>
