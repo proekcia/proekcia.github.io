@@ -314,7 +314,7 @@
 .rule__bracket .bracket__txt{text-align:left;}
 .rule__bracket .bracket__p{font-size:2.6em;}
 /* дужки під текстом — з відступом, щоб великі «(» не налазили на рядок вище */
-.rule__txt + .rule__bracket{margin-top:1.8em;}
+.rule__txt + .rule__bracket{margin-top:2.2em;}
 
 /* 1 · або бренд, або продажі: головна мета перемикається, друга — «побочка» */
 .vis-goal{display:flex;align-items:flex-end;gap:12px;}
@@ -795,7 +795,7 @@
   .rules__deck.is-deck .rule__txt{font-size:14px;line-height:1.35;}
   .rules__deck.is-deck .rule__sub{font-size:17px;}
   .rules__deck.is-deck .rule__bracket{font-size:13px;margin-bottom:1em;}
-  .rules__deck.is-deck .rule__txt + .rule__bracket{margin-top:1.2em;}
+  .rules__deck.is-deck .rule__txt + .rule__bracket{margin-top:1.6em;}
 
   .process__grid,.cta__grid{grid-template-columns:1fr;row-gap:calc(48px + 32 * var(--k));}
   .layers__grid{grid-template-columns:1fr;row-gap:calc(12px + 12 * var(--k));}
