@@ -327,7 +327,7 @@
       ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.setTransform(k, 0, 0, k, -70 * k, -70 * k);
-      var FLY = 0.06, SPAN = 0.62 - FLY;       // усі долітають до 62% — далі пауза, щоб прочитати
+      var FLY = 0.1, SPAN = 1 - FLY;           // кожен креатив летить 10% часу анімації
       var flying = [];
       for (var i = 0; i < n; i++) {
         var c = cells[i], t0 = i / n * SPAN, e = (p - t0) / FLY;
@@ -359,14 +359,10 @@
     };
     build();
     var memState = { p: 0 };
-    gsap.to(memState, {
-      p: 1, ease: 'none', onUpdate: function () { draw(memState.p); },
-      scrollTrigger: { trigger: '.memory', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true }
-    });
-    // висновок з'являється, коли знак складено
-    if (memEnd) gsap.to(memEnd, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out',
-      scrollTrigger: { trigger: '.memory', start: function () { var st = $('.memory'); return 'top+=' + (st.offsetHeight - window.innerHeight) * 0.64 + ' top'; },
-        toggleActions: 'play none none reverse', invalidateOnRefresh: true } });
+    // анімація за часом, а не за скролом: запускається, коли блок з'являється на екрані
+    gsap.timeline({ scrollTrigger: { trigger: '.memory', start: 'top 65%', once: true } })
+      .to(memState, { p: 1, duration: 4.2, ease: 'none', onUpdate: function () { draw(memState.p); } })
+      .to(memEnd, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 2.7);
     var rT;
     window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { build(); draw(memState.p); }, 150); });
   }
