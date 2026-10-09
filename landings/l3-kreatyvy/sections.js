@@ -238,7 +238,7 @@
     dt.appendChild(frag);
     gsap.to($$('.w', dt), {
       opacity: 1, ease: 'none', stagger: 0.12,
-      scrollTrigger: { trigger: dt, start: 'top 82%', end: 'bottom 45%', scrub: true }
+      scrollTrigger: { trigger: dt, start: 'top 100%', end: 'bottom 75%', scrub: true }   // фраза повністю проявляється, поки блок ще в нижній частині екрана
     });
   }
 
