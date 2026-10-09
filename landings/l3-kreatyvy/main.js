@@ -71,14 +71,24 @@
       });
     };
 
+    // запасний сценарій: відео не стартувало (iOS у режимі енергозбереження блокує автозапуск,
+    // або повільна мережа) — «тріск» і тексти все одно з’являються
+    var crackNow = function () {
+      if (cracked) return;
+      cracked = true;
+      hv.onCrack.forEach(function (fn) { fn(); });
+    };
     hv.start = function () {
       if (started) return;
       started = true;
+      setTimeout(function () { if (!cracked && video.currentTime < 0.2) crackNow(); }, 2600);
       videoReady().then(function () {
         live = true;
-        run().catch(function () {});
+        run().catch(crackNow);
       });
     };
+    // iOS: перший дотик дозволяє запуск — пробуємо дограти, якщо ролик ще стоїть
+    window.addEventListener('touchstart', function () { if (live && video.paused && !video.ended) run().catch(function () {}); }, { once: true, passive: true });
 
     // поза кадром — пауза; повернулися — догравати (якщо ще не скінчився).
     // Браузер сам ставить на паузу відео без звуку у фоновій вкладці —
@@ -106,6 +116,8 @@
 
   var gsap = window.gsap;
   if (window.ScrollTrigger) gsap.registerPlugin(window.ScrollTrigger);
+  // телефон: адресний рядок iOS ховається/з’являється — не перераховувати закріплення (інакше блоки «стрибають»)
+  if (window.ScrollTrigger) window.ScrollTrigger.config({ ignoreMobileResize: true });
 
   /* ---------- розбивка заголовка на літери ---------- */
   var lines = gsap.utils.toArray('.hero__line-in');

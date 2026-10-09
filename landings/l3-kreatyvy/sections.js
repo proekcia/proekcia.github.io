@@ -390,7 +390,8 @@
     cards.forEach(function (c, i) {
       if (!i) return;
       // старт — за нижнім краєм екрана, щоб наступні картки не визирали заздалегідь
-      tl.fromTo(c, { y: function () { return window.innerHeight; } }, { y: 0, duration: 1 }, i - 1)
+      // старт — нижче і екрана, і самої колоди: наступна картка не визирає заздалегідь
+      tl.fromTo(c, { y: function () { return Math.max(window.innerHeight, list.offsetHeight + 60); } }, { y: 0, duration: 1 }, i - 1)
         // попередня — трохи менша й темніша, але НЕ прозора: інакше крізь неї просвічують нижні картки
         // попередня відступає трохи вгору й углиб — над поточною видно лише її край
         .fromTo(cards[i - 1], { y: 0, scale: 1, filter: 'brightness(1)' }, { y: -14, scale: 0.95, filter: dim, duration: 1, immediateRender: false }, i - 1);   // явний старт: з «none» GSAP рахує від 0

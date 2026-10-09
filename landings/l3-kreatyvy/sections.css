@@ -702,6 +702,7 @@
 .split{background:var(--c-white);padding-block:var(--sec);}
 .split__title{margin:0;max-width:13em;font-weight:400;font-size:var(--fs-h1);line-height:1.02;letter-spacing:-.05em;}
 .split__w{display:inline-block;color:var(--c-orange);will-change:transform;}
+.nw{white-space:nowrap;}   /* слово з комою — не розривати */
 .split__head{display:grid;grid-template-columns:1fr auto;align-items:start;gap:calc(24px + 40 * var(--k));}
 /* картинка в правому куті — легко «пливе» */
 .split__pic{width:min(32vw, 460px);height:auto;animation:split-float 6s ease-in-out infinite;will-change:transform;
@@ -777,7 +778,14 @@
   .is-deck > *{position:absolute;left:0;right:0;top:0;margin:0 !important;transform-origin:50% 0;display:flex;flex-direction:column;}
   .rules__deck.is-deck > .rule{background:var(--c-black);border:1px solid rgba(255,255,255,.16);border-radius:calc(14px + 6 * var(--k));}
   .steps.is-deck > .step{background:var(--c-white);border:1px solid var(--line);border-radius:calc(14px + 6 * var(--k));min-height:0;}
-  .rules__deck.is-deck .rule__vis{height:150px;}
+  .rules__deck.is-deck .rule__vis{height:110px;padding-top:16px;}
+  /* у колоді картки компактніші — щоб уміщались у видиму частину екрана iPhone (з панелями Safari) */
+  .rules__deck.is-deck .rule{padding:20px;}
+  .rules__deck.is-deck .rule__title{font-size:24px;margin:.6em 0 .4em;}
+  .rules__deck.is-deck .rule__txt{font-size:14px;line-height:1.35;}
+  .rules__deck.is-deck .rule__sub{font-size:17px;}
+  .rules__deck.is-deck .rule__bracket{font-size:13px;margin-bottom:1em;}
+  .rules__deck.is-deck .rule__txt + .rule__bracket{margin-top:1.2em;}
 
   .process__grid,.cta__grid{grid-template-columns:1fr;row-gap:calc(48px + 32 * var(--k));}
   .layers__grid{grid-template-columns:1fr;row-gap:calc(12px + 12 * var(--k));}
@@ -819,9 +827,9 @@
   .cheaper__item + .cheaper__item{margin-top:-6px;}
   .mech__grid{grid-template-columns:1fr;}
   /* телефон: той самий один ряд, гортається пальцем */
-  .memory__grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:72%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * var(--pad));padding-inline:var(--pad);scroll-padding-inline:var(--pad);scrollbar-width:none;}
-  .memory__grid::-webkit-scrollbar{display:none;}
-  .ad-tile{scroll-snap-align:start;}
+  /* телефон: 4 креативи сіткою 2×2 — усі на одному екрані (п’ятий ховаємо; обидва продажні лишаються) */
+  .memory__grid{grid-template-columns:repeat(2, 1fr);gap:10px;margin:28px 0;}
+  .memory__grid .ad-tile:nth-child(5){display:none;}
   /* два горизонти: без липкої сцени — підпис, зображення, потім колонки */
 
   .cost{grid-template-columns:1fr;row-gap:32px;}
