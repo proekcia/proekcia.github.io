@@ -611,7 +611,8 @@
    Моноширинний шрифт, тепла термопапір, зубчасті краї, штрихкод. */
 .bill{background:var(--c-black);color:var(--c-white);min-height:100vh;min-height:100svh;display:flex;padding-block:calc(24px + 40 * var(--k));overflow:hidden;}
 .bill__grid{display:grid;grid-template-columns:1fr minmax(300px, 420px);gap:calc(32px + 96 * var(--k));align-items:end;}
-.bill__title{margin:0;font-weight:400;font-size:calc(28px + 28 * var(--k));line-height:1.06;letter-spacing:-.045em;align-self:start;margin-top:calc(60px + 60 * var(--k));}
+.bill__side{align-self:start;margin-top:calc(60px + 60 * var(--k));display:flex;flex-direction:column;align-items:flex-start;gap:calc(24px + 24 * var(--k));}
+.bill__title{margin:0;font-weight:400;font-size:calc(28px + 28 * var(--k));line-height:1.06;letter-spacing:-.045em;}
 .bill__wrap{position:relative;z-index:1;height:14px;}
 /* щілина принтера: чек «виходить» з-під неї */
 .bill__slot{position:absolute;z-index:2;bottom:0;left:-6%;right:-6%;height:14px;border-radius:7px;background:#262626;}
@@ -864,7 +865,7 @@
   .contact__go{grid-area:go;}
   .bill__grid{grid-template-columns:1fr;}
   .bill__grid{display:flex;flex-direction:column;justify-content:space-between;align-items:stretch;min-height:calc(100svh - 2 * (24px + 40 * var(--k)));}
-  .bill__title{margin-top:40px;}
+  .bill__side{margin-top:40px;gap:18px;}
   .bill__wrap{margin-inline:6%;}
   /* на телефоні чек коротший, щоб після друку не перекривав заголовок */
   .bill__foot .bill__meta{display:none;}

@@ -180,6 +180,7 @@
     var billPaper = document.querySelector('.bill__paper');
     billSum.textContent = fmtUah(0);
     gsap.set(billPaper, { yPercent: 100 });
+    gsap.set('.bill__cta', { autoAlpha: 0, y: 16 });
     gsap.timeline({
       scrollTrigger: {
         trigger: '.bill', pin: true, start: 'top top', refreshPriority: 2,   // рахується раніше за «Принципи» (у тих 1), щоб ті врахували відступ від цього закріплення
@@ -197,6 +198,8 @@
       // принтер ледь тремтить, поки друкує
       .fromTo('.bill__slot', { x: -1 }, { x: 1, duration: 0.025, repeat: 39, yoyo: true, ease: 'none' }, 0)
       // сума рахується, поки рядок СУМА виходить із принтера
+      // кнопка з'являється, коли сума дорахувалась
+      .to('.bill__cta', { autoAlpha: 1, y: 0, duration: 0.12, ease: 'power3.out' }, 0.86)
       // відрив
       .to(billPaper, { y: -16, rotation: -2.5, duration: 0.15, ease: 'back.out(2.5)' }, 1.02)
       // пауза: готовий чек тримається на екрані, перш ніж сторінка поїде далі
