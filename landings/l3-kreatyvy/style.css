@@ -277,6 +277,12 @@ h1{margin:0;font-weight:400;}
   .pill-btn:hover::before{transform:scale(1);transition-duration:.38s;transition-timing-function:cubic-bezier(.5,0,.75,.3);}
 }
 .pill-btn:focus-visible::before{transform:scale(1);}
+/* оранжева кнопка: під кінець заливки й сама кнопка набуває кольору заливки —
+   інакше по краю (особливо знизу) просвічує оранжевий обідок */
+.pill-btn--orange{transition:color .35s, background-color 0s;}
+@media (hover:hover){
+  .pill-btn--orange:hover{background-color:var(--c-black);transition:color .35s, background-color 0s .3s;}
+}
 /* оранжева кнопка на чорному тлі: заливка при наведенні — фірмовий світло-синій, текст чорний.
    Під кінець заливки й сама кнопка стає синьою — щоб по краю не лишалось оранжевого обідка */
 .bill .pill-btn--orange,.cta .pill-btn--orange,.hero .pill-btn--orange{transition:color .35s, background-color 0s;}
