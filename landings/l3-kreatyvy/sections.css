@@ -788,8 +788,6 @@
 .memory__legend li::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--c-greyblue);}
 .memory__legend li:last-child::before{background:var(--c-orange);opacity:1;}
 .memory__meta{display:flex;flex-direction:column;gap:12px;}
-.memory__count{margin:0;font-size:var(--fs-s);letter-spacing:.04em;text-transform:uppercase;color:rgba(13,13,13,.5);}
-.memory__count b{display:inline-block;min-width:3ch;font-weight:400;color:var(--c-black);font-variant-numeric:tabular-nums;}
 .memory__canvas{position:relative;width:min(100%, 80vh);width:min(100%, 80svh);aspect-ratio:1;justify-self:center;}
 .memory__canvas canvas{position:absolute;inset:0;width:100%;height:100%;}
 .memory__end{display:flex;flex-direction:column;align-items:flex-start;gap:calc(16px + 12 * var(--k));}

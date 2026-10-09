@@ -283,8 +283,8 @@
   if (memBox) {
     var cv = $('canvas', memBox), ctx = cv.getContext('2d');
     var MEM_STAR = new Path2D('M259.998 437.084C259.998 300.197 219.801 260 82.9141 260C219.801 260 259.998 219.803 259.998 82.916C259.998 219.803 300.195 260 437.082 260C300.195 260 259.998 300.197 259.998 437.084Z');
-    var memN = $('.memory__n'), memEnd = $('.memory__end');
-    var cells = [], size = 0, dpr = 1, cell = 0, last = -1;
+    var memEnd = $('.memory__end');
+    var cells = [], size = 0, dpr = 1, cell = 0;
     // детермінований «випадок» — однакова картина при кожному перерахунку
     var rnd = function (i, k) { var x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return x - Math.floor(x); };
     var build = function () {
@@ -293,12 +293,14 @@
       cv.width = size * dpr; cv.height = size * dpr;
       ctx.setTransform(1, 0, 0, 1, 0, 0);     // isPointInPath рахує з урахуванням поточної трансформації
       // сітка в координатах знака (520×520), лишаємо клітинки, центр яких усередині зірки
-      var step = 8, list = [];
-      for (var y = 70; y <= 450; y += step) for (var x = 70; x <= 450; x += step) {
-        if (ctx.isPointInPath(MEM_STAR, x + step / 2, y + step / 2)) list.push({ x: x, y: y });
+      // сітка симетрична відносно центру знака (260, 260): промені однакові, контур рівний
+      var step = 7, list = [], C = 260, R = 27;
+      for (var j = -R; j <= R; j++) for (var i = -R; i <= R; i++) {
+        var cx = C + i * step, cy = C + j * step;
+        if (ctx.isPointInPath(MEM_STAR, cx, cy)) list.push({ x: cx - step / 2, y: cy - step / 2 });
       }
       // порядок появи: від центру назовні з легким розкидом — знак «наростає»
-      list.forEach(function (c, i) { var dx = c.x - 253, dy = c.y - 253; c.o = Math.sqrt(dx * dx + dy * dy) + rnd(i, 1) * 90; });
+      list.forEach(function (c, i) { var dx = c.x + 3.5 - 260, dy = c.y + 3.5 - 260; c.o = Math.sqrt(dx * dx + dy * dy) + rnd(i, 1) * 90; });
       list.sort(function (a, b) { return a.o - b.o; });
       cell = step;
       cells = list.map(function (c, i) {
@@ -307,7 +309,6 @@
           fx: 260 + Math.cos(ang) * 520, fy: 260 + Math.sin(ang) * 520,   // звідки прилітає (за межами кадру)
           rot: (rnd(i, 3) - 0.5) * 0.9 };
       });
-      last = -1;
     };
     var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
     var draw = function (p) {
@@ -317,12 +318,14 @@
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.setTransform(k, 0, 0, k, -70 * k, -70 * k);
       var FLY = 0.07, SPAN = 0.8 - FLY;        // кожен креатив летить 7% скролу; усі долітають до 80%
-      var shown = 0, flying = [];
+      // наприкінці під відбитками проступає рівний силует знака — краї стають чіткими
+      var sil = Math.min(1, Math.max(0, (p - 0.72) / 0.12));
+      if (sil > 0) { ctx.globalAlpha = sil; ctx.fillStyle = '#D7E3F5'; ctx.fill(MEM_STAR); ctx.globalAlpha = 1; }
+      var flying = [];
       for (var i = 0; i < n; i++) {
         var c = cells[i], t0 = i / n * SPAN, e = (p - t0) / FLY;
         if (e <= 0) continue;
         if (e >= 1) {
-          shown++;
           // відбиток: темний напівпрозорий (накладаються — густішає) або оранжевий
           ctx.fillStyle = c.sell ? '#FF4613' : '#AABCD7';   // фірмовий сіро-синій
           ctx.beginPath(); ctx.roundRect(c.x + 0.75, c.y + 0.75, cell - 1.5, cell - 1.5, 1.5); ctx.fill();
@@ -346,7 +349,6 @@
         }
         ctx.restore();
       });
-      if (shown !== last) { last = shown; if (memN) memN.textContent = shown; }
     };
     build();
     var memState = { p: 0 };
