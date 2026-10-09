@@ -701,7 +701,7 @@
 .belt__st--wide{width:min(54vw, 720px);}
 .belt-tile{height:100%;width:auto;aspect-ratio:4/5;}
 /* 01 · пакет банерів — реальна дошка з банерами по країнах і аудиторіях */
-.belt-shot{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:calc(8px + 6 * var(--k));box-shadow:0 24px 50px -28px rgba(13,13,13,.4);}
+.belt-shot{display:block;height:100%;width:auto;max-width:none;border-radius:calc(8px + 6 * var(--k));box-shadow:0 24px 50px -28px rgba(13,13,13,.4);}
 .belt-phone{position:relative;height:100%;aspect-ratio:9/16;border-radius:22px;overflow:hidden;border:6px solid var(--c-black);background:var(--c-black);}
 /* 02 · два сторіс поруч */
 .belt__vis--phones{gap:calc(12px + 12 * var(--k));}
@@ -720,6 +720,7 @@
   .belt__track{gap:20px;}
   .belt__st,.belt__st--wide{width:calc(100vw - 2 * var(--pad) - 24px);}
   .belt__vis--phones{gap:6px;}
+  .belt-shot{height:auto;width:100%;}
   .belt__vis--phones .belt-phone{height:auto;width:calc((100% - 12px) / 3);border-width:4px;border-radius:14px;}
   .belt__vis{height:min(46svh, 400px);justify-content:center;}
   .belt__vis .kit-fmts{--fh:min(25vw, 104px);gap:6px;justify-content:center;}   /* чотири формати мають влізти в ширину телефона */
