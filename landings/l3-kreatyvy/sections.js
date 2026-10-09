@@ -361,7 +361,7 @@
   /* ---------- телефон/планшет: «колода» замість довгих списків принципів і етапів ----------
      Список закріплюється на екрані, і на скролі кожна наступна картка наїжджає знизу
      поверх попередньої (та трохи зменшується й тьмяніє). Десктоп не зачіпаємо. */
-  var deck = function (list, pinTarget, startAt, prio) {
+  var deck = function (list, pinTarget, startAt, prio, swipe) {
     var cards = $$(':scope > *', list);
     if (cards.length < 2) return;
     list.classList.add('is-deck');
@@ -390,6 +390,26 @@
         onLeaveBack: function () { cards.forEach(function (c) { c.classList.remove('is-on'); }); }
       }
     });
+    if (swipe) {
+      // «гортання пальцем»: картки лежать стосом, верхня — поточна. На скролі її змахує вбік
+      // з легким поворотом (як пальцем), а наступна з-під неї піднімається й світлішає.
+      var n = cards.length;
+      cards.forEach(function (c, i) { c.style.zIndex = n - i; });
+      gsap.set(cards.slice(1), { scale: 0.94, filter: dim });
+      cards.forEach(function (c, i) {
+        if (i === n - 1) return;
+        var dir = i % 2 ? 1 : -1;                // по черзі вліво / вправо — як живий жест
+        tl.to(c, { x: function () { return dir * window.innerWidth * 1.15; }, y: -30, rotation: dir * 14,
+                   duration: 1, ease: 'power1.in' }, i)
+          .fromTo(cards[i + 1], { scale: 0.94, filter: dim }, { scale: 1, filter: 'brightness(1)', duration: 0.8, ease: 'power2.out', immediateRender: false }, i + 0.2);
+      });
+      tl.to({}, { duration: 0.3 });
+      return function () {
+        list.classList.remove('is-deck'); list.style.height = '';
+        cards.forEach(function (c) { c.style.height = ''; c.style.zIndex = ''; c.classList.remove('is-on'); });
+        gsap.set(cards, { clearProps: 'all' });
+      };
+    }
     cards.forEach(function (c, i) {
       if (!i) return;
       // старт — за нижнім краєм екрана, щоб наступні картки не визирали заздалегідь
@@ -408,7 +428,7 @@
     };
   };
   mm.add('(max-width: 1023.98px)', function () {
-    var undoRules = deck($('.rules__deck'), '.rules__deck', 'top 4%', 1);   // вище на сторінці — рахується раніше
+    var undoRules = deck($('.rules__deck'), '.rules__deck', 'top 4%', 1, true);   // вище на сторінці — рахується раніше
     var undoSteps = deck($('.steps'), '.process__grid', function () {
       // закріплюємо так, щоб на екрані були і заголовок блоку, і колода етапів
       var g = $('.process__grid');
