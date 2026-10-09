@@ -642,10 +642,10 @@
 
   /* ---------- мем біля курсора при наведенні на кнопку (лише миша) ----------
      «Стартуєм» у брифі, «Замовити креативи» в бренд-пам'яті, «Знизити вартість ліда» біля чека, картка «Замовити креативи» в принципах — кожна зі своїм мемом */
-  var memeHover = function (btn, src) {
+  var memeHover = function (btn, src, cls) {
     if (!btn) return;
     var meme = document.createElement('img');
-    meme.className = 'brief__meme';
+    meme.className = 'brief__meme' + (cls ? ' ' + cls : '');
     meme.src = src;
     meme.alt = '';
     meme.setAttribute('aria-hidden', 'true');
@@ -668,6 +668,7 @@
     memeHover($('.memory__end .pill-btn'), 'images/brief/hamster.webp');
     memeHover($('.bill__cta'), 'images/brief/laugh.webp');
     memeHover($('.rule--cta'), 'images/brief/dog.webp');
+    memeHover($('.cta__main'), 'images/brief/sticker.webp', 'brief__meme--sticker');   // анімований стікер із прозорими кутами
   }
 
   // шрифти змінюють висоти — перерахувати тригери
