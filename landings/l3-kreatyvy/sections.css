@@ -327,8 +327,11 @@
 .rule__bracket{margin:0 0 1.6em;font-size:calc(14px + 4 * var(--k));color:var(--c-white);}
 .rule__bracket .bracket__txt{text-align:left;}
 /* дужка «висить» у полі картки: текст у дужках — на одній лінії з основним текстом */
-/* основний текст зсунутий праворуч на ширину дужки — починається на одній лінії з текстом у дужках */
-.rule:has(.rule__bracket) .rule__txt{padding-left:calc(1.1 * (14px + 4 * var(--k)));}
+/* основний текст і текст у дужках — одна колонка: ширину задає рядок у дужках,
+   абзац починається і закінчується рівно з ним (відступи — на ширину дужок) */
+.rule__pair{width:fit-content;max-width:100%;}
+.rule__pair .rule__txt{width:0;min-width:100%;max-width:none;
+  padding-inline:calc(1.1 * (14px + 4 * var(--k)));}
 .rule__bracket .bracket__p{font-size:2.6em;}
 /* дужки під текстом — з відступом, щоб великі «(» не налазили на рядок вище */
 .rule__txt + .rule__bracket{margin-top:2.2em;}
@@ -816,7 +819,7 @@
   .rules__deck.is-deck .rule__sub{font-size:17px;}
   .rules__deck.is-deck .rule__bracket{font-size:13px;margin-bottom:1em;}
   .rules__deck.is-deck .rule__txt + .rule__bracket{margin-top:1.6em;}
-  .rules__deck.is-deck .rule:has(.rule__bracket) .rule__txt{padding-left:calc(1.1 * 13px);}
+  .rules__deck.is-deck .rule__pair .rule__txt{padding-inline:calc(1.1 * 13px);}
 
   .process__grid,.cta__grid{grid-template-columns:1fr;row-gap:calc(48px + 32 * var(--k));}
   .layers__grid{grid-template-columns:1fr;row-gap:calc(12px + 12 * var(--k));}
