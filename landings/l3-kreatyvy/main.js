@@ -73,9 +73,18 @@
 
     // запасний сценарій: відео не стартувало (iOS у режимі енергозбереження блокує автозапуск,
     // або повільна мережа) — «тріск» і тексти все одно з’являються
+    // кадр «розбитий екран» — показуємо замість відео, якщо воно так і не пішло
+    var CRACK_IMG = window.matchMedia('(max-width: 1023.98px)').matches ? 'images/hero/crack-1024.jpg' : 'images/hero/crack.jpg';
+    var crackPre = new Image();
+    crackPre.src = CRACK_IMG;
     var crackNow = function () {
       if (cracked) return;
       cracked = true;
+      if (video.paused && video.currentTime < 0.2) {
+        video.poster = CRACK_IMG;
+        // короткий спалах — як у відео в момент тріску
+        if (window.gsap) window.gsap.fromTo(video, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: 0.6, ease: 'power2.out', clearProps: 'filter' });
+      }
       hv.onCrack.forEach(function (fn) { fn(); });
     };
     hv.start = function () {
