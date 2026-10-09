@@ -545,34 +545,37 @@
      ПІСЛЯ неї — інакше ScrollTrigger не врахує її висоту при розрахунку позицій. */
   /* ---------- 05 · «Що ви отримуєте?» — конвеєр ---------- */
   // відео в станціях грають лише в кадрі
-  // 04 · картка реклами масштабується, щоб уміститися у висоту станції (текст робить її високою)
-  var fbad = $('.fbad');
-  if (fbad) {
+  // 04 · стос із трьох реклам Loivi: масштаб під висоту станції; верхня картка по черзі йде назад
+  var fbStack = $('.fbstack');
+  if (fbStack) {
+    var fbCards = $$('.fbad', fbStack), fbOrder = fbCards.slice(), fbT = null;
     var fbFit = function () {
-      fbad.style.transform = '';
-      var vis = fbad.closest('.belt__vis');
-      var k = Math.min(1, (vis.clientHeight - 8) / fbad.offsetHeight);
-      fbad.style.transform = 'scale(' + k.toFixed(3) + ')';
+      fbStack.style.transform = '';
+      var vis = fbStack.closest('.belt__vis');
+      var k = Math.min(1, (vis.clientHeight - 30) / fbStack.offsetHeight);
+      fbStack.style.transform = 'scale(' + k.toFixed(3) + ')';
     };
-    fbFit();
+    var fbLay = function (anim) {
+      fbOrder.forEach(function (c, i) {
+        gsap.to(c, { x: i * 16, y: i * -16, scale: 1 - i * 0.05, zIndex: 10 - i, opacity: i > 2 ? 0 : 1,
+          duration: anim ? 0.6 : 0, ease: 'power3.inOut' });
+      });
+    };
+    var fbNext = function () {
+      var top = fbOrder.shift();
+      // верхня відлітає вбік і лягає в кінець стосу
+      gsap.timeline()
+        .to(top, { x: -70, y: 20, rotation: -8, duration: 0.35, ease: 'power2.in' })
+        .add(function () { fbOrder.push(top); gsap.set(top, { zIndex: 0 }); fbLay(true); })
+        .to(top, { rotation: 0, duration: 0.4, ease: 'power2.out' });
+    };
+    fbFit(); fbLay(false);
     window.addEventListener('resize', fbFit);
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(fbFit);
-  }
-  // 04 · карусель у рекламі: креативи Loivi гортаються один за одним, поки станція в кадрі
-  var fbTrack = $('.fbad__track');
-  if (fbTrack) {
-    var fbN = fbTrack.children.length, fbI = 0, fbT = null;
-    var fbDots = $$('.fbad__dots2 i'), fbCount = $('.fbad__count');
-    var fbGo = function () {
-      fbI = (fbI + 1) % fbN;
-      fbTrack.style.transform = 'translateX(' + (-100 * fbI) + '%)';
-      fbDots.forEach(function (d, i) { d.classList.toggle('is-on', i === fbI); });
-      if (fbCount) fbCount.textContent = (fbI + 1) + '/' + fbN;
-    };
     if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
-      if (es[0].isIntersecting) { if (!fbT) fbT = setInterval(fbGo, 2400); }
+      if (es[0].isIntersecting) { if (!fbT) fbT = setInterval(fbNext, 2600); }
       else { clearInterval(fbT); fbT = null; }
-    }, { threshold: 0.4 }).observe(fbTrack);
+    }, { threshold: 0.4 }).observe(fbStack);
   }
   // станції конвеєра: is-in, коли станція в кадрі (мітки текстів, кабінет кампаній)
   if ('IntersectionObserver' in window) {

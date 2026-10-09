@@ -720,33 +720,19 @@
 .fbad__who b{font-weight:600;}
 .fbad__who em{font-style:normal;color:#65676B;font-size:10px;}
 .fbad__dots{margin-left:auto;color:#65676B;letter-spacing:1px;font-size:9px;}
-.fbad__primary{position:relative;margin:0;padding:0 10px 8px;}
-.fbad__media{position:relative;aspect-ratio:1;overflow:hidden;}
-.fbad__track{display:flex;height:100%;transition:transform .7s cubic-bezier(.65,0,.35,1);}
-.fbad__track img{flex:none;display:block;width:100%;height:100%;object-fit:cover;}
-.fbad__count{position:absolute;right:8px;top:8px;padding:2px 7px;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;}
-.fbad__dots2{position:absolute;left:0;right:0;bottom:7px;display:flex;justify-content:center;gap:4px;}
-.fbad__dots2 i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);transition:background-color .3s;}
-.fbad__dots2 i.is-on{background:#fff;}
+.fbad__primary{margin:0;padding:0 10px 8px;min-height:3.9em;}
+.fbad__img{display:block;width:100%;height:auto;aspect-ratio:1;}
 .fbad__bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F0F2F5;border-radius:0 0 14px 14px;}
 .fbad__meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1;}
 .fbad__meta em{font-style:normal;font-size:9.5px;color:#65676B;}
 .fbad__meta b{position:relative;font-weight:600;font-size:12px;}
 .fbad__meta i{position:relative;font-style:normal;color:#65676B;font-size:10.5px;}
 .fbad__cta{position:relative;flex:none;padding:7px 11px;border-radius:6px;background:#E4E6EB;font-weight:600;font-size:11.5px;}
-/* оранжеві мітки, що підписують супутні тексти */
-.fbad__tag{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);white-space:nowrap;padding:3px 8px;border-radius:99px;
-  background:var(--c-orange);color:#fff;font-family:"Stolzl",sans-serif;font-weight:400;font-size:10.5px;letter-spacing:.02em;
-  opacity:0;transition:opacity .4s, transform .5s var(--ease-out);}
-.fbad__primary .fbad__tag{top:.9em;right:calc(100% + 0px);}
-.fbad__meta b .fbad__tag,.fbad__meta i .fbad__tag{right:calc(100% + 18px);}
-.fbad__tag--r{right:auto;left:calc(100% + 8px);}
-.belt__st.is-in .fbad__tag{opacity:1;}
-.belt__st.is-in .fbad__primary .fbad__tag{transition-delay:.1s;}
-.belt__st.is-in .fbad__meta b .fbad__tag{transition-delay:.35s;}
-.belt__st.is-in .fbad__meta i .fbad__tag{transition-delay:.55s;}
-.belt__st.is-in .fbad__cta .fbad__tag{transition-delay:.75s;}
-.belt__st:has(.fbad) .belt__vis{padding-inline:110px 90px;}   /* місце для міток з боків */
+/* стос із трьох реклам: верхня по черзі йде назад */
+.fbstack{position:relative;transform-origin:50% 50%;}
+.fbstack .fbad{position:relative;}
+.fbstack .fbad + .fbad{position:absolute;left:0;top:0;}
+.belt__st:has(.fbstack) .belt__vis{padding-inline:10px 40px;}
 
 /* 05 · кабінет кампаній: платформи вмикаються, ліди рахуються, графік росте */
 .ads{width:min(42vw, 600px);padding:14px 16px 12px;border-radius:14px;background:#fff;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);font-size:12.5px;}
@@ -785,9 +771,8 @@
   .belt__st,.belt__st--wide{width:calc(100vw - 2 * var(--pad) - 24px);}
   .belt__vis--phones{gap:6px;}
   .belt-shot{height:auto;width:100%;}
-  .belt__st:has(.fbad) .belt__vis{padding-inline:0;justify-content:center;}
+  .belt__st:has(.fbstack) .belt__vis{padding-inline:0 24px;justify-content:center;}
   .fbad{--w:min(64vw, 250px);}
-  .fbad__tag{display:none;}
   .ads{width:100%;font-size:11px;padding:12px;}
   .ads__row{grid-template-columns:30px 1fr .7fr .7fr;}
   .ads__cmp{display:none;}
