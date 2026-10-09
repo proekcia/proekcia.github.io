@@ -959,5 +959,3 @@
 .brief__meme{position:fixed;left:0;top:0;z-index:300;width:170px;height:auto;pointer-events:none;
   box-shadow:0 10px 30px rgba(13,13,13,.25);transform-origin:50% 100%;}
 
-/* анімований стікер (прозорі кути) — тінь по формі, а не прямокутником */
-.brief__meme--sticker{box-shadow:none;filter:drop-shadow(0 10px 22px rgba(0,0,0,.35));}
