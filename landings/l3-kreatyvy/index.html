@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=53">
-<link rel="stylesheet" href="sections.css?v=194">
+<link rel="stylesheet" href="sections.css?v=196">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -291,26 +291,35 @@
   </div>
 </section>
 
-<!-- ======================= 04 · ДВА ШАРИ (типографіка) =======================
-     Без ілюстрацій: думка про асиметрію шарів — великим шрифтом у два рядки з ✓ / ✕.
-     Під кожним — дослівне речення з презентації. -->
+<!-- ======================= 04 · ДВА ШАРИ: на реальному креативі =======================
+     Липка сцена. Спершу — лише «шар дії» (голий оффер на білому). На скролі зверху натягується
+     «шар бренду» — справжній креатив Luxury Aroma з тим самим оффером → ✓. Тексти — з презентації. -->
 <section class="layers" id="layers" aria-labelledby="layers-title">
-  <div class="wrap">
-    <h2 class="h2 layers__title" id="layers-title" data-rv>Тобто кожен креатив може мати 2&nbsp;шари:</h2>
-    <ul class="layers__legend">
-      <li class="layers__key layers__key--a">Шар дії</li>
-      <li class="layers__key layers__key--b">Шар бренд-пам’яті</li>
-    </ul>
-    <ol class="tw">
-      <li class="tw__row tw__row--ok">
-        <p class="tw__big"><span class="tw__l"><span>Бренд можна додати</span></span> <span class="tw__l"><span>до&nbsp;продажу</span></span><span class="tw__mark" aria-label="так"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg></span></p>
-        <p class="tw__small">Ми завжди можемо додати «шар бренду» до&nbsp;продажного креативу без втрати конверсії.</p>
-      </li>
-      <li class="tw__row tw__row--no">
-        <p class="tw__big"><span class="tw__l"><span>Продаж до&nbsp;бренду —</span></span> <span class="tw__l"><span>не&nbsp;завжди</span></span><span class="tw__mark" aria-label="ні"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg></span></p>
-        <p class="tw__small">Але не завжди можна додати «шар продажів» до&nbsp;бренд-креативу, не&nbsp;зламавши його атмосферу.</p>
-      </li>
-    </ol>
+  <div class="layers__stage">
+    <div class="wrap lx">
+      <div class="lx__text">
+        <h2 class="h2 layers__title" id="layers-title">Тобто кожен креатив може мати 2&nbsp;шари:</h2>
+        <ul class="layers__legend">
+          <li class="layers__key layers__key--a">Шар дії</li>
+          <li class="layers__key layers__key--b">Шар бренд-пам’яті</li>
+        </ul>
+        <p class="lx__s1">Ми завжди можемо додати «шар бренду» до&nbsp;продажного креативу без втрати конверсії.</p>
+        <p class="lx__s2">Але не завжди можна додати «шар продажів» до&nbsp;бренд-креативу, не&nbsp;зламавши його атмосферу.</p>
+      </div>
+      <figure class="lx__card" aria-hidden="true">
+        <div class="lx__sale">
+          <span class="lx__pct">−15%</span>
+          <span class="lx__k">на бренд тижня</span>
+          <span class="lx__name">Otimo · Pernoire</span>
+          <span class="lx__btn">Купити зі знижкою</span>
+        </div>
+        <img class="lx__brand" src="images/layers/aroma.webp?v=2" alt="" width="793" height="1049" decoding="async">
+        <span class="lx__edge"></span>
+        <span class="lx__chip"><span class="lx__chip-a">Шар дії</span><span class="lx__chip-b">Шар дії + шар бренду</span></span>
+        <span class="lx__ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg></span>
+        <figcaption class="lx__cap">Той самий оффер — плюс шар бренду</figcaption>
+      </figure>
+    </div>
   </div>
 </section>
 
@@ -786,7 +795,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=122" defer></script>
+<script src="sections.js?v=123" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>

@@ -364,13 +364,27 @@
     window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { build(); draw(memState.p); }, 150); });
   }
 
-  /* ---------- 04 · два шари: рядки виїжджають з-під маски, потім ✓ / ✕ ---------- */
-  $$('.tw__row').forEach(function (row) {
-    gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 80%', once: true } })
-      .from($$('.tw__l > span', row), { yPercent: 110, duration: 0.9, ease: 'expo.out', stagger: 0.08 })
-      .from($('.tw__mark', row), { scale: 0, rotation: -40, duration: 0.5, ease: 'back.out(2.5)' }, 0.45)
-      .from($('.tw__small', row), { autoAlpha: 0, y: 12, duration: 0.6, ease: 'power3.out' }, 0.35);
-  });
+  /* ---------- 04 · два шари: на голий оффер натягується шар бренду (липка сцена) ---------- */
+  var lxCard = $('.lx__card');
+  if (lxCard) {
+    var lxS = { p: 0 };
+    var lxBrand = $('.lx__brand', lxCard), lxEdge = $('.lx__edge', lxCard);
+    var lxDraw = function () {
+      var x = 100 - lxS.p * 100;   // лівий край шару бренду, %
+      lxBrand.style.clipPath = 'inset(0 0 0 ' + x.toFixed(2) + '%)';
+      lxEdge.style.left = x.toFixed(2) + '%';
+      lxEdge.style.opacity = lxS.p > 0.001 && lxS.p < 0.999 ? 1 : 0;
+    };
+    lxDraw();
+    gsap.timeline({ scrollTrigger: { trigger: '.layers', start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true } })
+      .to({}, { duration: 0.12 })                                                   // спершу видно лише шар дії
+      .to(lxS, { p: 1, duration: 0.5, ease: 'power2.inOut', onUpdate: lxDraw })      // шар бренду натягується
+      .to($('.lx__chip-a', lxCard), { opacity: 0, duration: 0.06 }, 0.55)
+      .to($('.lx__chip-b', lxCard), { opacity: 1, duration: 0.06 }, 0.57)
+      .to($('.lx__ok', lxCard), { opacity: 1, scale: 1, duration: 0.06, ease: 'back.out(2.5)' }, 0.64)
+      .fromTo('.lx__s2', { opacity: 0.25 }, { opacity: 1, duration: 0.08 }, 0.7)
+      .to({}, { duration: 0.22 });                                                  // пауза: готовий креатив тримається
+  }
 
   /* ---------- 05 · ПРИНЦИПИ: горизонтальний скрол на десктопі ---------- */
   var rules = $$('.rule');

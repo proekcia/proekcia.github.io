@@ -192,7 +192,8 @@
    Липка сцена. Кожна калька: молочна напівпрозора основа (backdrop-blur — те, що під нею,
    розмивається, як під справжньою калькою) + «друк» + реалістична текстура паперу (напівпрозора).
    Позиції/накладання веде GSAP-таймлайн від скролу. */
-.layers{background:var(--c-blue);padding-block:var(--sec);}
+.layers{position:relative;height:260vh;background:var(--c-blue);}
+.layers__stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden;}
 .layers__title{max-width:14em;}
 .layers__legend{list-style:none;margin:calc(24px + 16 * var(--k)) 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px 22px;
   font-size:var(--fs-s);letter-spacing:.04em;text-transform:uppercase;}
@@ -200,20 +201,29 @@
 .layers__key::before{content:"";width:12px;height:12px;border-radius:50%;}
 .layers__key--a::before{background:var(--c-orange);}
 .layers__key--b::before{background:var(--c-black);}
-/* два твердження великим шрифтом: ✓ / ✕ */
-.tw{list-style:none;margin:calc(36px + 40 * var(--k)) 0 0;padding:0;}
-.tw__row{padding-block:calc(22px + 22 * var(--k));border-top:1px solid rgba(13,13,13,.18);display:grid;grid-template-columns:1fr minmax(0, 22em);gap:12px calc(24px + 64 * var(--k));align-items:end;}
-.tw__row:last-child{border-bottom:1px solid rgba(13,13,13,.18);}
-.tw__big{margin:0;font-size:calc(30px + 40 * var(--k));line-height:1;letter-spacing:-.05em;}
-.tw__l{display:inline-block;white-space:nowrap;overflow:hidden;vertical-align:bottom;padding-bottom:.08em;margin-bottom:-.08em;}
-.tw__l > span{display:inline-block;}
-.tw__row--ok .tw__big{color:var(--c-black);}
-.tw__row--no .tw__big{color:var(--c-black);}
-.tw__mark{display:inline-grid;place-items:center;width:.82em;height:.82em;margin-left:.22em;border-radius:50%;vertical-align:-.06em;}
-.tw__mark svg{width:56%;height:56%;}
-.tw__row--ok .tw__mark{background:var(--c-green);color:var(--c-black);}
-.tw__row--no .tw__mark{background:var(--c-orange);color:var(--c-white);}
-.tw__small{margin:0;font-family:"Stolzl Book","Stolzl",sans-serif;font-size:var(--fs-t);line-height:1.4;color:rgba(13,13,13,.6);}
+/* шар дії → поверх натягується шар бренду (справжній креатив) */
+.lx{width:100%;display:grid;grid-template-columns:5fr 6fr;column-gap:calc(24px + 96 * var(--k));align-items:center;}
+.lx__s1{margin:calc(28px + 28 * var(--k)) 0 0;max-width:22em;font-size:calc(20px + 10 * var(--k));line-height:1.2;letter-spacing:-.03em;}
+.lx__s2{margin:14px 0 0;max-width:30em;font-family:"Stolzl Book","Stolzl",sans-serif;font-size:var(--fs-t);line-height:1.4;color:rgba(13,13,13,.55);}
+.lx__card{position:relative;justify-self:center;margin:0;height:min(74vh, 74svh, 700px);aspect-ratio:793 / 1049;max-width:100%;
+  border-radius:calc(10px + 6 * var(--k));overflow:hidden;background:#fff;box-shadow:0 40px 80px -40px rgba(13,13,13,.45);container-type:inline-size;}
+/* шар дії: голий оффер, системний шрифт, сіра кнопка */
+.lx__sale{position:absolute;inset:0;padding:14cqw 9cqw 12cqw;display:flex;flex-direction:column;align-items:center;text-align:center;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;color:#222;}
+.lx__pct{font-weight:700;font-size:24cqw;line-height:1;letter-spacing:-.02em;}
+.lx__k{margin-top:2cqw;font-weight:700;font-size:6cqw;text-transform:uppercase;}
+.lx__name{margin-top:2cqw;font-size:4.6cqw;color:#555;}
+.lx__btn{margin-top:auto;align-self:center;padding:3.4cqw 9cqw;background:#9a9a9a;color:#fff;font-weight:700;font-size:4.6cqw;text-transform:uppercase;}
+/* шар бренду — справжній креатив; «натягується» справа наліво */
+.lx__brand{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 0 100%);}
+.lx__edge{position:absolute;top:0;bottom:0;left:100%;width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 24px 6px rgba(13,13,13,.25);}
+.lx__chip{position:absolute;left:4cqw;top:4cqw;display:grid;}
+.lx__chip > span{grid-area:1 / 1;justify-self:start;padding:.5em .9em;border-radius:99px;font-size:max(11px, 3cqw);letter-spacing:.02em;white-space:nowrap;}
+.lx__chip-a{background:var(--c-orange);color:#fff;}
+.lx__chip-b{background:var(--c-black);color:#fff;opacity:0;}
+.lx__ok{position:absolute;right:4cqw;top:4cqw;width:12cqw;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:var(--c-green);color:var(--c-black);
+  box-shadow:0 10px 24px -10px rgba(13,13,13,.45);opacity:0;transform:scale(.4);}
+.lx__ok svg{width:55%;height:55%;}
+.lx__cap{position:absolute;left:0;right:0;bottom:-2.4em;text-align:center;font-size:var(--fs-s);letter-spacing:.04em;text-transform:uppercase;color:rgba(13,13,13,.5);}
 
 /* ======================= 05 · ПРИНЦИПИ ======================= */
 .rules{background:var(--c-black);color:var(--c-white);}
@@ -911,9 +921,11 @@
 
 /* ======================= Телефон (до 767 px) ======================= */
 @media (max-width:767.98px){
-  .tw__row{grid-template-columns:1fr;}
-  .tw__big{font-size:30px;}
-  .tw__l{white-space:normal;}
+  .lx{grid-template-columns:1fr;row-gap:18px;}
+  .layers .h2{font-size:26px;}
+  .lx__s1{margin-top:14px;font-size:17px;}
+  .lx__s2{font-size:13px;}
+  .lx__card{height:auto;width:min(72vw, 40svh);}
   .cases__grid{grid-template-columns:repeat(2, 1fr);gap:16px 10px;}
   .rv{width:76vw;}
   .reviews__btn{width:42px;}
