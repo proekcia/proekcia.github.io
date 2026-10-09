@@ -297,7 +297,9 @@
 .rules__scroll svg{width:28px;height:28px;transform:rotate(225deg);}
 
 .rule{
-  flex:none;width:44vw;min-height:72vh;
+  /* ширина однакова для всіх карток: найдовше речення в дужках (8-й принцип) — в один рядок */
+  --rule-w:calc(38.2 * (14px + 4 * var(--k)) + 2 * (24px + 24 * var(--k)));
+  flex:none;width:var(--rule-w);min-height:72vh;
   display:flex;flex-direction:column;
   padding:calc(24px + 24 * var(--k));
   border-top:1px solid var(--line-w);border-left:1px solid var(--line-w);
@@ -308,7 +310,9 @@
 .rule__txt p{margin:0 0 .7em;}
 .rule__txt p:last-child{margin-bottom:0;}
 .rule__sub{margin:0 0 .8em;font-size:var(--fs-h4);letter-spacing:-.03em;color:var(--c-orange);}
-/* фінальна картка-кнопка «Замовити креативи» */
+/* фінальна картка-кнопка «Замовити креативи»: займає решту екрана поруч із 8-м принципом —
+   у кінці стрічки повністю видно і її, і 8-й принцип */
+.rules__track .rule--cta{width:max(24vw, calc(100vw - var(--rule-w) - 2 * var(--pad)));}
 .rule--cta{position:relative;overflow:hidden;isolation:isolate;justify-content:space-between;background:var(--c-orange);color:var(--c-white);
   border:0;text-decoration:none;}
 .rule--cta::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c-blue);transform:translateY(101%);
@@ -325,6 +329,7 @@
 /* дужковий підпис у принципах */
 .rule__bracket{margin:0 0 1.6em;font-size:calc(14px + 4 * var(--k));color:var(--c-white);}
 .rule__bracket .bracket__txt{text-align:left;}
+@media (min-width:1024px){ .rule__bracket .bracket__txt{white-space:nowrap;} }
 /* дужка «висить» у полі картки: текст у дужках — на одній лінії з основним текстом */
 .rule__bracket .bracket__p{font-size:2.6em;}
 /* дужки під текстом — з відступом, щоб великі «(» не налазили на рядок вище */
@@ -426,8 +431,8 @@
 /* 07 · помітність → емоція → дія */
 .vis-steps{display:flex;align-items:flex-end;flex-wrap:wrap;gap:.1em .45em;font-size:var(--fs-h2);letter-spacing:-.05em;line-height:1;}
 .vis-steps span{opacity:.18;transition:opacity .5s, color .5s;}
-/* ПК: картки однакові (44vw) — три слова в один рядок по ширині картки */
-@media (min-width:1024px){ .vis-steps{flex-wrap:nowrap;font-size:min(var(--fs-h2), calc((44vw - 2 * (24px + 24 * var(--k))) / 10.7));} }
+/* ПК: три слова в один рядок по ширині картки */
+@media (min-width:1024px){ .vis-steps{flex-wrap:nowrap;font-size:min(var(--fs-h2), calc(38.2 * (14px + 4 * var(--k)) / 10.7));} }
 .rule.is-on .vis-steps span{opacity:1;}
 .rule.is-on .vis-steps span:nth-child(1){transition-delay:.1s;}
 .rule.is-on .vis-steps span:nth-child(2){transition-delay:.5s;}
@@ -795,7 +800,7 @@
   .rules__track{flex-direction:column;gap:calc(16px + 16 * var(--k));}
   .rules__intro{width:auto;padding:0 0 calc(24px + 24 * var(--k));}
   .rules__scroll{display:none;}
-  .rule{width:auto;min-height:0;}
+  .rule,.rules__track .rule--cta{width:auto;min-height:0;}
   .rule__vis{height:200px;margin-top:32px;}
   /* колода карток (JS ставить .is-deck): картки лежать одна на одній, наступна наїжджає знизу на скролі */
   .rules__track{will-change:auto;}   /* інакше закріплена колода рахується від треку, а не від екрана */
