@@ -311,15 +311,15 @@
 .rule--wide{width:56vw;}
 /* фінальна картка-кнопка «Замовити креативи» */
 .rule--cta{position:relative;overflow:hidden;isolation:isolate;justify-content:space-between;background:var(--c-orange);color:var(--c-white);
-  border-color:transparent;text-decoration:none;}
-.rule--cta::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c-white);transform:translateY(101%);
+  border:0;text-decoration:none;}
+.rule--cta::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c-blue);transform:translateY(101%);
   transition:transform .5s cubic-bezier(.22,1,.36,1);}
 .rule-cta__txt{font-weight:400;font-size:calc(44px + 64 * var(--k));line-height:.95;letter-spacing:-.05em;max-width:7em;transition:color .35s;}
 .rule-cta__go{align-self:flex-end;width:calc(64px + 64 * var(--k));aspect-ratio:1;transition:transform .45s cubic-bezier(.22,1,.36,1), color .35s;}
 .rule-cta__go svg{width:100%;height:100%;}
 @media (hover:hover){
   .rule--cta:hover::before{transform:none;}
-  .rule--cta:hover .rule-cta__txt,.rule--cta:hover .rule-cta__go{color:var(--c-orange);}
+  .rule--cta:hover .rule-cta__txt,.rule--cta:hover .rule-cta__go{color:var(--c-black);}
   .rule--cta:hover .rule-cta__go{transform:translate(8%, -8%);}
 }
 .rule--cta:focus-visible{outline:2px solid var(--c-blue);outline-offset:-4px;}
@@ -801,7 +801,7 @@
   .is-deck{position:relative;}
   .is-deck > *{position:absolute;left:0;right:0;top:0;margin:0 !important;transform-origin:50% 0;display:flex;flex-direction:column;}
   .rules__deck.is-deck > .rule{background:var(--c-black);border:1px solid rgba(255,255,255,.16);border-radius:calc(14px + 6 * var(--k));}
-  .rules__deck.is-deck > .rule--cta{background:var(--c-orange);border-color:var(--c-orange);}
+  .rules__deck.is-deck > .rule--cta{background:var(--c-orange);border:0;}
   .rules__deck .rule-cta__txt{font-size:44px;}
   .rules__deck .rule-cta__go{width:72px;}
   .steps.is-deck > .step{background:var(--c-white);border:1px solid var(--line);border-radius:calc(14px + 6 * var(--k));min-height:0;}
