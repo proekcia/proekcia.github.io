@@ -185,7 +185,7 @@
       scrollTrigger: {
         trigger: '.bill', pin: true, start: 'top top', refreshPriority: 2,   // рахується раніше за «Принципи» (у тих 1), щоб ті врахували відступ від цього закріплення
        
-        end: function () { return '+=' + billPaper.offsetHeight * 1.7; },
+        end: function () { return '+=' + billPaper.offsetHeight * 2.25; },   // довше — з паузою на готовому чеку
         scrub: 0.5, invalidateOnRefresh: true
       },
       // сума рахується від часу таймлайна (стійко до refresh/resize), поки рядок СУМА виходить із принтера
@@ -203,7 +203,7 @@
       // відрив
       .to(billPaper, { y: -16, rotation: -2.5, duration: 0.15, ease: 'back.out(2.5)' }, 1.02)
       // пауза: готовий чек тримається на екрані, перш ніж сторінка поїде далі
-      .to({}, { duration: 0.55 }, 1.17);
+      .to({}, { duration: 1.1 }, 1.17);
   }
 
   /* ---------- 02d · три кола «вискакують» по черзі ---------- */
