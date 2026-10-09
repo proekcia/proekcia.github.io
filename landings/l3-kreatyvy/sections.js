@@ -324,7 +324,7 @@
         if (e >= 1) {
           shown++;
           // відбиток: темний напівпрозорий (накладаються — густішає) або оранжевий
-          ctx.fillStyle = c.sell ? '#FF4613' : 'rgba(13,13,13,.62)';
+          ctx.fillStyle = c.sell ? '#FF4613' : '#AABCD7';   // фірмовий сіро-синій
           ctx.beginPath(); ctx.roundRect(c.x + 0.75, c.y + 0.75, cell - 1.5, cell - 1.5, 1.5); ctx.fill();
         } else flying.push([c, ease(e)]);
       }

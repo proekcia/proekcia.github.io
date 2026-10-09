@@ -785,7 +785,7 @@
 .memory__side{display:flex;flex-direction:column;gap:calc(20px + 20 * var(--k));}
 .memory__legend{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 24px;font-size:var(--fs-s);letter-spacing:.04em;text-transform:uppercase;}
 .memory__legend li{display:inline-flex;align-items:center;gap:10px;}
-.memory__legend li::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--c-black);opacity:.55;}
+.memory__legend li::before{content:"";width:12px;height:12px;border-radius:3px;background:var(--c-greyblue);}
 .memory__legend li:last-child::before{background:var(--c-orange);opacity:1;}
 .memory__meta{display:flex;flex-direction:column;gap:12px;}
 .memory__count{margin:0;font-size:var(--fs-s);letter-spacing:.04em;text-transform:uppercase;color:rgba(13,13,13,.5);}
