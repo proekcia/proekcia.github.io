@@ -424,6 +424,11 @@
 .step + .step{margin-top:calc(16px + 14 * var(--k));}
 .step__num{font-size:var(--fs-s);color:rgba(13,13,13,.4);}
 .step__title{margin:.8em 0 .45em;font-weight:400;font-size:var(--fs-h3);line-height:1.04;letter-spacing:-.045em;}
+/* «Перебір і доопрацювання» — в один рядок: шрифт трохи менший, якщо не влазить у ширину картки */
+@media (min-width:768px){
+  .step{container-type:inline-size;}
+  .step__title--one{white-space:nowrap;font-size:min(var(--fs-h3), 100cqw / 13.2);}
+}
 .step__txt{margin:0;max-width:28em;font-family:"Stolzl Book","Stolzl",sans-serif;font-size:var(--fs-t);line-height:1.4;color:rgba(13,13,13,.6);}
 
 /* ======================= 08 · ЯК ПОЧАТИ ======================= */
