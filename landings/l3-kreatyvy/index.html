@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=52">
-<link rel="stylesheet" href="sections.css?v=169">
+<link rel="stylesheet" href="sections.css?v=170">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -74,7 +74,7 @@
       <span>Замовити креативи</span>
       <span class="pill-btn__icon pill-btn__icon--ne" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span>
     </a>
-    <a href="#portfolio" class="pill-btn pill-btn--black">
+    <a href="#cases" class="pill-btn pill-btn--black">
       <span>Переглянути кейси</span>
       <span class="pill-btn__icon pill-btn__icon--se" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span>
     </a>
@@ -542,6 +542,62 @@
   </div>
 </section>
 
+<!-- ======================= 07 · КЕЙСИ =======================
+     4 кейси з портфоліо (обкладинка, при наведенні / в кадрі на телефоні — короткий ролик) + кнопка на все портфоліо. -->
+<section class="cases" id="cases" aria-labelledby="cases-title">
+  <div class="wrap">
+    <header class="sec-head cases__head">
+      <p class="eyebrow">07 · Кейси</p>
+      <h2 class="h2" id="cases-title" data-rv>Що ми вже зробили</h2>
+    </header>
+    <ul class="cases__grid">
+      <li><a class="case" href="https://proekcia.com/portfolio/loivi-4/" target="_blank" rel="noopener">
+        <span class="case__media">
+          <img src="images/portfolio/loivi.webp" alt="Loivi — Контент для реклами" width="800" height="1000" loading="lazy" decoding="async">
+          <video class="case__vid" muted loop playsinline preload="none" aria-hidden="true"><source src="images/portfolio/loivi.mp4" type="video/mp4"></video>
+          <span class="case__go" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" transform="rotate(180 24 24)"/></svg></span>
+        </span>
+        <span class="case__name">Loivi</span>
+        <span class="case__desc">Контент для реклами</span>
+        <span class="case__tags">Meta Ads · Контент</span>
+      </a></li>
+      <li><a class="case" href="https://proekcia.com/portfolio/luxury-aroma/" target="_blank" rel="noopener">
+        <span class="case__media">
+          <img src="images/portfolio/aroma.webp" alt="Luxury Aroma — Нішева парфумерія" width="800" height="1000" loading="lazy" decoding="async">
+          <video class="case__vid" muted loop playsinline preload="none" aria-hidden="true"><source src="images/portfolio/aroma.mp4" type="video/mp4"></video>
+          <span class="case__go" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" transform="rotate(180 24 24)"/></svg></span>
+        </span>
+        <span class="case__name">Luxury Aroma</span>
+        <span class="case__desc">Нішева парфумерія</span>
+        <span class="case__tags">Meta Ads · Google Ads</span>
+      </a></li>
+      <li><a class="case" href="https://proekcia.com/portfolio/un-kisu-nosiyi-brendu/" target="_blank" rel="noopener">
+        <span class="case__media">
+          <img src="images/portfolio/unkisu.webp" alt="Un Kisu — Носії бренду" width="800" height="1000" loading="lazy" decoding="async">
+          <video class="case__vid" muted loop playsinline preload="none" aria-hidden="true"><source src="images/portfolio/unkisu.mp4" type="video/mp4"></video>
+          <span class="case__go" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" transform="rotate(180 24 24)"/></svg></span>
+        </span>
+        <span class="case__name">Un Kisu</span>
+        <span class="case__desc">Носії бренду</span>
+        <span class="case__tags">Бренд · Контент</span>
+      </a></li>
+      <li><a class="case" href="https://proekcia.com/portfolio/yantos/" target="_blank" rel="noopener">
+        <span class="case__media">
+          <img src="images/portfolio/yantos.webp" alt="Yantos — Реклама секційної огорожі" width="800" height="1000" loading="lazy" decoding="async">
+          <video class="case__vid" muted loop playsinline preload="none" aria-hidden="true"><source src="images/portfolio/yantos.mp4" type="video/mp4"></video>
+          <span class="case__go" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round" transform="rotate(180 24 24)"/></svg></span>
+        </span>
+        <span class="case__name">Yantos</span>
+        <span class="case__desc">Реклама секційної огорожі</span>
+        <span class="case__tags">Meta Ads · Google Ads</span>
+      </a></li>
+    </ul>
+    <div class="cases__more">
+      <a href="https://proekcia.com/portfolio/" target="_blank" rel="noopener" class="pill-btn pill-btn--orange cta-inline"><span>Переглянути всі роботи</span><span class="pill-btn__icon pill-btn__icon--ne" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
 <!-- ======================= 07 · СТАРТ: БРИФ-ДОКУМЕНТ =======================
      Аркуш брифу: рядки «друкуються» при скролі, поруч по черзі ставляться галочки. -->
 <section class="brief" aria-labelledby="brief-title">
@@ -625,7 +681,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=111" defer></script>
+<script src="sections.js?v=112" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>

@@ -613,6 +613,28 @@
     }
   });
 
+  /* ---------- 07 · кейси: ролик грає при наведенні (ПК) або коли плитка в кадрі (телефон) ---------- */
+  var cases = $$('.case');
+  if (cases.length) {
+    var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var playCase = function (c, on) {
+      var v = $('.case__vid', c);
+      if (!v) return;
+      if (on) { v.preload = 'auto'; v.play().then(function () { c.classList.add('is-playing'); }).catch(function () {}); }
+      else { c.classList.remove('is-playing'); v.pause(); }
+    };
+    if (canHover) cases.forEach(function (c) {
+      c.addEventListener('mouseenter', function () { playCase(c, true); });
+      c.addEventListener('mouseleave', function () { playCase(c, false); });
+    });
+    else if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { playCase(e.target, e.intersectionRatio > 0.6); }); }, { threshold: [0, 0.6, 1] });
+      cases.forEach(function (c) { io.observe(c); });
+    }
+    gsap.from(cases, { y: 40, autoAlpha: 0, duration: 0.7, ease: 'power3.out', stagger: 0.08,
+      scrollTrigger: { trigger: '.cases__grid', start: 'top 85%', once: true } });
+  }
+
   /* ---------- мем біля курсора при наведенні на кнопку (лише миша) ----------
      «Стартуєм» у брифі, «Замовити креативи» в бренд-пам'яті, «Знизити вартість ліда» біля чека, картка «Замовити креативи» в принципах — кожна зі своїм мемом */
   var memeHover = function (btn, src, cls) {
