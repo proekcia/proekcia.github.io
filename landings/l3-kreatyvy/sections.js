@@ -338,7 +338,7 @@
       .fromTo(c('.lp__canvas'), { x: 0 }, { keyframes: { x: [0, -8, 7, -5, 3, 0] }, duration: 0.05, ease: 'none' }, 0.8)
       .to(c('.lp__verdict--no'), { opacity: 1, scale: 1, duration: 0.04, ease: 'back.out(2.5)' }, 0.84)
       .to(s2, { opacity: 1 }, 0.84)
-      .to({}, { duration: 0.12 }, 0.88);
+      .to({}, { duration: 0.28 }, 0.88);   // пауза в кінці: «Атмосфера зламана» тримається
   }
 
   /* ---------- 05 · ПРИНЦИПИ: горизонтальний скрол на десктопі ---------- */
@@ -348,15 +348,18 @@
     var track = $('.rules__track');
     section.classList.add('is-pinned');
     var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
-    var h = gsap.to(track, {
-      x: function () { return -dist(); }, ease: 'none',
+    // пауза в кінці: остання картка (кнопка) тримається на екрані ~60% висоти екрана скролу
+    var hold = function () { return window.innerHeight * 0.6; };
+    var h = gsap.timeline({
       scrollTrigger: {
         trigger: section, pin: true, start: 'top top',
         refreshPriority: 1,   // рахується першою: тригери нижче мають враховувати висоту закріплення
-        end: function () { return '+=' + dist(); },
+        end: function () { return '+=' + (dist() + hold()); },
         scrub: 0.6, invalidateOnRefresh: true, anticipatePin: 1
       }
-    });
+    })
+      .to(track, { x: function () { return -dist(); }, ease: 'none', duration: 1 })
+      .to({}, { duration: hold() / Math.max(1, dist()) });
     rules.forEach(function (r) {
       ST.create({
         trigger: r, containerAnimation: h, start: 'left 70%',
@@ -525,10 +528,9 @@
   mm.add('all', function () {   // і на десктопі, і на телефоні
     var track = $('.belt__track');
     if (!track) return;
-    gsap.to(track, {
-      x: function () { return -(track.scrollWidth - window.innerWidth); }, ease: 'none',
-      scrollTrigger: { trigger: '.belt', start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true }
-    });
+    gsap.timeline({ scrollTrigger: { trigger: '.belt', start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true } })
+      .to(track, { x: function () { return -(track.scrollWidth - window.innerWidth); }, ease: 'none', duration: 1 })
+      .to({}, { duration: 0.15 });   // пауза: остання станція тримається, перш ніж секція поїде
   });
 
   /* ---------- 07 · бриф: аркуш вирівнюється, рядки «друкуються», галочки ставляться по черзі ---------- */

@@ -192,7 +192,7 @@
    Липка сцена. Кожна калька: молочна напівпрозора основа (backdrop-blur — те, що під нею,
    розмивається, як під справжньою калькою) + «друк» + реалістична текстура паперу (напівпрозора).
    Позиції/накладання веде GSAP-таймлайн від скролу. */
-.layers{position:relative;height:420vh;background:var(--c-blue);}
+.layers{position:relative;height:470vh;background:var(--c-blue);}
 .layers__stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden;}
 .layers__grid{width:100%;display:grid;grid-template-columns:5fr 6fr;column-gap:calc(24px + 104 * var(--k));align-items:center;}
 
