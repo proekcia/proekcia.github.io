@@ -206,7 +206,8 @@
 .lx__s1{margin:calc(28px + 28 * var(--k)) 0 0;max-width:22em;font-size:calc(20px + 10 * var(--k));line-height:1.2;letter-spacing:-.03em;}
 .lx__s2{margin:14px 0 0;max-width:30em;font-family:"Stolzl Book","Stolzl",sans-serif;font-size:var(--fs-t);line-height:1.4;color:rgba(13,13,13,.55);}
 .lx__card{position:relative;justify-self:center;margin:0;height:min(74vh, 74svh, 700px);aspect-ratio:793 / 1049;max-width:100%;
-  border-radius:calc(10px + 6 * var(--k));overflow:hidden;background:#fff;box-shadow:0 40px 80px -40px rgba(13,13,13,.45);container-type:inline-size;}
+  border-radius:calc(10px + 6 * var(--k));overflow:hidden;background:#fff;box-shadow:0 40px 80px -40px rgba(13,13,13,.45);container-type:inline-size;
+  transform:rotate(4deg);}   /* легкий нахил праворуч */
 /* шар дії: голий оффер, системний шрифт, сіра кнопка */
 .lx__sale{position:absolute;inset:0;padding:14cqw 9cqw 12cqw;display:flex;flex-direction:column;align-items:center;text-align:center;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;color:#222;}
 .lx__pct{font-weight:700;font-size:24cqw;line-height:1;letter-spacing:-.02em;}
