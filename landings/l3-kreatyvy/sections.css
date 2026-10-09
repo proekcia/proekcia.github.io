@@ -877,3 +877,11 @@
 /* перенос рядка лише на телефоні */
 .br-m{display:none;}
 @media (max-width:767.98px){.br-m{display:inline;}}
+
+/* телефон: помаранчева картка рівно по центру поста (довгі рядки заголовка в Safari
+   розпирали її вправо), другорядний текст — більший */
+@media (max-width:767.98px){
+  .post__card{min-width:0;}
+  .post__title{font-size:8.8cqw;}
+  .post__note{font-size:14px;}
+}
