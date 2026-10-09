@@ -702,6 +702,9 @@
 /* 01 · пакет банерів — реальна дошка з банерами по країнах і аудиторіях */
 .belt-shot{display:block;max-width:100%;max-height:100%;width:auto;height:auto;border-radius:calc(8px + 6 * var(--k));box-shadow:0 24px 50px -28px rgba(13,13,13,.4);}
 .belt-phone{position:relative;height:100%;aspect-ratio:9/16;border-radius:22px;overflow:hidden;border:6px solid var(--c-black);background:var(--c-black);}
+/* 02 · два сторіс поруч */
+.belt__vis--phones{gap:calc(12px + 12 * var(--k));}
+.belt__vis--phones .belt-phone:nth-child(2){transform:translateY(6%);}
 .kit-copy--card{height:auto;padding:calc(16px + 8 * var(--k));border-radius:14px;background:#F4EEE2;width:100%;}
 .kit-launch{width:100%;}
 .belt__n{font-size:var(--fs-s);color:var(--c-orange);}
