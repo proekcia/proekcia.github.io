@@ -475,7 +475,7 @@
   gsap.set('.brief__t', { clipPath: 'inset(0% 100% 0% 0%)' });
   gsap.set('.brief__line', { scaleX: 0 });
   ST.create({
-    trigger: '.brief__list', start: 'top 75%', end: 'bottom 45%', scrub: true,
+    trigger: '.brief__list', start: 'top 90%', end: 'bottom 82%', scrub: true,   // усі пункти заповнені, поки список ще в нижній частині екрана
     onUpdate: function (self) {
       var p = self.progress, n = briefRows.length, done = 0;
       briefRows.forEach(function (row, i) {
