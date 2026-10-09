@@ -51,8 +51,9 @@
     var started = false, live = false, cracked = false;
 
     // короткий спалах у момент тріску — і з відео, і з запасним кадром
+    var noise = null;                           // запасний шум (анімована картинка), якщо відео заблоковане
     var flash = function () {
-      if (window.gsap) window.gsap.fromTo(video, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: 0.6, ease: 'power2.out', clearProps: 'filter' });
+      if (window.gsap) window.gsap.fromTo(noise ? [video, noise] : video, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: 0.6, ease: 'power2.out', clearProps: 'filter' });
     };
     // тріск — коли кадр із тріщинами реально з’явився на екрані:
     // requestVideoFrameCallback дає час показаного кадру; currentTime випереджає картинку
@@ -68,19 +69,13 @@
       if (rvfc) video.requestVideoFrameCallback(tick);
       else requestAnimationFrame(tick);
     };
+    var fellBack = false;                       // показали запасний кадр — відео вже не запускаємо
     var run = function () {
-      // екран уже «розбили» кадром, поки ролик вантажився — граємо далі з моменту тріску (шум)
-      if (cracked && video.currentTime < CRACK) video.currentTime = CRACK;
-      return video.play().then(function () { if (rvfc) video.requestVideoFrameCallback(tick); else requestAnimationFrame(tick); });
-    };
-    var videoReady = function () {
-      return new Promise(function (res) {
-        if (video.readyState >= 3) res();
-        else {
-          video.addEventListener('canplay', res, { once: true });
-          setTimeout(res, 6000);                 // повільний інтернет — не чекаємо вічно
-        }
-      });
+      if (fellBack) return Promise.reject();
+      return video.play().then(function () {
+        // ролик довантажився вже після запасного тріску — лишаємо розбитий кадр (останній)
+        if (fellBack) { video.pause(); video.currentTime = Math.max(0, video.duration - 0.05); return; }
+        if (rvfc) video.requestVideoFrameCallback(tick); else requestAnimationFrame(tick); });
     };
 
     // запасний сценарій: відео не стартувало (iOS у режимі енергозбереження блокує автозапуск,
@@ -92,19 +87,32 @@
     var crackNow = function () {
       if (cracked) return;
       cracked = true;
-      if (video.paused && video.currentTime < 0.2) video.poster = CRACK_IMG;
+      if (video.paused && video.currentTime < 0.2) {
+        fellBack = true;
+        video.poster = CRACK_IMG;
+        if (noise) noise.src = CRACK_IMG;
+      }
       flash();
       hv.onCrack.forEach(function (fn) { fn(); });
+    };
+    // автозапуск заблоковано (iOS в енергозбереженні) — шум анімованою картинкою, її iOS не блокує
+    var showNoise = function () {
+      if (noise || cracked) return;
+      noise = new Image();
+      noise.className = 'hero__bg';
+      noise.alt = '';
+      noise.setAttribute('aria-hidden', 'true');
+      noise.src = 'images/hero/noise.webp';
+      video.insertAdjacentElement('afterend', noise);
     };
     // запасний тріск — коли кнопки вже з’явились, а ролик так і не пішов
     hv.fallback = function () { if (!cracked && (video.paused || video.currentTime < 0.2)) crackNow(); };
     hv.start = function () {
       if (started) return;
       started = true;
-      videoReady().then(function () {
-        live = true;
-        run().catch(crackNow);
-      });
+      live = true;
+      // якщо автозапуск заборонено, браузер відмовить одразу — тоді шум картинкою
+      run().catch(function () { showNoise(); });
     };
     // iOS: перший дотик дозволяє запуск — пробуємо дограти, якщо ролик ще стоїть
     window.addEventListener('touchstart', function () { if (live && video.paused && !video.ended) run().catch(function () {}); }, { once: true, passive: true });
