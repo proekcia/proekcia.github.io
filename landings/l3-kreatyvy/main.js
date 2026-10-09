@@ -54,19 +54,24 @@
     var flash = function () {
       if (window.gsap) window.gsap.fromTo(video, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: 0.6, ease: 'power2.out', clearProps: 'filter' });
     };
-    var tick = function () {
+    // тріск — коли кадр із тріщинами реально з’явився на екрані:
+    // requestVideoFrameCallback дає час показаного кадру; currentTime випереджає картинку
+    var rvfc = 'requestVideoFrameCallback' in video;
+    var tick = function (now, meta) {
       if (video.paused || video.ended) return;
-      if (!cracked && video.currentTime >= CRACK) {
+      var t = rvfc && meta ? meta.mediaTime : video.currentTime - 0.08;
+      if (!cracked && t >= CRACK - 0.01) {
         cracked = true;
         flash();
         hv.onCrack.forEach(function (fn) { fn(); });
       }
-      requestAnimationFrame(tick);
+      if (rvfc) video.requestVideoFrameCallback(tick);
+      else requestAnimationFrame(tick);
     };
     var run = function () {
       // екран уже «розбили» кадром, поки ролик вантажився — граємо далі з моменту тріску (шум)
       if (cracked && video.currentTime < CRACK) video.currentTime = CRACK;
-      return video.play().then(function () { requestAnimationFrame(tick); });
+      return video.play().then(function () { if (rvfc) video.requestVideoFrameCallback(tick); else requestAnimationFrame(tick); });
     };
     var videoReady = function () {
       return new Promise(function (res) {
