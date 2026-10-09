@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=53">
-<link rel="stylesheet" href="sections.css?v=189">
+<link rel="stylesheet" href="sections.css?v=190">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -507,15 +507,20 @@
         <span class="way__go"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a></li>
     </ul>
 
-    <div class="roles">
-      <div class="roles__col" data-rv>
-        <h3 class="roles__title">Ми відповідаємо за:</h3>
-        <ul class="chips"><li>ідеї</li><li>меседжі</li><li>дизайн/монтаж</li><li>підготовку форматів</li><li>логіку варіацій</li></ul>
+    <!-- «рівняння»: наша робота + ваш офер = креатив, що продає -->
+    <div class="eq">
+      <div class="eq__part eq__part--us">
+        <h3 class="eq__who">Ми відповідаємо за:</h3>
+        <ul class="eq__list"><li>ідеї</li><li>меседжі</li><li>дизайн/монтаж</li><li>підготовку форматів</li><li>логіку варіацій</li></ul>
       </div>
-      <div class="roles__col" data-rv>
-        <h3 class="roles__title">Ви відповідаєте за:</h3>
-        <p class="roles__txt">продукт та фактичні конкурентні переваги, інакше кажучи – за&nbsp;<b>силу оферу</b></p>
+      <span class="eq__op" aria-hidden="true">+</span>
+      <div class="eq__part eq__part--you">
+        <h3 class="eq__who">Ви відповідаєте за:</h3>
+        <p class="eq__offer">силу оферу</p>
+        <p class="eq__note">продукт та фактичні конкурентні переваги</p>
       </div>
+      <span class="eq__op" aria-hidden="true">=</span>
+      <p class="eq__res">креатив, що&nbsp;продає</p>
     </div>
   </div>
 </section>
@@ -781,7 +786,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=119" defer></script>
+<script src="sections.js?v=120" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>

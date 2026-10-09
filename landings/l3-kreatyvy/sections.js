@@ -666,6 +666,12 @@
     $$('.rv__audio').forEach(function (a) { a.addEventListener('play', function () { $$('.rv__audio').forEach(function (o) { if (o !== a) o.pause(); }); }); });
   }
 
+  /* ---------- 06 · рівняння: частини з'являються по черзі ---------- */
+  if ($('.eq')) {
+    gsap.from('.eq > *', { y: 24, autoAlpha: 0, duration: 0.6, ease: 'power3.out', stagger: 0.14,
+      scrollTrigger: { trigger: '.eq', start: 'top 80%', once: true } });
+  }
+
   /* ---------- 07 · кейси: ролик грає при наведенні (ПК) або коли плитка в кадрі (телефон) ---------- */
   var cases = $$('.case');
   if (cases.length) {

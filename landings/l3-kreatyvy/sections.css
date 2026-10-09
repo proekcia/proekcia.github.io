@@ -475,6 +475,16 @@
 }
 .way:focus-visible{outline:2px solid var(--c-orange);outline-offset:-2px;}
 
+/* «рівняння»: [наша робота] + [ваш офер] = [креатив, що продає] */
+.eq{margin-top:calc(56px + 56 * var(--k));padding-block:calc(28px + 28 * var(--k));border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  display:grid;grid-template-columns:minmax(0, 1.25fr) auto minmax(0, .9fr) auto minmax(0, 1.1fr);align-items:center;gap:calc(14px + 18 * var(--k));}
+.eq__who{margin:0 0 14px;font-weight:500;font-size:var(--fs-s);letter-spacing:.06em;text-transform:uppercase;color:rgba(13,13,13,.5);}
+.eq__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
+.eq__list li{padding:.5em 1em;border-radius:99px;background:var(--c-black);color:var(--c-white);font-size:calc(14px + 4 * var(--k));line-height:1;letter-spacing:-.02em;}
+.eq__offer{display:inline-block;margin:0;padding:.35em .8em .4em;border-radius:99px;background:var(--c-orange);color:var(--c-white);font-size:calc(22px + 14 * var(--k));line-height:1;letter-spacing:-.035em;}
+.eq__note{margin:12px 0 0;font-family:"Stolzl Book","Stolzl",sans-serif;font-size:calc(13px + 2 * var(--k));line-height:1.35;color:rgba(13,13,13,.6);max-width:18em;}
+.eq__op{font-weight:100;font-size:calc(56px + 56 * var(--k));line-height:1;color:var(--c-black);}
+.eq__res{margin:0;font-size:calc(30px + 34 * var(--k));line-height:1;letter-spacing:-.05em;}
 .roles{margin-top:calc(56px + 56 * var(--k));display:grid;grid-template-columns:1fr 1fr;column-gap:calc(16px + 16 * var(--k));}
 .roles__col{border-top:1px solid var(--line);border-left:1px solid var(--line);padding:calc(20px + 28 * var(--k));}
 .roles__title{margin:0 0 calc(20px + 12 * var(--k));font-weight:500;font-size:var(--fs-s);letter-spacing:.06em;text-transform:uppercase;}
@@ -962,6 +972,8 @@
   .way__go{grid-area:go;}
 
   .roles{grid-template-columns:1fr;row-gap:16px;}
+  .eq{grid-template-columns:1fr;justify-items:start;gap:10px;}
+  .eq__op{font-size:48px;line-height:.9;}
   .cta__btn{width:100%;}
   .foot__row{flex-direction:column;align-items:flex-start;}
 }
