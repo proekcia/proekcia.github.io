@@ -552,22 +552,25 @@
     var fbFit = function () {
       fbStack.style.transform = '';
       var vis = fbStack.closest('.belt__vis');
-      var k = Math.min(1, (vis.clientHeight - 30) / fbStack.offsetHeight);
+      // уміститися і по висоті станції, і по ширині (з бічними картками стос ~1.8 ширини картки)
+      var k = Math.min(1, (vis.clientHeight - 30) / fbStack.offsetHeight, vis.clientWidth / (fbStack.offsetWidth * 1.8));
       fbStack.style.transform = 'scale(' + k.toFixed(3) + ')';
     };
+    // одна спереду по центру, дві — позаду з боків; по колу міняються місцями
+    var SLOT = [
+      { xPercent: 0, scale: 1, zIndex: 3, rotation: 0, filter: 'brightness(1)' },       // центр
+      { xPercent: -46, scale: 0.8, zIndex: 1, rotation: -5, filter: 'brightness(.88)' }, // зліва позаду
+      { xPercent: 46, scale: 0.8, zIndex: 1, rotation: 5, filter: 'brightness(.88)' }    // справа позаду
+    ];
     var fbLay = function (anim) {
       fbOrder.forEach(function (c, i) {
-        gsap.to(c, { x: i * 16, y: i * -16, scale: 1 - i * 0.05, zIndex: 10 - i, opacity: i > 2 ? 0 : 1,
-          duration: anim ? 0.6 : 0, ease: 'power3.inOut' });
+        gsap.to(c, Object.assign({ duration: anim ? 0.8 : 0, ease: 'power3.inOut' }, SLOT[i]));
       });
     };
     var fbNext = function () {
-      var top = fbOrder.shift();
-      // верхня відлітає вбік і лягає в кінець стосу
-      gsap.timeline()
-        .to(top, { x: -70, y: 20, rotation: -8, duration: 0.35, ease: 'power2.in' })
-        .add(function () { fbOrder.push(top); gsap.set(top, { zIndex: 0 }); fbLay(true); })
-        .to(top, { rotation: 0, duration: 0.4, ease: 'power2.out' });
+      // права виходить у центр, центральна йде вліво, ліва — вправо
+      fbOrder = [fbOrder[2], fbOrder[0], fbOrder[1]];
+      fbLay(true);
     };
     fbFit(); fbLay(false);
     window.addEventListener('resize', fbFit);

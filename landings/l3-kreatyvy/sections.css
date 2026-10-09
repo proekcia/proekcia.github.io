@@ -732,7 +732,7 @@
 .fbstack{position:relative;transform-origin:50% 50%;}
 .fbstack .fbad{position:relative;}
 .fbstack .fbad + .fbad{position:absolute;left:0;top:0;}
-.belt__st:has(.fbstack) .belt__vis{padding-inline:10px 40px;}
+.belt__st:has(.fbstack) .belt__vis{padding-inline:calc(var(--fbw, 250px) * .42);justify-content:center;}   /* місце для бічних карток */
 
 /* 05 · кабінет кампаній: платформи вмикаються, ліди рахуються, графік росте */
 .ads{width:min(42vw, 600px);padding:14px 16px 12px;border-radius:14px;background:#fff;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);font-size:12.5px;}
@@ -771,7 +771,7 @@
   .belt__st,.belt__st--wide{width:calc(100vw - 2 * var(--pad) - 24px);}
   .belt__vis--phones{gap:6px;}
   .belt-shot{height:auto;width:100%;}
-  .belt__st:has(.fbstack) .belt__vis{padding-inline:0 24px;justify-content:center;}
+  .belt__st:has(.fbstack) .belt__vis{padding-inline:0;justify-content:center;}
   .fbad{--w:min(64vw, 250px);}
   .ads{width:100%;font-size:11px;padding:12px;}
   .ads__row{grid-template-columns:30px 1fr .7fr .7fr;}
