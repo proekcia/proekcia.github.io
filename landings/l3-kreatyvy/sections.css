@@ -743,7 +743,7 @@
 .belt__st:has(.fbad) .belt__vis{padding-inline:110px 90px;}   /* місце для міток з боків */
 
 /* 05 · кабінет кампаній: платформи вмикаються, ліди рахуються, графік росте */
-.ads{width:100%;max-width:600px;padding:14px 16px 12px;border-radius:14px;background:#fff;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);font-size:12.5px;}
+.ads{width:min(42vw, 600px);padding:14px 16px 12px;border-radius:14px;background:#fff;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);font-size:12.5px;}
 .ads__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
 .ads__head b{font-weight:500;font-size:15px;letter-spacing:-.02em;}
 .ads__live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(13,13,13,.55);}
@@ -763,11 +763,10 @@
 .ads__cmp{color:rgba(13,13,13,.6);}
 .ads__num{font-variant-numeric:tabular-nums;font-weight:500;}
 .ads__cpl{font-variant-numeric:tabular-nums;color:#19A34A;}
-.ads__chart{display:block;width:100%;height:56px;margin-top:8px;overflow:visible;}
-.ads__line{fill:none;stroke:var(--c-orange);stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.6s var(--ease-out) .9s;}
-.ads__area{fill:rgba(255,70,19,.1);opacity:0;transition:opacity .8s 1.6s;}
-.belt__st.is-in .ads__line{stroke-dashoffset:0;}
-.belt__st.is-in .ads__area{opacity:1;}
+.ads__chart{display:block;width:100%;height:56px;margin-top:8px;overflow:visible;clip-path:inset(-4px 100% -4px 0);transition:clip-path 1.6s var(--ease-out) .9s;}
+.belt__st.is-in .ads__chart{clip-path:inset(-4px 0 -4px 0);}   /* графік «малюється» зліва направо */
+.ads__line{fill:none;stroke:var(--c-orange);stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-linejoin:round;}
+.ads__area{fill:rgba(255,70,19,.1);}
 
 .belt__n{font-size:var(--fs-s);color:var(--c-orange);}
 .belt__t{margin:6px 0 0;font-size:calc(17px + 5 * var(--k));line-height:1.2;letter-spacing:-.025em;}
