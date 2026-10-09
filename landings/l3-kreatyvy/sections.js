@@ -348,8 +348,9 @@
     var track = $('.rules__track');
     section.classList.add('is-pinned');
     var dist = function () { return Math.max(0, track.scrollWidth - window.innerWidth); };
-    // пауза в кінці: остання картка (кнопка) тримається на екрані ~60% висоти екрана скролу
-    var hold = function () { return window.innerHeight * 0.6; };
+    // пауза в кінці: горизонтальний рух зупиняється на останній картці (кнопці),
+    // і вона тримається ще цілий екран скролу, перш ніж секція поїде вгору
+    var hold = function () { return window.innerHeight * 1.0; };
     var h = gsap.timeline({
       scrollTrigger: {
         trigger: section, pin: true, start: 'top top',
