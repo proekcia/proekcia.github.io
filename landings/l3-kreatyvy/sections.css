@@ -770,17 +770,21 @@
 .memory{background:var(--c-white);padding-block:var(--sec);}
 .memory__title{margin:0;max-width:13em;font-weight:400;font-size:var(--fs-h2);line-height:1.04;letter-spacing:-.045em;}
 .memory__grid{margin:calc(40px + 48 * var(--k)) 0;display:grid;grid-template-columns:repeat(5, 1fr);gap:calc(8px + 12 * var(--k));}
-/* креатив бренду NOÉ: одна стримана редакційна система на всіх — знак по центру,
-   заголовок у два рядки світлим шрифтом над продуктом; на продажних — одна кнопка з ціною */
-.ad-tile{position:relative;aspect-ratio:4 / 5;overflow:hidden;border-radius:calc(6px + 6 * var(--k));container-type:inline-size;background:var(--c-greyblue);color:var(--c-black);text-align:center;}
+/* реальні креативи Loivi: логотипи й адреса сайту закриті «матовим склом» —
+   спершу питання «Впізнаєте бренд?», потім скло тане (відповідь), далі мітки настрій / продаж */
+.ad-tile{position:relative;margin:0;aspect-ratio:758 / 856;overflow:hidden;border-radius:calc(6px + 6 * var(--k));container-type:inline-size;background:#C7F23B;}
 .ad-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-.ad-tile--low{background:linear-gradient(90deg,#B8D4DF,#93BCC7);}   /* небо над опущеним фото */
-.ad-tile--low img{transform:translateY(12%);}   /* високий флакон — опускаємо, щоб заголовок не лягав на дозатор */
-.ad-tile__frame{position:absolute;inset:4.5%;border:1px solid rgba(255,255,255,.85);}
-.ad-tile__mark{position:absolute;left:0;right:0;top:9.5%;padding-left:.6em;font-weight:500;font-size:3.6cqw;letter-spacing:.6em;}
-.ad-tile__head{position:absolute;left:8%;right:8%;top:17.5%;font-weight:300;font-size:10.5cqw;line-height:1.04;letter-spacing:-.035em;}
-.ad-tile__btn{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);padding:3cqw 6cqw;border-radius:999px;
-  background:var(--c-black);color:var(--c-white);font-size:max(9px, 4.6cqw);letter-spacing:-.01em;white-space:nowrap;}
+.ad-tile__hide{position:absolute;border-radius:999px;background:rgba(255,255,255,.18);
+  -webkit-backdrop-filter:blur(7px) saturate(.9);backdrop-filter:blur(7px) saturate(.9);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.25);transform:scale(1.08);}
+.ad-tile__tag{position:absolute;left:5%;top:5%;padding:1.6cqw 3.4cqw;border-radius:999px;font-size:max(10px, 4.2cqw);line-height:1;letter-spacing:-.01em;
+  background:var(--c-black);color:var(--c-white);opacity:0;transform:translateY(-6px);}
+.ad-tile--sell .ad-tile__tag{background:var(--c-orange);}
+.memory__quiz{position:relative;display:grid;margin:calc(28px + 24 * var(--k)) 0 0;font-size:calc(17px + 7 * var(--k));line-height:1.2;letter-spacing:-.03em;}
+.memory__quiz > span{grid-area:1 / 1;}
+.memory__quiz b{font-weight:500;}
+.memory__a{opacity:0;}
+.memory__grid{margin-top:calc(18px + 14 * var(--k));}
 /* CTA всередині секцій — та сама «таблетка», що в героі, але компактніша */
 .cta-inline{display:inline-flex;flex:none;font-size:calc(13px + 5 * var(--k));width:auto;gap:1.6em;}
 .memory__end{display:flex;justify-content:flex-end;align-items:flex-end;gap:calc(24px + 56 * var(--k));flex-wrap:wrap;}
@@ -864,6 +868,7 @@
   /* телефон: 4 креативи сіткою 2×2 — усі на одному екрані (п’ятий ховаємо; обидва продажні лишаються) */
   .memory__grid{grid-template-columns:repeat(2, 1fr);gap:10px;margin:28px 0;}
   .memory__grid .ad-tile:nth-child(5){display:none;}
+  .memory__quiz{font-size:17px;}
   /* два горизонти: без липкої сцени — підпис, зображення, потім колонки */
 
   .cost{grid-template-columns:1fr;row-gap:32px;}

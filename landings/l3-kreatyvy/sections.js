@@ -276,13 +276,16 @@
      і лише на двох з’являються ціна й «Купити». Разова коротка послідовність. ---------- */
   var adTiles = $$('.ad-tile');
   if (adTiles.length) {
-    gsap.set('.ad-tile__frame, .ad-tile__mark, .ad-tile__head', { autoAlpha: 0 });
-    gsap.set('.ad-tile__btn', { x: 0, xPercent: -50, autoAlpha: 0, y: 12 });   // центрування через xPercent, щоб не губилося при ресайзі
-    gsap.timeline({ scrollTrigger: { trigger: '.memory__grid', start: 'top 80%', once: true } })
-      .fromTo(adTiles, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out', stagger: 0.06 })
-      .fromTo('.ad-tile__frame', { scale: 1.06 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'power2.out', stagger: 0.06 }, 0.6)
-      .to('.ad-tile__mark, .ad-tile__head', { autoAlpha: 1, duration: 0.45, stagger: 0.04 }, 0.75)
-      .to('.ad-tile__btn', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'back.out(1.8)', stagger: 0.12 }, 1.7);
+    // 1) креативи з'являються із закритими логотипами + питання «Впізнаєте бренд?»;
+    // 2) пауза — є час упізнати; 3) «скло» тане по черзі → відповідь «Це Loivi»
+    gsap.timeline({ scrollTrigger: { trigger: '.memory__grid', start: 'top 75%', once: true } })
+      .fromTo(adTiles, { y: 40, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: 'power3.out', stagger: 0.07 })
+      .to('.ad-tile__hide', { autoAlpha: 0, scale: 0.6, duration: 0.5, ease: 'power2.inOut', stagger: 0.08 }, 2.4)
+      .to('.memory__q', { autoAlpha: 0, y: -10, duration: 0.35, ease: 'power2.in' }, 2.4)
+      .fromTo('.memory__a', { autoAlpha: 0, y: 10 }, { autoAlpha: 1, y: 0, duration: 0.45, ease: 'power3.out' }, 2.8);
+    // «Але не всі креативи мають продавати прямо зараз» → мітки: більшість — настрій, лише деякі — продаж
+    gsap.to('.ad-tile__tag', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'back.out(2)', stagger: 0.1,
+      scrollTrigger: { trigger: '.memory__end', start: 'top 90%', once: true } });
   }
 
   /* ---------- 04 · шари креативу: панель «як у Figma» (липка сцена) ----------

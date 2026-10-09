@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=51">
-<link rel="stylesheet" href="sections.css?v=160">
+<link rel="stylesheet" href="sections.css?v=161">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -374,39 +374,40 @@
 <section class="memory" aria-labelledby="memory-title">
   <div class="wrap">
     <h2 class="memory__title" id="memory-title" data-rv>Всі креативи можуть будувати бренд-пам’ять</h2>
-    <div class="memory__grid" aria-hidden="true">
-      <div class="ad-tile">
-        <img src="images/memory/perfume.webp" alt="" width="560" height="695" decoding="async">
-        <span class="ad-tile__frame"></span>
-        <span class="ad-tile__mark">NOÉ</span>
-        <span class="ad-tile__head">Тиша,<br>що лишається</span>
-      </div>
-      <div class="ad-tile ad-tile--sell">
-        <img src="images/memory/serum.webp" alt="" width="560" height="695" decoding="async">
-        <span class="ad-tile__frame"></span>
-        <span class="ad-tile__mark">NOÉ</span>
-        <span class="ad-tile__head">−20%<br>на сироватку</span>
-        <span class="ad-tile__btn">Купити — 890&nbsp;грн</span>
-      </div>
-      <div class="ad-tile">
-        <img src="images/memory/candle.webp" alt="" width="560" height="695" decoding="async">
-        <span class="ad-tile__frame"></span>
-        <span class="ad-tile__mark">NOÉ</span>
-        <span class="ad-tile__head">Вечір<br>удома</span>
-      </div>
-      <div class="ad-tile ad-tile--sell">
-        <img src="images/memory/gift.webp" alt="" width="560" height="695" decoding="async">
-        <span class="ad-tile__frame"></span>
-        <span class="ad-tile__mark">NOÉ</span>
-        <span class="ad-tile__head">Подарунок,<br>що пам’ятають</span>
-        <span class="ad-tile__btn">Купити — 3&nbsp;200&nbsp;грн</span>
-      </div>
-      <div class="ad-tile ad-tile--low">
-        <img src="images/memory/oil.webp" alt="" width="560" height="695" decoding="async">
-        <span class="ad-tile__frame"></span>
-        <span class="ad-tile__mark">NOÉ</span>
-        <span class="ad-tile__head">Тепло шкіри</span>
-      </div>
+    <p class="memory__quiz" aria-hidden="true"><span class="memory__q">Впізнаєте бренд без&nbsp;логотипу?</span><span class="memory__a">Це <b>Loivi</b>. Логотип не&nbsp;потрібен — працює стиль</span></p>
+    <div class="memory__grid">
+      <figure class="ad-tile ad-tile--mood">
+        <img src="images/memory/loivi-rituals.webp" alt="Loivi — Less Toxic Vibes, More Green Rituals" width="758" height="856" decoding="async">
+        <span class="ad-tile__hide" style="left:36.94%;top:41.47%;width:23.75%;height:11.10%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:46.17%;top:75.93%;width:10.29%;height:5.84%" aria-hidden="true"></span>
+        <span class="ad-tile__tag" aria-hidden="true">настрій</span>
+      </figure>
+      <figure class="ad-tile ad-tile--mood">
+        <img src="images/memory/loivi-sun.webp" alt="Loivi — Sun On Your Skin, Power In Your Cells" width="758" height="856" decoding="async">
+        <span class="ad-tile__hide" style="left:5.28%;top:88.20%;width:35.62%;height:5.84%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:65.70%;top:62.85%;width:11.48%;height:7.48%" aria-hidden="true"></span>
+        <span class="ad-tile__tag" aria-hidden="true">настрій</span>
+      </figure>
+      <figure class="ad-tile ad-tile--sell">
+        <img src="images/memory/loivi-farm.webp" alt="Loivi — Local Functional Shots From Our Vertical Farm" width="758" height="856" decoding="async">
+        <span class="ad-tile__hide" style="left:7.92%;top:40.89%;width:34.30%;height:7.59%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:39.31%;top:69.86%;width:10.55%;height:5.14%" aria-hidden="true"></span>
+        <span class="ad-tile__tag" aria-hidden="true">продаж</span>
+      </figure>
+      <figure class="ad-tile ad-tile--mood">
+        <img src="images/memory/loivi-neurons.webp" alt="Loivi — Greens For Your Neurons" width="758" height="856" decoding="async">
+        <span class="ad-tile__hide" style="left:2.90%;top:9.58%;width:19.79%;height:8.88%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:60.95%;top:61.68%;width:13.19%;height:5.84%" aria-hidden="true"></span>
+        <span class="ad-tile__tag" aria-hidden="true">настрій</span>
+      </figure>
+      <figure class="ad-tile ad-tile--sell">
+        <img src="images/memory/loivi-garden.webp" alt="Loivi — A Mini Garden On Your Counter" width="758" height="856" decoding="async">
+        <span class="ad-tile__hide" style="left:66.62%;top:7.94%;width:16.49%;height:8.41%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:65.70%;top:35.98%;width:18.73%;height:5.84%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:16.49%;top:57.48%;width:16.49%;height:8.64%" aria-hidden="true"></span>
+        <span class="ad-tile__hide" style="left:15.57%;top:86.21%;width:19.00%;height:5.84%" aria-hidden="true"></span>
+        <span class="ad-tile__tag" aria-hidden="true">продаж</span>
+      </figure>
     </div>
     <div class="memory__end">
       <p class="memory__but" data-rv>Але не всі креативи мають продавати прямо зараз.</p>
@@ -683,7 +684,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=96" defer></script>
+<script src="sections.js?v=97" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>
