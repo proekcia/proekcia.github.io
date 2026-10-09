@@ -309,7 +309,8 @@
 .rule__txt p:last-child{margin-bottom:0;}
 .rule__sub{margin:0 0 .8em;font-size:var(--fs-h4);letter-spacing:-.03em;color:var(--c-orange);}
 .rule--wide{width:56vw;}
-/* фінальна картка-кнопка «Замовити креативи» */
+/* фінальна картка-кнопка «Замовити креативи»: вужча — у кінці на екрані повністю видно і її, і 8-й принцип */
+.rules__track .rule--cta{width:calc(44vw - 2 * var(--pad));}
 .rule--cta{position:relative;overflow:hidden;isolation:isolate;justify-content:space-between;background:var(--c-orange);color:var(--c-white);
   border:0;text-decoration:none;}
 .rule--cta::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--c-blue);transform:translateY(101%);
@@ -799,7 +800,7 @@
   .rules__track{flex-direction:column;gap:calc(16px + 16 * var(--k));}
   .rules__intro{width:auto;padding:0 0 calc(24px + 24 * var(--k));}
   .rules__scroll{display:none;}
-  .rule,.rule--wide{width:auto;min-height:0;}
+  .rule,.rule--wide,.rules__track .rule--cta{width:auto;min-height:0;}
   .rule__vis{height:200px;margin-top:32px;}
   /* колода карток (JS ставить .is-deck): картки лежать одна на одній, наступна наїжджає знизу на скролі */
   .rules__track{will-change:auto;}   /* інакше закріплена колода рахується від треку, а не від екрана */
