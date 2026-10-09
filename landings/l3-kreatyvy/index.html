@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=53">
-<link rel="stylesheet" href="sections.css?v=199">
+<link rel="stylesheet" href="sections.css?v=200">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -243,40 +243,10 @@
 <section class="cheaper" aria-labelledby="cheaper-title">
   <div class="wrap">
     <h2 class="cheaper__title" id="cheaper-title" data-rv>Бренд робить так, щоб ваші продажі стали дешевшими:</h2>
-    <ul class="cheaper__list cz">
-      <!-- 1 · стрічка: чужі пости розмиті, ваш — чіткий -->
-      <li class="cz__card">
-        <div class="cz__scene cz__scene--feed" aria-hidden="true">
-          <div class="cz__feed">
-            <span class="cz__ghost"></span><span class="cz__ghost"></span>
-            <span class="cz__mine"><img src="images/belt/loivi-ad.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
-            <span class="cz__ghost"></span><span class="cz__ghost"></span>
-            <span class="cz__ghost"></span><span class="cz__ghost"></span>
-            <span class="cz__mine"><img src="images/belt/loivi-ad.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
-            <span class="cz__ghost"></span><span class="cz__ghost"></span>
-          </div>
-        </div>
-        <p class="cz__txt">Вас впізнають раніше</p>
-      </li>
-      <!-- 2 · довіра: лайки ростуть, з’являються коментарі -->
-      <li class="cz__card">
-        <div class="cz__scene cz__scene--trust" aria-hidden="true">
-          <span class="cz__post"><img src="images/belt/loivi-ad3.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
-          <span class="cz__likes"><i>♥</i><b class="cz__n">128</b></span>
-          <span class="cz__c cz__c--1">вже купувала, класно 🔥</span>
-          <span class="cz__c cz__c--2">беру ще одну</span>
-          <span class="cz__c cz__c--3">рекомендую 💚</span>
-        </div>
-        <p class="cz__txt">Більше довіряють</p>
-      </li>
-      <!-- 3 · клік: курсор сам тягнеться до кнопки -->
-      <li class="cz__card">
-        <div class="cz__scene cz__scene--click" aria-hidden="true">
-          <span class="cz__ad"><img src="images/belt/loivi-ad2.webp" alt="" width="640" height="640" loading="lazy" decoding="async"><span class="cz__btn">Shop now</span></span>
-          <span class="cz__cursor"><svg viewBox="0 0 24 24"><path d="M5 3l14 8-6.2 1.6L9.6 19z" fill="#0D0D0D" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></span>
-        </div>
-        <p class="cz__txt">Легше клікають</p>
-      </li>
+    <ul class="cheaper__list">
+      <li class="cheaper__item"><span class="cheaper__em" aria-hidden="true"><img src="images/cheaper/crowd.webp" alt="" width="300" height="300" loading="lazy" decoding="async"></span><span class="cheaper__txt">Вас впізнають раніше</span></li>
+      <li class="cheaper__item"><span class="cheaper__em" aria-hidden="true"><img src="images/cheaper/dog.webp" alt="" width="360" height="360" loading="lazy" decoding="async"></span><span class="cheaper__txt">Більше довіряють</span></li>
+      <li class="cheaper__item"><span class="cheaper__em" aria-hidden="true"><img src="images/cheaper/cat.webp" alt="" width="360" height="360" loading="lazy" decoding="async"></span><span class="cheaper__txt">Легше клікають</span></li>
     </ul>
   </div>
 </section>
@@ -824,7 +794,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=125" defer></script>
+<script src="sections.js?v=126" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>

@@ -673,54 +673,18 @@
    Три кола, що злиплися; лінія ціни через них іде вниз. */
 .cheaper{background:var(--c-blue);padding-block:var(--sec);overflow:hidden;}
 .cheaper__title{margin:0 0 calc(40px + 56 * var(--k));max-width:16em;font-weight:400;font-size:var(--fs-h2);line-height:1.04;letter-spacing:-.045em;}
-.cheaper__list{list-style:none;margin:0;padding:0;}
-/* три мікро-сцени */
-.cz{display:grid;grid-template-columns:repeat(3, 1fr);gap:calc(14px + 18 * var(--k));}
-.cz__card{display:flex;flex-direction:column;gap:calc(14px + 8 * var(--k));}
-.cz__scene{position:relative;aspect-ratio:4 / 5;border-radius:calc(12px + 8 * var(--k));overflow:hidden;background:#fff;box-shadow:0 30px 60px -36px rgba(40,60,100,.45);}
-.cz__txt{margin:0;font-size:calc(20px + 12 * var(--k));letter-spacing:-.035em;}
-.cz__scene img{display:block;width:100%;height:100%;object-fit:cover;}
-/* 1 · стрічка */
-.cz__scene--feed{background:#EEF2F8;}
-.cz__feed{position:absolute;left:12%;right:12%;top:0;display:flex;flex-direction:column;gap:10px;padding-top:10px;}
-.cz__ghost,.cz__mine{display:block;aspect-ratio:1;border-radius:10px;flex:none;}
-.cz__ghost{background:linear-gradient(135deg,#C9D2DF,#AEB9C9);filter:blur(5px);opacity:.75;}
-.cz__ghost:nth-child(3n){background:linear-gradient(135deg,#D9CFC4,#BCAF9F);}
-.cz__mine{overflow:hidden;box-shadow:0 0 0 3px var(--c-orange), 0 14px 30px -12px rgba(255,70,19,.6);}
-.cz.is-on .cz__feed{animation:czFeed 7s linear infinite;}
-@keyframes czFeed{to{transform:translateY(-50%);}}
-/* 2 · довіра */
-.cz__scene--trust{background:#F4F6FA;}
-.cz__post{position:absolute;left:18%;right:18%;top:6cqw;aspect-ratio:1;border-radius:10px;overflow:hidden;}
-.cz__likes{position:absolute;left:10%;top:calc(7% + 80% * .76 + 6px);display:inline-flex;align-items:center;gap:6px;font-size:max(12px, 1.6cqw);font-weight:500;}
-.cz__likes i{font-style:normal;color:#FF3040;font-size:1.3em;}
-.cz__scene--trust{container-type:inline-size;}
-.cz__likes{left:18%;top:72cqw;bottom:auto;font-size:4.4cqw;}
-.cz__c{position:absolute;left:12%;max-width:80%;padding:2.2cqw 3.6cqw;border-radius:4cqw 4cqw 4cqw 1cqw;background:#fff;box-shadow:0 6px 16px -8px rgba(13,13,13,.25);
-  font-size:3.9cqw;line-height:1.2;white-space:nowrap;opacity:0;transform:translateY(8px) scale(.96);}
-.cz__c--1{top:82cqw;}
-.cz__c--2{top:94cqw;left:26%;}
-.cz__c--3{top:106cqw;}
-.cz.is-on .cz__c{animation:czCom 6s ease-out infinite;}
-.cz.is-on .cz__c--2{animation-delay:.8s;}
-.cz.is-on .cz__c--3{animation-delay:1.6s;}
-@keyframes czCom{0%,6%{opacity:0;transform:translateY(8px) scale(.96);}14%,82%{opacity:1;transform:none;}92%,100%{opacity:0;transform:translateY(-4px);}}
-.cz.is-on .cz__likes i{animation:czBeat 1.5s ease-in-out infinite;display:inline-block;}
-@keyframes czBeat{0%,100%{transform:scale(1);}15%{transform:scale(1.35);}30%{transform:scale(1);}}
-/* 3 · клік */
-.cz__scene--click{background:#F4F6FA;container-type:inline-size;}
-.cz__ad{position:absolute;left:10%;right:10%;top:9%;aspect-ratio:1;border-radius:10px;overflow:hidden;}
-.cz__btn{position:absolute;left:50%;bottom:-13cqw;transform:translateX(-50%);}
-.cz__ad{overflow:visible;}
-.cz__ad img{border-radius:10px;}
-.cz__btn{bottom:auto;top:calc(100% + 5cqw);padding:3cqw 9cqw;border-radius:99px;background:var(--c-black);color:#fff;font-size:4.4cqw;white-space:nowrap;}
-.cz__cursor{position:absolute;left:0;top:0;width:9cqw;transform:translate(85cqw, 30cqw);}
-.cz__cursor svg{display:block;width:100%;height:auto;filter:drop-shadow(0 2px 3px rgba(0,0,0,.3));}
-.cz.is-on .cz__cursor{animation:czCur 3.6s cubic-bezier(.45,0,.25,1) infinite;}
-.cz.is-on .cz__btn{animation:czPress 3.6s ease infinite;}
-@keyframes czCur{0%{transform:translate(85cqw, 30cqw);}45%,60%{transform:translate(52cqw, 104cqw);}52%{transform:translate(52cqw, 104cqw) scale(.85);}100%{transform:translate(85cqw, 30cqw);}}
-@keyframes czPress{0%,48%{transform:translateX(-50%) scale(1);background:var(--c-black);}52%{transform:translateX(-50%) scale(.92);background:var(--c-orange);}62%,100%{transform:translateX(-50%) scale(1);background:var(--c-black);}}
-@media (prefers-reduced-motion:reduce){ .cz__feed,.cz__c,.cz__cursor,.cz__btn,.cz__likes i{animation:none !important;} .cz__c{opacity:1;transform:none;} }
+.cheaper__list{list-style:none;margin:0;padding:0;display:flex;justify-content:center;--d:min(calc(200px + 260 * var(--k)), 29vw);}
+.cheaper__item{flex:none;width:var(--d);display:flex;flex-direction:column;align-items:center;text-align:center;}   /* кола торкаються — «злиплі» */
+.cheaper__em{
+  display:flex;align-items:center;justify-content:center;
+  width:100%;aspect-ratio:1;border-radius:50%;
+  background:var(--c-white);font-size:calc(var(--d) * .42);line-height:1;
+  overflow:hidden;
+}
+.cheaper__em img{width:100%;height:100%;object-fit:cover;display:block;}   /* мем у колі */
+.cheaper__item:nth-child(2) .cheaper__em{background:var(--c-black);}
+.cheaper__item:nth-child(3) .cheaper__em{background:var(--c-orange);}
+.cheaper__txt{margin-top:calc(18px + 14 * var(--k));font-size:calc(20px + 12 * var(--k));letter-spacing:-.035em;}
 
 /* ======================= 03 · ЗНИЖКА: великий % на тлі ======================= */
 .discount{position:relative;overflow:hidden;}
@@ -1001,8 +965,9 @@
   .bill__list{padding:6px 0;}
   .bill__row{padding:4px 0;}
   .bill__total{padding:8px 0;}
-  .cz{grid-template-columns:1fr;gap:28px;}
-  .cz__scene{max-width:340px;}
+  .cheaper__list{flex-direction:column;gap:28px;}
+  .cheaper__list{--d:min(62vw, 240px);align-items:center;}
+  .cheaper__item + .cheaper__item{margin-top:-6px;}
   .mech__grid{grid-template-columns:1fr;}
   /* телефон: той самий один ряд, гортається пальцем */
   /* телефон: 4 креативи сіткою 2×2 — усі на одному екрані (п’ятий ховаємо; обидва продажні лишаються) */
