@@ -932,6 +932,19 @@
 
 /* ======================= Телефон (до 767 px) ======================= */
 @media (max-width:767.98px){
+  /* 1 · «2 шари»: картка нижче від тексту, без важкої тіні */
+  .lx__card{margin-top:18px;box-shadow:0 18px 36px -24px rgba(13,13,13,.35);}
+  .lx__cap{display:none;}
+  /* 2 · бренд-пам'ять: коротший скрол, усе по центру */
+  .memory{height:190vh;}
+  .memory__grid2{justify-items:center;text-align:center;}
+  .memory__legend{justify-content:center;}
+  .memory__end{align-items:center;}
+  .memory__title{margin-inline:auto;}
+  /* 3 · формати — у два ряди */
+  .belt__vis .kit-fmts{--fh:min(36vw, 150px);display:grid;grid-template-columns:auto auto;justify-content:center;align-content:center;align-items:end;gap:10px;}
+  /* 5 · «Засновник та арт-директор» в один рядок */
+  .cta__role .bracket__txt{white-space:nowrap;}
   .lx{grid-template-columns:1fr;row-gap:18px;}
   .layers .h2{font-size:26px;}
   .lx__s1{margin-top:14px;font-size:17px;}
@@ -940,7 +953,6 @@
   .cases__grid{grid-template-columns:repeat(2, 1fr);gap:16px 10px;}
   .rv{width:76vw;}
   .reviews__btn{width:42px;}
-  .cases__more{justify-content:flex-start;}
   /* бренд-пам'ять: заголовок зверху, знак посередині, висновок під ним */
   .memory__grid2{grid-template-columns:1fr;row-gap:14px;}
   .memory__side{display:contents;}
@@ -1025,9 +1037,9 @@
   .feeds{position:static;display:block;max-width:520px;margin:0 auto;padding-inline:var(--pad);}
 }
 
-/* перенос рядка лише на телефоні */
+/* перенос рядка лише на телефоні / лише на більших екранах */
 .br-m{display:none;}
-@media (max-width:767.98px){.br-m{display:inline;}}
+@media (max-width:767.98px){.br-m{display:inline;} .br-d{display:none;}}
 
 /* телефон: помаранчева картка рівно по центру поста (довгі рядки заголовка в Safari
    розпирали її вправо), другорядний текст — більший */
