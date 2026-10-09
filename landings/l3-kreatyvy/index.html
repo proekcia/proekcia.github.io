@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=51">
-<link rel="stylesheet" href="sections.css?v=143">
+<link rel="stylesheet" href="sections.css?v=146">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -307,41 +307,60 @@
         </blockquote>
       </div>
 
-      <figure class="desk" aria-hidden="true">
-        <!-- аркуш 1: шар дії — звичайний білий аркуш із робочим, але «нічийним» банером -->
-        <div class="sheet sheet--a">
-          <span class="sheet__white"></span>
-          <div class="sheet__ink ink-plain">
-            <span class="ink-plain__kicker">Новий аромат</span>
-            <span class="ink-plain__pct">−20%</span>
-            <span class="ink-plain__price">50 мл · 2 400 грн</span>
-            <span class="ink-plain__btn">Замовити</span>
-          </div>
-          <span class="sheet__label">Шар дії</span>
-        </div>
-        <!-- калька 2: шар бренд-пам’яті — «мудборд»: фото, кольори, шрифт, знак.
-             Після накладання фото розгортається, а текст дії перебирає фірмовий стиль. -->
-        <div class="sheet sheet--b">
-          <span class="sheet__milk"></span>
-          <div class="sheet__ink">
-            <span class="kit__photo"><img src="images/layers/brand-photo.webp" alt="" decoding="async"></span>
-            <span class="kit__aa">Aa</span>
-            <span class="kit__sw"><i></i><i></i><i></i></span>
-            <span class="kit__frame"></span>
-            <span class="kit__mark">NOÉ</span>
-            <!-- текст дії у фірмовому стилі (з’являється після накладання) -->
-            <div class="ink-brand">
-              <span class="ink-brand__top"><span>Новий аромат · №&nbsp;03</span></span>
-              <span class="ink-brand__pct">−20%</span>
-              <span class="ink-brand__until">лише до 15.06</span>
-              <span class="ink-brand__cta"><i></i>Замовити<svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg></span>
-              <span class="ink-brand__price">2&nbsp;400&nbsp;грн</span>
+      <!-- вікно «як у Figma»: панель шарів + креатив.
+           Сцена 1 — на продажний креатив по черзі вмикаються шари бренду, ціна й кнопка на місці → ✓.
+           Сцена 2 — на бренд-креатив вмикаються «продажні» шари, атмосфера ламається → ✕. -->
+      <figure class="lp" aria-hidden="true">
+        <div class="lp__win">
+          <div class="lp__bar"><i></i><i></i><i></i><span class="lp__file"><span class="lp__f1">sale_ad.fig</span><span class="lp__f2">brand_ad.fig</span></span></div>
+          <div class="lp__body">
+            <div class="lp__panel">
+              <p class="lp__ph">Шари</p>
+              <!-- сцена 1 -->
+              <ul class="lp__rows lp__rows--1">
+                <li class="lp__g lp__g--a">Шар дії</li>
+                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Ціна −20%</li>
+                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Кнопка «Замовити»</li>
+                <li class="lp__g lp__g--b">Шар бренду</li>
+                <li class="lp__row" data-on=".1"><b class="lp__eye"></b>Фото</li>
+                <li class="lp__row" data-on=".18"><b class="lp__eye"></b>Шрифт</li>
+                <li class="lp__row" data-on=".26"><b class="lp__eye"></b>Палітра</li>
+                <li class="lp__row" data-on=".34"><b class="lp__eye"></b>Знак NOÉ</li>
+              </ul>
+              <!-- сцена 2 -->
+              <ul class="lp__rows lp__rows--2">
+                <li class="lp__g lp__g--b">Шар бренду</li>
+                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Фото</li>
+                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Шрифт і&nbsp;палітра</li>
+                <li class="lp__row is-on" data-on="0"><b class="lp__eye"></b>Знак NOÉ</li>
+                <li class="lp__g lp__g--a">Шар продажів</li>
+                <li class="lp__row" data-on=".64"><b class="lp__eye"></b>Плашка −50%</li>
+                <li class="lp__row" data-on=".71"><b class="lp__eye"></b>Стікер «ХІТ»</li>
+                <li class="lp__row" data-on=".78"><b class="lp__eye"></b>КУПИ ЗАРАЗ!!!</li>
+              </ul>
+            </div>
+            <div class="lp__stage">
+              <div class="lp__canvas">
+                <span class="cv__white"></span>
+                <img class="cv__photo" src="images/layers/brand-photo.webp" alt="" width="688" height="854" decoding="async">
+                <span class="cv__frame"></span>
+                <span class="cv__mark">NOÉ</span>
+                <!-- продажний текст: дві версії шрифту, перемикаються шаром «Шрифт» -->
+                <span class="cv__kicker"><span class="f-plain">Новий аромат</span><span class="f-brand">Новий аромат · №&nbsp;03</span></span>
+                <span class="cv__pct"><span class="f-plain">−20%</span><span class="f-brand">−20%</span></span>
+                <span class="cv__btn"><span class="f-plain">Замовити</span><span class="f-brand">Замовити →</span></span>
+                <!-- бренд-креатив (сцена 2) -->
+                <span class="cv__slogan">Тиша,<br>що пахне<br>травою</span>
+                <!-- «продажні» шари, що ламають атмосферу -->
+                <span class="cv__burst">−50%</span>
+                <span class="cv__hit">ХІТ!</span>
+                <span class="cv__buy">КУПИ ЗАРАЗ!!!</span>
+              </div>
+              <span class="lp__verdict lp__verdict--ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg>Конверсія на&nbsp;місці</span>
+              <span class="lp__verdict lp__verdict--no"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg>Атмосфера зламана</span>
             </div>
           </div>
-          <img class="sheet__paper" src="images/layers/tracing.webp?v=2" alt="" width="688" height="874" decoding="async">
-          <span class="sheet__label">Шар бренд-пам’яті</span>
         </div>
-        <span class="desk__mark desk__mark--ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2"/></svg></span>
       </figure>
     </div>
   </div>
@@ -638,6 +657,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=91" defer></script>
+<script src="sections.js?v=92" defer></script>
 </body>
 </html>

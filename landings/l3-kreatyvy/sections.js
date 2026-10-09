@@ -285,42 +285,60 @@
       .to('.ad-tile__btn', { autoAlpha: 1, y: 0, duration: 0.45, ease: 'back.out(1.8)', stagger: 0.12 }, 1.7);
   }
 
-  /* ---------- 04 · кальки накладаються (липка сцена) ----------
-     0–.1    кальки лежать окремо: «нічийний» банер і бренд-мудборд;
-     .1–.32  калька бренду лягає на банер;
-     .34–.52 «рендер»: фото розгортається на весь макет, мудборд (Aa, кольори) зникає,
-             текст дії перебирає фірмовий шрифт і кольори, з’являються рамка і знак → ✓, речення 1;
-     .6      речення 2; далі — пауза. */
-  var shA = $('.sheet--a'), shB = $('.sheet--b');
-  if (shA && shB) {
-    var desk = $('.desk');
-    var narrow = function () { return window.innerWidth < 768; };
-    // на телефоні кальки в розкладеному стані менші й ближчі, щоб обидві влазили в ширину
-    var apart = function () { return desk.offsetWidth * (narrow() ? 0.25 : 0.24); };
-    var small = function () { return narrow() ? 0.6 : 0.8; };
+  /* ---------- 04 · шари креативу: панель «як у Figma» (липка сцена) ----------
+     Сцена 1 (0–.46): на продажний креатив по черзі вмикаються шари бренду — фото, шрифт,
+       палітра, знак; ціна й кнопка лишаються на місці → «Конверсія на місці», речення 1.
+     .5–.58: перехід на бренд-креатив.
+     Сцена 2 (.6–.86): вмикаються «продажні» шари — плашка, стікер, «КУПИ ЗАРАЗ»;
+       креатив смикається → «Атмосфера зламана», речення 2. Далі пауза. */
+  var lp = $('.lp');
+  if (lp) {
+    var SW = 0.52;                                   // момент перемикання сцен
+    var rows1 = $$('.lp__rows--1 .lp__row'), rows2 = $$('.lp__rows--2 .lp__row');
+    var setRows = function (p) {
+      var scene2 = p >= SW;
+      $('.lp__rows--1').style.visibility = scene2 ? 'hidden' : 'visible';
+      $('.lp__rows--2').style.visibility = scene2 ? 'visible' : 'hidden';
+      (scene2 ? rows2 : rows1).forEach(function (r) {
+        var at = parseFloat(r.dataset.on) || 0;
+        r.classList.toggle('is-on', p >= at);
+        r.classList.toggle('is-new', at > 0 && p >= at && p < at + 0.06);   // щойно ввімкнений шар підсвічується
+      });
+    };
+    var c = function (sel) { return $(sel, lp); };
     var s1 = $('.rule-note__s--1'), s2 = $('.rule-note__s--2');
     gsap.timeline({
-      defaults: { ease: 'power2.inOut' },
-      scrollTrigger: { trigger: '.layers', start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true }
+      defaults: { ease: 'power2.out', duration: 0.05 },
+      scrollTrigger: {
+        trigger: '.layers', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true,
+        onUpdate: function (self) { setRows(self.progress); },
+        onRefresh: function (self) { setRows(self.progress); }
+      }
     })
-      .fromTo(shA, { x: function () { return -apart(); }, rotation: -5, scale: small }, { x: function () { return -apart(); }, rotation: -5, scale: small, duration: 0.1 }, 0)
-      .fromTo(shB, { x: function () { return apart(); }, rotation: 4, scale: small }, { x: function () { return apart(); }, rotation: 4, scale: small, duration: 0.1 }, 0)
-      // накладання
-      .to([shA, shB], { x: 0, rotation: 0, scale: 1, duration: 0.22 }, 0.1)
-      .to('.sheet__label', { opacity: 0, duration: 0.06 }, 0.1)
-      // «рендер» фірмового стилю
-      .to('.sheet--b .sheet__milk', { opacity: 0.08, duration: 0.08 }, 0.32)
-      .to('.kit__aa, .kit__sw', { opacity: 0, y: -8, duration: 0.06 }, 0.34)
-      .to('.kit__photo', { top: '5.5%', right: '5%', width: '90%', height: '89.5%', duration: 0.14 }, 0.36)
-      .to('.ink-plain', { opacity: 0, filter: 'blur(4px)', duration: 0.08 }, 0.38)
-      .to('.kit__mark', { bottom: '87.6%', duration: 0.12 }, 0.4)   // знак «піднімається» в лівий кут верхнього рядка
-      .to('.kit__frame', { borderColor: 'rgba(255,255,255,.75)', duration: 0.08 }, 0.42)
-      .fromTo('.ink-brand', { opacity: 0, filter: 'blur(6px)' }, { opacity: 1, filter: 'blur(0px)', duration: 0.1 }, 0.44)
-      .fromTo('.ink-brand__pct', { letterSpacing: '.08em' }, { letterSpacing: '-.07em', duration: 0.12 }, 0.44)
-      .to('.desk__mark--ok', { opacity: 1, scale: 1, duration: 0.05, ease: 'back.out(2.5)' }, 0.54)
-      .to(s1, { opacity: 1, duration: 0.06 }, 0.46)
-      .to(s2, { opacity: 1, duration: 0.06 }, 0.62)
-      .to({}, { duration: 0.3 }, 0.7);
+      // сцена 1: шари бренду
+      .to(c('.cv__photo'), { opacity: 1 }, 0.1)
+      .to(c('.cv__white'), { opacity: 0 }, 0.1)
+      .to(lp.querySelectorAll('.f-plain'), { opacity: 0 }, 0.18)
+      .to(lp.querySelectorAll('.f-brand'), { opacity: 1 }, 0.18)
+      .to(c('.cv__btn'), { backgroundColor: '#FF4613', borderRadius: 999 }, 0.26)
+      .to(c('.cv__frame'), { opacity: 1 }, 0.34)
+      .to(c('.cv__mark'), { opacity: 1 }, 0.34)
+      .to(c('.lp__verdict--ok'), { opacity: 1, scale: 1, duration: 0.04, ease: 'back.out(2.5)' }, 0.4)
+      .to(s1, { opacity: 1 }, 0.4)
+      // перехід на бренд-креатив
+      .to(c('.lp__verdict--ok'), { opacity: 0, scale: 0.6, duration: 0.03, ease: 'power2.in' }, 0.5)
+      .to([c('.cv__kicker'), c('.cv__pct'), c('.cv__btn')], { opacity: 0, duration: 0.04 }, SW - 0.02)
+      .to(c('.cv__slogan'), { opacity: 1, duration: 0.05 }, SW + 0.02)
+      .to(c('.lp__f1'), { opacity: 0, duration: 0.02 }, SW)
+      .to(c('.lp__f2'), { opacity: 1, duration: 0.02 }, SW)
+      // сцена 2: «продажні» шари влітають і ламають атмосферу
+      .to(c('.cv__burst'), { scale: 1, duration: 0.04, ease: 'back.out(3)' }, 0.64)
+      .to(c('.cv__hit'), { scale: 1, duration: 0.04, ease: 'back.out(3)' }, 0.71)
+      .to(c('.cv__buy'), { y: 0, duration: 0.04, ease: 'back.out(2)' }, 0.78)
+      .fromTo(c('.lp__canvas'), { x: 0 }, { keyframes: { x: [0, -8, 7, -5, 3, 0] }, duration: 0.05, ease: 'none' }, 0.8)
+      .to(c('.lp__verdict--no'), { opacity: 1, scale: 1, duration: 0.04, ease: 'back.out(2.5)' }, 0.84)
+      .to(s2, { opacity: 1 }, 0.84)
+      .to({}, { duration: 0.12 }, 0.88);
   }
 
   /* ---------- 05 · ПРИНЦИПИ: горизонтальний скрол на десктопі ---------- */

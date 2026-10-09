@@ -192,7 +192,7 @@
    Липка сцена. Кожна калька: молочна напівпрозора основа (backdrop-blur — те, що під нею,
    розмивається, як під справжньою калькою) + «друк» + реалістична текстура паперу (напівпрозора).
    Позиції/накладання веде GSAP-таймлайн від скролу. */
-.layers{position:relative;height:280vh;background:var(--c-blue);}
+.layers{position:relative;height:420vh;background:var(--c-blue);}
 .layers__stage{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;overflow:hidden;}
 .layers__grid{width:100%;display:grid;grid-template-columns:5fr 6fr;column-gap:calc(24px + 104 * var(--k));align-items:center;}
 
@@ -211,65 +211,75 @@
 .rule-note__s{display:block;opacity:.32;}
 .rule-note__s + .rule-note__s{margin-top:.7em;}
 
-/* стіл */
-.desk{--dh:min(76vh, 76svh, 680px);position:relative;height:var(--dh);margin:0;}
-.sheet{
-  --sh:calc(var(--dh) * .86);
-  position:absolute;top:calc((var(--dh) - var(--sh)) / 2);left:calc(50% - var(--sh) * 344 / 874);
-  height:var(--sh);width:calc(var(--sh) * 688 / 874);
-  container-type:inline-size;transform-origin:50% 50%;
-}
-.sheet--b{z-index:2;}
-.sheet__milk{position:absolute;inset:0;background:rgba(255,255,255,.6);
-  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
-  -webkit-mask:url(images/layers/tracing-mask.png) center / 100% 100% no-repeat;
-          mask:url(images/layers/tracing-mask.png) center / 100% 100% no-repeat;}
-.sheet__ink{position:absolute;inset:0;}
-/* шар дії — непрозорий білий аркуш; шар бренду — напівпрозора калька поверх нього */
-.sheet__white{position:absolute;inset:0;background:#fff;}
-.sheet__paper{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}   /* текстура — напівпрозоре «затемнення», тож нижня калька просвічує */
-.sheet__label{position:absolute;left:50%;bottom:-2.6em;transform:translateX(-50%);white-space:nowrap;
-  font-size:max(11px, 3cqw);letter-spacing:.06em;text-transform:uppercase;}
+/* вікно «як у Figma»: панель шарів + креатив */
+.lp{--h:min(74vh, 74svh, 640px);margin:0;}
+.lp__win{height:var(--h);display:flex;flex-direction:column;background:var(--c-white);border-radius:calc(12px + 6 * var(--k));
+  box-shadow:0 30px 60px -30px rgba(13,13,13,.35);overflow:hidden;}
+.lp__bar{flex:none;display:flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-bottom:1px solid rgba(13,13,13,.08);}
+.lp__bar i{width:9px;height:9px;border-radius:50%;background:rgba(13,13,13,.14);}
+.lp__file{position:relative;margin-left:10px;display:grid;font-size:12px;letter-spacing:-.01em;color:rgba(13,13,13,.55);}
+.lp__file > span{grid-area:1 / 1;}
+.lp__f2{opacity:0;}
+.lp__body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(150px, 34%) 1fr;}
+.lp__panel{position:relative;border-right:1px solid rgba(13,13,13,.08);padding:16px 10px;font-size:13px;letter-spacing:-.01em;}
+.lp__ph{margin:0 8px 10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(13,13,13,.45);}
+.lp__rows{list-style:none;margin:0;padding:0;position:absolute;left:10px;right:10px;top:44px;}
+.lp__rows--2{visibility:hidden;}
+.lp__g{display:flex;align-items:center;gap:8px;margin:14px 8px 6px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(13,13,13,.5);}
+.lp__g:first-child{margin-top:0;}
+.lp__g::before{content:"";width:8px;height:8px;border-radius:50%;}
+.lp__g--a::before{background:var(--c-orange);}
+.lp__g--b::before{background:var(--c-black);}
+.lp__row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:6px;white-space:nowrap;
+  opacity:.35;transition:opacity .25s, background-color .25s;}
+.lp__row.is-on{opacity:1;}
+.lp__row.is-new{background:rgba(255,70,19,.12);}
+.lp__eye{flex:none;width:16px;height:16px;background:center / contain no-repeat
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230D0D0D' stroke-width='1.6'%3E%3Cpath d='M3 12c2.5-3 5.5-4.5 9-4.5s6.5 1.5 9 4.5'/%3E%3Cpath d='M6 15l-1.5 2M12 16.5V19M18 15l1.5 2'/%3E%3C/svg%3E");}
+.lp__row.is-on .lp__eye{background-image:
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230D0D0D' stroke-width='1.6'%3E%3Cpath d='M2.5 12C5 8 8.2 6 12 6s7 2 9.5 6c-2.5 4-5.7 6-9.5 6s-7-2-9.5-6z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");}
 
-/* калька «дія»: робочий, але безликий банер — системний шрифт, сіра кнопка */
-.ink-plain{color:#222;font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;text-align:center;}
-.ink-plain > span{position:absolute;left:0;right:0;}
-.ink-plain__kicker{top:13%;font-size:4.4cqw;font-weight:700;text-transform:uppercase;}
-.ink-plain__pct{top:21%;font-size:24cqw;font-weight:700;line-height:1;letter-spacing:-.02em;}
-.ink-plain__price{top:52%;font-size:5cqw;}
-.ink-plain__btn{left:24% !important;right:24% !important;bottom:16%;padding:3.2cqw 0;background:#9a9a9a;color:#fff;
-  font-size:4.6cqw;font-weight:700;text-transform:uppercase;}
+.lp__stage{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center;padding:calc(14px + 10 * var(--k));
+  background:#F2F2F2;container-type:size;}
+/* креатив 4:5 — вписаний у сцену і по ширині, і по висоті; сам теж контейнер — розміри всередині в cqw канви */
+.lp__canvas{position:relative;width:min(100cqw, 100cqh * .8);aspect-ratio:4 / 5;overflow:hidden;container-type:inline-size;
+  box-shadow:0 1px 2px rgba(13,13,13,.12);}
+.lp__canvas > span,.lp__canvas > img{position:absolute;}
+.cv__white{inset:0;background:#fff;}
+.cv__photo{inset:0;width:100%;height:100%;object-fit:cover;opacity:0;}
+.cv__frame{inset:4.5%;border:1px solid rgba(13,13,13,.55);opacity:0;}
+.cv__mark{left:9%;top:8.6%;font-weight:300;font-size:4cqw;letter-spacing:.6em;color:var(--c-black);opacity:0;}
+/* дві версії шрифту лежать одна на одній */
+.cv__kicker,.cv__pct,.cv__btn{display:grid;justify-items:center;}
+.cv__kicker > span,.cv__pct > span,.cv__btn > span{grid-area:1 / 1;white-space:nowrap;}
+.f-plain{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;font-weight:700;}
+.f-brand{opacity:0;}
+.cv__kicker{left:0;right:0;top:15%;color:#222;}
+.cv__kicker .f-plain{font-size:4.6cqw;text-transform:uppercase;}
+.cv__kicker .f-brand{font-size:3cqw;letter-spacing:.16em;text-transform:uppercase;}
+.cv__pct{left:0;right:0;top:22%;color:#111;line-height:1;}
+.cv__pct .f-plain{font-size:24cqw;letter-spacing:-.02em;}
+.cv__pct .f-brand{font-weight:100;font-size:28cqw;letter-spacing:-.07em;}
+.cv__btn{left:50%;bottom:13%;transform:translateX(-50%);padding:3.2cqw 10cqw;background:#9a9a9a;color:#fff;align-items:center;}
+.cv__btn .f-plain{font-size:4.6cqw;text-transform:uppercase;}
+.cv__btn .f-brand{font-size:3.8cqw;letter-spacing:.12em;text-transform:uppercase;}
+/* бренд-креатив */
+.cv__slogan{left:9%;top:17%;font-family:"Nyght Serif",serif;font-style:italic;font-size:10cqw;line-height:1;letter-spacing:-.03em;color:var(--c-black);opacity:0;}
+/* «продажні» шари, що ламають атмосферу: кричущо, криво, не в стилі */
+.cv__burst{right:5%;top:30%;width:34cqw;aspect-ratio:1;display:grid;place-items:center;background:#FFE600;color:#E10600;
+  clip-path:polygon(50% 0,61% 13%,77% 5%,80% 22%,97% 25%,89% 40%,100% 54%,85% 62%,90% 79%,72% 79%,64% 96%,50% 85%,36% 96%,28% 79%,10% 79%,15% 62%,0 54%,11% 40%,3% 25%,20% 22%,23% 5%,39% 13%);
+  font-family:Impact,"Arial Black",Arial,sans-serif;font-size:10cqw;transform:rotate(-14deg) scale(0);}
+.cv__hit{left:7%;top:52%;width:20cqw;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#E10600;color:#fff;
+  font-family:"Arial Black",Arial,sans-serif;font-weight:900;font-size:5.4cqw;transform:rotate(12deg) scale(0);}
+.cv__buy{left:-4%;right:-4%;bottom:7%;padding:2.6cqw 0;background:#E10600;color:#FFE600;text-align:center;
+  font-family:Impact,"Arial Black",Arial,sans-serif;font-size:9cqw;letter-spacing:.02em;transform:rotate(-4deg) translateY(260%);}
 
-/* калька «бренд»: мудборд */
-.kit__photo{position:absolute;right:9%;top:46%;width:40cqw;height:46cqw;overflow:hidden;}
-.kit__photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 50%;}   /* кришка флакона — точно по центру макета, підписи дзеркально обабіч */
-.kit__aa{position:absolute;left:9%;top:10%;font-weight:100;font-size:22cqw;line-height:1;letter-spacing:-.04em;color:var(--c-black);}
-.kit__sw{position:absolute;left:9%;top:42%;display:flex;gap:2cqw;}
-.kit__sw i{width:8cqw;aspect-ratio:1;border-radius:50%;}
-.kit__sw i:nth-child(1){background:#B9D3EC;}
-.kit__sw i:nth-child(2){background:#5E7F4A;}
-.kit__sw i:nth-child(3){background:var(--c-orange);}
-.kit__frame{position:absolute;inset:5.5% 5% 5%;border:1px solid rgba(13,13,13,.5);}
-.kit__mark{position:absolute;left:9%;bottom:12%;font-weight:300;font-size:4cqw;letter-spacing:.7em;color:var(--c-black);}
-
-/* текст дії у фірмовому стилі (поверх розгорнутого фото) */
-.ink-brand{position:absolute;inset:0;opacity:0;color:var(--c-black);}
-.ink-brand > span{position:absolute;}
-.ink-brand__top{left:9%;right:9%;top:9%;display:flex;justify-content:flex-end;padding-bottom:2.2cqw;
-  border-bottom:1px solid currentColor;font-size:3cqw;letter-spacing:.14em;text-transform:uppercase;}
-.ink-brand__pct{left:8%;top:16%;font-weight:100;font-size:27cqw;line-height:1;letter-spacing:-.07em;}
-.ink-brand__until{right:60%;top:44%;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:3.2cqw;letter-spacing:.04em;text-transform:uppercase;opacity:.75;}
-.ink-brand__cta{left:9%;bottom:10%;display:inline-flex;align-items:center;gap:2cqw;padding-bottom:1.2cqw;color:var(--c-white);
-  border-bottom:1px solid currentColor;font-size:4cqw;letter-spacing:.12em;text-transform:uppercase;}
-.ink-brand__cta i{width:2cqw;height:2cqw;border-radius:50%;background:var(--c-orange);}
-.ink-brand__cta svg{width:5cqw;height:5cqw;}
-.ink-brand__price{left:60%;top:44%;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:3.2cqw;letter-spacing:.04em;opacity:.75;}
-
-/* вердикти */
-.desk__mark{position:absolute;z-index:5;right:4%;top:6%;width:calc(44px + 20 * var(--k));aspect-ratio:1;border-radius:50%;
-  display:grid;place-items:center;opacity:0;transform:scale(.4);}
-.desk__mark svg{width:56%;height:56%;}
-.desk__mark--ok{background:var(--c-green);color:var(--c-black);}
+.lp__verdict{position:absolute;z-index:3;top:calc(8px + 6 * var(--k));right:calc(8px + 6 * var(--k));display:inline-flex;align-items:center;gap:6px;
+  padding:7px 12px 7px 8px;border-radius:999px;font-size:13px;letter-spacing:-.01em;white-space:nowrap;opacity:0;transform:scale(.6);}
+.lp__verdict svg{width:18px;height:18px;}
+.lp__verdict--ok{background:var(--c-green);color:var(--c-black);}
+.lp__verdict--no{background:var(--c-black);color:var(--c-white);}
+.lp__verdict--no svg{color:var(--c-orange);}
 
 /* ======================= 05 · ПРИНЦИПИ ======================= */
 .rules{background:var(--c-black);color:var(--c-white);}
@@ -789,7 +799,7 @@
 
   .process__grid,.cta__grid{grid-template-columns:1fr;row-gap:calc(48px + 32 * var(--k));}
   .layers__grid{grid-template-columns:1fr;row-gap:calc(12px + 12 * var(--k));}
-  .desk{--dh:min(52vh, 52svh, 520px);}
+  .lp{--h:min(56vh, 56svh, 520px);}
   .process__head{position:static;}
   .beads{display:none;}
   .step{min-height:0;}
@@ -848,7 +858,20 @@
   .layers .h2{font-size:26px;}
   .layers__legend{margin-top:12px;font-size:11px;}
   .rule-note{margin-top:14px;font-size:13px;line-height:1.35;}
-  .desk{--dh:min(46vh, 46svh, 420px);}
+  .lp{--h:calc(26px + (100vw - 2 * var(--pad)) * .6 * 1.25 + 20px);}   /* висота — по креативу 4:5, без порожнечі */
+  .lp__body{grid-template-columns:40% 1fr;}
+  .lp__panel{padding:10px 4px;font-size:10.5px;}
+  .lp__ph{margin:0 6px 6px;font-size:9px;}
+  .lp__rows{left:4px;right:4px;top:28px;}
+  .lp__g{margin:8px 6px 3px;font-size:8.5px;gap:5px;}
+  .lp__g::before{width:6px;height:6px;}
+  .lp__row{gap:5px;padding:3.5px 6px;}
+  .lp__eye{width:12px;height:12px;}
+  .lp__stage{padding:10px;}
+  .lp__verdict{font-size:10px;padding:5px 9px 5px 6px;gap:4px;}
+  .lp__verdict svg{width:13px;height:13px;}
+  .lp__bar{height:26px;}
+  .lp__file{font-size:10px;}
 
 
   .way{grid-template-columns:auto 1fr auto;grid-template-areas:"num title go" "txt txt txt";row-gap:10px;}
