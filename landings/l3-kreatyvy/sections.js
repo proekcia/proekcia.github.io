@@ -641,7 +641,7 @@
   });
 
   /* ---------- мем біля курсора при наведенні на кнопку (лише миша) ----------
-     «Стартуєм» у брифі та «Замовити креативи» в блоці бренд-пам'яті — кожна зі своїм мемом */
+     «Стартуєм» у брифі, «Замовити креативи» в бренд-пам'яті, «Знизити вартість ліда» біля чека — кожна зі своїм мемом */
   var memeHover = function (btn, src) {
     if (!btn) return;
     var meme = document.createElement('img');
@@ -666,6 +666,7 @@
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     memeHover($('.brief__send'), 'images/brief/meme.webp');
     memeHover($('.memory__end .pill-btn'), 'images/brief/hamster.webp');
+    memeHover($('.bill__cta'), 'images/brief/laugh.webp');
   }
 
   // шрифти змінюють висоти — перерахувати тригери
