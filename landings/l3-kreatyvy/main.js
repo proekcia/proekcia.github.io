@@ -44,7 +44,7 @@
      кадрі — білому тріснутому екрані. Стартує разом з появою заголовка. Тріск — на 1,5 с. */
   var video = document.getElementById('heroVideo');
   var CRACK = 1.5;
-  var hv = { onCrack: [], start: function () {} };
+  var hv = { onCrack: [], start: function () {}, fallback: function () {} };
 
   if (video) {
     video.muted = true;
@@ -87,11 +87,13 @@
       }
       hv.onCrack.forEach(function (fn) { fn(); });
     };
+    // запасний тріск — коли кнопки вже з’явились, а ролик так і не пішов
+    hv.fallback = function () { if (!cracked && (video.paused || video.currentTime < 0.2)) crackNow(); };
     hv.start = function () {
       if (started) return;
       started = true;
-      setTimeout(function () { if (!cracked && video.currentTime < 0.2) crackNow(); }, 2600);
       videoReady().then(function () {
+        if (cracked) return;                     // вже «розбили» кадром — ролик не запускаємо
         live = true;
         run().catch(crackNow);
       });
@@ -166,11 +168,15 @@
     .fromTo(video, { filter: 'brightness(1.9) contrast(1.2)' },
       { filter: 'brightness(1) contrast(1)', duration: 1.1, ease: 'power2.out', clearProps: 'filter' }, '<')
     .to(chars1, { yPercent: 0, duration: 1.1, stagger: 0.045 }, '-=0.55')
-    .add(hv.start, '<')  // ролик стартує разом з появою заголовка
     .to(chars2, { yPercent: 0, duration: 1.1, stagger: { each: 0.045, from: 'end' } }, '<0.15')
     .add(function () { title.classList.add('is-revealed'); })
-    .to('.hero .pill-btn--orange, .hero .pill-btn--black', { xPercent: 0, autoAlpha: 1, duration: 1.1 }, '-=0.6')
-    .to('.site-header', { autoAlpha: 1, y: 0, duration: 0.9 }, '<')
+    .addLabel('btns', '-=0.6')
+    .to('.hero .pill-btn--orange, .hero .pill-btn--black', { xPercent: 0, autoAlpha: 1, duration: 1.1 }, 'btns')
+    // ролик стартує так, щоб тріск (1.5 с ролика) припав одразу після появи кнопок
+    .add(hv.start, 'btns-=0.8')
+    // відео так і не пішло — розбиваємо екран кадром саме в цей момент
+    .add(hv.fallback, 'btns+=0.75')
+    .to('.site-header', { autoAlpha: 1, y: 0, duration: 0.9 }, 'btns')
     .add(function () {
       crt.style.display = 'none';
       scheduleGlitch();
