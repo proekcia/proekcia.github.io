@@ -248,11 +248,14 @@
     scrollTrigger: { trigger: '.discount', start: 'top bottom', end: 'bottom top', scrub: true }
   });
 
-  /* ---------- 03b · «продажі» злітає вгору, «бренд» опускається — фраза розходиться по шву ---------- */
+  /* ---------- 03b · «продажі» і «бренд» постійно то розходяться (вгору / вниз), то сходяться ---------- */
   var em = function (k) { return function () { return parseFloat(getComputedStyle($('.split__title')).fontSize) * k; }; };
-  gsap.timeline({ scrollTrigger: { trigger: '.split__title', start: 'top 85%', end: 'top 35%', scrub: 0.6, invalidateOnRefresh: true } })
-    .fromTo('.split__w--a', { y: 0, rotation: 0 }, { y: em(-0.14), rotation: -3, ease: 'power2.out' }, 0)
-    .fromTo('.split__w--b', { y: 0, rotation: 0 }, { y: em(0.14), rotation: 3, ease: 'power2.out' }, 0);
+  var splitLoop = gsap.timeline({ paused: true, repeat: -1, yoyo: true, repeatDelay: 0.25, defaults: { duration: 1.3, ease: 'sine.inOut' } })
+    .fromTo('.split__w--a', { y: 0, rotation: 0 }, { y: em(-0.14), rotation: -3 }, 0)
+    .fromTo('.split__w--b', { y: 0, rotation: 0 }, { y: em(0.14), rotation: 3 }, 0);
+  // грає лише в кадрі
+  ScrollTrigger.create({ trigger: '.split__title', start: 'top bottom', end: 'bottom top',
+    onToggle: function (self) { if (self.isActive) splitLoop.play(); else splitLoop.pause(); } });
   $$('.split__err').forEach(function (card, i) {
     gsap.from(card, { autoAlpha: 0, y: 30, duration: 0.7, ease: 'power3.out', delay: i * 0.12,
       scrollTrigger: { trigger: card, start: 'top 88%', once: true } });
