@@ -613,6 +613,24 @@
     }
   });
 
+  /* ---------- відгуки: стрілки гортають стрічку на ширину картки ---------- */
+  var rvTrack = $('.reviews__track');
+  if (rvTrack) {
+    var rvPrev = $('.reviews__btn--prev'), rvNext = $('.reviews__btn--next');
+    var rvStep = function () { var c = $('.rv', rvTrack); return c ? c.getBoundingClientRect().width + parseFloat(getComputedStyle(rvTrack).columnGap || 24) : 300; };
+    var rvSync = function () {
+      rvPrev.disabled = rvTrack.scrollLeft < 4;
+      rvNext.disabled = rvTrack.scrollLeft + rvTrack.clientWidth >= rvTrack.scrollWidth - 4;
+    };
+    rvPrev.addEventListener('click', function () { rvTrack.scrollBy({ left: -rvStep(), behavior: 'smooth' }); });
+    rvNext.addEventListener('click', function () { rvTrack.scrollBy({ left: rvStep(), behavior: 'smooth' }); });
+    rvTrack.addEventListener('scroll', rvSync, { passive: true });
+    window.addEventListener('resize', rvSync);
+    rvSync();
+    // одне аудіо за раз
+    $$('.rv__audio').forEach(function (a) { a.addEventListener('play', function () { $$('.rv__audio').forEach(function (o) { if (o !== a) o.pause(); }); }); });
+  }
+
   /* ---------- 07 · кейси: ролик грає при наведенні (ПК) або коли плитка в кадрі (телефон) ---------- */
   var cases = $$('.case');
   if (cases.length) {

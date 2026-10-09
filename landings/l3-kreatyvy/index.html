@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=53">
-<link rel="stylesheet" href="sections.css?v=171">
+<link rel="stylesheet" href="sections.css?v=172">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -598,6 +598,128 @@
   </div>
 </section>
 
+<!-- ======================= ВІДГУКИ (з головного сайту) =======================
+     Горизонтальна стрічка зі snap-прокруткою + стрілки. Відео — YouTube Shorts (нова вкладка), аудіо — з сайту. -->
+<section class="reviews" id="reviews" aria-labelledby="reviews-title">
+  <div class="wrap">
+    <header class="reviews__head">
+      <h2 class="h2" id="reviews-title" data-rv>Відгуки</h2>
+      <div class="reviews__nav">
+        <button class="reviews__btn reviews__btn--prev" type="button" aria-label="Попередні відгуки"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <button class="reviews__btn reviews__btn--next" type="button" aria-label="Наступні відгуки"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></button>
+      </div>
+    </header>
+  </div>
+  <ul class="reviews__track">
+      <li class="rv rv--video">
+        <div class="rv__photo"><img src="images/reviews/r1.webp" alt="Владислав" width="440" height="550" loading="lazy" decoding="async"><a class="rv__play" href="https://youtube.com/shorts/8Qwz7v0bmSM" target="_blank" rel="noopener" aria-label="Дивитися відеовідгук: Владислав"><svg viewBox="0 0 32 32"><path d="M11 8l13 8-13 8z" fill="currentColor"/></svg></a>
+        </div>
+        <p class="rv__who"><b>Владислав</b><span>Маркетинг-директор JoyMarket</span></p>
+        <blockquote class="rv__txt"><p>Після того, як почали працювати з вами, від минулого року ми зробили X5 до обороту, що дуже жорстко насправді зриває голову. Вам велике дякую за вашу структуру, велике дякую за поради, які ви даєте…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/joymarket/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--audio">
+        <div class="rv__photo"><img src="images/reviews/r2.webp" alt="Кирило Пасенюк" width="440" height="550" loading="lazy" decoding="async">
+          <audio class="rv__audio" controls preload="none" src="https://proekcia.com/wp-content/uploads/2026/09/vidguk-kyrylo-pasenyuk-firma.ogg"></audio>
+        </div>
+        <p class="rv__who"><b>Кирило Пасенюк</b><span>Фірма, власник</span></p>
+        <blockquote class="rv__txt"><p>Проєкція фактично стала проєкцією моїх абстракцій, які я собі в голові малював. Але на то й вони і абстракції, що вони не чіткі, якісь лише виключно ідеї…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/firma/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--video">
+        <div class="rv__photo"><img src="images/reviews/r3.webp" alt="Євгеній Гума" width="440" height="550" loading="lazy" decoding="async"><a class="rv__play" href="https://youtube.com/shorts/S3I03Mg7ivo" target="_blank" rel="noopener" aria-label="Дивитися відеовідгук: Євгеній Гума"><svg viewBox="0 0 32 32"><path d="M11 8l13 8-13 8z" fill="currentColor"/></svg></a>
+        </div>
+        <p class="rv__who"><b>Євгеній Гума</b><span>Stalor, власник</span></p>
+        <blockquote class="rv__txt"><p>Ми раніше називалися BUDMAT, таких компаній в Україні штук 40, тому постійно була плутанина. Я зрозумів, що бізнес переріс назву — став чимось більшим, системнішим…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/stalor/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--audio">
+        <div class="rv__photo"><img src="images/reviews/r4.webp" alt="Олексій Головащук" width="440" height="550" loading="lazy" decoding="async">
+          <audio class="rv__audio" controls preload="none" src="https://proekcia.com/wp-content/uploads/2026/07/reels_review.mp3"></audio>
+        </div>
+        <p class="rv__who"><b>Олексій Головащук</b><span>Reels Studio, власник</span></p>
+        <blockquote class="rv__txt"><p>ROMI зріс з 215% до 750% на тому самому бюджеті — ефективність зросла втричі. Дякую Proekcia за роботу, звернусь ще!</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/reels/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r5.webp" alt="Артем Корнеев" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Артем Корнеев</b><span>TheHrdwood, власник</span></p>
+        <blockquote class="rv__txt"><p>Ми 10 років продавали на Etsy і Amazon, і в якийсь момент захотілось будувати бренд поза маркетплейсами. Старий чорно-білий логотип просто приївся…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/thehrdwood/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r6.webp" alt="Микола Виговський" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Микола Виговський</b><span>Yantos Wire</span></p>
+        <blockquote class="rv__txt"><p>Усе було чудово!</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/yantos-wire/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r7.webp" alt="Майя Худоназарова" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Майя Худоназарова</b><span>Маркетинг-директор Rens</span></p>
+        <blockquote class="rv__txt"><p>Завдяки професіоналізму команди «Проекція» для нашої компанії було успішно розроблено два сайти. Хочемо особливо відзначити структурований підхід до роботи: чітке дотримання термінів…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/rens/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r8.webp" alt="Андрій" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Андрій</b><span>Сітка Захід</span></p>
+        <blockquote class="rv__txt"><p>Найбільше в роботі сподобався професіоналізм, свій підхід до створення продукту та зворотній зв’язок. Рекомендую.</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/sitka-zahid/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r9.webp" alt="Іван Яковлев" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Іван Яковлев</b><span>Rehau, директор</span></p>
+        <blockquote class="rv__txt"><p>Рівень залученості на рівні не підрядника, а партнера.</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/rehau/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r10.webp" alt="Ксенія" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Ксенія</b><span>CSD, маркетолог</span></p>
+        <blockquote class="rv__txt"><p>Сподобалася лояльність до некомпетентності замовника, бажання пояснити, як потрібно, і допомогти замовнику прийняти правильне рішення, відсутність нав’язування непотрібних послуг…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/csd/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r11.webp" alt="Олександр Богачик" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Олександр Богачик</b><span>Brushme, власник</span></p>
+        <blockquote class="rv__txt"><p>Дуже сподобалась ваша чесність, пластичність, віжн, креативність.</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/brusme/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r12.webp" alt="Роман Петров" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Роман Петров</b><span>Аерокоптер, власник</span></p>
+        <blockquote class="rv__txt"><p>Ваші високі внутрішні стандарти, які не дозволяють вам робити неякісно. Ґрунтовний, системний підхід до проєктів: копаєте в рази глибше за інших…</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/vertolit-ak1-3/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r13.webp" alt="Олексій" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Олексій</b><span>Малевич, власник</span></p>
+        <blockquote class="rv__txt"><p>Сподобалась організація процесу.</p></blockquote>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r14.webp" alt="Андрій Кузик" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Андрій Кузик</b><span>MAX, власник</span></p>
+        <blockquote class="rv__txt"><p>Сподобався результат.</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/max/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+      <li class="rv rv--text">
+        <div class="rv__photo"><img src="images/reviews/r15.webp" alt="Олена Гарміш" width="440" height="550" loading="lazy" decoding="async">
+        </div>
+        <p class="rv__who"><b>Олена Гарміш</b><span>Лікарка-ревматолог</span></p>
+        <blockquote class="rv__txt"><p>Багато клієнтів приходить кожен день — по 12–15 людей.</p></blockquote>
+        <a class="rv__case" href="https://proekcia.com/portfolio/revmatolog/" target="_blank" rel="noopener"><span class="rv__arr"><svg viewBox="0 0 24 24" fill="none"><path d="M13.5 5l6.9 6.9-6.9 6.9M4.5 11.9h15.8" stroke="currentColor" stroke-width="1.5"/></svg></span>Переглянути кейс</a>
+      </li>
+  </ul>
+</section>
+
 <!-- ======================= 07 · СТАРТ: БРИФ-ДОКУМЕНТ =======================
      Аркуш брифу: рядки «друкуються» при скролі, поруч по черзі ставляться галочки. -->
 <section class="brief" aria-labelledby="brief-title">
@@ -681,7 +803,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=112" defer></script>
+<script src="sections.js?v=113" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>
