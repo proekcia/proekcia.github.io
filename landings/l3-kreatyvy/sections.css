@@ -420,10 +420,14 @@
 .rv__txt{margin:0;font-family:"Stolzl Book","Stolzl",sans-serif;font-size:calc(13px + 2 * var(--k));line-height:1.45;color:rgba(13,13,13,.72);}
 .rv__txt p{margin:0;}
 .rv__txt::before{content:"“";display:block;font-family:"Nyght Serif",serif;font-style:italic;font-size:3em;line-height:.6;color:var(--c-black);margin-bottom:.15em;}
-.rv__case{margin-top:auto;display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--c-black);text-decoration:none;}
-.rv__arr{width:40px;height:26px;border-radius:999px;border:1px solid var(--c-black);display:grid;place-items:center;transition:background-color .25s, color .25s;}
-.rv__arr svg{width:15px;height:15px;}
-@media (hover:hover){ .rv__case:hover .rv__arr{background:var(--c-black);color:var(--c-white);} }
+/* «Переглянути кейс» — як на головному сайті: при наведенні вся кнопка стає чорною,
+   стрілка в обводці від'їжджає вправо, обводка зникає */
+.rv__case{margin-top:auto;align-self:flex-start;display:inline-flex;flex-wrap:nowrap;align-items:center;gap:.86em;padding-right:1em;border-radius:10em;
+  color:var(--c-black);font-size:calc(11px + 2 * var(--k));line-height:1;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;text-decoration:none;transition:.3s;}
+.rv__arr{display:grid;place-items:center;padding:.52em 1.87em;border-radius:10em;border:1px solid var(--c-black);pointer-events:none;transition:.3s;}
+.rv__arr svg{width:1.72em;height:1.72em;}
+.rv__case:hover,.rv__case:focus-visible{background:var(--c-black);color:var(--c-white);}
+.rv__case:hover .rv__arr,.rv__case:focus-visible .rv__arr{transform:translateX(1.5em);border-color:transparent;}
 
 /* ---- 07 · кейси ---- */
 .cases{background:var(--c-blue);padding-block:var(--sec);}   /* фірмовий світло-синій */
