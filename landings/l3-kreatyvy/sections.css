@@ -712,7 +712,7 @@
 .kit-copy--card{height:auto;padding:calc(16px + 8 * var(--k));border-radius:14px;background:#F4EEE2;width:100%;}
 .kit-launch{width:100%;}
 /* 04 · реклама в стрічці: креатив + супутні тексти з мітками */
-.fbad{--w:min(30vh, 290px);width:var(--w);background:#fff;border-radius:14px;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);
+.fbad{--w:250px;transform-origin:50% 50%;width:var(--w);background:#fff;border-radius:14px;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:11px;line-height:1.3;color:#050505;overflow:visible;}
 .fbad__top{display:flex;align-items:center;gap:8px;padding:9px 10px 6px;}
 .fbad__ava{width:26px;height:26px;border-radius:50%;flex:none;display:block;}
@@ -721,7 +721,13 @@
 .fbad__who em{font-style:normal;color:#65676B;font-size:10px;}
 .fbad__dots{margin-left:auto;color:#65676B;letter-spacing:1px;font-size:9px;}
 .fbad__primary{position:relative;margin:0;padding:0 10px 8px;}
-.fbad__img{display:block;width:100%;height:auto;aspect-ratio:1;}
+.fbad__media{position:relative;aspect-ratio:1;overflow:hidden;}
+.fbad__track{display:flex;height:100%;transition:transform .7s cubic-bezier(.65,0,.35,1);}
+.fbad__track img{flex:none;display:block;width:100%;height:100%;object-fit:cover;}
+.fbad__count{position:absolute;right:8px;top:8px;padding:2px 7px;border-radius:99px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;}
+.fbad__dots2{position:absolute;left:0;right:0;bottom:7px;display:flex;justify-content:center;gap:4px;}
+.fbad__dots2 i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.55);transition:background-color .3s;}
+.fbad__dots2 i.is-on{background:#fff;}
 .fbad__bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F0F2F5;border-radius:0 0 14px 14px;}
 .fbad__meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1;}
 .fbad__meta em{font-style:normal;font-size:9.5px;color:#65676B;}

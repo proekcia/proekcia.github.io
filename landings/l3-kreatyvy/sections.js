@@ -545,6 +545,35 @@
      ПІСЛЯ неї — інакше ScrollTrigger не врахує її висоту при розрахунку позицій. */
   /* ---------- 05 · «Що ви отримуєте?» — конвеєр ---------- */
   // відео в станціях грають лише в кадрі
+  // 04 · картка реклами масштабується, щоб уміститися у висоту станції (текст робить її високою)
+  var fbad = $('.fbad');
+  if (fbad) {
+    var fbFit = function () {
+      fbad.style.transform = '';
+      var vis = fbad.closest('.belt__vis');
+      var k = Math.min(1, (vis.clientHeight - 8) / fbad.offsetHeight);
+      fbad.style.transform = 'scale(' + k.toFixed(3) + ')';
+    };
+    fbFit();
+    window.addEventListener('resize', fbFit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fbFit);
+  }
+  // 04 · карусель у рекламі: креативи Loivi гортаються один за одним, поки станція в кадрі
+  var fbTrack = $('.fbad__track');
+  if (fbTrack) {
+    var fbN = fbTrack.children.length, fbI = 0, fbT = null;
+    var fbDots = $$('.fbad__dots2 i'), fbCount = $('.fbad__count');
+    var fbGo = function () {
+      fbI = (fbI + 1) % fbN;
+      fbTrack.style.transform = 'translateX(' + (-100 * fbI) + '%)';
+      fbDots.forEach(function (d, i) { d.classList.toggle('is-on', i === fbI); });
+      if (fbCount) fbCount.textContent = (fbI + 1) + '/' + fbN;
+    };
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { if (!fbT) fbT = setInterval(fbGo, 2400); }
+      else { clearInterval(fbT); fbT = null; }
+    }, { threshold: 0.4 }).observe(fbTrack);
+  }
   // станції конвеєра: is-in, коли станція в кадрі (мітки текстів, кабінет кампаній)
   if ('IntersectionObserver' in window) {
     var adsDone = false;
