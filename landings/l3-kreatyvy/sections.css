@@ -591,7 +591,7 @@
    Липка сцена: два зациклені відео (фокус на грошах / фокус на персонажі).
    На середині скролу JS ставить .is-brand — короткий автоматичний перехід, який не може
    «застрягти» напівпрозорим: швидкий наплив одного відео на інше. */
-.hzD{position:relative;height:230vh;background:var(--c-blue);}
+.hzD{position:relative;height:300vh;background:var(--c-blue);}   /* довше на «Бренді» — встигнути прочитати */
 .hzD__stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;color:var(--c-white);}
 .hzD__art{position:absolute;inset:0;margin:0;}
 .hzD__vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
@@ -614,7 +614,7 @@
 
 @media (max-width:767.98px){
   /* телефон: окремі вертикальні відео 9:16 на весь екран; текст на небі, підпис унизу */
-  .hzD{height:200vh;}
+  .hzD{height:260vh;}
   .hzD__title{font-size:30px;}
   .hzD__p{font-size:min(22px, 5.6vw);}   /* рядок «…щоб вас обирали» має влізти в ширину */
   .hzD__txt{right:var(--pad);top:48px;}

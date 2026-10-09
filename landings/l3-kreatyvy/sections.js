@@ -29,7 +29,7 @@
       raf2 = 0;
       var r = hzD.getBoundingClientRect();
       var p = Math.min(1, Math.max(0, -r.top / (r.height - window.innerHeight)));
-      var b = p >= 0.45;
+      var b = p >= 0.4;   // «Бренд» — з 40% і до кінця: пауза, щоб прочитати
       if (b === isBrand) return;
       isBrand = b;
       hzStage.classList.toggle('is-brand', b);
