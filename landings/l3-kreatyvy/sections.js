@@ -252,7 +252,7 @@
   /* ---------- 03 · великий «%» повільно обертається зі скролом ---------- */
   gsap.fromTo('.discount__pct', { rotation: -25, yPercent: -40 }, {
     rotation: 15, yPercent: -60, ease: 'none',
-    scrollTrigger: { trigger: '.discount', start: 'top bottom', end: 'bottom top', scrub: true }
+    scrollTrigger: { trigger: '.discount', start: 'top bottom', end: 'center 40%', scrub: 0.6 }   // рух відбувається, поки блок заходить на екран
   });
 
   /* ---------- 03b · «продажі» і «бренд» постійно то розходяться (вгору / вниз), то сходяться ---------- */
