@@ -318,9 +318,6 @@
       ctx.clearRect(0, 0, cv.width, cv.height);
       ctx.setTransform(k, 0, 0, k, -70 * k, -70 * k);
       var FLY = 0.07, SPAN = 0.8 - FLY;        // кожен креатив летить 7% скролу; усі долітають до 80%
-      // наприкінці під відбитками проступає рівний силует знака — краї стають чіткими
-      var sil = Math.min(1, Math.max(0, (p - 0.72) / 0.12));
-      if (sil > 0) { ctx.globalAlpha = sil; ctx.fillStyle = '#D7E3F5'; ctx.fill(MEM_STAR); ctx.globalAlpha = 1; }
       var flying = [];
       for (var i = 0; i < n; i++) {
         var c = cells[i], t0 = i / n * SPAN, e = (p - t0) / FLY;
