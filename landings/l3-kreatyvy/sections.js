@@ -207,14 +207,21 @@
   }
 
   /* ---------- 02d · три кола «вискакують» по черзі ---------- */
-  gsap.from('.cheaper__em', {
-    scale: 0, rotation: -20, duration: 0.9, ease: 'back.out(1.7)', stagger: 0.18,
-    scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
-  });
-  gsap.from('.cheaper__txt', {
-    autoAlpha: 0, y: 20, duration: 0.7, ease: 'power2.out', stagger: 0.18, delay: 0.25,
-    scrollTrigger: { trigger: '.cheaper__list', start: 'top 80%', once: true }
-  });
+  // мікро-сцени «бренд здешевлює продажі» грають лише в кадрі
+  var cz = $('.cz');
+  if (cz) {
+    gsap.from('.cz__card', { y: 40, autoAlpha: 0, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+      scrollTrigger: { trigger: cz, start: 'top 80%', once: true } });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) {
+      cz.classList.toggle('is-on', es[0].isIntersecting);
+      var n = $('.cz__n');
+      if (es[0].isIntersecting && n && !n.dataset.done) {
+        n.dataset.done = 1;
+        var o = { v: 128 };
+        gsap.to(o, { v: 2486, duration: 4, ease: 'power1.out', onUpdate: function () { n.textContent = Math.round(o.v).toLocaleString('uk-UA'); } });
+      }
+    }, { threshold: 0.25 }).observe(cz);
+  }
 
   /* ---------- 03 · «знижка»: фраза дочитується скролом, слово за словом ---------- */
   var dt = $('.discount__title');
