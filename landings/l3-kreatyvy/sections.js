@@ -722,7 +722,8 @@
     memeHover($('.memory__end .pill-btn'), 'images/brief/hamster.webp');
     memeHover($('.bill__cta'), 'images/brief/laugh.webp');
     memeHover($('.rule--cta'), 'images/brief/dog.webp');
-    memeHover($('.cta__main'), 'images/brief/sticker.webp?v=2');   // анімований стікер (квадратний, як інші меми)
+    memeHover($('.cta__main'), 'images/brief/sticker.webp?v=2');
+    memeHover($('.cases__more .pill-btn'), 'images/brief/sticker2.webp', 'brief__meme--cut');   // котик без фону   // анімований стікер (квадратний, як інші меми)
   }
 
   // шрифти змінюють висоти — перерахувати тригери
