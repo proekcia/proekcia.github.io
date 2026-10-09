@@ -884,4 +884,7 @@
   .post__card{min-width:0;}
   .post__title{font-size:8.8cqw;}
   .post__note{font-size:14px;}
+  /* лого й «01 · Увага» — менші, як у макеті; у підписі щільніше: −5% між літерами */
+  .post .post__logo{width:21.5cqw;}
+  .post__eyebrow{letter-spacing:-.05em;}
 }
