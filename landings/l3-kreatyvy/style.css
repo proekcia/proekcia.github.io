@@ -353,10 +353,10 @@ h1{margin:0;font-weight:400;}
     font-size:2.521vw;                         /* 9.8 px */
   }
 
-  /* кнопки: у стовпчик, великі — на всю ширину тексту */
+  /* кнопки: у стовпчик, злиплі, великі — на всю ширину тексту */
   .hero__actions{
     position:relative;left:auto;top:auto;transform:none;
-    flex-direction:column;align-items:center;gap:2.6vw;
+    flex-direction:column;align-items:center;gap:0;
     margin-top:6vw;
     font-size:3.85vw;                          /* 15 px; решта — в em */
   }

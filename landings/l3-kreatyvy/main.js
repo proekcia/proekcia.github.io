@@ -50,15 +50,22 @@
     video.muted = true;
     var started = false, live = false, cracked = false;
 
+    // короткий спалах у момент тріску — і з відео, і з запасним кадром
+    var flash = function () {
+      if (window.gsap) window.gsap.fromTo(video, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: 0.6, ease: 'power2.out', clearProps: 'filter' });
+    };
     var tick = function () {
       if (video.paused || video.ended) return;
       if (!cracked && video.currentTime >= CRACK) {
         cracked = true;
+        flash();
         hv.onCrack.forEach(function (fn) { fn(); });
       }
       requestAnimationFrame(tick);
     };
     var run = function () {
+      // екран уже «розбили» кадром, поки ролик вантажився — граємо далі з моменту тріску (шум)
+      if (cracked && video.currentTime < CRACK) video.currentTime = CRACK;
       return video.play().then(function () { requestAnimationFrame(tick); });
     };
     var videoReady = function () {
@@ -80,11 +87,8 @@
     var crackNow = function () {
       if (cracked) return;
       cracked = true;
-      if (video.paused && video.currentTime < 0.2) {
-        video.poster = CRACK_IMG;
-        // короткий спалах — як у відео в момент тріску
-        if (window.gsap) window.gsap.fromTo(video, { filter: 'brightness(2.2)' }, { filter: 'brightness(1)', duration: 0.6, ease: 'power2.out', clearProps: 'filter' });
-      }
+      if (video.paused && video.currentTime < 0.2) video.poster = CRACK_IMG;
+      flash();
       hv.onCrack.forEach(function (fn) { fn(); });
     };
     // запасний тріск — коли кнопки вже з’явились, а ролик так і не пішов
@@ -93,7 +97,6 @@
       if (started) return;
       started = true;
       videoReady().then(function () {
-        if (cracked) return;                     // вже «розбили» кадром — ролик не запускаємо
         live = true;
         run().catch(crackNow);
       });
