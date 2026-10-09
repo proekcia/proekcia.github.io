@@ -44,7 +44,7 @@
      кадрі — білому тріснутому екрані. Стартує разом з появою заголовка. Тріск — на 1,5 с. */
   var video = document.getElementById('heroVideo');
   var CRACK = 1.5;
-  var hv = { onCrack: [], start: function () {}, fallback: function () {} };
+  var hv = { onCrack: [], start: function () {}, fallback: function () {}, whenReady: function (fn) { fn(); } };
 
   if (video) {
     video.muted = true;
@@ -111,9 +111,32 @@
       if (started) return;
       started = true;
       live = true;
-      // якщо автозапуск заборонено, браузер відмовить одразу — тоді шум картинкою
+      if (blocked) return;                      // автозапуск заборонено — вже шумить картинка
+      video.currentTime = 0;
       run().catch(function () { showNoise(); });
     };
+
+    // iPhone не вантажить відео наперед, поки його не запустять. Тому одразу запускаємо
+    // й ставимо на паузу на першому кадрі — ролик довантажується, поки йде заставка.
+    // Інтро чекає на готовність ролика (не довше 3 с), щоб тріск збігся з кнопками.
+    var ready = false, blocked = false, waiting = [];
+    var settle = function () { ready = true; waiting.splice(0).forEach(function (fn) { fn(); }); };
+    hv.whenReady = function (fn) {
+      if (ready) return fn();
+      waiting.push(fn);
+      setTimeout(settle, 3000);
+    };
+    var prime = function () {
+      video.play().then(function () {
+        if (!started) { video.pause(); video.currentTime = 0; }
+        settle();
+      }, function (e) {
+        if (started) return;
+        if (e && e.name === 'NotAllowedError') { blocked = true; showNoise(); }
+        settle();
+      });
+    };
+    prime();
     // iOS: перший дотик дозволяє запуск — пробуємо дограти, якщо ролик ще стоїть
     window.addEventListener('touchstart', function () { if (live && video.paused && !video.ended) run().catch(function () {}); }, { once: true, passive: true });
 
@@ -173,7 +196,8 @@
   gsap.set('.hero .pill-btn--orange', { xPercent: -35, autoAlpha: 0 });
   gsap.set('.hero .pill-btn--black', { xPercent: 35, autoAlpha: 0 });
 
-  var intro = gsap.timeline({ delay: 0.05, defaults: { ease: 'expo.out' } });
+  var intro = gsap.timeline({ paused: true, delay: 0.05, defaults: { ease: 'expo.out' } });
+  hv.whenReady(function () { intro.play(); });
   intro
     // 1) лінія розтягується від центру на всю ширину
     .fromTo(crtLine, { scaleX: 0, opacity: 0.6 }, { scaleX: 1, opacity: 1, duration: 0.3, ease: 'power3.out' })
