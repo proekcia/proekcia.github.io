@@ -707,9 +707,68 @@
 .belt__vis--phones{gap:calc(12px + 12 * var(--k));}
 .belt__vis--phones .belt-phone{flex:none;}
 .belt__vis--phones .belt-phone:nth-child(2){transform:translateY(6%);}
-.belt__st--auto{width:auto;}   /* три сторіс — ширина за вмістом */
+.belt__st--auto{width:auto;}   /* ширина — за картинкою */
+.belt__st--auto .belt__t{width:0;min-width:100%;}   /* підпис не розтягує станцію, а переноситься по її ширині */
 .kit-copy--card{height:auto;padding:calc(16px + 8 * var(--k));border-radius:14px;background:#F4EEE2;width:100%;}
 .kit-launch{width:100%;}
+/* 04 · реклама в стрічці: креатив + супутні тексти з мітками */
+.fbad{--w:min(30vh, 290px);width:var(--w);background:#fff;border-radius:14px;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:11px;line-height:1.3;color:#050505;overflow:visible;}
+.fbad__top{display:flex;align-items:center;gap:8px;padding:9px 10px 6px;}
+.fbad__ava{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#C7F23B;color:#1E7B2E;font-weight:700;font-size:13px;}
+.fbad__who{display:flex;flex-direction:column;line-height:1.15;}
+.fbad__who b{font-weight:600;}
+.fbad__who em{font-style:normal;color:#65676B;font-size:10px;}
+.fbad__dots{margin-left:auto;color:#65676B;letter-spacing:1px;font-size:9px;}
+.fbad__primary{position:relative;margin:0;padding:0 10px 8px;}
+.fbad__img{display:block;width:100%;height:auto;aspect-ratio:1;}
+.fbad__bar{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F0F2F5;border-radius:0 0 14px 14px;}
+.fbad__meta{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1;}
+.fbad__meta em{font-style:normal;font-size:9.5px;color:#65676B;}
+.fbad__meta b{position:relative;font-weight:600;font-size:12px;}
+.fbad__meta i{position:relative;font-style:normal;color:#65676B;font-size:10.5px;}
+.fbad__cta{position:relative;flex:none;padding:7px 11px;border-radius:6px;background:#E4E6EB;font-weight:600;font-size:11.5px;}
+/* оранжеві мітки, що підписують супутні тексти */
+.fbad__tag{position:absolute;right:calc(100% + 8px);top:50%;transform:translateY(-50%);white-space:nowrap;padding:3px 8px;border-radius:99px;
+  background:var(--c-orange);color:#fff;font-family:"Stolzl",sans-serif;font-weight:400;font-size:10.5px;letter-spacing:.02em;
+  opacity:0;transition:opacity .4s, transform .5s var(--ease-out);}
+.fbad__primary .fbad__tag{top:.9em;right:calc(100% + 0px);}
+.fbad__meta b .fbad__tag,.fbad__meta i .fbad__tag{right:calc(100% + 18px);}
+.fbad__tag--r{right:auto;left:calc(100% + 8px);}
+.belt__st.is-in .fbad__tag{opacity:1;}
+.belt__st.is-in .fbad__primary .fbad__tag{transition-delay:.1s;}
+.belt__st.is-in .fbad__meta b .fbad__tag{transition-delay:.35s;}
+.belt__st.is-in .fbad__meta i .fbad__tag{transition-delay:.55s;}
+.belt__st.is-in .fbad__cta .fbad__tag{transition-delay:.75s;}
+.belt__st:has(.fbad) .belt__vis{padding-inline:110px 90px;}   /* місце для міток з боків */
+
+/* 05 · кабінет кампаній: платформи вмикаються, ліди рахуються, графік росте */
+.ads{width:100%;max-width:600px;padding:14px 16px 12px;border-radius:14px;background:#fff;box-shadow:0 24px 50px -26px rgba(13,13,13,.4), 0 0 0 1px rgba(13,13,13,.06);font-size:12.5px;}
+.ads__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.ads__head b{font-weight:500;font-size:15px;letter-spacing:-.02em;}
+.ads__live{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(13,13,13,.55);}
+.ads__live i{width:7px;height:7px;border-radius:50%;background:#19C24A;box-shadow:0 0 0 0 rgba(25,194,74,.5);animation:adsPulse 1.8s infinite;}
+@keyframes adsPulse{0%{box-shadow:0 0 0 0 rgba(25,194,74,.5);}70%{box-shadow:0 0 0 8px rgba(25,194,74,0);}100%{box-shadow:0 0 0 0 rgba(25,194,74,0);}}
+.ads__row{display:grid;grid-template-columns:34px 1.1fr 1.3fr .8fr .8fr;align-items:center;gap:8px;padding:9px 0;border-top:1px solid rgba(13,13,13,.08);}
+.ads__row--th{border-top:0;padding-top:0;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:rgba(13,13,13,.4);}
+.ads__tg{width:30px;height:17px;border-radius:99px;background:#D5D8DD;position:relative;transition:background-color .35s;}
+.ads__tg::after{content:"";position:absolute;left:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .35s var(--ease-out);}
+.ads__row.is-on .ads__tg{background:#19C24A;}
+.ads__row.is-on .ads__tg::after{transform:translateX(13px);}
+.ads__pf{display:inline-flex;align-items:center;gap:7px;font-weight:500;}
+.ads__pf i{width:10px;height:10px;border-radius:3px;}
+.ads__row--google .ads__pf i{background:conic-gradient(#4285F4 0 25%, #34A853 0 50%, #FBBC05 0 75%, #EA4335 0);border-radius:50%;}
+.ads__row--meta .ads__pf i{background:#0866FF;border-radius:50%;}
+.ads__row--tiktok .ads__pf i{background:#000;box-shadow:2px 0 0 #FE2C55, -2px 0 0 #25F4EE;}
+.ads__cmp{color:rgba(13,13,13,.6);}
+.ads__num{font-variant-numeric:tabular-nums;font-weight:500;}
+.ads__cpl{font-variant-numeric:tabular-nums;color:#19A34A;}
+.ads__chart{display:block;width:100%;height:56px;margin-top:8px;overflow:visible;}
+.ads__line{fill:none;stroke:var(--c-orange);stroke-width:2.5;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.6s var(--ease-out) .9s;}
+.ads__area{fill:rgba(255,70,19,.1);opacity:0;transition:opacity .8s 1.6s;}
+.belt__st.is-in .ads__line{stroke-dashoffset:0;}
+.belt__st.is-in .ads__area{opacity:1;}
+
 .belt__n{font-size:var(--fs-s);color:var(--c-orange);}
 .belt__t{margin:6px 0 0;font-size:calc(17px + 5 * var(--k));line-height:1.2;letter-spacing:-.025em;}
 
@@ -721,6 +780,13 @@
   .belt__st,.belt__st--wide{width:calc(100vw - 2 * var(--pad) - 24px);}
   .belt__vis--phones{gap:6px;}
   .belt-shot{height:auto;width:100%;}
+  .belt__st:has(.fbad) .belt__vis{padding-inline:0;justify-content:center;}
+  .fbad{--w:min(64vw, 250px);}
+  .fbad__tag{display:none;}
+  .ads{width:100%;font-size:11px;padding:12px;}
+  .ads__row{grid-template-columns:30px 1fr .7fr .7fr;}
+  .ads__cmp{display:none;}
+  .ads__row--th span:nth-child(3){display:none;}
   .belt__vis--phones .belt-phone{height:auto;width:calc((100% - 12px) / 3);border-width:4px;border-radius:14px;}
   .belt__vis{height:min(46svh, 400px);justify-content:center;}
   .belt__vis .kit-fmts{--fh:min(25vw, 104px);gap:6px;justify-content:center;}   /* чотири формати мають влізти в ширину телефона */

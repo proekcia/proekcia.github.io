@@ -545,6 +545,27 @@
      ПІСЛЯ неї — інакше ScrollTrigger не врахує її висоту при розрахунку позицій. */
   /* ---------- 05 · «Що ви отримуєте?» — конвеєр ---------- */
   // відео в станціях грають лише в кадрі
+  // станції конвеєра: is-in, коли станція в кадрі (мітки текстів, кабінет кампаній)
+  if ('IntersectionObserver' in window) {
+    var adsDone = false;
+    var stIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-in');
+        if (!adsDone && $('.ads', e.target)) {
+          adsDone = true;
+          $$('.ads__row:not(.ads__row--th)', e.target).forEach(function (row, i) {
+            setTimeout(function () {
+              row.classList.add('is-on');
+              var n = $('.ads__num', row), to = +n.dataset.to, o = { v: 0 };
+              gsap.to(o, { v: to, duration: 1.4, ease: 'power2.out', onUpdate: function () { n.textContent = Math.round(o.v).toLocaleString('uk-UA'); } });
+            }, 250 + i * 350);
+          });
+        }
+      });
+    }, { threshold: 0.5 });
+    $$('.belt__st').forEach(function (st) { stIO.observe(st); });
+  }
   $$('.kit-video').forEach(function (v) {
     new IntersectionObserver(function (es) {
       if (es[0].isIntersecting) { v.preload = 'auto'; v.play().catch(function () {}); } else v.pause();
