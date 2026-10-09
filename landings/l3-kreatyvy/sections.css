@@ -476,7 +476,7 @@
 .way:focus-visible{outline:2px solid var(--c-orange);outline-offset:-2px;}
 
 /* «рівняння»: [наша робота] + [ваш офер] = [креатив, що продає] */
-.eq{margin-top:calc(56px + 56 * var(--k));padding-block:calc(28px + 28 * var(--k));border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+.eq{margin-top:calc(56px + 56 * var(--k));
   display:grid;grid-template-columns:minmax(0, 1.25fr) auto minmax(0, .9fr) auto minmax(0, 1.1fr);align-items:center;gap:calc(14px + 18 * var(--k));}
 .eq__who{margin:0 0 14px;font-weight:500;font-size:var(--fs-s);letter-spacing:.06em;text-transform:uppercase;color:rgba(13,13,13,.5);}
 .eq__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px;}
