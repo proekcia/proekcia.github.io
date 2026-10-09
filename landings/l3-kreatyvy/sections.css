@@ -891,4 +891,4 @@
 
 /* мем біля курсора над «Надіслати бриф» */
 .brief__meme{position:fixed;left:0;top:0;z-index:300;width:170px;height:auto;pointer-events:none;
-  box-shadow:0 10px 30px rgba(13,13,13,.25);transform-origin:100% 100%;}
+  box-shadow:0 10px 30px rgba(13,13,13,.25);transform-origin:50% 100%;}

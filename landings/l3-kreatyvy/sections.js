@@ -501,13 +501,14 @@
     meme.alt = '';
     meme.setAttribute('aria-hidden', 'true');
     document.body.appendChild(meme);
-    gsap.set(meme, { xPercent: -100, yPercent: -100, x: -40, y: -40, scale: 0, rotation: 20, autoAlpha: 0 });
+    // мем висить над курсором: низ картинки — трохи вище за вістря, по центру
+    gsap.set(meme, { xPercent: -50, yPercent: -100, x: -400, y: -400, scale: 0, rotation: 14, autoAlpha: 0 });
     var mx = gsap.quickTo(meme, 'x', { duration: 0.35, ease: 'power3.out' });
     var my = gsap.quickTo(meme, 'y', { duration: 0.35, ease: 'power3.out' });
-    var follow = function (e) { mx(e.clientX + 30); my(e.clientY + 20); };
+    var follow = function (e) { mx(e.clientX); my(e.clientY - 46); };
     sendBtn.addEventListener('mouseenter', function (e) {
-      gsap.set(meme, { x: e.clientX + 30, y: e.clientY + 20 });
-      gsap.to(meme, { scale: 1, autoAlpha: 1, rotation: 20, duration: 0.45, ease: 'back.out(2)', overwrite: 'auto' });
+      gsap.set(meme, { x: e.clientX, y: e.clientY - 46 });
+      gsap.to(meme, { scale: 1, autoAlpha: 1, rotation: 14, duration: 0.45, ease: 'back.out(2)', overwrite: 'auto' });
     });
     sendBtn.addEventListener('mousemove', follow);
     sendBtn.addEventListener('mouseleave', function () {
