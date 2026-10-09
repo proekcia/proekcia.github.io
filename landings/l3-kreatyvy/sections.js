@@ -118,7 +118,7 @@
 
   // пости, які на старті опинилися б над сценою, ховаємо до моменту «прилипання»
   var startY = function (track) {
-    if (track === cTrack) return centerOn(cPosts[1]);
+    if (track === cTrack) return centerOn(cPosts[0]);
     if (track === lTrack) return -step(lTrack) * 3.3;
     return -step(rTrack) * 4.2;
   };
@@ -148,8 +148,8 @@
   })
     // центральна: рівний швидкий «свайп»…
     .fromTo(cTrack,
-      { y: function () { return centerOn(cPosts[1]); } },
-      { y: function () { var a = centerOn(cPosts[1]), b = centerOn(stopPost); return a + (b - a) * 0.88; }, duration: 1, ease: 'none' }, 0)
+      { y: function () { return centerOn(cPosts[0]); } },
+      { y: function () { var a = centerOn(cPosts[0]), b = centerOn(stopPost); return a + (b - a) * 0.88; }, duration: 1, ease: 'none' }, 0)
     // …і різке гальмування на пості з фразою
     .to(cTrack, { y: function () { return centerOn(stopPost); }, duration: 0.4, ease: 'expo.out' }, 1)
     .to(stopPost, { filter: 'blur(0px)', duration: 0.35, ease: 'expo.out', clearProps: 'filter' }, 1)
