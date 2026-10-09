@@ -1,0 +1,43 @@
+/* ======================= ПОПАП «Зв’язатися зараз» =======================
+   Тимчасова копія попапа з головного сайту: потім цей блок (popup.css + popup.js +
+   розмітка #popup в index.html) замінюється справжнім попапом із сайту. */
+.popup{position:fixed;inset:0;z-index:500;visibility:hidden;pointer-events:none;}
+.popup.is-open{visibility:visible;pointer-events:auto;}
+.popup__shade{position:absolute;inset:0;background:rgba(13,13,13,.28);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;transition:opacity .45s ease;}
+.popup.is-open .popup__shade{opacity:1;}
+.popup__panel{position:absolute;top:0;right:0;bottom:0;width:min(41vw, 820px);min-width:480px;overflow-y:auto;
+  background:var(--c-white);color:var(--c-black);padding:calc(40px + 32 * var(--k)) calc(32px + 48 * var(--k)) 28px;
+  display:flex;flex-direction:column;transform:translateX(100%);transition:transform .55s cubic-bezier(.22,1,.36,1);}
+.popup.is-open .popup__panel{transform:none;}
+.popup__close{position:absolute;top:16px;right:16px;width:44px;height:44px;border-radius:50%;background:var(--c-black);color:var(--c-white);
+  display:grid;place-items:center;transition:transform .3s;}
+.popup__close:hover{transform:rotate(90deg);}
+.popup__close svg{width:20px;height:20px;}
+.popup__title{margin:0;font-weight:500;font-size:calc(34px + 30 * var(--k));line-height:1;letter-spacing:-.03em;text-transform:uppercase;}
+.popup__sub{margin:.9em 0 0;font-size:calc(15px + 4 * var(--k));color:rgba(13,13,13,.6);letter-spacing:-.01em;}
+.popup__form{margin-top:calc(24px + 24 * var(--k));display:flex;flex-direction:column;gap:8px;flex:1;}
+.popup__field{display:block;}
+.popup__field input,.popup__field textarea{width:100%;border:0;border-radius:4px;background:#EBEBEB;color:var(--c-black);
+  font:inherit;font-size:calc(15px + 3 * var(--k));letter-spacing:-.01em;padding:1.35em 1.25em;outline:none;transition:background-color .2s, box-shadow .2s;}
+.popup__field textarea{min-height:calc(140px + 60 * var(--k));resize:vertical;}
+.popup__field input::placeholder,.popup__field textarea::placeholder{color:rgba(13,13,13,.5);}
+.popup__field input:focus,.popup__field textarea:focus{background:#E4E4E4;box-shadow:inset 0 0 0 1.5px var(--c-black);}
+.popup__send{margin-top:calc(14px + 10 * var(--k));height:calc(56px + 10 * var(--k));border-radius:8px;background:var(--c-orange);color:var(--c-white);
+  font-size:calc(16px + 4 * var(--k));letter-spacing:-.01em;transition:background-color .25s;}
+.popup__send:hover{background:var(--c-black);}
+.popup__legal{margin:10px 0 0;text-align:center;font-size:13px;line-height:1.35;color:rgba(13,13,13,.55);}
+.popup__legal a{color:inherit;text-decoration:underline;text-underline-offset:3px;}
+.popup__done{display:none;margin-top:calc(24px + 24 * var(--k));font-size:calc(18px + 6 * var(--k));line-height:1.3;}
+.popup.is-sent .popup__form{display:none;}
+.popup.is-sent .popup__done{display:block;}
+html.popup-lock{overflow:hidden;}
+
+@media (max-width:767.98px){
+  .popup__panel{width:100%;min-width:0;padding:72px 16px 20px;}
+  .popup__close{top:14px;right:14px;}
+  .popup__title{font-size:34px;}
+}
+@media (prefers-reduced-motion:reduce){
+  .popup__panel,.popup__shade{transition:none;}
+}

@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=51">
 <link rel="stylesheet" href="sections.css?v=146">
+<link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
 </head>
@@ -654,9 +655,30 @@
   </div>
 </footer>
 
+
+<!-- ======================= ПОПАП «Зв’язатися зараз» =======================
+     Тимчасова копія попапа з головного сайту (див. popup.css / popup.js). -->
+<div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-hidden="true">
+  <div class="popup__shade" data-close></div>
+  <div class="popup__panel">
+    <button class="popup__close" type="button" data-close aria-label="Закрити"><svg viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2"/></svg></button>
+    <h2 class="popup__title" id="popup-title">Зв’язатися<br>зараз</h2>
+    <p class="popup__sub">Залиште контакти, ми передзвонимо</p>
+    <form class="popup__form" action="#" novalidate>
+      <label class="popup__field"><span class="visually-hidden">Ваше ім’я</span><input type="text" name="name" placeholder="Ваше ім’я" autocomplete="name" required></label>
+      <label class="popup__field"><span class="visually-hidden">Номер телефону</span><input type="tel" name="phone" placeholder="Номер телефону" autocomplete="tel" inputmode="tel" required></label>
+      <label class="popup__field"><span class="visually-hidden">Про ваш бізнес</span><textarea name="about" placeholder="Про ваш бізнес" rows="5"></textarea></label>
+      <button class="popup__send" type="submit">Очікую дзвінок</button>
+      <p class="popup__legal">Натискаючи на кнопку, ви даєте згоду на <a href="#">обробку персональних даних</a>.</p>
+    </form>
+    <p class="popup__done">Дякуємо! Ми скоро передзвонимо.</p>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
 <script src="sections.js?v=94" defer></script>
+<script src="popup.js?v=1" defer></script>
 </body>
 </html>
