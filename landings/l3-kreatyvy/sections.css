@@ -935,7 +935,7 @@
 
 /* ======================= Телефон (до 767 px) ======================= */
 @media (max-width:767.98px){
-  .cheaper{padding-top:calc(var(--sec) + 48px);}   /* заголовок не прилипає до чека над ним */
+  .cheaper{padding-top:calc(var(--sec) + 14px);}   /* заголовок не прилипає до чека над ним */
   /* 1 · «2 шари»: картка нижче від тексту, без важкої тіні */
   .lx__card{margin-top:18px;box-shadow:0 18px 36px -24px rgba(13,13,13,.35);}
   .lx__cap{display:none;}
