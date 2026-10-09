@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
 <link rel="stylesheet" href="style.css?v=53">
-<link rel="stylesheet" href="sections.css?v=172">
+<link rel="stylesheet" href="sections.css?v=174">
 <link rel="stylesheet" href="popup.css?v=1">
 <!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
 <script>document.documentElement.classList.add('js');</script>
@@ -291,48 +291,26 @@
   </div>
 </section>
 
-<!-- ======================= 04 · ДВА ШАРИ: КАЛЬКИ =======================
-     Липка сцена. Дві кальки (реалістична текстура паперу — згенерована): «нічийний» продажний банер
-     і бренд-мудборд. Калька бренду лягає зверху — фото розгортається, текст перебирає фірмовий шрифт,
-     з’являються рамка, знак і акцентний колір: продажний креатив отримав «шар бренду».
-     Тексти — дослівно з презентації; написи на кальках — декор (aria-hidden). -->
+<!-- ======================= 04 · ДВА ШАРИ (типографіка) =======================
+     Без ілюстрацій: думка про асиметрію шарів — великим шрифтом у два рядки з ✓ / ✕.
+     Під кожним — дослівне речення з презентації. -->
 <section class="layers" id="layers" aria-labelledby="layers-title">
-  <div class="layers__stage">
-    <div class="wrap layers__grid">
-      <div class="layers__text">
-        <h2 class="h2" id="layers-title">Тобто кожен креатив може мати 2&nbsp;шари:</h2>
-        <ul class="layers__legend">
-          <li class="layers__key layers__key--a">Шар дії</li>
-          <li class="layers__key layers__key--b">Шар бренд-пам’яті</li>
-        </ul>
-        <blockquote class="rule-note">
-          <span class="rule-note__s rule-note__s--1">Ми завжди можемо додати «шар бренду» до продажного креативу без втрати конверсії.</span>
-          <span class="rule-note__s rule-note__s--2">Але не завжди можна додати «шар продажів» до бренд-креативу, не зламавши його атмосферу.</span>
-        </blockquote>
-      </div>
-
-      <!-- «скло і фарба»: бренд — прозоре матове скло, дія — непрозора оранжева фарба.
-           Ліворуч скло лягає на фарбу — фарба світиться крізь нього ✓.
-           Праворуч фарба лягає на скло з атмосферою — і повністю його закриває ✕. -->
-      <figure class="gl" aria-hidden="true">
-        <div class="gl__pair gl__pair--ok">
-          <div class="gl__stack">
-            <span class="gl__plate gl__plate--paint"></span>
-            <span class="gl__plate gl__plate--glass gl__top"></span>
-          </div>
-          <span class="gl__mark gl__mark--ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg></span>
-          <span class="gl__cap">Дія <b>+ бренд</b></span>
-        </div>
-        <div class="gl__pair gl__pair--no">
-          <div class="gl__stack">
-            <span class="gl__plate gl__plate--glass gl__plate--aura"><i></i></span>
-            <span class="gl__plate gl__plate--paint gl__top"></span>
-          </div>
-          <span class="gl__mark gl__mark--no"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg></span>
-          <span class="gl__cap">Бренд <b>+ дія</b></span>
-        </div>
-      </figure>
-    </div>
+  <div class="wrap">
+    <h2 class="h2 layers__title" id="layers-title" data-rv>Тобто кожен креатив може мати 2&nbsp;шари:</h2>
+    <ul class="layers__legend">
+      <li class="layers__key layers__key--a">Шар дії</li>
+      <li class="layers__key layers__key--b">Шар бренд-пам’яті</li>
+    </ul>
+    <ol class="tw">
+      <li class="tw__row tw__row--ok">
+        <p class="tw__big"><span class="tw__l"><span>Бренд можна додати</span></span> <span class="tw__l"><span>до&nbsp;продажу</span></span><span class="tw__mark" aria-label="так"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4"/></svg></span></p>
+        <p class="tw__small">Ми завжди можемо додати «шар бренду» до&nbsp;продажного креативу без втрати конверсії.</p>
+      </li>
+      <li class="tw__row tw__row--no">
+        <p class="tw__big"><span class="tw__l"><span>Продаж до&nbsp;бренду —</span></span> <span class="tw__l"><span>не&nbsp;завжди</span></span><span class="tw__mark" aria-label="ні"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.4"/></svg></span></p>
+        <p class="tw__small">Але не завжди можна додати «шар продажів» до&nbsp;бренд-креативу, не&nbsp;зламавши його атмосферу.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -803,7 +781,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="main.js?v=36" defer></script>
-<script src="sections.js?v=113" defer></script>
+<script src="sections.js?v=114" defer></script>
 <script src="popup.js?v=1" defer></script>
 </body>
 </html>

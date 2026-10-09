@@ -364,34 +364,13 @@
     window.addEventListener('resize', function () { clearTimeout(rT); rT = setTimeout(function () { build(); draw(memState.p); }, 150); });
   }
 
-  /* ---------- 04 · «скло і фарба» (липка сцена) ----------
-     0–.08   шари лежать окремо (верхній — зсунутий угору-вбік);
-     .08–.32 ліворуч скло лягає на фарбу → фарба світиться крізь скло ✓, речення 1;
-     .46–.70 праворуч фарба лягає на скло з атмосферою → повністю закриває ✕, речення 2;
-     далі — пауза. */
-  var glOk = $('.gl__pair--ok'), glNo = $('.gl__pair--no');
-  if (glOk && glNo) {
-    var s1 = $('.rule-note__s--1'), s2 = $('.rule-note__s--2');
-    var topOk = $('.gl__top', glOk), topNo = $('.gl__top', glNo);
-    var apart = { xPercent: 34, yPercent: -30, rotation: 7 };
-    var apartNo = { xPercent: -30, yPercent: -30, rotation: -7 };   // правий — прилітає зліва, щоб не виходив за край екрана
-    gsap.timeline({
-      defaults: { ease: 'power2.inOut' },
-      scrollTrigger: { trigger: '.layers', start: 'top top', end: 'bottom bottom', scrub: 0.6, invalidateOnRefresh: true }
-    })
-      .fromTo(topOk, apart, Object.assign({ duration: 0.08 }, apart), 0)
-      .fromTo(topNo, apartNo, Object.assign({ duration: 0.08 }, apartNo), 0)
-      // ✓ скло лягає на фарбу
-      .to(topOk, { xPercent: 0, yPercent: 0, rotation: 0, duration: 0.22 }, 0.08)
-      .to($('.gl__mark', glOk), { opacity: 1, scale: 1, duration: 0.05, ease: 'back.out(2.5)' }, 0.32)
-      .to(s1, { opacity: 1, duration: 0.06 }, 0.3)
-      // ✕ фарба лягає на скло — з «ударом»
-      .to(topNo, { xPercent: 0, yPercent: 0, rotation: 0, duration: 0.2, ease: 'power3.in' }, 0.46)
-      .fromTo($('.gl__stack', glNo), { x: 0 }, { keyframes: { x: [0, -7, 6, -4, 2, 0] }, duration: 0.05, ease: 'none' }, 0.66)
-      .to($('.gl__mark', glNo), { opacity: 1, scale: 1, duration: 0.05, ease: 'back.out(2.5)' }, 0.7)
-      .to(s2, { opacity: 1, duration: 0.06 }, 0.68)
-      .to({}, { duration: 0.24 }, 0.76);
-  }
+  /* ---------- 04 · два шари: рядки виїжджають з-під маски, потім ✓ / ✕ ---------- */
+  $$('.tw__row').forEach(function (row) {
+    gsap.timeline({ scrollTrigger: { trigger: row, start: 'top 80%', once: true } })
+      .from($$('.tw__l > span', row), { yPercent: 110, duration: 0.9, ease: 'expo.out', stagger: 0.08 })
+      .from($('.tw__mark', row), { scale: 0, rotation: -40, duration: 0.5, ease: 'back.out(2.5)' }, 0.45)
+      .from($('.tw__small', row), { autoAlpha: 0, y: 12, duration: 0.6, ease: 'power3.out' }, 0.35);
+  });
 
   /* ---------- 05 · ПРИНЦИПИ: горизонтальний скрол на десктопі ---------- */
   var rules = $$('.rule');
