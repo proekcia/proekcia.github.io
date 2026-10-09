@@ -59,10 +59,7 @@
    Бічні летять розмиті в різні боки, центральна гальмує на пості з фразою.
    На телефоні — одна центральна колонка. */
 .signal{position:relative;height:260vh;background:var(--c-blue);}   /* коротший скрол — швидше до головної думки */
-/* зверху сцена НЕ обрізає (щоб пости виїжджали цілими картками), а знизу й з боків — обрізає */
-.signal__stage{position:sticky;top:0;height:100vh;height:100svh;clip-path:inset(-100vh 0 0 0);}
-/* пости, що на вході були б над верхнім краєм сцени, ховаємо, доки сцена не дійде до верху */
-.signal:not(.is-pinned) .post.is-above{opacity:0 !important;}
+.signal__stage{position:sticky;top:0;height:100vh;height:100svh;clip-path:inset(0);}   /* усе, що вище сцени, просто обрізається — без раптової появи постів */
 .feeds{
   position:absolute;inset:0;
 
