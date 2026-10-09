@@ -381,7 +381,6 @@
       .to(lxS, { p: 1, duration: 0.5, ease: 'power2.inOut', onUpdate: lxDraw })      // шар бренду натягується
       .to($('.lx__chip-a', lxCard), { opacity: 0, duration: 0.06 }, 0.55)
       .to($('.lx__chip-b', lxCard), { opacity: 1, duration: 0.06 }, 0.57)
-      .to($('.lx__ok', lxCard), { opacity: 1, scale: 1, duration: 0.06, ease: 'back.out(2.5)' }, 0.64)
       .fromTo('.lx__s2', { opacity: 0.25 }, { opacity: 1, duration: 0.08 }, 0.7)
       .to({}, { duration: 0.22 });                                                  // пауза: готовий креатив тримається
   }
