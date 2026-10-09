@@ -1,0 +1,371 @@
+/* =========================================================================
+   Proekcia — лендинг «Рекламні креативи»
+   Гумова верстка: макет 1920 px перераховано в одиниці від ширини.
+
+   Як влаштовано масштабування:
+   - .hero — контейнер (container-type: inline-size), тож 100cqw = його
+     ширина без скролбару. --u = 1 px макета: calc(100cqw / 1920 * --k).
+   - --k — коефіцієнт «наближення» сцени: на десктопі 1 (телевізор у кадрі
+     повністю), на планшеті й мобільному сцена збільшується, щоб екран
+     телевізора з заголовком займав всю ширину.
+   - Шапка рахується від --hu = 1 px макета від 100vw з нижньою межею.
+   Брейкпоінти як у темі proekcia.com: 768 і 992 px.
+   ========================================================================= */
+
+@font-face{font-family:"Stolzl";src:url("fonts/Stolzl-Thin.ttf") format("truetype");font-weight:100;font-style:normal;font-display:swap;}
+@font-face{font-family:"Stolzl";src:url("fonts/Stolzl-Light.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"Stolzl";src:url("fonts/Stolzl-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Stolzl";src:url("fonts/Stolzl-Medium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"Stolzl Book";src:url("fonts/Stolzl-Book.ttf") format("truetype");font-weight:normal;font-style:normal;font-display:swap;}
+@font-face{font-family:"Nyght Serif";src:url("fonts/NyghtSerif-MediumItalic.ttf") format("truetype");font-weight:500;font-style:italic;font-display:swap;}
+
+:root{
+  --c-black:#0D0D0D;
+  --c-orange:#FF4613;
+  --c-green:#00FF1E;
+  --c-grey:#EEEEEE;
+  --c-blue:#D7E3F5;
+  --c-greyblue:#AABCD7;
+  --c-white:#FFFFFF;
+  --c-tv:#05070B;              /* темне тло фото телевізора */
+
+  --hu:max(calc(100vw / 1920), .62px);
+  --ease-out:cubic-bezier(.22,1,.36,1);
+}
+
+*,*::before,*::after{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  margin:0;
+  background:var(--c-blue);
+  color:var(--c-black);
+  font-family:"Stolzl",system-ui,sans-serif;
+  font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;overflow-x:clip;   /* clip — щоб працював position:sticky */
+}
+img,svg,canvas{display:block;max-width:100%;}
+a{color:inherit;text-decoration:none;}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;}
+h1{margin:0;font-weight:400;}
+
+/* ============================== HEADER ============================== */
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:50;
+  transition:height .4s var(--ease-out), background-color .4s, translate .45s var(--ease-out);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:calc(48 * var(--hu));
+  /* висота шапки — парна кількість пікселів, щоб пігулка меню (теж парної
+     висоти) стояла рівно на піксельній сітці */
+  height:calc(110 * var(--hu));height:round(calc(110 * var(--hu)), 2px);
+  padding:0 max(calc(64 * var(--hu)), 20px);
+}
+/* після першого екрана шапка лишається зверху: компактніша, на темній напівпрозорій підкладці
+   (кольори логотипа й меню світлі — читаються на будь-якому блоці під нею) */
+.site-header.is-scrolled{
+  height:max(calc(76 * var(--hu)), 56px);height:max(round(calc(76 * var(--hu)), 2px), 56px);
+  background:rgba(13,13,13,.86);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+}
+/* схована (гортають униз) — виїжджає за верхній край; translate, а не transform: transform зайнятий інтро-анімацією */
+.site-header.is-hidden{translate:0 -100% !important;}   /* !important: GSAP ставить шапці вбудоване translate:none */
+.site-header__logo{flex:none;}
+.site-header__logo img{width:calc(200 * var(--hu));height:auto;}
+
+.site-header__right{display:flex;align-items:center;gap:max(calc(32 * var(--hu)), 16px);}
+
+/* CTA у шапці: компактна контурна «таблетка» в кольорі меню */
+.hdr-cta{display:inline-flex;align-items:center;height:max(calc(46 * var(--hu)), 34px);padding:0 max(calc(22 * var(--hu)), 14px);
+  border:1.5px solid var(--c-blue);border-radius:999px;color:var(--c-blue);
+  font-size:max(calc(16 * var(--hu)), 12px);line-height:1;letter-spacing:-.02em;text-transform:uppercase;white-space:nowrap;
+  transition:background-color .35s, color .35s;}
+@media (hover:hover){ .hdr-cta:hover{background:var(--c-orange);border-color:var(--c-orange);color:var(--c-white);} }
+.hdr-cta:focus-visible{outline:2px solid var(--c-blue);outline-offset:4px;}
+@media (max-width:767.98px){ .hdr-cta{display:none;} }
+.menu-btn:focus-visible{outline:2px solid var(--c-blue);outline-offset:4px;border-radius:999px;}
+
+.menu-btn{display:flex;align-items:center;gap:calc(12 * var(--hu));color:var(--c-blue);}
+.menu-btn__label{
+  font-size:max(calc(16 * var(--hu)), 12px);line-height:1;
+  letter-spacing:-.02em;text-transform:uppercase;
+}
+.menu-btn__pill{
+  position:relative;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  /* розміри округлюємо до парних пікселів — інакше рисочки стають на
+     півпікселя і розмиваються (виглядають товстими/сірими) */
+  gap:calc(9 * var(--hu));gap:round(calc(9 * var(--hu)), 2px);
+  width:calc(89 * var(--hu));
+  height:calc(46 * var(--hu));height:round(calc(46 * var(--hu)), 2px);
+  border-radius:999px;background:var(--c-blue);
+  transition:background-color .3s;
+}
+.menu-btn__pill span{
+  width:calc(35 * var(--hu));height:2px;border-radius:2px;background:var(--c-black);
+  flex:none;
+  transition:transform .4s var(--ease-out), background-color .3s;
+}
+.menu-btn:hover .menu-btn__pill{background:var(--c-orange);}
+.menu-btn:hover .menu-btn__pill span{background:var(--c-white);}
+.menu-btn:hover .menu-btn__pill span:first-child{transform:translateX(calc(-4 * var(--hu)));}
+.menu-btn:hover .menu-btn__pill span:last-child{transform:translateX(calc(4 * var(--hu)));}
+
+/* ======================= ІНТРО «УВІМКНЕННЯ» =======================
+   Як старий телевізор: по центру спалахує тонка лінія на всю ширину,
+   потім вона «розкривається» — дві чорні половини роз'їжджаються від центру
+   вгору й униз, а світло лінії розливається і гасне. */
+.intro-crt{position:fixed;inset:0;z-index:100;display:none;pointer-events:none;overflow:hidden;}
+.intro-crt__half{position:absolute;left:0;right:0;height:50.5%;background:var(--c-tv);}
+.intro-crt__half--top{top:0;}
+.intro-crt__half--bottom{bottom:0;}
+.intro-crt__line{
+  position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;
+  background:var(--c-white);
+  box-shadow:0 0 24px 6px rgba(215,227,245,.8), 0 0 80px 20px rgba(215,227,245,.35);
+  transform:scaleX(0);
+}
+.js .intro-crt{display:block;}
+
+/* ============================== HERO ============================== */
+.hero{
+  --k:1;
+  --u:calc(100cqw / 1920 * var(--k));
+  --title-top:361.4;           /* верх великих літер першого рядка, px макета */
+  position:relative;
+  container-type:inline-size;
+  overflow:clip;
+  background:var(--c-tv);
+}
+
+.hero__scene{position:relative;will-change:transform;}
+
+/* сцена = кадр 1920×1080 у масштабі --u, завжди по центру */
+.hero__stage{
+  position:relative;z-index:1;
+  width:calc(1920 * var(--u));
+  height:calc(1080 * var(--u));
+  margin-left:calc(50cqw - 960 * var(--u));
+  will-change:transform;
+}
+.hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+
+/* --- живий екран (межі скла кінескопа на фото) --- */
+.hero__screen{
+  position:absolute;
+  /* межі скла виміряні по кадру відео: x 372–1548, y 144–1000 */
+  left:calc(370 * var(--u));top:calc(142 * var(--u));
+  width:calc(1180 * var(--u));height:calc(860 * var(--u));
+  border-radius:calc(70 * var(--u)) calc(70 * var(--u)) calc(110 * var(--u)) calc(110 * var(--u)) /
+                calc(50 * var(--u)) calc(50 * var(--u)) calc(70 * var(--u)) calc(70 * var(--u));
+  overflow:hidden;
+  pointer-events:none;
+}
+.hero__scan{
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(to bottom, rgba(13,13,13,.10) 0 1px, transparent 1px 3px);
+}
+.hero__roll{
+  position:absolute;left:0;right:0;top:-30%;height:30%;
+  background:linear-gradient(to bottom, transparent, rgba(215,227,245,.16) 50%, transparent);
+  animation:tv-roll 7s linear infinite;
+}
+@keyframes tv-roll{to{transform:translateY(433%);}}
+
+/* --- заголовок --- */
+.hero__title{
+  position:absolute;
+  /* блок 438.8–1482 px макета: «Рекламні» — праворуч, «креативи» — ліворуч */
+  left:calc(438.8 * var(--u));
+  /* при line-height 1.0277 верх великих літер Stolzl ≈ .162em від верху рядка */
+  top:calc(var(--title-top) * var(--u) - .162em);
+  width:calc(1043.2 * var(--u));
+  font-size:calc(149.42 * var(--u));
+  line-height:1.0277;                          /* крок рядків 153.6 px макета */
+  letter-spacing:-.05em;
+  color:var(--c-black);
+  text-wrap:nowrap;
+}
+/* --- підписи, що з'являються з тріском екрана --- */
+.hero__punch,.hero__lead{
+  position:absolute;margin:0;
+  letter-spacing:-.05em;
+  color:var(--c-black);
+}
+.hero__punch{
+  font-family:"Stolzl Book","Stolzl",system-ui,sans-serif;
+  left:calc(var(--punch-x, 1151.5) * var(--u));
+  top:calc(var(--punch-y, 537.8) * var(--u));
+  font-size:max(calc(40.91 * var(--u)), 14px);
+  line-height:1.1;
+  white-space:nowrap;
+}
+/* абзац від лівого краю «Рекламні» (438 px) до 750 px макета — 4 рядки
+   журнального вирівнювання; права межа фіксована, при мінімальному кеглі він росте вліво */
+.hero__lead{
+  left:calc(445.9 * var(--u));
+  top:calc(367.8 * var(--u));
+  font-family:"Stolzl Book","Stolzl",system-ui,sans-serif;
+  width:15.75em;                                  /* = 344 px макета при 21.8 px */
+  font-size:max(calc(21.84 * var(--u)), 13px);
+  line-height:1.1;
+  /* журнальне вирівнювання: усі рядки, включно з останнім, на всю ширину */
+  text-align:justify;text-align-last:justify;
+  hyphens:none;
+  opacity:.6;
+}
+.js .hero__punch,.js .hero__lead{visibility:hidden;}
+.reveal-line{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em;}
+.reveal-line > span{display:block;}
+
+/* маска для появи літер знизу: обрізаємо лише низ рядка (не боки),
+   щоб «дрейф» рядків і глітч не з'їдали крайні літери; після інтро маску знімаємо */
+.hero__line{display:block;padding:0 .06em .14em;margin:0 -.06em -.14em;clip-path:inset(-50% -50% 0 -50%);}
+.hero__title.is-revealed .hero__line{clip-path:none;}
+.hero__line--1{text-align:right;}
+.hero__line-in{display:inline-block;will-change:transform;}
+.hero__title .char{display:inline-block;will-change:transform;}
+
+.hero__title.is-glitch .hero__line{animation:glitch .32s steps(2, end) both;}
+@keyframes glitch{
+  0%  {transform:translateX(0);           text-shadow:-.03em 0 var(--c-green), .03em 0 var(--c-greyblue);}
+  25% {transform:translateX(.04em);       text-shadow:.02em 0 var(--c-green), -.04em 0 var(--c-greyblue);}
+  50% {transform:translateX(-.03em) skewX(-6deg); text-shadow:-.05em 0 var(--c-green), .02em 0 var(--c-greyblue);}
+  75% {transform:translateX(.02em);       text-shadow:.01em 0 var(--c-green), -.01em 0 var(--c-greyblue);}
+  100%{transform:none;text-shadow:none;}
+}
+
+/* --- кнопки: дві пігулки, що «злиплись» --- */
+.hero__actions{
+  position:absolute;z-index:2;
+  left:50%;top:calc(738 * var(--u));
+  transform:translateX(-50%);
+  display:flex;
+  font-size:max(calc(27.28 * var(--u)), 14px);
+}
+.pill-btn{
+  position:relative;isolation:isolate;overflow:hidden;
+  display:flex;align-items:center;justify-content:space-between;gap:1em;
+  width:19.125em;height:3.5em;padding:0 1.6em 0 2em;
+  border-radius:999px;
+  color:var(--c-white);
+  font-size:inherit;line-height:1;letter-spacing:-.02em;text-transform:uppercase;
+  white-space:nowrap;
+  transition:color .35s;
+}
+.pill-btn--orange{background:var(--c-orange);}
+.pill-btn--black{
+  background:var(--c-black);
+  box-shadow:inset 0 0 0 2px var(--c-black);
+  transition:color .35s, background-color .35s;
+}
+/* чорна: при наведенні — прозора з чорним контуром 2 px і чорним текстом */
+@media (hover:hover){
+  .pill-btn--black:hover{background:transparent;color:var(--c-black);}
+}
+.pill-btn--black:focus-visible{background:transparent;color:var(--c-black);}
+/* заливка при наведенні виростає з точки курсора */
+.pill-btn::before{
+  content:"";position:absolute;z-index:-1;
+  left:var(--mx, 50%);top:var(--my, 50%);
+  width:44em;height:44em;margin:-22em 0 0 -22em;border-radius:50%;
+  transform:scale(0);transition:transform .55s var(--ease-out);
+}
+.pill-btn--orange::before{background:var(--c-black);}
+.pill-btn--black::before{display:none;}
+/* наведення — дзеркальне до «відходу»: коло стартує повільно з точки входу курсора
+   і розганяється (ease-in), а при відході стискається до точки виходу (ease-out) */
+@media (hover:hover){
+  .pill-btn:hover::before{transform:scale(1);transition-duration:.38s;transition-timing-function:cubic-bezier(.5,0,.75,.3);}
+}
+.pill-btn:focus-visible::before{transform:scale(1);}
+.pill-btn:focus-visible{outline:2px solid var(--c-blue);outline-offset:3px;}
+
+/* стрілка: поворот — на рамці, а при наведенні сама стрілка плавно
+   зсувається вперед за своїм напрямком (у власних координатах ↙ = (-x, +y)).
+   Обидва трансформи на різних елементах — тому рух рівний, без стрибків. */
+.pill-btn__icon{position:relative;flex:none;width:1.5em;height:1.5em;will-change:transform;}
+.pill-btn__icon--ne{transform:rotate(180deg);}
+.pill-btn__icon--se{transform:rotate(270deg);}
+.pill-btn__icon svg{
+  width:100%;height:100%;
+  transition:transform .6s var(--ease-out);
+  /* тримаємо стрілку на окремому шарі постійно: інакше в кінці анімації
+     браузер «прилипає» її до піксельної сітки — і вона смикається вбік */
+  will-change:transform;backface-visibility:hidden;
+  transform:translate3d(0,0,0);
+}
+@media (hover:hover){
+  .pill-btn:hover .pill-btn__icon svg{transform:translate3d(-14%, 14%, 0);}
+}
+
+/* ---------- планшет: сцену трохи наближено ---------- */
+@media (max-width:991.98px){
+  .hero{--k:1.25;}
+}
+
+/* ---------- мобільний: екран телевізора на всю ширину, кнопки під ним ---------- */
+@media (max-width:767.98px){
+  /* Мобільний макет 390 px: усе в vw (1 px макета = 100vw/390), тож від 320
+     до 767 px композиція масштабується пропорційно.
+     Телевізор — висота 311 px з 390 (сцена 1.418 × ширини екрана),
+     заголовок і підписи — та сама композиція, що на десктопі, трохи нижче;
+     кнопки — під телевізором в один ряд, злиплі; під ними темне тло
+     перетікає в #D7E3F5. Висота секції — 693 px макета. */
+  .hero{
+    --k:1.418;
+    padding-top:35.13vw;                       /* 137 px */
+    padding-bottom:49.2vw;
+    background:linear-gradient(to bottom,
+      var(--c-tv) 0, var(--c-tv) 147.7vw,       /* 576 px */
+      #8FA2BF 160vw,
+      var(--c-blue) 170.8vw);                   /* 666 px */
+  }
+
+  /* шапка 56 px: лого 150 px, пігулка меню 56.5×29 без підпису */
+  .site-header{height:14.36vw;height:round(14.36vw, 2px);padding:0 5.13vw;}
+  .site-header__logo img{width:38.46vw;}
+  .menu-btn__label{display:none;}
+  .menu-btn__pill{width:14.49vw;height:7.49vw;height:round(7.49vw, 2px);gap:6px;}
+  .menu-btn__pill span{width:5.69vw;height:1.5px;}
+
+  /* заголовок і підписи — точно за мобільним макетом: координати від лівого
+     краю екрана (--vx = лівий край екрана в координатах сцени) і від верху сцени */
+  .hero__stage{--vx:calc(960 * var(--u) - 50vw);}
+  .hero__title{
+    left:calc(var(--vx) + 12.66vw);            /* 49.4 px */
+    top:calc(27.94vw - .163em);                /* верх літер «Рекламні»: 246 px секції */
+    width:73.85vw;                             /* 288 px */
+    font-size:11.054vw;                        /* 43.1 px */
+  }
+  /* «креативи» на телефоні більше: 62.1 px, верх літер — 278.6 px секції */
+  .hero__title{line-height:1.03;}
+  .hero__line--1{text-align:left;}
+  .hero__line--2{text-align:right;font-size:1.4415em;margin-top:-.335em;position:relative;left:-.087em;}
+  .hero__punch{
+    left:calc(var(--vx) + 63.71vw);            /* 248.5 px */
+    top:29.99vw;                               /* 254 px секції */
+    font-size:2.768vw;                         /* 10.8 px */
+  }
+  .hero__lead{
+    left:calc(var(--vx) + 12.66vw);            /* 49.4 px */
+    top:58.34vw;                               /* 364.5 px секції */
+    transform:none;
+    width:72.66vw;                             /* 283 px */
+    font-size:2.521vw;                         /* 9.8 px */
+  }
+
+  /* кнопки: дві по 175 px, злиплі, 21 px під телевізором */
+  .hero__actions{
+    position:relative;left:auto;top:auto;transform:none;
+    justify-content:center;
+    margin-top:5.38vw;
+    font-size:2.348vw;                         /* 9.16 px; решта — в em */
+  }
+  .pill-btn--black{background:var(--c-blue);color:var(--c-black);box-shadow:none;}
+}
+
+/* ---------- без анімацій ---------- */
+@media (prefers-reduced-motion:reduce){
+  .hero__roll{animation:none;display:none;}
+  .js .intro-crt{display:none;}
+  .pill-btn::before,.pill-btn__icon svg{transition:none;}
+}

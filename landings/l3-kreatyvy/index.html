@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Рекламні креативи — Proekcia</title>
+<meta name="description" content="Рекламні креативи для соцмереж і digital-реклами від дизайн- та маркетинг-студії Proekcia.">
+<link rel="icon" href="assets/logo/Icon_logo_black.svg">
+<link rel="preload" href="images/hero/tv.jpg" as="image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css?v=48">
+<link rel="stylesheet" href="sections.css?v=133">
+<!-- Класс .js вмикає стартові стани анімацій; без JS сторінка показується одразу -->
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- інтро: «увімкнення телевізора» на весь екран (працює лише з JS) -->
+<div class="intro-crt" aria-hidden="true">
+  <span class="intro-crt__half intro-crt__half--top"></span>
+  <span class="intro-crt__half intro-crt__half--bottom"></span>
+  <span class="intro-crt__line"></span>
+</div>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header" id="siteHeader">
+  <a href="#top" class="site-header__logo" aria-label="Proekcia">
+    <img src="assets/logo/Vector_lightblue.svg" alt="Proekcia" width="200" height="42">
+  </a>
+  <div class="site-header__right">
+    <a href="#cta" class="hdr-cta">Обговорити проєкт</a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Відкрити меню" aria-expanded="false">
+      <span class="menu-btn__label">Меню</span>
+      <span class="menu-btn__pill" aria-hidden="true"><span></span><span></span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top">
+  <!-- сцена + кнопки: при скролі зменшуються разом як одне ціле -->
+  <div class="hero__scene">
+  <div class="hero__stage">
+    <!-- грає один раз, без звуку; запуск — у main.js -->
+    <video class="hero__bg" id="heroVideo" muted playsinline preload="auto"
+           poster="images/hero/tv.jpg" width="1920" height="1080" aria-hidden="true">
+      <source src="images/hero/hero-540.mp4" type="video/mp4" media="(max-width: 767.98px)">
+      <source src="images/hero/hero.mp4" type="video/mp4">
+    </video>
+
+    <!-- «живий» екран телевізора: скан-лінії, смуга розгортки -->
+    <div class="hero__screen" aria-hidden="true">
+      <span class="hero__scan"></span>
+      <span class="hero__roll"></span>
+    </div>
+
+    <h1 class="hero__title">
+      <span class="hero__line hero__line--1"><span class="hero__line-in">Рекламні</span></span>
+      <span class="hero__line hero__line--2"><span class="hero__line-in">креативи</span></span>
+    </h1>
+
+    <!-- з'являються, коли екран тріскається (по рядках) -->
+    <p class="hero__punch" data-reveal>Що пробивають<br>шшшшшшшшум</p>
+    <p class="hero__lead" data-reveal>Створюємо контент, банери та відео для рекламних кампаній в&nbsp;Google Ads, Meta, TikTok та&nbsp;для інших платформ</p>
+  </div>
+
+  <div class="hero__actions">
+    <a href="#cta" class="pill-btn pill-btn--orange">
+      <span>Замовити креативи</span>
+      <span class="pill-btn__icon pill-btn__icon--ne" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span>
+    </a>
+    <a href="#portfolio" class="pill-btn pill-btn--black">
+      <span>Переглянути кейси</span>
+      <span class="pill-btn__icon pill-btn__icon--se" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span>
+    </a>
+  </div>
+  </div>
+
+</section>
+
+<!-- ============== ПЕРЕХІД: темне тло героя → #D7E3F5 ============== -->
+<div class="fade" aria-hidden="true"></div>
+
+<!-- ======================= 01 · УВАГА: СТРІЧКА =======================
+     Липка сцена: стрічки летять, центральна гальмує на одному пості з фразою. -->
+<section class="signal" id="signal" aria-labelledby="signal-title">
+  <div class="signal__stage">
+    <!-- три стрічки соцмереж: бічні летять розмиті, центральна гальмує на одному пості з фразою -->
+    <div class="feeds">
+      <div class="feed feed--side feed--l" aria-hidden="true"><div class="feed__track">
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-serum.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-watch.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-sushi.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-handbag.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-juice.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+      </div></div>
+      <div class="feed feed--c"><div class="feed__track">
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-latte.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-sneaker.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-burger.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-phone.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-lipstick.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post post--stop">
+          <div class="post__head post__head--brand">
+            <svg class="post__avatar" viewBox="0 0 520 520" aria-hidden="true"><circle cx="260" cy="260" r="260" fill="#D7E3F5"/><path d="M259.998 437.084C259.998 300.197 219.801 260 82.9141 260C219.801 260 259.998 219.803 259.998 82.916C259.998 219.803 300.195 260 437.082 260C300.195 260 259.998 300.197 259.998 437.084Z" fill="#0D0D0D"/></svg>
+            <span class="post__name">proekcia_studio</span>
+          </div>
+          <div class="post__card">
+            <div class="post__top">
+              <img class="post__logo" src="assets/logo/Vector_white.svg" alt="Proekcia" width="200" height="42">
+              <p class="post__eyebrow">01 · Увага</p>
+            </div>
+            <h2 class="post__title" id="signal-title"><span>Люди не&nbsp;читають.</span> <span>Вони скролять та</span> <span>сканують. У&nbsp;вас є</span> <em class="ny">секунди</em></h2>
+            <p class="post__note">Заголовок і&nbsp;перші секунди уваги — це 80% результату.<br>Мета першого речення — змусити прочитати друге.</p>
+            <span class="post__scroll" aria-hidden="true"><span class="post__scroll-dot"><svg viewBox="0 0 24.12 24.12"><path class="post__scroll-shape" transform="translate(.16 0)" d="M11.9 21.86C11.9 14.94 9.87 12.91 2.95 12.91C9.87 12.91 11.9 10.88 11.9 3.96C11.9 10.88 13.93 12.91 20.85 12.91C13.93 12.91 11.9 14.94 11.9 21.86Z"/></svg></span></span>
+          </div>
+        </article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-pizza.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+      </div></div>
+      <div class="feed feed--side feed--r" aria-hidden="true"><div class="feed__track">
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-headphones.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-jacket.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-perfume.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-scooter.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-can.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+        <article class="post" aria-hidden="true"><div class="post__head"><i></i><span><b></b><b></b></span></div><img src="images/feed/ad-sunglasses.jpg" alt="" width="900" height="1117" loading="eager" fetchpriority="low" decoding="async"><div class="post__cap"><b></b><b></b></div></article>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 02 · ДВІ ЗАДАЧІ ======================= -->
+<section class="tasks" id="tasks" aria-labelledby="tasks-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">02 · Продажі vs бренд</p>
+      <h2 class="tasks__title" id="tasks-title" data-rv>У&nbsp;реклами є&nbsp;2&nbsp;задачі</h2>
+    </header>
+    <ol class="tasks__list">
+      <li class="tasks__item" data-rv>
+        <span class="tasks__dot" aria-hidden="true">01</span>
+        <p>Продажі — з&nbsp;ними все ясно, це кисень бізнесу. Без них — смерть.</p>
+      </li>
+      <li class="tasks__item" data-rv>
+        <span class="tasks__dot" aria-hidden="true">02</span>
+        <p>А&nbsp;от бренд — слово, яке всі чули, але мало хто відчуває практично. І&nbsp;це не просто логотип, кольори чи «візуальний стиль».</p>
+      </li>
+    </ol>
+  </div>
+
+  <!-- візуал: пігулка з морем, трубка «кисню» вистромлюється над нею -->
+  <figure class="breath" aria-hidden="true">
+    <!-- відео 1920×1080 на білому тлі; кадр обрізано до пігулки з трубкою (з невеликим запасом по краях) -->
+    <div class="breath__frame">
+      <video class="breath__video" muted loop playsinline preload="none" width="1920" height="1080" aria-hidden="true">
+        <source src="images/tasks/breath-540.mp4" type="video/mp4" media="(max-width: 767.98px)">
+        <source src="images/tasks/breath-720.mp4" type="video/mp4" media="(max-width: 1440px)">
+        <source src="images/tasks/breath.mp4" type="video/mp4">
+      </video>
+    </div>
+  </figure>
+</section>
+
+<!-- ======================= 02b · ДВА ГОРИЗОНТИ =======================
+     Липка сцена з двома зацикленими відео: спершу в фокусі гроші (продажі),
+     на скролі кадр перетікає у відео, де в фокусі той, хто удобрює ґрунт зірками (бренд). -->
+<section class="hzD" id="horizons" aria-labelledby="hzD-title">
+  <div class="hzD__stage">
+    <h2 class="visually-hidden" id="hzD-title">Продажі й бренд — різні горизонти</h2>
+    <figure class="hzD__art" aria-hidden="true">
+      <video class="hzD__vid hzD__vid--sales" muted loop playsinline preload="metadata" poster="images/horizons/loop-sales.webp" width="1920" height="1080">
+        <source src="images/horizons/loop-sales-m.mp4" type="video/mp4" media="(max-width: 767.98px)">
+        <source src="images/horizons/loop-sales-720.mp4" type="video/mp4" media="(max-width: 1440px)">
+        <source src="images/horizons/loop-sales.mp4" type="video/mp4">
+      </video>
+      <video class="hzD__vid hzD__vid--brand" muted loop playsinline preload="metadata" poster="images/horizons/loop-brand.webp?v=2" width="1920" height="1080">
+        <source src="images/horizons/loop-brand-m.mp4" type="video/mp4" media="(max-width: 767.98px)">
+        <source src="images/horizons/loop-brand-720.mp4?v=2" type="video/mp4" media="(max-width: 1440px)">
+        <source src="images/horizons/loop-brand.mp4?v=2" type="video/mp4">
+      </video>
+    </figure>
+    <div class="hzD__txt hzD__txt--sales">
+      <h3 class="hzD__title"><span class="ln"><span style="--i:0">Продажі</span></span></h3>
+      <p class="hzD__p"><span class="ln"><span style="--i:1">продавати тут і&nbsp;зараз</span></span></p>
+    </div>
+    <div class="hzD__txt hzD__txt--brand">
+      <h3 class="hzD__title"><span class="ln"><span style="--i:0">Бренд</span></span></h3>
+      <p class="hzD__p"><span class="ln"><span style="--i:1">і&nbsp;зробити так, щоб вас обирали</span></span><span class="ln"><span style="--i:2">легше завтра</span></span></p>
+    </div>
+    <p class="bracket hzD__note">
+      <span class="bracket__p" aria-hidden="true">(</span>
+      <span class="bracket__txt">це різні горизонти і&nbsp;очікування, як&nbsp;удобрювати ґрунт і&nbsp;збирати врожай</span>
+      <span class="bracket__p" aria-hidden="true">)</span>
+    </p>
+  </div>
+</section>
+
+<!-- ======================= 02c · ЦІНА РОСТЕ: ЧЕК =======================
+     Тексти — дослівно з презентації. Візуал: термочек виповзає з принтера,
+     кожна позиція дорожча за попередню, сума «набігає». Службові рядки чека — декор (aria-hidden). -->
+<section class="bill" id="climb" aria-labelledby="bill-title">
+  <div class="wrap bill__grid">
+    <h2 class="bill__title" id="bill-title" data-rv>Якщо ви робите тільки перше — ви регулярно отримуєте результат… але з&nbsp;часом платите за нього все дорожче, бо:</h2>
+    <div class="bill__wrap">
+      <span class="bill__slot" aria-hidden="true"></span>
+      <div class="bill__feed">
+        <div class="bill__paper">
+          <div class="bill__head" aria-hidden="true">
+            <span class="bill__b">КАСОВИЙ ЧЕК</span>
+            <span>Продажна реклама</span>
+            <span class="bill__meta"><span>№ 000126</span><span>06.06.2026 13:13</span></span>
+          </div>
+          <ol class="bill__list">
+          <li class="bill__row" data-sum="12000"><span class="bill__t">Аудиторія вигорає</span><span class="bill__q" aria-hidden="true"><span>1 x 12 000,00</span><span>12 000,00</span></span></li>
+          <li class="bill__row" data-sum="14500"><span class="bill__t">Ціна кліка/ліда росте</span><span class="bill__q" aria-hidden="true"><span>1 x 14 500,00</span><span>14 500,00</span></span></li>
+          <li class="bill__row" data-sum="18000"><span class="bill__t">Конверсія падає</span><span class="bill__q" aria-hidden="true"><span>1 x 18 000,00</span><span>18 000,00</span></span></li>
+          <li class="bill__row" data-sum="23000"><span class="bill__t">Конкуренти копіюють</span><span class="bill__q" aria-hidden="true"><span>1 x 23 000,00</span><span>23 000,00</span></span></li>
+          <li class="bill__row" data-sum="29500"><span class="bill__t">Вас порівнюють тільки по&nbsp;ціні</span><span class="bill__q" aria-hidden="true"><span>1 x 29 500,00</span><span>29 500,00</span></span></li>
+          <li class="bill__row" data-sum="38000"><span class="bill__t">Реклама змушена щоразу «з&nbsp;нуля» доводити, що ви не шахраї</span><span class="bill__q" aria-hidden="true"><span>1 x 38 000,00</span><span>38 000,00</span></span></li>
+          </ol>
+          <div class="bill__total" aria-hidden="true"><span>СУМА</span><span class="bill__sum" data-total="135000">135 000,00</span></div>
+          <div class="bill__foot" aria-hidden="true">
+            <span class="bill__meta"><span>ГОТІВКА</span><span>0,00</span></span>
+            <span class="bill__meta"><span>КАРТКА</span><span>135 000,00</span></span>
+            <span class="bill__code"></span>
+            <span>ЗБЕРІГАЙТЕ ЧЕК</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 02d · БРЕНД ЗДЕШЕВЛЮЄ ПРОДАЖІ ======================= -->
+<section class="cheaper" aria-labelledby="cheaper-title">
+  <div class="wrap">
+    <h2 class="cheaper__title" id="cheaper-title" data-rv>Бренд робить так, щоб ваші продажі стали дешевшими:</h2>
+    <ul class="cheaper__list">
+      <li class="cheaper__item"><span class="cheaper__em" aria-hidden="true">👀</span><span class="cheaper__txt">Вас впізнають раніше</span></li>
+      <li class="cheaper__item"><span class="cheaper__em" aria-hidden="true">🤗</span><span class="cheaper__txt">Більше довіряють</span></li>
+      <li class="cheaper__item"><span class="cheaper__em" aria-hidden="true">👆🏻</span><span class="cheaper__txt">Легше клікають</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================= 03 · ЗНИЖКА ======================= -->
+<section class="discount" aria-labelledby="discount-title">
+  <span class="discount__pct" aria-hidden="true">%</span>
+  <div class="wrap">
+    <h2 class="discount__title" id="discount-title">Бренд — це <em class="ny">знижка</em> на&nbsp;майбутні продажі</h2>
+  </div>
+</section>
+
+<!-- ======================= 03b · РОЗДІЛЯЙТЕ =======================
+     Типографічний блок: у заголовку «продажі» і «бренд» виділені й на появі роз’їжджаються —
+     фраза ніби розходиться по шву. Помилки — великі цифри 01 / 02 з текстом. Тексти — дослівно з презентації. -->
+<section class="split" aria-labelledby="split-title">
+  <div class="wrap">
+    <div class="split__head">
+      <h2 class="split__title" id="split-title">Розділяйте <span class="split__w split__w--a">продажі</span> та <span class="split__w split__w--b">бренд</span>, щоб свідомо керувати бюджетом</h2>
+      <img class="split__pic" src="images/split/dog.webp" alt="" width="800" height="631" loading="lazy" decoding="async" aria-hidden="true">
+    </div>
+    <p class="split__lead" data-rv>Якщо не розділяти — бізнес часто робить одну з&nbsp;двох помилок...</p>
+    <ol class="split__errors">
+      <li class="split__err"><span class="split__num">01</span><p>Чекає миттєвих продажів від бренд-креативу і&nbsp;розчаровується :(</p></li>
+      <li class="split__err"><span class="split__num">02</span><p>Жене тільки продажні оголошення і&nbsp;не розуміє, чому з&nbsp;часом все дорожчає.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======================= 03c · ДВІ МЕХАНІКИ =======================
+     Фрази підсвічуються по черзі — як маркер по тексту. -->
+<section class="mech" aria-label="Дві механіки">
+  <div class="wrap mech__grid">
+    <div class="mech__col mech__col--brand">
+      <h2 class="mech__title" data-rv>У&nbsp;бренду своя механіка</h2>
+      <p class="mech__txt"><span class="hl">Пам’ять</span>, <span class="hl">впізнавання</span>, <span class="hl">емоційний відбиток</span>, <span class="hl">характер та атмосфера</span>, щоб людина впізнала вас і&nbsp;обрала легше завтра.</p>
+    </div>
+    <div class="mech__col mech__col--sales">
+      <h2 class="mech__title" data-rv>У&nbsp;продажах своя</h2>
+      <p class="mech__txt"><span class="hl">ясність офера</span>, <span class="hl">докази</span>, <span class="hl">зняття заперечень</span>, <span class="hl">короткий шлях до дії</span>, щоб людина зробила крок зараз (клік/заявка/покупка).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 04 · ДВА ШАРИ: КАЛЬКИ =======================
+     Липка сцена. Дві кальки (реалістична текстура паперу — згенерована): «нічийний» продажний банер
+     і бренд-мудборд. Калька бренду лягає зверху — фото розгортається, текст перебирає фірмовий шрифт,
+     з’являються рамка, знак і акцентний колір: продажний креатив отримав «шар бренду».
+     Тексти — дослівно з презентації; написи на кальках — декор (aria-hidden). -->
+<section class="layers" id="layers" aria-labelledby="layers-title">
+  <div class="layers__stage">
+    <div class="wrap layers__grid">
+      <div class="layers__text">
+        <h2 class="h2" id="layers-title">Тобто кожен креатив може мати 2&nbsp;шари:</h2>
+        <ul class="layers__legend">
+          <li class="layers__key layers__key--a">Шар дії</li>
+          <li class="layers__key layers__key--b">Шар бренд-пам’яті</li>
+        </ul>
+        <blockquote class="rule-note">
+          <span class="rule-note__s rule-note__s--1">Ми завжди можемо додати «шар бренду» до продажного креативу без втрати конверсії.</span>
+          <span class="rule-note__s rule-note__s--2">Але не завжди можна додати «шар продажів» до бренд-креативу, не зламавши його атмосферу.</span>
+        </blockquote>
+      </div>
+
+      <figure class="desk" aria-hidden="true">
+        <!-- аркуш 1: шар дії — звичайний білий аркуш із робочим, але «нічийним» банером -->
+        <div class="sheet sheet--a">
+          <span class="sheet__white"></span>
+          <div class="sheet__ink ink-plain">
+            <span class="ink-plain__kicker">Новий аромат</span>
+            <span class="ink-plain__pct">−20%</span>
+            <span class="ink-plain__price">50 мл · 2 400 грн</span>
+            <span class="ink-plain__btn">Замовити</span>
+          </div>
+          <span class="sheet__label">Шар дії</span>
+        </div>
+        <!-- калька 2: шар бренд-пам’яті — «мудборд»: фото, кольори, шрифт, знак.
+             Після накладання фото розгортається, а текст дії перебирає фірмовий стиль. -->
+        <div class="sheet sheet--b">
+          <span class="sheet__milk"></span>
+          <div class="sheet__ink">
+            <span class="kit__photo"><img src="images/layers/brand-photo.webp" alt="" decoding="async"></span>
+            <span class="kit__aa">Aa</span>
+            <span class="kit__sw"><i></i><i></i><i></i></span>
+            <span class="kit__frame"></span>
+            <span class="kit__mark">NOÉ</span>
+            <!-- текст дії у фірмовому стилі (з’являється після накладання) -->
+            <div class="ink-brand">
+              <span class="ink-brand__top"><span>Новий аромат · №&nbsp;03</span></span>
+              <span class="ink-brand__pct">−20%</span>
+              <span class="ink-brand__until">лише до 15.06</span>
+              <span class="ink-brand__cta"><i></i>Замовити<svg viewBox="0 0 24 24" fill="none"><path d="M4 12h15M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.5"/></svg></span>
+              <span class="ink-brand__price">2&nbsp;400&nbsp;грн</span>
+            </div>
+          </div>
+          <img class="sheet__paper" src="images/layers/tracing.webp?v=2" alt="" width="688" height="874" decoding="async">
+          <span class="sheet__label">Шар бренд-пам’яті</span>
+        </div>
+        <span class="desk__mark desk__mark--ok"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2"/></svg></span>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 04b · УСІ БУДУЮТЬ ПАМ’ЯТЬ =======================
+     5 креативів одного вигаданого бренду NOÉ (фото — згенеровані): на всіх — однаковий фірмовий стиль
+     (знак, рамка, шрифт) = бренд-пам’ять; лише на двох — ще й ціна та «Купити» (продають зараз).
+     Написи на креативах — декор (aria-hidden). Анімація разова, без довгого скролу. -->
+<section class="memory" aria-labelledby="memory-title">
+  <div class="wrap">
+    <h2 class="memory__title" id="memory-title" data-rv>Всі креативи можуть будувати бренд-пам’ять</h2>
+    <div class="memory__grid" aria-hidden="true">
+      <div class="ad-tile">
+        <img src="images/memory/perfume.webp" alt="" width="560" height="695" decoding="async">
+        <span class="ad-tile__frame"></span>
+        <span class="ad-tile__mark">NOÉ</span>
+        <span class="ad-tile__head">Тиша,<br>що лишається</span>
+      </div>
+      <div class="ad-tile ad-tile--sell">
+        <img src="images/memory/serum.webp" alt="" width="560" height="695" decoding="async">
+        <span class="ad-tile__frame"></span>
+        <span class="ad-tile__mark">NOÉ</span>
+        <span class="ad-tile__head">−20%<br>на сироватку</span>
+        <span class="ad-tile__btn">Купити — 890&nbsp;грн</span>
+      </div>
+      <div class="ad-tile">
+        <img src="images/memory/candle.webp" alt="" width="560" height="695" decoding="async">
+        <span class="ad-tile__frame"></span>
+        <span class="ad-tile__mark">NOÉ</span>
+        <span class="ad-tile__head">Вечір<br>удома</span>
+      </div>
+      <div class="ad-tile ad-tile--sell">
+        <img src="images/memory/gift.webp" alt="" width="560" height="695" decoding="async">
+        <span class="ad-tile__frame"></span>
+        <span class="ad-tile__mark">NOÉ</span>
+        <span class="ad-tile__head">Подарунок,<br>що пам’ятають</span>
+        <span class="ad-tile__btn">Купити — 3&nbsp;200&nbsp;грн</span>
+      </div>
+      <div class="ad-tile ad-tile--low">
+        <img src="images/memory/oil.webp" alt="" width="560" height="695" decoding="async">
+        <span class="ad-tile__frame"></span>
+        <span class="ad-tile__mark">NOÉ</span>
+        <span class="ad-tile__head">Тепло шкіри</span>
+      </div>
+    </div>
+    <div class="memory__end">
+      <p class="memory__but" data-rv>Але не всі креативи мають продавати прямо зараз.</p>
+      <a href="#cta" class="pill-btn pill-btn--orange cta-inline"><span>Зібрати свій баланс</span><span class="pill-btn__icon pill-btn__icon--ne" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 05 · 8 ПРИНЦИПІВ (горизонтальний скрол) =======================
+     Тексти — дослівно з презентації. -->
+<section class="rules" id="rules" aria-labelledby="rules-title">
+  <div class="rules__pin">
+    <div class="rules__track">
+      <header class="rules__intro">
+        <p class="eyebrow eyebrow--light">03 · Принципи</p>
+        <h2 class="h2" id="rules-title">8 принципів створення пробивних креативів</h2>
+        <span class="rules__scroll" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span>
+      </header>
+
+      <div class="rules__deck">
+      <article class="rule">
+        <span class="rule__num">1 принцип</span>
+        <h3 class="rule__title">Для кожного креативу має бути обрана лише одна головна мета.</h3>
+        <p class="rule__txt">Або бренд або продажі. Друга — можлива, але лише як побочка, не всупереч першій меті.</p>
+        <div class="rule__vis vis-goal" aria-hidden="true"><span class="vis-goal__a">бренд</span><span class="vis-goal__b">продажі</span></div>
+      </article>
+
+      <article class="rule">
+        <span class="rule__num">2 принцип</span>
+        <h3 class="rule__title">Увага — дефіцит. У&nbsp;нас є секунди.</h3>
+        <p class="rule__txt">Тому потрібен хук — стартовий удар, без розігрівів. Глядач має «провалитися» в&nbsp;історію. Ніби з’їжджає зі слизької гірки — без шансів зупинитись. Заголовок та перші секунди = 80% результату. Мета першого речення — змусити прочитати друге.</p>
+        <div class="rule__vis vis-slide" aria-hidden="true"><span class="vis-slide__line"></span><span class="vis-slide__dot"></span></div>
+      </article>
+
+      <article class="rule">
+        <span class="rule__num">3 принцип</span>
+        <h3 class="rule__title">Нативність перемагає «рекламність»</h3>
+        <p class="rule__txt">Реальність перемагає глянець. Чим менше реклама схожа на рекламу — тим охочіше її читають. Ми робимо контент, який виглядає природно для стрічки. Справжнє часто працює краще, ніж «вилизане».</p>
+        <p class="bracket rule__bracket"><span class="bracket__p" aria-hidden="true">(</span><span class="bracket__txt">Автентичність — це міст до довіри.</span><span class="bracket__p" aria-hidden="true">)</span></p>
+        <div class="rule__vis vis-gloss" aria-hidden="true"><span class="vis-gloss__fake">вилизане</span><span class="vis-gloss__real">справжнє</span></div>
+      </article>
+
+      <article class="rule">
+        <span class="rule__num">4 принцип</span>
+        <h3 class="rule__title">Один креатив — одна думка</h3>
+        <p class="rule__txt">Не говоримо «все одразу». Кожну фразу фокусуємо на одній конкретній перевазі/думці. Пишемо самодостатні фрази, що працюють окремо і&nbsp;в&nbsp;будь-якому порядку.</p>
+        <p class="bracket rule__bracket"><span class="bracket__p" aria-hidden="true">(</span><span class="bracket__txt">Відсікаємо зайве, що розмиває основну думку.</span><span class="bracket__p" aria-hidden="true">)</span></p>
+        <div class="rule__vis vis-one" aria-hidden="true">
+          <span style="--i:0">ціна</span><span style="--i:1">якість</span><span style="--i:2">доставка</span><span style="--i:3">гарантія</span><span style="--i:4">знижки</span><span style="--i:5">сервіс</span>
+          <b>Доставка за&nbsp;2&nbsp;години</b>
+        </div>
+      </article>
+
+      <article class="rule rule--wide">
+        <span class="rule__num">5 принцип</span>
+        <h3 class="rule__title">Чітка пропозиція — основа креативу</h3>
+        <p class="rule__sub">Креатив без пропозиції — просто картинка</p>
+        <div class="rule__txt">
+          <p>Що саме ви пропонуєте? Чому це краще/інакше?</p>
+          <p>Зведіть все до однієї простої обіцянки. В&nbsp;ідеалі, ця обіцянка має бути такою, якої конкуренти не дають — або не можуть дати. Офер — це ядро, навколо нього тримається все.</p>
+          <p>Якщо ми створюємо бренд-креатив, тоді месседж може бути ширшим, наприклад про те, «хто ми», «що ми робимо і&nbsp;чому?», а&nbsp;не «що пропонуємо тут і&nbsp;зараз»</p>
+        </div>
+        <div class="rule__vis vis-offer" aria-hidden="true">
+          <span class="vis-offer__frame"><span class="vis-offer__cap vis-offer__cap--a">картинка</span><span class="vis-offer__cap vis-offer__cap--b">креатив</span></span>
+          <span class="vis-offer__chip">офер</span>
+        </div>
+      </article>
+
+      <article class="rule rule--wide">
+        <span class="rule__num">6 принцип</span>
+        <h3 class="rule__title">Найпотужніший елемент реклами — це правда</h3>
+        <p class="rule__txt">Ми перекладаємо факти про ваш продукт у&nbsp;зрозумілі повідомлення і&nbsp;питаємо себе: «Це допоможе продати?» Ефективна реклама спирається на реальну цінність, без «пилюки в&nbsp;очі». Тому з&nbsp;вашого боку — правда, нехай навіть нудна, але фактична, а&nbsp;з&nbsp;нашого боку — спосіб як зробити її більш емоційною і&nbsp;цікавою</p>
+        <div class="rule__vis vis-truth" aria-hidden="true"><span class="vis-truth__q">Я продаю товар кращий,<br>ніж в&nbsp;конкурентів, по&nbsp;ціні<br>нижчій ніж в&nbsp;конкурентів</span></div>
+      </article>
+
+      <article class="rule">
+        <span class="rule__num">7 принцип</span>
+        <h3 class="rule__title">Люди хочуть результат, а&nbsp;не характеристики</h3>
+        <p class="bracket rule__bracket"><span class="bracket__p" aria-hidden="true">(</span><span class="bracket__txt">Перекладаємо характеристики в&nbsp;наслідки.</span><span class="bracket__p" aria-hidden="true">)</span></p>
+        <p class="rule__txt">Найкращі заголовки б’ють в&nbsp;особисту вигоду, користь та відчуття. Властивості = лише доказ. Тому показуємо не «що це», а&nbsp;«що це дає». Ніхто не купує властивості. Купують користь.</p>
+        <div class="rule__vis vis-chain" aria-hidden="true">
+          <span class="vis-chain__a">що це</span><span class="vis-chain__ic"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span><span class="vis-chain__b">що це дає</span>
+        </div>
+      </article>
+
+      <article class="rule rule--wide">
+        <span class="rule__num">8 принцип</span>
+        <h3 class="rule__title">Креативність як інструмент</h3>
+        <p class="bracket rule__bracket"><span class="bracket__p" aria-hidden="true">(</span><span class="bracket__txt">Креативність — це форма подачі, яка трансформує меседж в&nbsp;емоцію.</span><span class="bracket__p" aria-hidden="true">)</span></p>
+        <p class="rule__txt">Це не якась туманна, «езотерична» форма мистецтва. Креативність розв’язує конкретні задачі: помітність → емоція → дія. Бо нудьгою не продають. Ми пишемо тексти від людини до людини, а&nbsp;не «для всіх і&nbsp;нікого водночас». Разом із ключовим повідомленням передаємо настрій, характер.</p>
+        <div class="rule__vis vis-steps" aria-hidden="true"><span>помітність</span><span>емоція</span><span>дія</span></div>
+      </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 06 · ПРОЦЕС ======================= -->
+<section class="process" id="process" aria-labelledby="process-title">
+  <div class="wrap process__grid">
+    <div class="process__head">
+      <p class="eyebrow">04 · Наш робочий процес: 5&nbsp;кроків повного циклу</p>
+      <h2 class="h2" id="process-title" data-rv>Креатив — не магія. Це <em class="ny">виробництво</em>.</h2>
+      <p class="lead" data-rv>Ми не «чекаємо натхнення» — ми запускаємо процес, і&nbsp;натхнення має застати нас за роботою.</p>
+      <ol class="beads" aria-hidden="true"><li>01</li><li>02</li><li>03</li><li>04</li><li>05</li></ol>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <span class="step__num">01 етап</span>
+        <h3 class="step__title">Збір «сировини» і&nbsp;«палива для уяви»</h3>
+        <p class="step__txt">Факти про продукт, ЦА, конкурентне поле, реальні тригери покупки. Це важка робота, якої часто уникають, але буде великою помилкою чекати на натхнення, пропускаючи підготовчі кроки.</p>
+      </li>
+      <li class="step">
+        <span class="step__num">02 етап</span>
+        <h3 class="step__title">«Перетравлення» і&nbsp;синтез</h3>
+        <p class="step__txt">Ідея – це нова комбінація старих елементів; шукаємо зв’язки, збираємо різні кути подачі. Зводимо все до купи і&nbsp;шукаємо синтез — як у&nbsp;пазлі, де все зійдеться в&nbsp;один чіткий меседж.</p>
+      </li>
+      <li class="step">
+        <span class="step__num">03 етап</span>
+        <h3 class="step__title">Перебір і&nbsp;доопрацювання</h3>
+        <p class="step__txt">Найкращий спосіб знайти хорошу ідею: перебрати багато ідей. Та допрацювати її до стану робочого інструменту.</p>
+      </li>
+      <li class="step">
+        <span class="step__num">04 етап</span>
+        <h3 class="step__title">Запуск</h3>
+        <p class="step__txt">Ніхто напевно не знає, що точно зачепить; найкращий суддя — реальний трафік і&nbsp;результат у&nbsp;вигляді звернень і&nbsp;продажів.</p>
+      </li>
+      <li class="step">
+        <span class="step__num">05 етап</span>
+        <h3 class="step__title">Результат і&nbsp;висновки</h3>
+        <!-- TODO: замінити на текст із презентації -->
+        <p class="step__txt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ======================= 05 · ПАКЕТ КРЕАТИВІВ: «ЩО ВИ ОТРИМУЄТЕ?» — КОНВЕЄР =======================
+     Тексти пунктів — дослівно з презентації. Горизонтальна стрічка на скролі: один креатив народжується → оживає → множиться на формати → обростає текстами → летить у кабінети. -->
+<section class="belt" aria-labelledby="belt-title">
+  <div class="belt__stage">
+    <div class="wrap belt__head">
+      <p class="eyebrow">05 · Пакет креативів</p>
+      <h2 class="h2" id="belt-title">Що ви отримуєте?</h2>
+    </div>
+    <ol class="belt__track">
+      <li class="belt__st"><div class="belt__vis" aria-hidden="true"><div class="ad-tile belt-tile"><img src="images/memory/serum.webp" alt="" width="560" height="695" decoding="async"><span class="ad-tile__frame"></span><span class="ad-tile__mark">NOÉ</span><span class="ad-tile__head">−20%<br>на сироватку</span><span class="ad-tile__btn">Купити — 890&nbsp;грн</span></div></div><span class="belt__n">01</span><p class="belt__t">Пакет банерів у&nbsp;потрібній кількості</p></li>
+      <li class="belt__st"><div class="belt__vis" aria-hidden="true"><div class="belt-phone"><video class="kit-video" muted loop playsinline preload="none" poster="images/horizons/loop-sales-m.webp" src="images/horizons/loop-sales-m.mp4"></video><span class="kit-play"></span></div></div><span class="belt__n">02</span><p class="belt__t">Пакет відео (короткі версії + варіації хуків)</p></li>
+      <li class="belt__st belt__st--wide"><div class="belt__vis" aria-hidden="true"><span class="kit-fmts"><span class="kit-fmt kit-fmt--169"><img src="images/memory/serum.webp" alt="" decoding="async"><b>16:9</b></span><span class="kit-fmt kit-fmt--11"><img src="images/memory/serum.webp" alt="" decoding="async"><b>1:1</b></span><span class="kit-fmt kit-fmt--45"><img src="images/memory/serum.webp" alt="" decoding="async"><b>4:5</b></span><span class="kit-fmt kit-fmt--916"><img src="images/memory/serum.webp" alt="" decoding="async"><b>9:16</b></span></span></div><span class="belt__n">03</span><p class="belt__t">Адаптації під платформи та формати (де треба)</p></li>
+      <li class="belt__st"><div class="belt__vis" aria-hidden="true"><div class="kit-copy kit-copy--card"><span class="kit-copy__k">Заголовок</span><span class="kit-copy__h">−20% на сироватку</span><span class="kit-copy__k">Опис</span><span class="kit-copy__d">Шкіра пам’ятає турботу. Лише цього тижня.</span><span class="kit-copy__k">CTA</span><span class="kit-copy__c">Купити — 890&nbsp;грн →</span></div></div><span class="belt__n">04</span><p class="belt__t">Супутні тексти: заголовки/описи/CTA</p></li>
+      <li class="belt__st"><div class="belt__vis" aria-hidden="true"><div class="kit-launch"><span class="kit-chips"><i>Google Ads</i><i>Meta</i><i>TikTok</i></span><svg class="kit-chart" viewBox="0 0 200 80" preserveAspectRatio="none"><path d="M0 70 L30 62 L55 66 L85 48 L110 52 L140 30 L165 34 L200 10"/></svg></div></div><span class="belt__n">05</span><p class="belt__t">І&nbsp;безпосередньо: налаштування, запуск і&nbsp;супровід рекламних кампаній в&nbsp;Google Ads, Meta, TikTok та/або інших платформах</p></li>
+    </ol>
+  </div>
+</section>
+
+
+<!-- ======================= 08 · З ЧОГО ПОЧАТИ: ФОРМАТИ СПІВПРАЦІ ======================= -->
+<section class="ways" id="ways" aria-labelledby="ways-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">06 · Формати співпраці</p>
+      <h2 class="h2" id="ways-title" data-rv>З&nbsp;чого почати: формати співпраці</h2>
+      <p class="lead" data-rv>Пропонуємо два способи замовити креативи:</p>
+    </header>
+    <ul class="ways__list">
+      <li><a class="way" href="#cta">
+        <span class="way__num">01</span><span class="way__title">Рекламна кампанія</span>
+        <span class="way__txt">Пакет креативів під конкретну рекламну кампанію/оновлення продукту/бренду</span>
+        <span class="way__go"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="way" href="#cta">
+        <span class="way__num">02</span><span class="way__title">Регулярна підтримка</span>
+        <span class="way__txt">Регулярне виробництво (постійно «підливати» нові ідеї), щоб аудиторія не вигорала</span>
+        <span class="way__go"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a></li>
+    </ul>
+
+    <div class="roles">
+      <div class="roles__col" data-rv>
+        <h3 class="roles__title">Ми відповідаємо за:</h3>
+        <ul class="chips"><li>ідеї</li><li>меседжі</li><li>дизайн/монтаж</li><li>підготовку форматів</li><li>логіку варіацій</li></ul>
+      </div>
+      <div class="roles__col" data-rv>
+        <h3 class="roles__title">Ви відповідаєте за:</h3>
+        <p class="roles__txt">продукт та фактичні конкурентні переваги, інакше кажучи – за&nbsp;<b>силу оферу</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 07 · СТАРТ: БРИФ-ДОКУМЕНТ =======================
+     Аркуш брифу: рядки «друкуються» при скролі, поруч по черзі ставляться галочки. -->
+<section class="brief" aria-labelledby="brief-title">
+  <div class="wrap">
+    <article class="brief__sheet">
+      <header class="brief__top">
+        <img src="assets/logo/Vector.svg" alt="Proekcia" width="160" height="34" loading="lazy">
+        <span class="brief__label">07 · Старт</span>
+      </header>
+      <h2 class="brief__title" id="brief-title">Що потрібно від вас для старту:</h2>
+      <ol class="brief__list">
+          <li class="brief__row"><span class="brief__n">01</span><span class="brief__t">цілі: продажі/бренд</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">02</span><span class="brief__t">що ви продаєте, кому і&nbsp;де?</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">03</span><span class="brief__t">Переваги / ціни / умови</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">04</span><span class="brief__t">Часті заперечення / страхи / питання</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">05</span><span class="brief__t">чому вам довіряють (факти/цифри/відгуки)</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">06</span><span class="brief__t">що люди отримують як результат</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">07</span><span class="brief__t">географія/доставка/обмеження</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">08</span><span class="brief__t">посилання на лендінг/соцмережі</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">09</span><span class="brief__t">хто головні конкуренти/аналоги</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">10</span><span class="brief__t">обрані платформи для просування</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+          <li class="brief__row"><span class="brief__n">11</span><span class="brief__t">приклади «подобається/не подобається»</span><span class="brief__line" aria-hidden="true"></span><span class="brief__ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></li>
+      </ol>
+      <footer class="brief__foot">
+        <span class="brief__bar" aria-hidden="true"><span></span></span>
+        <span class="brief__count" aria-hidden="true"><b>0</b> / 11</span>
+        <a href="#cta" class="pill-btn pill-btn--orange cta-inline brief__send"><span>Надіслати бриф</span><span class="pill-btn__icon pill-btn__icon--ne" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a>
+      </footer>
+    </article>
+  </div>
+</section>
+
+<!-- ======================= 09 · ПОРТФОЛІО ТА КОНТАКТИ ======================= -->
+<section class="cta" id="cta" aria-labelledby="cta-title">
+  <span id="portfolio" class="visually-hidden"></span>
+  <div class="wrap">
+    <p class="eyebrow eyebrow--light">08 · Контакти</p>
+    <h2 class="cta__title" id="cta-title" data-rv>Портфоліо та контакти</h2>
+    <div class="cta__person" data-rv>
+      <p class="cta__name">Владислав Якушенков</p>
+      <p class="bracket cta__role"><span class="bracket__p" aria-hidden="true">(</span><span class="bracket__txt">Засновник та<br>арт-директор</span><span class="bracket__p" aria-hidden="true">)</span></p>
+    </div>
+    <a href="https://ig.me/m/proekcia_studio" target="_blank" rel="noopener" class="pill-btn pill-btn--orange cta-inline cta__main"><span>Написати в&nbsp;Instagram</span><span class="pill-btn__icon pill-btn__icon--ne" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a>
+    <ul class="contacts">
+      <li><a class="contact" href="tel:+380734174813"><span class="contact__k">Телефон:</span><span class="contact__v">+380 73 417 48 13</span><span class="contact__go"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="contact" href="https://proekcia.com" target="_blank" rel="noopener"><span class="contact__k">Сайт:</span><span class="contact__v">proekcia.com</span><span class="contact__go"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a></li>
+      <li><a class="contact" href="https://www.instagram.com/proekcia_studio/" target="_blank" rel="noopener"><span class="contact__k">Instagram</span><span class="contact__v">proekcia_studio</span><span class="contact__go"><svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><path d="M14 34L34 14M14 16L14 34H32" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/></svg></span></a></li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__row">
+    <img src="assets/logo/Vector_white.svg" alt="Proekcia" width="160" height="34" loading="lazy">
+    <p class="foot__copy">proekcia © 2026 · упаковка бізнесу і&nbsp;реклама</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="main.js?v=29" defer></script>
+<script src="sections.js?v=83" defer></script>
+</body>
+</html>
